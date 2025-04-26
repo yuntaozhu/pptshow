@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKO 课程表 - 2025年4月</title>
+    <title>光纤传感CVP监测系统商业计划</title>
     <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Font Awesome CDN -->
@@ -13,20 +13,20 @@
     <style>
         :root {
             --tesla-red: #E31937;
-            --accent-yellow: #FFD700; /* Gold/Yellow from image */
-            --dark-bg: #1a1a1a; /* Dark background */
-            --card-bg: rgba(255, 215, 0, 0.05); /* Subtle yellow transparent background for cards */
-            --card-border: rgba(255, 215, 0, 0.3); /* Semi-transparent yellow border */
-            --text-light: #e5e7eb; /* Light gray text */
+            --blue-start: #0a1128; /* Very dark blue */
+            --blue-end: #001f3f; /* Darker blue */
+            --blue-accent: #0074d9; /* Bright blue */
+            --text-light: #e5e7eb; /* Light gray text for contrast */
+            --card-bg: rgba(0, 116, 217, 0.08); /* Subtle transparent blue */
+            --card-border: rgba(0, 116, 217, 0.3); /* Semi-transparent blue border */
         }
         body {
-            background-color: var(--dark-bg);
+            background: linear-gradient(to bottom right, var(--blue-start), var(--blue-end)); /* Gradient blue background */
             color: var(--text-light);
             font-family: sans-serif;
             overflow-x: hidden; /* Prevent horizontal scroll caused by animations */
             position: relative; /* Needed for z-index context */
             min-height: 100vh; /* Ensure body covers at least viewport height */
-            padding-bottom: 2rem; /* Add space at the bottom */
         }
         h1, h2, h3, h4, h5, h6 {
             color: #fff; /* White headings */
@@ -34,171 +34,384 @@
         .text-tesla-red {
             color: var(--tesla-red);
         }
-        .text-accent-yellow {
-            color: var(--accent-yellow);
+        .text-blue-accent {
+            color: var(--blue-accent);
         }
 
-        /* Top Calendar Bar */
-        .calendar-header {
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #fff;
-            position: sticky; /* Make it sticky */
-            top: 0; /* Stick to the top */
-            z-index: 50; /* Ensure it's above content when scrolling */
-            backdrop-filter: blur(5px); /* Frosted glass effect */
+        /* General Section Padding */
+        section {
+            padding: 4rem 1rem; /* Add padding to all sections */
+            max-width: 1200px; /* Limit content width */
+            margin: 0 auto;
+            position: relative;
+            z-index: 10; /* Ensure content is above particles */
         }
-        .calendar-header .month-year {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .calendar-header .today-button {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-         .calendar-header .today-button:hover {
-             background-color: rgba(255, 255, 255, 0.2);
-         }
-         .calendar-date-nav {
+
+        /* Header Title Section (Slide 1) */
+        .title-section {
+             height: 100vh; /* Full viewport height for dramatic intro */
              display: flex;
+             flex-direction: column;
              align-items: center;
-             gap: 0.5rem;
-             font-size: 1.2rem;
-         }
-         .calendar-date-nav .date-number {
-             font-size: 2rem;
-             font-weight: bold;
-         }
-         .calendar-date-nav .day-abbr {
-             font-size: 0.9rem;
-         }
-         .calendar-date-nav .nav-icon {
-             cursor: pointer;
-             opacity: 0.8;
-         }
-         .calendar-date-nav .nav-icon:hover {
-             opacity: 1;
-         }
-        .calendar-view-toggle {
-            display: flex;
-             background-color: rgba(255, 255, 255, 0.1);
-             border-radius: 20px;
+             justify-content: center;
+             text-align: center;
              overflow: hidden;
-             font-size: 0.9rem;
         }
-        .calendar-view-toggle span {
-            padding: 0.5rem 1rem;
-             cursor: pointer;
-             transition: background-color 0.2s ease;
-        }
-         .calendar-view-toggle span.active {
-             background-color: var(--accent-yellow);
-             color: #000; /* Dark text on yellow */
+         .title-section h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+         }
+         .title-section .subtitle {
+             font-size: clamp(1.2rem, 4vw, 2rem);
+             color: var(--text-light);
+             margin-bottom: 3rem;
+             text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+         }
+         .title-section .presenter {
+             background-color: var(--blue-accent);
+             color: #fff;
+             padding: 0.8rem 2rem;
+             border-radius: 5px;
+             font-size: 1.2rem;
              font-weight: bold;
+             opacity: 0.9;
+         }
+         /* Chip Graphic - as background or absolute element */
+         .title-section::before {
+             content: '';
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             width: clamp(300px, 60vw, 800px);
+             height: clamp(200px, 40vw, 500px);
+             background-image: url('https://via.placeholder.com/800x500?text=Futuristic+Chip'); /* Replace with actual chip graphic */
+             background-size: contain;
+             background-repeat: no-repeat;
+             background-position: center;
+             opacity: 0.3; /* Subtle transparency */
+             z-index: -1; /* Behind text */
          }
 
 
-        /* Main Content Area */
-        .schedule-list-container {
-            max-width: 600px; /* Limit width similar to image */
-            margin: 2rem auto;
-            padding: 0 1rem;
-             position: relative;
-             z-index: 10; /* Above particles */
+        /* Table of Contents Section (Slides 2 & 3) */
+        .contents-section {
+             text-align: center;
         }
-
-        /* Daily Schedule Block */
-        .daily-schedule-block {
+        .contents-section h2 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--blue-accent); /* Blue title */
+        }
+        .contents-section .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
             margin-bottom: 3rem;
         }
-        .daily-schedule-header {
+        .contents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .contents-item {
             display: flex;
-            align-items: baseline;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .daily-schedule-header .day-number {
-            font-size: clamp(3rem, 8vw, 5rem); /* Large day number */
-            font-weight: bold;
-            line-height: 1;
-            color: #fff;
-        }
-         .daily-schedule-header .weekday {
-             font-size: 1.5rem;
-             font-weight: bold;
-             color: var(--text-light);
-         }
-
-        /* Session Card (Bento Style) */
-        .session-card {
+            align-items: center;
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 8px;
             padding: 1rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-light);
-            position: relative;
-            overflow: hidden; /* For internal elements */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; /* Indicate clickable */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
         }
-        .session-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+         .contents-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 116, 217, 0.15);
+         }
+        .contents-item .number-block {
+            background: linear-gradient(to bottom right, var(--blue-accent), rgba(0, 116, 217, 0.5)); /* Blue gradient block */
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            margin-right: 1rem;
+             position: relative;
         }
-        .session-card::before {
+         /* Angled corner effect for number block (optional, more complex CSS) */
+         /* .contents-item .number-block::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 6px; /* Left color bar */
-            height: 100%;
-             background-color: var(--accent-yellow); /* Default yellow bar */
+            right: -10px; // Adjust for desired angle
+            width: 0;
+            height: 0;
+            border-top: 2rem solid transparent; // Match padding height
+            border-bottom: 2rem solid transparent; // Match padding height
+            border-left: 10px solid var(--blue-accent); // Match width and color
+         } */
+
+        .contents-item .text {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            flex-grow: 1;
         }
 
-         /* Color bar variations based on class type/image colors */
-         .session-card.type-power::before { background-color: var(--accent-yellow); } /* Yellow/Orange in original */
-         .session-card.type-trx::before { background-color: var(--blue-accent); } /* Blueish in original */
-         .session-card.type-bombing::before { background-color: var(--tesla-red); } /* Redish in original */
-         .session-card.type-battle::before { background-color: var(--accent-yellow); } /* Yellow/Orange in original */
-         .session-card.type-core::before { background-color: var(--blue-accent); } /* Blueish in original */
-         .session-card.type-allinone::before { background-color: var(--blue-accent); } /* Blueish in original */
-         .session-card.type-combat::before { background-color: var(--tesla-red); } /* Redish in original */
 
-
-        .session-card .session-time {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #fff; /* White time */
-            margin-bottom: 0.3rem;
+        /* PART Section Titles (Slides 4, 7, 10, 17, 20, 24, 27, 29, 32) */
+        .part-title-section {
+             min-height: 50vh; /* Make part title sections prominent */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             text-align: center;
         }
-         .session-card .session-details {
-             font-size: 0.9rem;
-             color: var(--text-light);
-         }
-         .session-card .capacity {
-             font-size: 0.8rem;
-             color: rgba(255, 255, 255, 0.7); /* Slightly faded capacity */
-             margin-top: 0.2rem;
-         }
-         .session-card .status-tag {
-             position: absolute;
-             top: 10px;
-             right: 10px;
-             background-color: var(--accent-yellow);
-             color: #000;
-             font-size: 0.7rem;
+         .part-title-block {
+            background: linear-gradient(to right, var(--blue-accent), rgba(0, 116, 217, 0.3));
+             color: #fff;
+             font-size: clamp(1.5rem, 5vw, 2rem);
              font-weight: bold;
-             padding: 2px 8px;
-             border-radius: 12px; /* Pill shape */
+             padding: 0.8rem 2rem;
+             border-radius: 4px;
+             margin-bottom: 1.5rem;
+             position: relative;
+             display: inline-block;
+         }
+         .part-title-section h2 {
+             font-size: clamp(3rem, 10vw, 6rem);
+             font-weight: bold;
+             color: #fff;
+             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+         }
+
+
+        /* Content Section Styles (Slides 5, 6, 8, 9, 11-16, 18, 19, 21-23, 25, 26, 28, 30, 31, 33, 34) */
+        .content-block {
+            margin-bottom: 3rem;
+             padding: 2rem;
+             background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark background */
+             border-radius: 8px;
+             border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+             backdrop-filter: blur(3px); /* Frosted glass */
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+         .content-block:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+         }
+        .content-block h3 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+         /* Subtle underline for h3 */
+         .content-block h3::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--blue-accent);
+            margin-top: 8px;
+            opacity: 0.8;
+         }
+        .content-block p, .content-block ul {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+         .content-block ul {
+             list-style: disc;
+             margin-left: 1.5rem;
+             margin-top: 1rem;
+         }
+          .content-block ul li {
+              margin-bottom: 0.5rem;
+          }
+
+         /* Layout for content blocks with images (using flexbox) */
+         .image-text-layout {
+             display: flex;
+             flex-direction: column;
+             gap: 2rem;
+             align-items: center;
+         }
+          .image-text-layout .text-part,
+          .image-text-layout .image-part {
+              flex: 1; /* Allow parts to grow */
+              width: 100%; /* Full width on small screens */
+          }
+         .image-text-layout img {
+             display: block;
+             max-width: 100%;
+             height: auto;
+             border-radius: 8px;
+             border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+         }
+
+        @media (min-width: 768px) {
+            .image-text-layout {
+                 flex-direction: row; /* Side-by-side on medium screens and up */
+            }
+             .image-text-layout.reverse {
+                 flex-direction: row-reverse; /* Reverse order */
+             }
+        }
+
+        /* Specific styles for notable content blocks */
+        .quote-style-block { /* Slide 5 Project Intro */
+             font-size: 1.3rem;
+             font-style: italic;
+             color: #fff;
+             position: relative;
+             padding-left: 4rem; /* Space for quote mark */
+        }
+         .quote-style-block::before {
+             content: '"';
+             position: absolute;
+             left: 0;
+             top: 0;
+             font-size: 6rem;
+             color: var(--blue-accent);
+             opacity: 0.5;
+             line-height: 1;
+         }
+         .quote-style-block p {
+              font-size: 1.3rem; /* Match parent font size */
+              color: inherit;
+         }
+
+
+        /* Note/Data Block Style (for pages with notebook graphic in PPT) */
+        .note-block {
+             background-color: rgba(255, 255, 255, 0.05); /* Very subtle light transparent */
+             border: 1px dashed rgba(255, 255, 255, 0.2); /* Dashed border */
+             padding: 1.5rem;
+             border-radius: 8px;
+             margin-top: 1.5rem;
+        }
+        .note-block p, .note-block ul {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+         .note-block ul {
+              list-style: disc;
+              margin-left: 1rem;
+              margin-top: 0.5rem;
+         }
+
+
+         /* Financial Data Block (Slides 22, 23) */
+         .financial-data h4 {
+             font-size: 1.2rem;
+             font-weight: bold;
+             color: var(--blue-accent);
+             margin-top: 1rem;
+             margin-bottom: 0.5rem;
+         }
+         .financial-data p, .financial-data ul li {
+             font-family: monospace; /* Monospace font for data */
+             font-size: 1rem;
+             line-height: 1.4;
+         }
+         .financial-data ul {
+             list-style: none;
+             margin-left: 0;
+         }
+         .financial-data ul li::before {
+             content: '- ';
+             color: var(--tesla-red); /* Red dash */
+         }
+
+         /* Vision Section (Slide 34) */
+         .vision-points ul {
+             list-style: none;
+             padding: 0;
+             margin-top: 1.5rem;
+         }
+          .vision-points ul li {
+              background-color: var(--card-bg);
+              border: 1px solid var(--card-border);
+              border-radius: 8px;
+              padding: 1rem;
+              margin-bottom: 1rem;
+              font-size: 1.1rem;
+              font-weight: bold;
+              color: var(--blue-accent);
+              transition: transform 0.3s ease, background-color 0.3s ease;
+              position: relative;
+              padding-left: 3rem; /* Space for icon */
+          }
+           .vision-points ul li:hover {
+               transform: translateY(-5px);
+               background-color: rgba(0, 116, 217, 0.15);
+           }
+           .vision-points ul li::before {
+               content: '\f00c'; /* Checkmark icon (Font Awesome) */
+               font-family: 'Font Awesome 6 Free';
+               font-weight: 900; /* Solid icon */
+               position: absolute;
+               left: 1rem;
+               top: 50%;
+               transform: translateY(-50%);
+               color: var(--tesla-red); /* Red icon */
+               font-size: 1.5rem;
+           }
+            .vision-points ul li span {
+                display: block; /* New line for detail text */
+                font-size: 0.9rem;
+                font-weight: normal;
+                color: var(--text-light);
+                margin-top: 0.3rem;
+            }
+
+
+        /* Thank You Section (Slide 35) */
+        .thank-you-section {
+             height: 80vh; /* Make thank you prominent */
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             text-align: center;
+             overflow: hidden;
+        }
+         .thank-you-section h2 {
+             font-size: clamp(3rem, 10vw, 6rem);
+             font-weight: bold;
+             color: #fff;
+             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+         }
+         .thank-you-section .presenter {
+             background-color: var(--blue-accent);
+             color: #fff;
+             padding: 0.8rem 2rem;
+             border-radius: 5px;
+             font-size: 1.2rem;
+             font-weight: bold;
+             opacity: 0.9;
+             margin-top: 3rem;
+         }
+          /* Chip Graphic - as background or absolute element */
+         .thank-you-section::before {
+             content: '';
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             width: clamp(300px, 60vw, 800px);
+             height: clamp(200px, 40vw, 500px);
+             background-image: url('https://via.placeholder.com/800x500?text=Futuristic+Chip'); /* Replace with actual chip graphic */
+             background-size: contain;
+             background-repeat: no-repeat;
+             background-position: center;
+             opacity: 0.3; /* Subtle transparency */
+             z-index: -1; /* Behind text */
          }
 
 
@@ -214,18 +427,6 @@
             height: 100vh;
         }
 
-        /* Optional: Styles for the small blue/red dots in the calendar header */
-        .date-dot {
-            display: block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            margin: 4px auto 0; /* Center below the date number */
-        }
-         .date-dot.blue { background-color: var(--blue-accent); }
-         .date-dot.red { background-color: var(--tesla-red); }
-
-
     </style>
 </head>
 <body>
@@ -233,296 +434,475 @@
     <!-- p5.js Canvas (will be created by the script) -->
     <div id="p5-canvas-container"></div>
 
-    <!-- Top Calendar Bar -->
-    <header class="calendar-header" data-aos="fade-down" data-aos-duration="800">
-        <div class="month-year">2025年4月</div>
-        <div class="today-button">回今天</div>
-         <!-- Date Navigation (Static representation) -->
-         <div class="calendar-date-nav">
-             <!-- Example dates from the image -->
-             <div class="date-item">
-                 <div class="day-abbr">一</div>
-                 <div class="date-number">21</div>
-                  <div class="date-dot blue"></div>
+    <!-- Title Section (Slide 1) -->
+    <section class="title-section" data-aos="fade-in" data-aos-duration="1500">
+        <h1 data-aos="fade-up" data-aos-delay="500">上海医英汇医疗科技<br>光纤传感CVP监测系统商业计划</h1>
+        <!-- Removed redundant "WORLD WORLD" -->
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="700"></p>
+        <p class="presenter" data-aos="fade-up" data-aos-delay="900">汇报人:</p>
+    </section>
+
+    <!-- Table of Contents Section (Slides 2 & 3) -->
+    <section class="contents-section" data-aos="fade-up" data-aos-duration="800">
+        <h2 data-aos="fade-up" data-aos-delay="100">目录</h2>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="200">CONTENTS</p>
+        <div class="contents-grid">
+            <div class="contents-item" data-aos="zoom-in" data-aos-delay="300">
+                <div class="number-block">01</div>
+                <div class="text">项目概述</div>
+            </div>
+            <div class="contents-item" data-aos="zoom-in" data-aos-delay="400">
+                <div class="number-block">02</div>
+                <div class="text">市场痛点</div>
+            </div>
+            <div class="contents-item" data-aos="zoom-in" data-aos-delay="500">
+                <div class="number-block">03</div>
+                <div class="text">解决方案</div>
+            </div>
+            <div class="contents-item" data-aos="zoom-in" data-aos-delay="600">
+                <div class="number-block">04</div>
+                <div class="text">市场机遇</div>
+            </div>
+            <div class="contents-item" data-aos="zoom-in" data-aos-delay="700">
+                <div class="number-block">05</div>
+                <div class="text">市场潜力</div>
+            </div>
+             <div class="contents-item" data-aos="zoom-in" data-aos-delay="800">
+                 <div class="number-block">06</div>
+                 <div class="text">竞争分析</div>
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">二</div>
-                 <div class="date-number">22</div>
-                  <div class="date-dot blue"></div>
+             <div class="contents-item" data-aos="zoom-in" data-aos-delay="900">
+                 <div class="number-block">07</div>
+                 <div class="text">商业模式</div>
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">三</div>
-                 <div class="date-number">23</div>
-                  <div class="date-dot red"></div>
+             <div class="contents-item" data-aos="zoom-in" data-aos-delay="1000">
+                 <div class="number-block">08</div>
+                 <div class="text">团队与合作</div>
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">四</div>
-                 <div class="date-number">24</div>
-                  <div class="date-dot blue"></div>
+             <div class="contents-item" data-aos="zoom-in" data-aos-delay="1100">
+                 <div class="number-block">09</div>
+                 <div class="text">财务预测与愿景</div>
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">五</div>
-                 <div class="date-number">今</div>
-                  <div class="date-dot blue"></div>
+        </div>
+    </section>
+
+    <!-- PART 01: 项目概述 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 01</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">项目概述</h2>
+        </div>
+    </section>
+
+    <!-- Slide 5: 项目简介 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>项目简介</h3>
+            <div class="quote-style-block">
+                 <p>基于光纤传感技术的CVP监测系统及血流动力学参数监测平台,公司致力于创新医疗监护解决方案。</p>
+            </div>
+        </div>
+         <div class="image-text-layout mt-8" data-aos="fade-up" data-aos-delay="300">
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/600x400?text=Fiber+Optics" alt="Fiber Optics">
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">六</div>
-                 <div class="date-number">26</div>
-                  <div class="date-dot blue"></div>
+              <div class="text-part">
+                  <p class="text-lg leading-relaxed">（此部分可根据需要补充更多项目简介文本）</p>
+              </div>
+         </div>
+    </section>
+
+     <!-- Slide 6: 项目使命与目标 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>项目使命与目标</h3>
+            <p>通过创新技术提供精准、实时的血流动力学参数监测,以改善患者临床监护和治疗效果。</p>
+             <div class="note-block mt-4">
+                 <p>（此处可添加与使命目标相关的详细阐述）</p>
              </div>
-             <div class="date-item">
-                 <div class="day-abbr">日</div>
-                 <div class="date-number">27</div>
-                  <div class="date-dot blue"></div>
+        </div>
+    </section>
+
+
+    <!-- PART 02: 市场痛点 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 02</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">市场痛点</h2>
+        </div>
+    </section>
+
+     <!-- Slide 8: 传统监测问题 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>传统监测问题</h3>
+            <h4>传统压力换能器技术局限:</h4>
+            <ul>
+                <li>校准与漂移</li>
+                <li>电磁干扰与信号噪声</li>
+                <li>系统结构复杂性及维护难度</li>
+                <li>实时响应性不足</li>
+            </ul>
+        </div>
+         <div class="image-text-layout mt-8 reverse" data-aos="fade-up" data-aos-delay="300">
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/600x400?text=Medical+Tube" alt="Medical Tube">
+             </div>
+              <div class="text-part">
+                  <p class="text-lg leading-relaxed">（此处可添加对传统技术问题的详细描述）</p>
+              </div>
+         </div>
+    </section>
+
+    <!-- Slide 9: 临床需求分析 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>临床需求分析</h3>
+            <div class="note-block">
+                <p>临床亟需稳定、准确、便捷的CVP监测方案以提升监护质量。</p>
+            </div>
+             <p class="mt-4">（此处可添加对临床需求的详细分析）</p>
+        </div>
+    </section>
+
+     <!-- PART 03: 解决方案 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 03</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">解决方案</h2>
+        </div>
+    </section>
+
+     <!-- Slide 11: 一体化导管 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="image-text-layout" data-aos="fade-up" data-aos-delay="100">
+             <div class="text-part">
+                 <h3>一体化导管</h3>
+                 <h4>双腔导管</h4>
+                 <p>采用光纤传感器与静脉导管一体化设计,监测CVP同时不影响输液通路</p>
+             </div>
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/600x400?text=Integrated+Catheter" alt="Integrated Catheter Diagram">
              </div>
          </div>
-         <div class="calendar-view-toggle">
-             <span class="active">日</span>
-             <span>周</span>
+         <div class="note-block mt-8" data-aos="fade-up" data-aos-delay="300">
+             <p>（此处可添加导管的技术细节或优势阐述）</p>
          </div>
-         <i class="fas fa-times text-xl nav-icon ml-4"></i> <!-- Close icon -->
-    </header>
+    </section>
 
-    <!-- Main Schedule List -->
-    <div class="schedule-list-container">
+     <!-- Slide 12: 光纤传感技术 -->
+     <section data-aos="fade-up" data-aos-duration="800">
+        <div class="image-text-layout reverse" data-aos="fade-up" data-aos-delay="100">
+             <div class="text-part">
+                 <h3>光纤传感技术</h3>
+                 <h4>单波长强度测量法</h4>
+                 <p>采用法布里佩罗干涉仪,实现低成本、低功耗、快速响应的监测。</p>
+                  <div class="bg-blue-accent text-white p-4 rounded mt-4 inline-block opacity-90" data-aos="zoom-in" data-aos-delay="400">
+                      优化方案,成本降低90%
+                  </div>
+             </div>
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/600x400?text=Fiber+Optic+Device" alt="Fiber Optic Device">
+             </div>
+         </div>
+    </section>
 
-        <!-- Day: 周一 28 -->
-        <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-            <div class="daily-schedule-header">
-                <div class="day-number">28</div>
-                <div class="weekday">周一</div>
+    <!-- Slide 13: 产品技术特点 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>产品技术特点</h3>
+            <h4>一体化设计与优势</h4>
+            <div class="note-block">
+                 <p>光纤传感器与双腔导管一体化设计,实现高精度、抗干扰、易集成的特点,提高监测的稳定性和准确性。</p>
             </div>
-            <div class="session-list">
-                <div class="session-card type-power" data-aos="fade-right" data-aos-delay="100">
-                    <div class="session-time">12:10-13:10</div>
-                    <div class="session-details">力量循环 POWER CYCLE</div>
-                    <div class="capacity">(0/18)</div>
-                     <div class="status-tag">待发布</div>
-                </div>
-                 <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="200">
-                     <div class="session-time">13:20-14:20</div>
-                     <div class="session-details">全身塑形 TRX</div>
-                     <div class="capacity">(0/14)</div>
-                      <div class="status-tag">待发布</div>
+             <p class="mt-4">（此处可添加更多技术特点）</p>
+        </div>
+    </section>
+
+    <!-- Slide 14: 动物实验 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>动物实验</h3>
+             <div class="note-block">
+                 <p>（此处可添加实验的简要介绍或成果）</p>
+             </div>
+             <div class="image-text-layout mt-8" data-aos="fade-up" data-aos-delay="300">
+                 <div class="image-part">
+                      <img src="https://via.placeholder.com/400x300?text=Experiment+Setup+1" alt="Experiment Setup">
                  </div>
-                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="300">
-                     <div class="session-time">18:20-19:20</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/12)</div>
-                      <div class="status-tag">待发布</div>
+                  <div class="image-part">
+                     <img src="https://via.placeholder.com/400x300?text=Experiment+Setup+2" alt="Experiment Setup">
                  </div>
+             </div>
+        </div>
+    </section>
+
+     <!-- Slide 15: 实测CVP波形 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>实测CVP波形</h3>
+            <div class="note-block">
+                <p>（此处可添加对波形图的解读）</p>
             </div>
-        </section>
+             <div class="image-part mt-8" data-aos="fade-up" data-aos-delay="300">
+                <!-- Placeholder for graph image. Could use a library like Chart.js if dynamic data is needed, but static image is simpler based on original -->
+                 <img src="https://via.placeholder.com/800x400?text=CVP+Waveform+Graphs" alt="CVP Waveform Graphs">
+            </div>
+        </div>
+    </section>
 
-         <!-- Day: 周二 29 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">29</div>
-                 <div class="weekday">周二</div>
+     <!-- Slide 16: 工程研发 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>工程研发</h3>
+             <div class="note-block">
+                 <p>（此处可添加研发团队或流程介绍）</p>
              </div>
-             <div class="session-list">
-                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">07:20-08:20</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/10)</div>
-                      <div class="status-tag">待发布</div>
+             <div class="image-text-layout mt-8" data-aos="fade-up" data-aos-delay="300">
+                 <div class="image-part">
+                     <img src="https://via.placeholder.com/400x300?text=Engineering+R%26D+1" alt="Engineering R&D">
                  </div>
-                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
-                      <div class="session-time">08:30-09:30</div>
-                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
-                      <div class="capacity">(0/18)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
+                  <div class="image-part">
+                      <img src="https://via.placeholder.com/400x300?text=Engineering+R%26D+2" alt="Engineering R&D">
+                 </div>
              </div>
-         </section>
+        </div>
+    </section>
 
-         <!-- Day: 周三 30 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">30</div>
-                 <div class="weekday">周三</div>
-             </div>
-             <div class="session-list">
-                 <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">19:30-20:30</div>
-                     <div class="session-details">上肢轰炸 UPPER BOMBING</div>
-                     <div class="capacity">(0/20)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-             </div>
-         </section>
+    <!-- PART 04: 市场机遇 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 04</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">市场机遇</h2>
+        </div>
+    </section>
 
-         <!-- Day: 周四 01 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">01</div>
-                 <div class="weekday">周四</div>
-             </div>
-             <div class="session-list">
-                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">08:40-09:40</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/16)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="200">
-                     <div class="session-time">09:50-10:50</div>
-                     <div class="session-details">力量循环 POWER CYCLE</div>
-                     <div class="capacity">(0/18)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                 <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="300">
-                      <div class="session-time">11:00-12:00</div>
-                      <div class="session-details">全身塑形 TRX</div>
-                      <div class="capacity">(0/14)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
-                      <div class="session-time">18:20-19:20</div>
-                      <div class="session-details">大核心 Super Core</div>
-                      <div class="capacity">(0/15)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="500">
-                     <div class="session-time">19:30-20:30</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/12)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-             </div>
-         </section>
+     <!-- Slide 18: 市场需求增长 / 技术进步与政策支持 -->
+     <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>市场需求增长</h3>
+            <h4>技术进步与政策支持:</h4>
+            <p>医疗技术进步和政策支持推动精准监测需求升级。</p>
+             <ul class="mt-4">
+                 <li>中国“十四五”规划中明确提出要推进智慧医疗和精准医疗,专项资金和税收优惠支持。</li>
+                 <li>高精度监测设备的小型化、集成化和低功耗化。</li>
+                 <li>全球医疗物联网市场预计2025年将达到近3000亿美元,CVP等生命体征的实时监测技术正逐步迈向智能化和精准化。</li>
+             </ul>
+        </div>
+         <div class="image-part mt-8" data-aos="fade-up" data-aos-delay="300">
+             <img src="https://via.placeholder.com/800x400?text=Market+Growth+Graphic" alt="Market Growth Graphic">
+         </div>
+    </section>
 
-         <!-- Day: 周五 02 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">02</div>
-                 <div class="weekday">周五</div>
-             </div>
-             <div class="session-list">
-                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">07:20-08:20</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/10)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
-                      <div class="session-time">08:30-09:30</div>
-                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
-                      <div class="capacity">(0/18)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="300">
-                      <div class="session-time">09:40-10:40</div>
-                      <div class="session-details">全身塑形 TRX</div>
-                      <div class="capacity">(0/12)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                 <!-- Location is "凯德星贸全能店" in this block in source -->
-                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
-                      <div class="session-time">14:10-15:10</div>
-                      <div class="session-details">大核心 Super Core</div>
-                      <div class="capacity">(0/21)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <!-- Location is "凯德星贸全能店" in this block in source -->
-                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="500">
-                     <div class="session-time">15:20-16:20</div>
-                     <div class="session-details">力量循环 POWER CYCLE</div>
-                     <div class="capacity">(0/20)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-             </div>
-         </section>
+     <!-- Slide 19: 市场需求增长 / 临床需求 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+             <h3>临床需求</h3>
+             <p>临床对精确血流动力学监测的要求不断提升。精确的CVP监测能帮助医生更好地判断患者的液体状态,及时调整治疗方案,降低重症患者并发症率。</p>
+             <p class="mt-4">重症监护和大手术患者的住院费用与监测精度密切相关;例如,有研究指出,高精度监测设备在重症管理中可减少约15%-20%的医疗资源浪费,并改善患者预后。</p>
+             <p class="mt-4">随着人口老龄化和慢性病患者数量增加,中国每年重症及大手术病例数达到数十万例,临床对精准、实时监测设备的需求逐步攀升,为高精度CVP监测设备的推广应用提供了广阔市场。</p>
+        </div>
+    </section>
 
-         <!-- Day: 周六 03 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">03</div>
-                 <div class="weekday">周六</div>
-             </div>
-             <div class="session-list">
-                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">10:40-11:40</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/12)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
-                      <div class="session-time">11:50-12:50</div>
-                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
-                      <div class="capacity">(0/20)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <div class="session-card type-core" data-aos="fade-right" data-aos-delay="300">
-                      <div class="session-time">13:00-14:00</div>
-                      <div class="session-details">大核心 Super Core</div>
-                      <div class="capacity">(0/15)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                 <!-- Location is "凯德星贸全能店" in this block in source -->
-                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
-                      <div class="session-time">17:10-18:10</div>
-                      <div class="session-details">大核心 Super Core</div>
-                      <div class="capacity">(0/21)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <!-- Location is "凯德星贸全能店" in this block in source -->
-                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="500">
-                     <div class="session-time">18:20-19:20</div>
-                     <div class="session-details">力量循环 POWER CYCLE</div>
-                     <div class="capacity">(0/20)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-             </div>
-         </section>
+     <!-- PART 05: 市场潜力 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 05</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">市场潜力</h2>
+        </div>
+    </section>
 
-         <!-- Day: 周日 04 -->
-         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
-             <div class="daily-schedule-header">
-                 <div class="day-number">04</div>
-                 <div class="weekday">周日</div>
+     <!-- Slide 21: 应用领域广泛 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="image-text-layout reverse" data-aos="fade-up" data-aos-delay="100">
+             <div class="text-part">
+                 <h3>应用领域广泛</h3>
+                 <ul>
+                    <li>危重症患者:如休克、急性心力衰竭、大手术围术期管理</li>
+                    <li>液体治疗指导:尤其在循环衰竭或大量输液时,CVP可动态反映液体平衡状态</li>
+                    <li>特殊病症监测:如肺动脉高压、肾功能受损患者的容量管理</li>
+                 </ul>
              </div>
-             <div class="session-list">
-                  <!-- Location is "凯德星贸全能店" in this block in source -->
-                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
-                     <div class="session-time">07:20-08:20</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/16)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                  <!-- Location is "凯德星贸全能店" in this block in source -->
-                  <div class="session-card type-core" data-aos="fade-right" data-aos-delay="200">
-                      <div class="session-time">08:30-09:30</div>
-                      <div class="session-details">大核心 Super Core</div>
-                      <div class="capacity">(0/21)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <!-- Location is "凯德星贸全能店" in this block in source -->
-                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="300">
-                     <div class="session-time">09:40-10:40</div>
-                     <div class="session-details">力量循环 POWER CYCLE</div>
-                     <div class="capacity">(0/20)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
-                  <!-- Location is "真北路近铁广场全能店" in this block in source -->
-                  <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="400">
-                      <div class="session-time">14:40-15:40</div>
-                      <div class="session-details">全身塑形 TRX</div>
-                      <div class="capacity">(0/14)</div>
-                       <div class="status-tag">待发布</div>
-                  </div>
-                  <!-- Location is "真北路近铁广场全能店" in this block in source -->
-                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="500">
-                     <div class="session-time">15:50-16:50</div>
-                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
-                     <div class="capacity">(0/16)</div>
-                      <div class="status-tag">待发布</div>
-                 </div>
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/400x600?text=Human+Body+Diagram" alt="Human Body Diagram with Catheter">
              </div>
-         </section>
+         </div>
+    </section>
+
+     <!-- Slide 22 & 23: 中国市场分析 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>中国市场分析</h3>
+             <div class="financial-data note-block">
+                 <p>中国2023年中心静脉导管需求量约0.12亿只</p>
+                 <p class="mt-2">中国每年需CVP监测的患者数量范围约为300万-500万例,取中位数400万例估算</p>
+                 <h4 class="mt-4">患者构成:</h4>
+                 <ul>
+                     <li>重症患者:200万-300万例(心衰、休克、多器官衰竭等)。</li>
+                     <li>大手术患者:100万-200万例(心脏手术、肿瘤切除、严重创伤术后等)</li>
+                 </ul>
+                 <h4 class="mt-4">费用估算:</h4>
+                 <ul>
+                     <li>设备费用:压力监测仪(光纤传感器技术),单价约2万-5万元,取中位数3万元估算</li>
+                     <li>耗材费用:一体化导管一次性耗材,单次使用成本约500-1500元,取中位数800元估算</li>
+                 </ul>
+                 <h4 class="mt-4">市场规模估算:</h4>
+                 <ul>
+                     <li>耗材市场:400万例 × 800元 = 32亿元/年。</li>
+                     <li>设备市场(新增需求):按10%年增长率,2024年设备保有量约10万台,新增1万台/年 × 3万元 = 3亿元/年。</li>
+                     <li>设备市场(存量更新):按5年更换周期,年更新需求2万台 × 3万元 = 6亿元/年。</li>
+                 </ul>
+                 <h4 class="mt-4">总市场规模:</h4>
+                 <ul>
+                     <li>耗材32亿+设备(新增3亿+更新6亿)9亿 = 41亿元/年。</li>
+                 </ul>
+             </div>
+        </div>
+    </section>
+
+    <!-- PART 06: 竞争分析 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 06</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">竞争分析</h2>
+        </div>
+    </section>
+
+     <!-- Slide 25: 竞争环境 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+            <h3>竞争环境</h3>
+             <h4>竞争对手与市场现状:</h4>
+             <div class="note-block">
+                 <p>全球中心静脉导管主要厂商、传统电子换能器是主要竞争对手。</p>
+                 <ul>
+                     <li>中心静脉导管市场中Teleflex、Edwards Lifesciences、Bard和B.Braun全球前四大厂商共占有超过60%的市场份额。2023年全球市场18.84亿美元。目前国内生产中心静脉导管产品的企业有三十多家,国内外尚无一体化监测导管</li>
+                     <li>传统一次性有创血压传感器头部厂家国外有爱德华,BD,雅培、德尔格等,国内厂家较分散,全球市场约20亿美元规模</li>
+                 </ul>
+             </div>
+        </div>
+    </section>
+
+     <!-- Slide 26: 产品优势与市场策略 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+         <div class="image-text-layout" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-part">
+                  <h3>产品优势与市场策略</h3>
+                  <ul>
+                      <li>产品创新</li>
+                      <li>市场扩张</li>
+                      <li>合作与并购</li>
+                  </ul>
+              </div>
+              <div class="image-part">
+                  <img src="https://via.placeholder.com/600x400?text=Fiber+Optic+Art" alt="Fiber Optic Artistic Representation">
+              </div>
+          </div>
+    </section>
 
 
-    </div> <!-- End schedule-list-container -->
+     <!-- PART 07: 商业模式 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 07</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">商业模式</h2>
+        </div>
+    </section>
+
+     <!-- Slide 28: 产品与服务构成 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+             <h3>产品与服务构成</h3>
+             <div class="note-block">
+                 <h4>产品构成:</h4>
+                 <p>激光解调模块、光纤压力传感一体化导管,监护仪</p>
+                 <h4 class="mt-4">营收来源:</h4>
+                 <p>设备销售、一次性导管及耗材、系统维护服务</p>
+                 <h4 class="mt-4">渠道:</h4>
+                 <p>医院采购、代理商合作、展会推广</p>
+             </div>
+        </div>
+    </section>
+
+     <!-- PART 08: 团队与合作 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 08</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">团队与合作</h2>
+        </div>
+    </section>
+
+     <!-- Slide 30: 核心团队介绍 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+             <h3>核心团队介绍</h3>
+             <h4>专家团队与经验:</h4>
+             <div class="note-block">
+                 <p>团队由光学、电子、软件、医疗器械专家组成,拥有丰富的研发、生产和市场推广经验。</p>
+             </div>
+             <p class="mt-4">（此处可添加团队成员照片或简介）</p>
+        </div>
+    </section>
+
+     <!-- Slide 31: 临床试验与合作伙伴 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="image-text-layout reverse" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-part">
+                  <h3>临床试验与合作伙伴</h3>
+                  <h4>与行业领军医院合作:</h4>
+                  <p>与行业领军医院共同开展临床试验,确保产品的临床效果和安全性。</p>
+              </div>
+              <div class="image-part">
+                  <img src="https://via.placeholder.com/600x400?text=Clinical+Trials" alt="Clinical Trials and Partners">
+              </div>
+          </div>
+    </section>
+
+     <!-- PART 09: 财务预测与愿景 -->
+    <section class="part-title-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="text-center">
+            <span class="part-title-block" data-aos="fade-up" data-aos-delay="100">PART 09</span>
+            <h2 data-aos="fade-up" data-aos-delay="200">财务预测与愿景</h2>
+        </div>
+    </section>
+
+     <!-- Slide 33: 财务状况 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+        <div class="content-block" data-aos="fade-up" data-aos-delay="100">
+             <h3>财务状况</h3>
+             <h4>初期投入与盈利预期:</h4>
+             <div class="note-block">
+                 <p>预计2年研发试产期,3-5年取得三类医疗器械证,取证后年销售收入预计1-3亿元。</p>
+             </div>
+             <p class="mt-4">（此处可添加更详细的财务数据或图表）</p>
+        </div>
+    </section>
+
+     <!-- Slide 34: 企业愿景 -->
+    <section data-aos="fade-up" data-aos-duration="800">
+         <div class="image-text-layout" data-aos="fade-up" data-aos-delay="100">
+             <div class="text-part vision-points">
+                 <h3>企业愿景</h3>
+                 <ul>
+                     <li>成为国际领先供应商
+                          <span>未来5年内,目标成为国际领先的CVP监测解决方案供应商,推动医疗监测技术革新。</span>
+                     </li>
+                     <li>搭建精准血流动力学监测平台
+                         <span>持续创新,提供更多的血流动力学参数监测方案</span>
+                     </li>
+                 </ul>
+             </div>
+             <div class="image-part">
+                 <img src="https://via.placeholder.com/400x600?text=Enterprise+Vision" alt="Enterprise Vision Diagram">
+             </div>
+         </div>
+    </section>
+
+    <!-- Thank You Section (Slide 35) -->
+    <section class="thank-you-section" data-aos="fade-in" data-aos-duration="1500">
+        <h2 data-aos="fade-up" data-aos-delay="500">THANK YOU<br>谢谢</h2>
+        <p class="presenter" data-aos="fade-up" data-aos-delay="900">汇报人:</p>
+    </section>
 
 
     <!-- AOS Initialization Script -->
@@ -539,11 +919,11 @@
     <!-- p5.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
 
-    <!-- Your p5.js Sketch for Particle Background (Adapted for Motion/Exercise) -->
+    <!-- Your p5.js Sketch for Particle Background -->
     <script>
         let particles = [];
-        const numParticles = 150; // Particle density
-        const maxDist = 120; // Max distance for lines
+        const numParticles = 180; // Particle density
+        const maxDist = 150; // Max distance for lines
         let mouseParticle; // Particle that follows the mouse
 
         class Particle {
@@ -553,10 +933,11 @@
                     this.pos = createVector(mouseX, mouseY);
                 } else {
                     this.pos = createVector(random(width), random(height));
-                    this.vel = p5.Vector.random2D().mult(random(0.3, 1.5)); // Slower, random speed
-                    this.acc = createVector();
+                    // Give particles a slight random velocity
+                    this.vel = p5.Vector.random2D().mult(random(0.2, 0.8));
+                    this.acc = createVector(); // For potential forces
                 }
-                this.size = random(1.5, 3); // Random size
+                this.size = random(1, 3); // Random size for variation
             }
 
             update() {
@@ -564,13 +945,13 @@
                     this.pos.x = mouseX;
                     this.pos.y = mouseY;
                 } else {
-                     // Add some slight random movement/noise
-                     this.vel.add(p5.Vector.random2D().mult(0.05)); // Subtle random force
-                     this.vel.limit(1.5); // Limit max speed
+                    // Subtle random movement to simulate energy/data flow
+                    this.vel.add(p5.Vector.random2D().mult(0.02));
+                    this.vel.limit(1); // Limit speed
 
                     this.pos.add(this.vel);
                     this.acc.mult(0);
-                    this.edges();
+                    this.edges(); // Keep particles within the screen
                 }
             }
 
@@ -584,75 +965,93 @@
 
             display() {
                 noStroke();
-                // Subtle white or light yellow particles matching the theme
-                 fill(255, 255, 255, this.isMouse ? 200 : 100); // Semi-transparent white
+                // Semi-transparent white particles
+                fill(255, 255, 255, this.isMouse ? 200 : 80);
                 ellipse(this.pos.x, this.pos.y, this.size);
             }
 
+            // Connect particle to another particle if they are close
             connect(other) {
                 const d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                 if (d < maxDist) {
-                    const alpha = map(d, 0, maxDist, 150, 0); // Fade out lines
+                    // Draw a line, opacity decreases as distance approaches maxDist
+                    const alpha = map(d, 0, maxDist, 150, 0); // Fade out lines based on distance
                     let lineColor;
 
                     if (this.isMouse || other.isMouse) {
                          // Tesla Red lines near mouse
                          lineColor = color(227, 25, 55, alpha);
                     } else {
-                         // Lines between regular particles - Subtle yellow/gray
-                         lineColor = color(255, 215, 0, alpha * 0.5); // Semi-transparent yellow
+                         // Subtle blue lines between regular particles, potentially gradient
+                         lineColor = color(0, 116, 217, alpha * 0.8); // Blue accent color
                     }
 
+
                     stroke(lineColor);
-                    strokeWeight(0.5); // Thin lines
+                    strokeWeight(0.6); // Thin lines
                     line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                 }
             }
         }
 
+        // p5.js setup function - runs once at the beginning
         function setup() {
+            // Create canvas covering the entire window
             let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.position(0, 0);
-            canvas.style('z-index', '-1');
-            canvas.style('pointer-events', 'none');
+            canvas.position(0, 0); // Position canvas at the top-left corner
+            canvas.style('z-index', '-1'); // Send canvas to the background
+            canvas.style('pointer-events', 'none'); // Allow mouse events to pass through canvas
 
+            // Create particles
             for (let i = 0; i < numParticles; i++) {
                 particles.push(new Particle());
             }
+             // Create a particle that follows the mouse
             mouseParticle = new Particle(true);
             particles.push(mouseParticle); // Add mouse particle to the list
         }
 
+        // p5.js draw function - runs continuously
         function draw() {
-            background(26, 26, 26, 80); // Semi-transparent dark background clear (allows particles to leave faint trails)
+            background(10, 17, 40, 60); // Semi-transparent dark blue clear (allows trails)
 
-            // Update particles (mouse particle update handled automatically by tracking mouseX/mouseY)
+            // Update and display particles, and connect them
              for (let i = particles.length -1; i >= 0; i--) {
                  particles[i].update();
              }
 
-            // Connect and display particles
-             for (let i = 0; i < particles.length; i++) {
+            // Connect particles (draw lines first)
+            for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     particles[i].connect(particles[j]);
                 }
             }
+            // Display particles on top of lines
             for (let i = particles.length - 1; i >= 0; i--) {
                  particles[i].display();
              }
         }
 
+        // p5.js windowResized function - called when the window is resized
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
+            // Optional: Re-initialize particles if their starting positions should adapt to new size
+            // particles = [];
+            // for (let i = 0; i < numParticles; i++) {
+            //     particles.push(new Particle());
+            // }
         }
 
+         // Listen for mouse move to update mouseParticle position
         function mouseMoved() {
              if (mouseParticle) {
                 mouseParticle.pos.x = mouseX;
                 mouseParticle.pos.y = mouseY;
              }
-             return false; // Prevent default scroll/touch behavior
+             // Prevent default scroll behavior on mouse move if needed, though pointer-events: none should handle it
+             return false;
         }
+
 
     </script>
 
