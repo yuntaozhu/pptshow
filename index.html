@@ -3,359 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>探奇星球机器人课程交流会</title>
+    <title>超级猩猩 课程表 - 2025年4月</title>
     <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- AOS CSS CDN -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Framer Motion CDN (Included as requested, but primarily for framework use) -->
-    <script src="https://cdn.jsdelivr.net/npm/framer-motion@latest/dist/framer-motion.min.js"></script>
-
     <style>
         :root {
             --tesla-red: #E31937;
-            --primary-orange: #FF9800; /* A warm orange */
-            --light-orange: #FFCC80; /* A lighter orange */
-            --text-color: #333; /* Darker text for light background */
-            --bg-start-color: #FFF3E0; /* Very light orange/yellow */
-            --bg-end-color: #FFECB3; /* Light orange */
-            --accent-color: #0288D1; /* Accent blue from PPT for some elements */
-            --accent-green: #4CAF50; /* Accent green from PPT for some elements */
+            --accent-yellow: #FFD700; /* Gold/Yellow from image */
+            --dark-bg: #1a1a1a; /* Dark background */
+            --card-bg: rgba(255, 215, 0, 0.05); /* Subtle yellow transparent background for cards */
+            --card-border: rgba(255, 215, 0, 0.3); /* Semi-transparent yellow border */
+            --text-light: #e5e7eb; /* Light gray text */
         }
         body {
-            background: linear-gradient(to bottom right, var(--bg-start-color), var(--bg-end-color)); /* Gradient background */
-            color: var(--text-color);
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: sans-serif;
             overflow-x: hidden; /* Prevent horizontal scroll caused by animations */
-            position: relative;
-            min-height: 100vh; /* Ensure body covers viewport height */
+            position: relative; /* Needed for z-index context */
+            min-height: 100vh; /* Ensure body covers at least viewport height */
+            padding-bottom: 2rem; /* Add space at the bottom */
         }
-         /* Override default Tailwind background/text for sections to use body gradient */
-        section {
-            background-color: transparent; /* Sections are transparent to show body background */
-            color: var(--text-color);
-        }
-
         h1, h2, h3, h4, h5, h6 {
-            color: #000; /* Black headings for contrast on light background */
-             font-weight: bold;
+            color: #fff; /* White headings */
         }
-         h2.section-title {
-             font-size: clamp(2.5rem, 6vw, 4rem); /* Large section title */
-             font-weight: bold;
-             margin-bottom: 2rem;
-             position: relative;
-             display: inline-block;
-             color: #000; /* Section titles are black */
-        }
-        h2.section-title::after {
-            content: '';
-            display: block;
-            width: 50%;
-            height: 6px;
-            background: linear-gradient(to right, var(--primary-orange), var(--light-orange)); /* Orange gradient line */
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-
-
         .text-tesla-red {
             color: var(--tesla-red);
         }
-        .bg-tesla-red {
-            background-color: var(--tesla-red);
-        }
-        .border-tesla-red {
-            border-color: var(--tesla-red);
-        }
-        .text-accent-blue {
-            color: var(--accent-color);
-        }
-         .bg-accent-blue {
-             background-color: var(--accent-color);
-         }
-         .border-accent-blue {
-             border-color: var(--accent-color);
-         }
-         .text-accent-green {
-             color: var(--accent-green);
-         }
-          .bg-accent-green {
-              background-color: var(--accent-green);
-          }
-           .border-accent-green {
-               border-color: var(--accent-green);
-           }
-
-
-        /* Custom Bento Grid like sections */
-        .bento-section {
-            margin-bottom: 4rem; /* Spacing between sections */
-            padding: 4rem 1rem; /* More padding for sections */
-            max-width: 1200px; /* Limit content width */
-            margin: 0 auto;
-            position: relative;
-            z-index: 10; /* Ensure content is above particles */
+        .text-accent-yellow {
+            color: var(--accent-yellow);
         }
 
-        .bento-grid {
-            display: grid;
-            gap: 1.5rem; /* Gap between grid items */
-        }
-
-        /* Cards/Blocks */
-        .card {
-            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white card */
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px; /* More rounded corners */
-            padding: 1.5rem;
+        /* Top Calendar Bar */
+        .calendar-header {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            position: sticky; /* Make it sticky */
+            top: 0; /* Stick to the top */
+            z-index: 50; /* Ensure it's above content when scrolling */
             backdrop-filter: blur(5px); /* Frosted glass effect */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .card h3 {
-            color: #000;
-            font-weight: bold;
-             margin-bottom: 1rem;
-        }
-        .card p {
-            color: var(--text-color);
-        }
-
-         /* Highlight Numbers */
-        .highlight-number {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: bold;
-            color: var(--primary-orange); /* Use primary orange for big numbers */
-            line-height: 1;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-
-         /* Circular graphics (Slide 1) */
-         .circle-graphic {
-             position: relative;
-             width: 300px; /* Container width */
-             height: 300px; /* Container height */
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             margin: 2rem auto; /* Center the graphic */
-         }
-         .circle-large-outline {
-             position: absolute;
-             width: 250px;
-             height: 250px;
-             border: 10px solid rgba(0, 0, 0, 0.1);
-             border-radius: 50%;
-         }
-          .circle-large-fill {
-              position: absolute;
-              width: 220px;
-              height: 220px;
-              background: radial-gradient(circle at top left, var(--light-orange), var(--primary-orange));
-              border-radius: 50%;
-              opacity: 0.8;
-              box-shadow: 0 0 20px rgba(255, 152, 0, 0.5);
-          }
-         .circle-small {
-             position: absolute;
-             width: 50px;
-             height: 50px;
-             border-radius: 50%;
-             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-         }
-         .circle-small:nth-child(3) { background-color: #FFCC80; top: 10%; left: 20%; } /* Light Orange */
-         .circle-small:nth-child(4) { background-color: #80DEEA; top: 5%; left: 50%; } /* Light Cyan */
-         .circle-small:nth-child(5) { background-color: #4DD0E1; top: 15%; left: 70%; } /* Cyan */
-         .circle-small:nth-child(6) { background-color: #E57373; top: 30%; left: 15%; } /* Light Red */
-         .circle-small:nth-child(7) { background-color: #BA68C8; top: 50%; left: 10%; } /* Lilac */
-         .circle-small:nth-child(8) { background-color: #4FC3F7; top: 70%; left: 25%; } /* Light Blue */
-         .circle-small:nth-child(9) { background-color: #FF8A65; top: 80%; left: 45%; } /* Orange */
-
-
-         /* Hexagon graphics (Slide 2) */
-        .hexagon-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            margin: 3rem auto;
-            max-width: 400px; /* Limit width */
-        }
-        .hexagon-row {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .hexagon {
-            width: 100px; /* Adjust size */
-            height: 110px; /* Adjust height based on shape */
-            background-color: var(--accent-color); /* Default Blue */
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-             position: relative;
-        }
-         .hexagon-content {
-             z-index: 2; /* Ensure content is above potential pseudo-elements */
-             transform: translateY(-5px); /* Optical adjustment */
-         }
-         .hexagon i {
-             font-size: 2.5rem;
-             margin-bottom: 0.5rem;
-         }
-         .hexagon-blue { background-color: var(--accent-color); }
-         .hexagon-green { background-color: var(--accent-green); }
-         .hexagon-text { font-size: 1rem; margin-top: 0.5rem; }
-
-         /* Line graphics for values (Slide 4, 14, 16, 18) */
-         .value-item {
-             display: flex;
-             align-items: flex-start; /* Align text to top */
-             margin-bottom: 1.5rem;
-         }
-         .value-item .icon {
-             width: 30px;
-             height: 30px;
-             border: 2px solid var(--primary-orange);
-             border-radius: 50%;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             color: var(--primary-orange);
-             font-size: 1rem;
-             flex-shrink: 0;
-             margin-right: 1rem;
-             background-color: rgba(255, 255, 255, 0.8);
-         }
-         .value-item .text {
-             flex-grow: 1;
-         }
-         .value-item h4 {
-             color: #000;
-             font-weight: bold;
-             margin-bottom: 0.3rem;
-         }
-         .value-item p {
-             color: var(--text-color);
-             font-size: 0.95rem;
-         }
-
-
-         /* Flowchart/Process Graphics (Slide 21, 22) */
-         .flowchart {
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-             gap: 1.5rem;
-             margin: 3rem auto;
-         }
-         .flow-step {
-             background-color: rgba(255, 255, 255, 0.8);
-             border: 2px solid var(--accent-color);
-             border-radius: 8px;
-             padding: 0.8rem 1.5rem;
-             text-align: center;
-             font-weight: bold;
-             color: var(--accent-color);
-             position: relative;
-             width: 200px;
-         }
-          .flow-step::after {
-            content: '▼'; /* Down arrow */
-            position: absolute;
-            bottom: -1rem; /* Position below */
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--accent-color);
+        .calendar-header .month-year {
             font-size: 1.5rem;
-            line-height: 0;
-            z-index: 1;
-         }
-         .flow-step:last-child::after {
-             display: none; /* No arrow after last step */
-         }
-
-         .process-item {
-             display: flex;
-             align-items: center;
-             gap: 1.5rem;
-             margin-bottom: 2rem;
-         }
-         .process-item .icon-circle {
-             width: 60px;
-             height: 60px;
-             border-radius: 50%;
-             background: linear-gradient(to bottom right, var(--primary-orange), var(--light-orange));
-             color: white;
-             font-size: 2rem;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             flex-shrink: 0;
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-         }
-         .process-item .text {
-             flex-grow: 1;
-         }
-         .process-item .text h4 {
-             color: #000;
-             font-weight: bold;
-             margin-bottom: 0.5rem;
-         }
-         .process-item .connector {
-             flex-grow: 1;
-             height: 3px;
-             background: linear-gradient(to right, var(--light-orange), rgba(255, 152, 0, 0.3));
-             margin-top: 1.5rem; /* Align with circle center */
-         }
-         .process-row {
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             gap: 2rem; /* Space between items in a row */
-             flex-wrap: wrap; /* Wrap on small screens */
-         }
-
-
-        /* Images */
-        .image-container {
-             position: relative;
-             overflow: hidden;
-             border-radius: 12px; /* Match card radius */
-             margin-top: 2rem;
-             border: 1px solid rgba(0, 0, 0, 0.1);
-             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-         }
-         .image-container img {
-             display: block;
-             width: 100%;
-             height: auto;
-             object-fit: cover;
-         }
-
-        /* Certificates/Awards (Slide 5) */
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust size */
-            gap: 1rem;
-            margin-top: 2rem;
+            font-weight: bold;
         }
-         .certificate-item img {
-             width: 100%;
-             height: auto;
-             border: 1px solid rgba(0, 0, 0, 0.1);
-             border-radius: 8px;
+        .calendar-header .today-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+         .calendar-header .today-button:hover {
+             background-color: rgba(255, 255, 255, 0.2);
+         }
+         .calendar-date-nav {
+             display: flex;
+             align-items: center;
+             gap: 0.5rem;
+             font-size: 1.2rem;
+         }
+         .calendar-date-nav .date-number {
+             font-size: 2rem;
+             font-weight: bold;
+         }
+         .calendar-date-nav .day-abbr {
+             font-size: 0.9rem;
+         }
+         .calendar-date-nav .nav-icon {
+             cursor: pointer;
+             opacity: 0.8;
+         }
+         .calendar-date-nav .nav-icon:hover {
+             opacity: 1;
+         }
+        .calendar-view-toggle {
+            display: flex;
+             background-color: rgba(255, 255, 255, 0.1);
+             border-radius: 20px;
+             overflow: hidden;
+             font-size: 0.9rem;
+        }
+        .calendar-view-toggle span {
+            padding: 0.5rem 1rem;
+             cursor: pointer;
+             transition: background-color 0.2s ease;
+        }
+         .calendar-view-toggle span.active {
+             background-color: var(--accent-yellow);
+             color: #000; /* Dark text on yellow */
+             font-weight: bold;
          }
 
-         /* Specific p5 canvas style */
+
+        /* Main Content Area */
+        .schedule-list-container {
+            max-width: 600px; /* Limit width similar to image */
+            margin: 2rem auto;
+            padding: 0 1rem;
+             position: relative;
+             z-index: 10; /* Above particles */
+        }
+
+        /* Daily Schedule Block */
+        .daily-schedule-block {
+            margin-bottom: 3rem;
+        }
+        .daily-schedule-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .daily-schedule-header .day-number {
+            font-size: clamp(3rem, 8vw, 5rem); /* Large day number */
+            font-weight: bold;
+            line-height: 1;
+            color: #fff;
+        }
+         .daily-schedule-header .weekday {
+             font-size: 1.5rem;
+             font-weight: bold;
+             color: var(--text-light);
+         }
+
+        /* Session Card (Bento Style) */
+        .session-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden; /* For internal elements */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; /* Indicate clickable */
+        }
+        .session-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px; /* Left color bar */
+            height: 100%;
+             background-color: var(--accent-yellow); /* Default yellow bar */
+        }
+
+         /* Color bar variations based on class type/image colors */
+         .session-card.type-power::before { background-color: var(--accent-yellow); } /* Yellow/Orange in original */
+         .session-card.type-trx::before { background-color: var(--blue-accent); } /* Blueish in original */
+         .session-card.type-bombing::before { background-color: var(--tesla-red); } /* Redish in original */
+         .session-card.type-battle::before { background-color: var(--accent-yellow); } /* Yellow/Orange in original */
+         .session-card.type-core::before { background-color: var(--blue-accent); } /* Blueish in original */
+         .session-card.type-allinone::before { background-color: var(--blue-accent); } /* Blueish in original */
+         .session-card.type-combat::before { background-color: var(--tesla-red); } /* Redish in original */
+
+
+        .session-card .session-time {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff; /* White time */
+            margin-bottom: 0.3rem;
+        }
+         .session-card .session-details {
+             font-size: 0.9rem;
+             color: var(--text-light);
+         }
+         .session-card .capacity {
+             font-size: 0.8rem;
+             color: rgba(255, 255, 255, 0.7); /* Slightly faded capacity */
+             margin-top: 0.2rem;
+         }
+         .session-card .status-tag {
+             position: absolute;
+             top: 10px;
+             right: 10px;
+             background-color: var(--accent-yellow);
+             color: #000;
+             font-size: 0.7rem;
+             font-weight: bold;
+             padding: 2px 8px;
+             border-radius: 12px; /* Pill shape */
+         }
+
+
+         /* p5.js canvas styling */
         canvas {
             display: block;
             position: fixed; /* Covers the entire viewport */
@@ -363,954 +210,319 @@
             left: 0;
             z-index: -1; /* Put behind other content */
             pointer-events: none; /* Allow mouse events to pass through canvas */
-             /* Ensure canvas stretches full viewport, not just body scroll height */
             width: 100vw;
             height: 100vh;
         }
 
-         /* Hide Framer Motion script error in console if not used directly for animations */
-        script[src*="framer-motion"] {
-            display: none; /* Not strictly needed, but can clean up console if not used */
+        /* Optional: Styles for the small blue/red dots in the calendar header */
+        .date-dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin: 4px auto 0; /* Center below the date number */
         }
-
-
-         /* Logo */
-         .logo-footer {
-             display: flex;
-             align-items: center;
-             justify-content: flex-end;
-             margin-top: 4rem;
-         }
-         .logo-footer img {
-             height: 50px; /* Adjust size */
-         }
-         .logo-footer span {
-             font-size: 1.5rem;
-             font-weight: bold;
-             color: var(--accent-color);
-             margin-left: 0.5rem;
-         }
-
-         /* Specific style for slide 1 title */
-         .slide1-title {
-             font-size: clamp(3rem, 10vw, 7rem);
-             font-weight: bold;
-             color: #000;
-             margin-bottom: 1rem;
-         }
-          .slide1-tagline {
-              font-size: clamp(1.5rem, 4vw, 2.5rem);
-              font-weight: bold;
-              color: var(--primary-orange); /* Orange tagline */
-          }
-
-
-         /* Value sections grid layout */
-         .value-sections-grid {
-             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-         }
-
-         /* Table-like layout for Course Overview */
-         .course-overview-table {
-             display: grid;
-             grid-template-columns: 1fr 2fr; /* Adjust column ratio */
-             gap: 1px; /* Visual separation */
-             border: 1px solid rgba(0, 0, 0, 0.1);
-             border-radius: 8px;
-             overflow: hidden; /* Hide border overflow */
-             background-color: rgba(0, 0, 0, 0.1); /* Border color */
-         }
-         .course-overview-header,
-         .course-overview-row > div {
-             padding: 0.8rem;
-             background-color: rgba(255, 255, 255, 0.8);
-             color: #000;
-             font-weight: bold;
-             text-align: center;
-         }
-         .course-overview-header {
-             background-color: rgba(255, 152, 0, 0.2); /* Light orange header */
-         }
-         .course-overview-row {
-             display: contents; /* Make children participate in parent grid */
-         }
-         .course-overview-row > div {
-            background-color: rgba(255, 255, 255, 0.6); /* Slightly more transparent rows */
-            font-weight: normal;
-            color: var(--text-color);
-            text-align: left; /* Align content left */
-         }
-
-
-         /* Custom style for the specific particle sketch provided */
-         /* Note: This sketch is abstract and may not fit the design well */
-         /* It's included here but not used in the final p5 sketch below */
-         /*
-         .particle-sketch-provided canvas {
-             background: none !important; // Prevent sketch from clearing background
-         }
-         */
+         .date-dot.blue { background-color: var(--blue-accent); }
+         .date-dot.red { background-color: var(--tesla-red); }
 
 
     </style>
 </head>
-<body class="relative">
+<body>
 
-    <!-- p5.js Sketch Container -->
-    <!-- The canvas will be fixed and cover the body -->
-    <!-- We don't need a div for it if p5 creates it in the body -->
+    <!-- p5.js Canvas (will be created by the script) -->
+    <div id="p5-canvas-container"></div>
 
-    <!-- Section 1: Title / Intro -->
-    <section class="bento-section text-center" data-aos="fade-in" data-aos-duration="1500">
-        <h1 class="slide1-title" data-aos="fade-up" data-aos-delay="300">探奇星球机器人课程交流会</h1>
-        <p class="slide1-tagline" data-aos="fade-up" data-aos-delay="500">让世界充满更多会玩又有创造力的人</p>
-        <div class="circle-graphic" data-aos="zoom-in" data-aos-delay="700">
-            <div class="circle-large-outline"></div>
-            <div class="circle-large-fill"></div>
-            <div class="circle-small"></div>
-            <div class="circle-small"></div>
-            <div class="circle-small"></div>
-            <div class="circle-small"></div>
-            <div class="circle-small"></div>
-             <div class="circle-small"></div>
-              <div class="circle-small"></div>
-        </div>
-         <div class="logo-footer" data-aos="fade-up" data-aos-delay="900">
-             <!-- Placeholder logo - replace with actual image -->
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-    </section>
-
-    <!-- Section 2: Table of Contents -->
-    <section class="bento-section text-center" data-aos="fade-up">
-        <h2 class="section-title">目录 / Table of Contents</h2>
-         <div class="hexagon-grid" data-aos="fade-up" data-aos-delay="200">
-             <div class="hexagon-row">
-                 <div class="hexagon hexagon-blue" data-aos="zoom-in" data-aos-delay="300">
-                     <div class="hexagon-content">01<div class="hexagon-text">品牌介绍</div></div>
-                 </div>
-                 <div class="hexagon hexagon-blue" data-aos="zoom-in" data-aos-delay="400">
-                      <div class="hexagon-content">02<div class="hexagon-text">课程介绍</div></div>
-                 </div>
+    <!-- Top Calendar Bar -->
+    <header class="calendar-header" data-aos="fade-down" data-aos-duration="800">
+        <div class="month-year">2025年4月</div>
+        <div class="today-button">回今天</div>
+         <!-- Date Navigation (Static representation) -->
+         <div class="calendar-date-nav">
+             <!-- Example dates from the image -->
+             <div class="date-item">
+                 <div class="day-abbr">一</div>
+                 <div class="date-number">21</div>
+                  <div class="date-dot blue"></div>
              </div>
-             <div class="hexagon-row">
-                 <div class="hexagon hexagon-green" data-aos="zoom-in" data-aos-delay="500">
-                      <div class="hexagon-content">03<div class="hexagon-text">服务支持</div></div>
-                 </div>
+             <div class="date-item">
+                 <div class="day-abbr">二</div>
+                 <div class="date-number">22</div>
+                  <div class="date-dot blue"></div>
+             </div>
+             <div class="date-item">
+                 <div class="day-abbr">三</div>
+                 <div class="date-number">23</div>
+                  <div class="date-dot red"></div>
+             </div>
+             <div class="date-item">
+                 <div class="day-abbr">四</div>
+                 <div class="date-number">24</div>
+                  <div class="date-dot blue"></div>
+             </div>
+             <div class="date-item">
+                 <div class="day-abbr">五</div>
+                 <div class="date-number">今</div>
+                  <div class="date-dot blue"></div>
+             </div>
+             <div class="date-item">
+                 <div class="day-abbr">六</div>
+                 <div class="date-number">26</div>
+                  <div class="date-dot blue"></div>
+             </div>
+             <div class="date-item">
+                 <div class="day-abbr">日</div>
+                 <div class="date-number">27</div>
+                  <div class="date-dot blue"></div>
              </div>
          </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
+         <div class="calendar-view-toggle">
+             <span class="active">日</span>
+             <span>周</span>
          </div>
-    </section>
+         <i class="fas fa-times text-xl nav-icon ml-4"></i> <!-- Close icon -->
+    </header>
 
-    <!-- Section 3: Part 01 - Brand Intro Header -->
-    <section class="bento-section text-center" data-aos="fade-up">
-         <p class="highlight-number" data-aos="fade-up" data-aos-delay="200">PART 01</p>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">品牌介绍</h2>
-         <!-- Decorative graphics from PPT - simplified -->
-         <div class="flex justify-around items-center mt-8 opacity-70">
-             <!-- Sun -->
-             <i class="fas fa-sun text-yellow-500 text-6xl" data-aos="spin" data-aos-delay="500"></i>
-             <!-- Earth -->
-             <div class="relative" data-aos="fade-right" data-aos-delay="600">
-                 <i class="fas fa-globe-americas text-blue-600 text-8xl"></i>
-                  <i class="fas fa-tree text-green-700 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full"></i>
-                  <i class="fas fa-rainbow text-purple-500 absolute top-10 right-0 transform translate-x-full rotate-12"></i>
-                  <i class="fas fa-hand-paper text-green-500 absolute bottom-0 left-0 transform -translate-x-full rotate-12"></i>
-                   <i class="fas fa-hand-paper text-green-500 absolute bottom-0 right-0 transform translate-x-full -rotate-12"></i>
-             </div>
-             <!-- Clouds -->
-              <div class="flex space-x-4" data-aos="fade-left" data-aos-delay="700">
-                  <i class="fas fa-cloud text-gray-300 text-5xl"></i>
-                   <i class="fas fa-cloud text-gray-300 text-6xl relative -top-3"></i>
-                   <i class="fas fa-cloud text-gray-300 text-4xl"></i>
-              </div>
+    <!-- Main Schedule List -->
+    <div class="schedule-list-container">
 
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="900">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-    </section>
-
-    <!-- Section 4: Company Profile / Culture -->
-    <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">企业简介 / Company Profile</h2>
-        <div class="grid md:grid-cols-2 gap-8 mt-8">
-            <div class="card" data-aos="fade-right" data-aos-delay="200">
-                <h3 class="text-xl mb-4"><i class="fas fa-building mr-3 text-primary-orange"></i> 企业简介</h3>
-                <p>
-                    北京探奇信息技术有限公司是一家由北师大和中科院专家团队主导、集幼儿科技创新、产品设计、教育研发、推广服务于一体,专业从事科技创新教育的机构,引进基于人工智能、美国麻省理工学院 PAPERT 博士的建构主义理论 STEAM 课程(S: Science 科学;T: Technology 技术;E: Engineering 工程;A: Art 艺术; M: Mathematics 数学;),并改进为更适合国内 3-6岁幼儿操作的课程。
-                </p>
+        <!-- Day: 周一 28 -->
+        <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+            <div class="daily-schedule-header">
+                <div class="day-number">28</div>
+                <div class="weekday">周一</div>
             </div>
-            <div class="card" data-aos="fade-left" data-aos-delay="300">
-                 <h3 class="text-xl mb-4"><i class="fas fa-heart mr-3 text-primary-orange"></i> 企业文化</h3>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-bullseye"></i></div>
-                      <div class="text">
-                         <h4>企业使命</h4>
-                         <p>让世界充满会玩有创造力的人。</p>
-                      </div>
+            <div class="session-list">
+                <div class="session-card type-power" data-aos="fade-right" data-aos-delay="100">
+                    <div class="session-time">12:10-13:10</div>
+                    <div class="session-details">力量循环 POWER CYCLE</div>
+                    <div class="capacity">(0/18)</div>
+                     <div class="status-tag">待发布</div>
+                </div>
+                 <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="200">
+                     <div class="session-time">13:20-14:20</div>
+                     <div class="session-details">全身塑形 TRX</div>
+                     <div class="capacity">(0/14)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-eye"></i></div>
-                      <div class="text">
-                         <h4>企业愿景</h4>
-                         <p>做客户信任,值得尊敬的教育公司。</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                     <div class="icon"><i class="fas fa-star"></i></div>
-                     <div class="text">
-                         <h4>企业价值观</h4>
-                         <p>简单、诚信、勤奋、坚韧、合作。</p>
-                     </div>
+                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="300">
+                     <div class="session-time">18:20-19:20</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/12)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
             </div>
-        </div>
-         <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-    </section>
+        </section>
 
-    <!-- Section 5: Company Honors -->
-    <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">企业荣誉 / Company Honors</h2>
-        <p class="text-lg text-center mb-8" data-aos="fade-up" data-aos-delay="100">
-            企业专利、AAA认证、CCC认证、质量认证
-        </p>
-        <div class="certificates-grid" data-aos="fade-up" data-aos-delay="300">
-             <!-- Replace with actual certificate images -->
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="400"><img src="https://via.placeholder.com/200x280?text=Certificate+1" alt="Certificate"></div>
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="450"><img src="https://via.placeholder.com/200x280?text=Certificate+2" alt="Certificate"></div>
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="500"><img src="https://via.placeholder.com/200x280?text=Certificate+3" alt="Certificate"></div>
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="550"><img src="https://via.placeholder.com/200x280?text=Certificate+4" alt="Certificate"></div>
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="600"><img src="https://via.placeholder.com/200x280?text=Certificate+5" alt="Certificate"></div>
-             <div class="certificate-item" data-aos="zoom-in" data-aos-delay="650"><img src="https://via.placeholder.com/200x280?text=Certificate+6" alt="Certificate"></div>
-        </div>
-         <div class="logo-footer" data-aos="fade-up" data-aos-delay="800">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-    </section>
-
-    <!-- Section 6: Etymology of "Tanqi" -->
-    <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">“探奇”由来 / Etymology of "Tanqi"</h2>
-        <div class="card mx-auto max-w-2xl mt-8 text-center" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="text-xl mb-4">蓝田山石门精舍</h3>
-            <p class="text-gray-700">作者: 王维</p>
-            <p class="mt-4 italic">
-                落日山水好,漾舟信归风。<br>
-                探奇不觉远,因以缘源穷。
-            </p>
-        </div>
-        <div class="card mx-auto max-w-3xl mt-8" data-aos="fade-up" data-aos-delay="300">
-             <p class="text-lg leading-relaxed">
-                “探奇”取自唐朝王维《蓝田山石门精舍》中的一句“探奇不觉远,因以缘源穷”, 原诗本意为: 一路上专注于寻找奇景而感觉不到路途遥远,不知不觉间,就走到了水的 源头。
-             </p>
-             <p class="text-lg leading-relaxed mt-4">
-                 我们认为由兴趣引发的学习就像是一场有兴致的旅游,每一次成绩都是路上的美景, 过程不觉辛苦,终能到达梦想地。
-             </p>
-        </div>
-         <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-    </section>
-
-     <!-- Section 7: Brand Logo & Mascot -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">品牌LOGO / Brand Logo</h2>
-         <div class="card mx-auto max-w-xl text-center py-8" data-aos="fade-up" data-aos-delay="200">
-             <div class="flex items-center justify-center text-4xl font-bold space-x-4 text-primary-orange">
-                 <span>Qi</span>
-                 <i class="fas fa-plus text-gray-500"></i>
-                 <i class="fas fa-lightbulb text-yellow-500"></i>
-                 <i class="fas fa-plus text-gray-500"></i>
-                 <i class="fas fa-search text-accent-blue"></i>
-                 <i class="fas fa-equals text-gray-500"></i>
-                  <!-- Placeholder logo - replace with actual image -->
-                  <img src="https://via.placeholder.com/60x60?text=Logo" alt="Tanqi Logo" class="inline-block ml-4">
+         <!-- Day: 周二 29 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">29</div>
+                 <div class="weekday">周二</div>
              </div>
-             <p class="mt-4 text-gray-600">
-                 <span class="mr-4">谐音,活力</span>
-                 <span class="mr-4">创作</span>
-                 <span>启发</span>
-             </p>
-         </div>
-
-          <h2 class="section-title mt-12">吉祥物介绍 / Mascot Intro</h2>
-          <div class="grid md:grid-cols-2 gap-8 mt-8">
-              <div class="card" data-aos="fade-right" data-aos-delay="200">
-                  <div class="flex items-center mb-4">
-                      <!-- Placeholder mascot image -->
-                      <img src="https://via.placeholder.com/150x150?text=Mascot" alt="Mascot" class="mr-4 rounded-lg">
-                      <p class="text-lg leading-relaxed">
-                          活泼可爱、聪明调皮的小探宝。<br>
-                          探奇星球是真实世界的“缩印版”,在这里,小探宝和孩子们一起创造属于自己的世界。
-                      </p>
-                  </div>
-              </div>
-              <div class="card grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-delay="300">
-                   <!-- Placeholder scene images -->
-                   <img src="https://via.placeholder.com/200x150?text=Scene+1" alt="Mascot Scene 1" class="rounded-lg">
-                   <img src="https://via.placeholder.com/200x150?text=Scene+2" alt="Mascot Scene 2" class="rounded-lg">
-                   <img src="https://via.placeholder.com/200x150?text=Scene+3" alt="Mascot Scene 3" class="rounded-lg">
-                   <img src="https://via.placeholder.com/200x150?text=Scene+4" alt="Mascot Scene 4" class="rounded-lg">
-              </div>
-          </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 8: Part 02 - Course Intro Header -->
-     <section class="bento-section text-center" data-aos="fade-up">
-         <p class="highlight-number" data-aos="fade-up" data-aos-delay="200">PART 02</p>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">课程介绍</h2>
-          <!-- Decorative graphics from PPT - simplified -->
-         <div class="flex justify-around items-center mt-8 opacity-70">
-             <!-- Sun -->
-             <i class="fas fa-sun text-yellow-500 text-6xl" data-aos="spin" data-aos-delay="500"></i>
-             <!-- Earth -->
-             <div class="relative" data-aos="fade-right" data-aos-delay="600">
-                 <i class="fas fa-globe-americas text-blue-600 text-8xl"></i>
-                  <i class="fas fa-tree text-green-700 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full"></i>
-                  <i class="fas fa-rainbow text-purple-500 absolute top-10 right-0 transform translate-x-full rotate-12"></i>
-                  <i class="fas fa-hand-paper text-green-500 absolute bottom-0 left-0 transform -translate-x-full rotate-12"></i>
-                   <i class="fas fa-hand-paper text-green-500 absolute bottom-0 right-0 transform translate-x-full -rotate-12"></i>
-             </div>
-             <!-- Clouds -->
-              <div class="flex space-x-4" data-aos="fade-left" data-aos-delay="700">
-                  <i class="fas fa-cloud text-gray-300 text-5xl"></i>
-                   <i class="fas fa-cloud text-gray-300 text-6xl relative -top-3"></i>
-                   <i class="fas fa-cloud text-gray-300 text-4xl"></i>
-              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="900">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 9: Curriculum Philosophy -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">课程理念 / Curriculum Philosophy</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8 value-sections-grid">
-             <div class="card" data-aos="fade-right" data-aos-delay="200">
-                 <h3 class="text-xl mb-4"><i class="fas fa-lightbulb mr-3 text-primary-orange"></i> 理念</h3>
-                 <p class="leading-relaxed">
-                     把创造性思维融入到情景化、游戏化、趣味化中,让幼儿在动手搭建的过程中,明白其中的原理,从而获得解决问题的能力。
-                 </p>
-                 <div class="image-container mt-4">
-                      <!-- Placeholder image -->
-                      <img src="https://via.placeholder.com/400x300?text=Teaching+Scene" alt="Teaching Scene">
+             <div class="session-list">
+                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">07:20-08:20</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/10)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-             </div>
-              <div class="card" data-aos="fade-left" data-aos-delay="300">
-                 <h3 class="text-xl mb-4"><i class="fas fa-book-open mr-3 text-primary-orange"></i> 理论来源</h3>
-                 <ul class="list-disc list-inside space-y-2 text-gray-700">
-                     <li>源自美国麻省理工学院 Papert 博士建构主义理论;</li>
-                     <li>埃里克森社会心理发展理论;</li>
-                     <li>《3-6岁儿童学习与发展指南》</li>
-                 </ul>
-                  <div class="grid grid-cols-3 gap-4 mt-4">
-                      <!-- Placeholder images -->
-                      <img src="https://via.placeholder.com/150x200?text=Papert" alt="Papert" class="rounded-lg">
-                       <img src="https://via.placeholder.com/150x200?text=Book" alt="Book Cover" class="rounded-lg">
-                        <img src="https://via.placeholder.com/150x200?text=Erikson" alt="Erikson" class="rounded-lg">
+                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
+                      <div class="session-time">08:30-09:30</div>
+                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
+                      <div class="capacity">(0/18)</div>
+                       <div class="status-tag">待发布</div>
                   </div>
              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
+         </section>
 
-     <!-- Section 10: Curriculum Practice -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-right">课程实践 / Curriculum Practice</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8">
-             <div class="card" data-aos="fade-right" data-aos-delay="200">
-                 <p class="text-lg leading-relaxed">
-                     课程已在北京众多一级一类幼儿园,经过3年的教学实践,最终形成的一套适合3-6岁幼儿动手操作的创新思维课程。
-                 </p>
-                  <p class="text-lg leading-relaxed mt-4">
-                      北京航天机关幼儿园,已将探奇星球机器人课程作为园本教材纳入日常教学活动中,并形成正规出版物进行使用。
-                  </p>
+         <!-- Day: 周三 30 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">30</div>
+                 <div class="weekday">周三</div>
              </div>
-             <div class="card image-container" data-aos="fade-left" data-aos-delay="300">
-                  <!-- Placeholder images -->
-                 <img src="https://via.placeholder.com/600x400?text=Course+Book+1" alt="Course Book 1">
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 11: Curriculum Details -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">课程介绍 / Curriculum Details</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8">
-             <div class="card" data-aos="fade-right" data-aos-delay="200">
-                 <ul class="list-disc list-inside space-y-3 text-gray-700 text-lg">
-                     <li>分为小、中、大共三个级别,每个级别分上、下学期;</li>
-                     <li>每学期1盒教学操作材料,每盒100个操作零件;</li>
-                     <li>每学期含有1本搭建卡片;</li>
-                     <li>每学期16节教学活动,3年共96节教学活动;</li>
-                     <li>课程含教师指导手册、电子课件、教学示范活动视频。</li>
-                 </ul>
-             </div>
-              <div class="card image-container" data-aos="fade-left" data-aos-delay="300">
-                <!-- Placeholder image -->
-                <img src="https://via.placeholder.com/600x400?text=Course+Kit" alt="Course Kit">
-             </div>
-         </div>
-         <div class="grid md:grid-cols-2 gap-8 mt-8">
-             <div class="card image-container" data-aos="fade-right" data-aos-delay="400">
-                 <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Models+1" alt="Models 1">
-             </div>
-              <div class="card image-container" data-aos="fade-left" data-aos-delay="500">
-                 <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Models+2" alt="Models 2">
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="700">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 12: Competition Activity -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">16节教学活动搭卡+1节竞赛活动参赛卡+1张奖状</h2>
-        <div class="grid md:grid-cols-3 gap-8 mt-8">
-            <div class="card image-container" data-aos="zoom-in" data-aos-delay="200">
-                 <!-- Placeholder image -->
-                <img src="https://via.placeholder.com/400x600?text=Competition+Card+Front" alt="Competition Card Front">
-                 <p class="text-center mt-2 font-bold">参赛卡正面</p>
-             </div>
-             <div class="card image-container" data-aos="zoom-in" data-aos-delay="300">
-                 <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/400x600?text=Competition+Card+Back" alt="Competition Card Back">
-                 <p class="text-center mt-2 font-bold">参赛卡反面</p>
-             </div>
-             <div class="card image-container" data-aos="zoom-in" data-aos-delay="400">
-                 <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/400x600?text=Award+Certificate" alt="Award Certificate">
-                  <p class="text-center mt-2 font-bold">奖状</p>
-             </div>
-        </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 13: Building Cards -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">搭建卡 / Building Cards</h2>
-         <div class="card image-container mt-8 mx-auto max-w-4xl" data-aos="fade-up" data-aos-delay="200">
-              <!-- Placeholder image -->
-             <img src="https://via.placeholder.com/800x500?text=Building+Cards" alt="Building Cards">
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="400">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 14: Curriculum - Small Class -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">课程体系 - 小班</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8 value-sections-grid">
-             <div class="card image-container" data-aos="fade-right" data-aos-delay="200">
-                  <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Small+Class+Model+1" alt="Small Class Model 1">
-             </div>
-             <div class="card" data-aos="fade-left" data-aos-delay="300">
-                 <h3 class="text-xl mb-4"><i class="fas fa-chart-bar mr-3 text-primary-orange"></i> 课程价值</h3>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-brain"></i></div>
-                      <div class="text">
-                         <h4>知识技能</h4>
-                         <p>1.认识管道和各种积木块;2.学习管道的连接与固定;3.学习凸点与凹槽的连接方法;4.学习用双锁、互锁的方法连接积木</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-smile"></i></div>
-                      <div class="text">
-                         <h4>情感态度</h4>
-                         <p>愿意参加机器人活动,喜欢拼搭作品并能大胆描述自己的作品</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                     <div class="icon"><i class="fas fa-walking"></i></div>
-                     <div class="text">
-                         <h4>行为技能</h4>
-                         <p>能够准确将各种建构零件进行连接;能够准确的将不同的块、板连接</p>
-                     </div>
-                 </div>
-                  <div class="value-item">
-                     <div class="icon"><i class="fas fa-seedling"></i></div>
-                     <div class="text">
-                         <h4>能力培养</h4>
-                         <p>能够大胆拼搭,做出与众不同的作品</p>
-                     </div>
-                 </div>
-            </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 15: Curriculum - Small Class Overview -->
-     <section class="bento-section" data-aos="fade-up">
-         <h2 class="section-title text-center">课程体系 - 小班 (内容)</h2>
-         <div class="card mt-8" data-aos="fade-up" data-aos-delay="200">
-              <div class="course-overview-table">
-                 <div class="course-overview-header">目录</div>
-                 <div class="course-overview-header">单元主题 / 包含课程</div>
-
-                 <div class="course-overview-row">
-                     <div>管道工程<br>(小班上)</div>
-                     <div>
-                         <p>奇幻旅游 / 望远镜, 大象滑梯, 电话, 羚羊</p>
-                         <p class="mt-2">小球快跑 / 手电筒, 篮球架, 洗手台, 天鹅</p>
-                         <p class="mt-2">管道活动 / 照相机, 飞跃断崖, 投球游戏, 长颈鹿</p>
-                         <p class="mt-2">动物之家 / 隧道大冒险, 桌球游戏, 管道乐园, 蜗牛</p>
-                     </div>
-                 </div>
-                 <div class="course-overview-row">
-                     <div>小建筑师<br>(小班下)</div>
-                      <div>
-                         <p>龟兔赛跑 / 小乌龟, 金字塔, 火箭, 洗漱用品</p>
-                         <p class="mt-2">埃及之旅 / 看台, 狮身人面像, 碰碰车, 灯塔</p>
-                         <p class="mt-2">游乐场 / 小桥, 神秘宝箱, 跷跷板, 风车</p>
-                         <p class="mt-2">坐船去荷兰 / 苹果树, 小怪物, 旋转木马, 天平</p>
-                     </div>
+             <div class="session-list">
+                 <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">19:30-20:30</div>
+                     <div class="session-details">上肢轰炸 UPPER BOMBING</div>
+                     <div class="capacity">(0/20)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
              </div>
-             <div class="grid md:grid-cols-2 gap-8 mt-8">
-                 <div class="image-container" data-aos="fade-right" data-aos-delay="300">
-                     <!-- Placeholder image -->
-                     <img src="https://via.placeholder.com/600x400?text=Small+Class+Models+Overview+1" alt="Small Class Models Overview 1">
+         </section>
+
+         <!-- Day: 周四 01 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">01</div>
+                 <div class="weekday">周四</div>
+             </div>
+             <div class="session-list">
+                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">08:40-09:40</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/16)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-                  <div class="image-container" data-aos="fade-left" data-aos-delay="400">
-                      <!-- Placeholder image -->
-                      <img src="https://via.placeholder.com/600x400?text=Small+Class+Models+Overview+2" alt="Small Class Models Overview 2">
+                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="200">
+                     <div class="session-time">09:50-10:50</div>
+                     <div class="session-details">力量循环 POWER CYCLE</div>
+                     <div class="capacity">(0/18)</div>
+                      <div class="status-tag">待发布</div>
+                 </div>
+                 <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="300">
+                      <div class="session-time">11:00-12:00</div>
+                      <div class="session-details">全身塑形 TRX</div>
+                      <div class="capacity">(0/14)</div>
+                       <div class="status-tag">待发布</div>
                   </div>
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 16: Curriculum - Middle Class -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-right">课程体系 - 中班</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8 value-sections-grid">
-             <div class="card" data-aos="fade-right" data-aos-delay="200">
-                 <h3 class="text-xl mb-4"><i class="fas fa-chart-bar mr-3 text-primary-orange"></i> 课程价值</h3>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-brain"></i></div>
-                      <div class="text">
-                         <h4>知识技能</h4>
-                         <p>1.初步感知平面对称与不对称;2.初步感知空间对称;3.学习支点、重心概念</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-smile"></i></div>
-                      <div class="text">
-                         <h4>情感态度</h4>
-                         <p>习惯并能积极地参加机器人活动,能够尝试合作游戏</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                     <div class="icon"><i class="fas fa-walking"></i></div>
-                     <div class="text">
-                         <h4>行为技能</h4>
-                         <p>探索生活中的科学原理</p>
-                     </div>
-                 </div>
-                  <div class="value-item">
-                     <div class="icon"><i class="fas fa-seedling"></i></div>
-                     <div class="text">
-                         <h4>能力培养</h4>
-                         <p>勇于创新,将想象力转变为创造力</p>
-                     </div>
-                 </div>
-            </div>
-             <div class="card image-container" data-aos="fade-left" data-aos-delay="300">
-                  <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Middle+Class+Model+1" alt="Middle Class Model 1">
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-     <!-- Section 17: Curriculum - Middle Class Overview -->
-     <section class="bento-section" data-aos="fade-up">
-         <h2 class="section-title text-center">课程体系 - 中班 (内容)</h2>
-          <div class="card mt-8" data-aos="fade-up" data-aos-delay="200">
-              <div class="course-overview-table">
-                 <div class="course-overview-header">目录</div>
-                 <div class="course-overview-header">单元主题 / 包含课程</div>
-
-                 <div class="course-overview-row">
-                     <div>小设计师<br>(中班上)</div>
-                     <div>
-                         <p>生活小助手 / 水桶, 毛毛虫, 汽车, 旋转飞椅</p>
-                         <p class="mt-2">动物展览馆 / 地球仪, 蝴蝶, 装甲车, 鸭鸭船</p>
-                         <p class="mt-2">奇幻旅游 / 书, 鳄鱼的嘴巴, 旋转机器人, 旋转木马</p>
-                         <p class="mt-2">游乐园 / 印章机, 烤鱼, 门票压印机, 海盗船</p>
-                     </div>
-                 </div>
-                 <div class="course-overview-row">
-                     <div>百变工程<br>(中班下)</div>
-                      <div>
-                         <p>建筑工地 / 铲车, 人形机器人, 喷气飞机, 钻孔机</p>
-                         <p class="mt-2">探奇星球上的机器人 / 卡车, 蛇形机器人, 工程船, 风力发电机</p>
-                         <p class="mt-2">船和飞机 / 塔吊, 瓦力机器人, 海底探测器, 雷达探测器</p>
-                         <p class="mt-2">科技博物馆 / 挖掘机, 飞行机器人, 直升飞机, 狙击枪</p>
-                     </div>
-                 </div>
-             </div>
-             <div class="grid md:grid-cols-2 gap-8 mt-8">
-                 <div class="image-container" data-aos="fade-right" data-aos-delay="300">
-                     <!-- Placeholder image -->
-                     <img src="https://via.placeholder.com/600x400?text=Middle+Class+Models+Overview+1" alt="Middle Class Models Overview 1">
-                 </div>
-                  <div class="image-container" data-aos="fade-left" data-aos-delay="400">
-                      <!-- Placeholder image -->
-                      <img src="https://via.placeholder.com/600x400?text=Middle+Class+Models+Overview+2" alt="Middle Class Models Overview 2">
+                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
+                      <div class="session-time">18:20-19:20</div>
+                      <div class="session-details">大核心 Super Core</div>
+                      <div class="capacity">(0/15)</div>
+                       <div class="status-tag">待发布</div>
                   </div>
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-      <!-- Section 18: Curriculum - Large Class -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">课程体系 - 大班</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8 value-sections-grid">
-             <div class="card image-container" data-aos="fade-right" data-aos-delay="200">
-                  <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Large+Class+Model+1" alt="Large Class Model 1">
-             </div>
-             <div class="card" data-aos="fade-left" data-aos-delay="300">
-                 <h3 class="text-xl mb-4"><i class="fas fa-chart-bar mr-3 text-primary-orange"></i> 课程价值</h3>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-brain"></i></div>
-                      <div class="text">
-                         <h4>知识技能</h4>
-                         <p>1.熟练使用齿轮;2.运用马达搭建作品;3.学习冠齿轮的垂直咬合</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                      <div class="icon"><i class="fas fa-smile"></i></div>
-                      <div class="text">
-                         <h4>情感态度</h4>
-                         <p>能够清晰进行自我表达,乐于交谈,运用比较的方法进行探索活动</p>
-                      </div>
-                 </div>
-                 <div class="value-item">
-                     <div class="icon"><i class="fas fa-walking"></i></div>
-                     <div class="text">
-                         <h4>行为技能</h4>
-                         <p>在复杂作品的基础中,能够运用自己的想法进行改装</p>
-                     </div>
-                 </div>
-                  <div class="value-item">
-                     <div class="icon"><i class="fas fa-seedling"></i></div>
-                     <div class="text">
-                         <h4>能力培养</h4>
-                         <p>善于分析作品的结构,遇到困难不放弃,积极主动的解决问题</p>
-                     </div>
-                 </div>
-            </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
-
-      <!-- Section 19: Curriculum - Large Class Overview -->
-     <section class="bento-section" data-aos="fade-up">
-         <h2 class="section-title text-center">课程体系 - 大班 (内容)</h2>
-          <div class="card mt-8" data-aos="fade-up" data-aos-delay="200">
-              <div class="course-overview-table">
-                 <div class="course-overview-header">目录</div>
-                 <div class="course-overview-header">单元主题 / 包含课程</div>
-
-                 <div class="course-overview-row">
-                     <div>齿轮世界<br>(大班上)</div>
-                     <div>
-                         <p>齿轮的奥秘 / 陀螺发射器, 摇摇马, 电钻, 直升飞机</p>
-                         <p class="mt-2">游乐场 / 打蛋机, 风车磨坊, 打桩机, 吊扇</p>
-                         <p class="mt-2">小小工程师 / 稻草人, 旋转椅, 弓锯, 会转弯的车</p>
-                         <p class="mt-2">创意传动 / 风扇, 疯狂大摆锤, 车载广告牌, 旋转鸟笼</p>
-                     </div>
-                 </div>
-                 <div class="course-overview-row">
-                     <div>小发明家<br>(大班下)</div>
-                      <div>
-                         <p>趣味游戏 / 秋千, 道闸, 抽油机, 果酱机器人</p>
-                         <p class="mt-2">智能生活 / 踢球, 千斤顶, 叉车, 跳舞机器人</p>
-                         <p class="mt-2">我是小工匠 / 趣味三轮车, 太阳能发电, 传送带, 自动雨刷器</p>
-                         <p class="mt-2">生活小助手 / 敲击游戏, 摆动的鱼, 压路机, 智能牙科椅</p>
-                     </div>
+                 <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="500">
+                     <div class="session-time">19:30-20:30</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/12)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
              </div>
-             <div class="grid md:grid-cols-2 gap-8 mt-8">
-                 <div class="image-container" data-aos="fade-right" data-aos-delay="300">
-                     <!-- Placeholder image -->
-                     <img src="https://via.placeholder.com/600x400?text=Large+Class+Models+Overview+1" alt="Large Class Models Overview 1">
+         </section>
+
+         <!-- Day: 周五 02 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">02</div>
+                 <div class="weekday">周五</div>
+             </div>
+             <div class="session-list">
+                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">07:20-08:20</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/10)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-                  <div class="image-container" data-aos="fade-left" data-aos-delay="400">
-                      <!-- Placeholder image -->
-                      <img src="https://via.placeholder.com/600x400?text=Large+Class+Models+Overview+2" alt="Large Class Models Overview 2">
+                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
+                      <div class="session-time">08:30-09:30</div>
+                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
+                      <div class="capacity">(0/18)</div>
+                       <div class="status-tag">待发布</div>
                   </div>
+                  <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="300">
+                      <div class="session-time">09:40-10:40</div>
+                      <div class="session-details">全身塑形 TRX</div>
+                      <div class="capacity">(0/12)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                 <!-- Location is "凯德星贸全能店" in this block in source -->
+                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
+                      <div class="session-time">14:10-15:10</div>
+                      <div class="session-details">大核心 Super Core</div>
+                      <div class="capacity">(0/21)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                  <!-- Location is "凯德星贸全能店" in this block in source -->
+                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="500">
+                     <div class="session-time">15:20-16:20</div>
+                     <div class="session-details">力量循环 POWER CYCLE</div>
+                     <div class="capacity">(0/20)</div>
+                      <div class="status-tag">待发布</div>
+                 </div>
              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
+         </section>
 
-     <!-- Section 20: Part 03 - Support Header -->
-     <section class="bento-section text-center" data-aos="fade-up">
-         <p class="highlight-number" data-aos="fade-up" data-aos-delay="200">PART 03</p>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">教学支持</h2>
-          <!-- Decorative graphics from PPT - simplified -->
-         <div class="flex justify-around items-center mt-8 opacity-70">
-             <!-- Sun -->
-             <i class="fas fa-sun text-yellow-500 text-6xl" data-aos="spin" data-aos-delay="500"></i>
-             <!-- Earth -->
-             <div class="relative" data-aos="fade-right" data-aos-delay="600">
-                 <i class="fas fa-globe-americas text-blue-600 text-8xl"></i>
-                  <i class="fas fa-tree text-green-700 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full"></i>
-                  <i class="fas fa-rainbow text-purple-500 absolute top-10 right-0 transform translate-x-full rotate-12"></i>
-                  <i class="fas fa-hand-paper text-green-500 absolute bottom-0 left-0 transform -translate-x-full rotate-12"></i>
-                   <i class="fas fa-hand-paper text-green-500 absolute bottom-0 right-0 transform translate-x-full -rotate-12"></i>
+         <!-- Day: 周六 03 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">03</div>
+                 <div class="weekday">周六</div>
              </div>
-             <!-- Clouds -->
-              <div class="flex space-x-4" data-aos="fade-left" data-aos-delay="700">
-                  <i class="fas fa-cloud text-gray-300 text-5xl"></i>
-                   <i class="fas fa-cloud text-gray-300 text-6xl relative -top-3"></i>
-                   <i class="fas fa-cloud text-gray-300 text-4xl"></i>
-              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="900">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
+             <div class="session-list">
+                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">10:40-11:40</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/12)</div>
+                      <div class="status-tag">待发布</div>
+                 </div>
+                  <div class="session-card type-bombing" data-aos="fade-right" data-aos-delay="200">
+                      <div class="session-time">11:50-12:50</div>
+                      <div class="session-details">上肢轰炸 UPPER BOMBING</div>
+                      <div class="capacity">(0/20)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                  <div class="session-card type-core" data-aos="fade-right" data-aos-delay="300">
+                      <div class="session-time">13:00-14:00</div>
+                      <div class="session-details">大核心 Super Core</div>
+                      <div class="capacity">(0/15)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                 <!-- Location is "凯德星贸全能店" in this block in source -->
+                 <div class="session-card type-core" data-aos="fade-right" data-aos-delay="400">
+                      <div class="session-time">17:10-18:10</div>
+                      <div class="session-details">大核心 Super Core</div>
+                      <div class="capacity">(0/21)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                  <!-- Location is "凯德星贸全能店" in this block in source -->
+                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="500">
+                     <div class="session-time">18:20-19:20</div>
+                     <div class="session-details">力量循环 POWER CYCLE</div>
+                     <div class="capacity">(0/20)</div>
+                      <div class="status-tag">待发布</div>
+                 </div>
+             </div>
+         </section>
 
-     <!-- Section 21: International 4C Teaching Method -->
-     <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">国际4C教学法</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8">
-             <div class="card" data-aos="fade-right" data-aos-delay="200">
-                 <div class="value-item">
-                      <div class="icon bg-primary-orange text-white border-primary-orange"><span class="font-bold">1</span></div>
-                      <div class="text">
-                         <h4 class="text-xl mb-0 text-primary-orange">联系 (Connect)</h4>
-                      </div>
+         <!-- Day: 周日 04 -->
+         <section class="daily-schedule-block" data-aos="fade-up" data-aos-duration="800">
+             <div class="daily-schedule-header">
+                 <div class="day-number">04</div>
+                 <div class="weekday">周日</div>
+             </div>
+             <div class="session-list">
+                  <!-- Location is "凯德星贸全能店" in this block in source -->
+                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="100">
+                     <div class="session-time">07:20-08:20</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/16)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-                 <div class="value-item">
-                      <div class="icon bg-primary-orange text-white border-primary-orange"><span class="font-bold">2</span></div>
-                      <div class="text">
-                         <h4 class="text-xl mb-0 text-primary-orange">建构 (Construct)</h4>
-                      </div>
+                  <!-- Location is "凯德星贸全能店" in this block in source -->
+                  <div class="session-card type-core" data-aos="fade-right" data-aos-delay="200">
+                      <div class="session-time">08:30-09:30</div>
+                      <div class="session-details">大核心 Super Core</div>
+                      <div class="capacity">(0/21)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                  <!-- Location is "凯德星贸全能店" in this block in source -->
+                 <div class="session-card type-power" data-aos="fade-right" data-aos-delay="300">
+                     <div class="session-time">09:40-10:40</div>
+                     <div class="session-details">力量循环 POWER CYCLE</div>
+                     <div class="capacity">(0/20)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
-                 <div class="value-item">
-                      <div class="icon bg-primary-orange text-white border-primary-orange"><span class="font-bold">3</span></div>
-                      <div class="text">
-                         <h4 class="text-xl mb-0 text-primary-orange">反思 (Contemplate)</h4>
-                      </div>
-                 </div>
-                  <div class="value-item">
-                      <div class="icon bg-primary-orange text-white border-primary-orange"><span class="font-bold">4</span></div>
-                      <div class="text">
-                         <h4 class="text-xl mb-0 text-primary-orange">延续 (Continue)</h4>
-                      </div>
+                  <!-- Location is "真北路近铁广场全能店" in this block in source -->
+                  <div class="session-card type-trx" data-aos="fade-right" data-aos-delay="400">
+                      <div class="session-time">14:40-15:40</div>
+                      <div class="session-details">全身塑形 TRX</div>
+                      <div class="capacity">(0/14)</div>
+                       <div class="status-tag">待发布</div>
+                  </div>
+                  <!-- Location is "真北路近铁广场全能店" in this block in source -->
+                  <div class="session-card type-battle" data-aos="fade-right" data-aos-delay="500">
+                     <div class="session-time">15:50-16:50</div>
+                     <div class="session-details">热浪战绳 BATTLE WAVE®</div>
+                     <div class="capacity">(0/16)</div>
+                      <div class="status-tag">待发布</div>
                  </div>
              </div>
-             <div class="flowchart" data-aos="fade-left" data-aos-delay="300">
-                 <div class="flow-step">情境引入</div>
-                 <div class="flow-step">实物搭建</div>
-                 <div class="flow-step">反思与讨论</div>
-                 <div class="flow-step">延伸与分享</div>
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-     </section>
+         </section>
 
-      <!-- Section 22: Training & Services -->
-      <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">培训与服务</h2>
-         <div class="flex justify-center items-center flex-wrap gap-8 mt-8">
-             <div class="process-item" data-aos="fade-right" data-aos-delay="200">
-                 <div class="icon-circle"><i class="fas fa-book"></i></div>
-                 <div class="text">
-                      <h4>电子教案</h4>
-                      <p>提供与课程相匹配的文字版教案,便于教师快速理解课程内容并进行授课。</p>
-                 </div>
-             </div>
-              <div class="process-item connector hidden md:block" data-aos="fade-right" data-aos-delay="300">
-                 <div class="connector"></div>
-             </div>
-             <div class="process-item" data-aos="fade-right" data-aos-delay="400">
-                 <div class="icon-circle"><i class="fas fa-video"></i></div>
-                 <div class="text">
-                      <h4>教学视频</h4>
-                      <p>提供完整的每节教学活动视频培训资料,包含授课步骤产品及操作使用教学视频。</p>
-                 </div>
-             </div>
-         </div>
-         <div class="flex justify-center items-center flex-wrap gap-8 mt-8 md:mt-0">
-             <div class="process-item connector hidden md:block" data-aos="fade-left" data-aos-delay="500">
-                 <div class="connector"></div>
-             </div>
-              <div class="process-item" data-aos="fade-left" data-aos-delay="600">
-                 <div class="icon-circle"><i class="fas fa-file-powerpoint"></i></div>
-                 <div class="text">
-                      <h4>课件</h4>
-                      <p>提供与课程相匹配的课件,便于教师快速理解课程内容并进行授课。</p>
-                 </div>
-             </div>
-             <div class="process-item connector hidden md:block" data-aos="fade-left" data-aos-delay="700">
-                 <div class="connector"></div>
-             </div>
-             <div class="process-item" data-aos="fade-left" data-aos-delay="800">
-                 <div class="icon-circle"><i class="fas fa-trophy"></i></div>
-                 <div class="text">
-                      <h4>竞赛活动</h4>
-                      <p>期末亲子活动、竞赛活动方案。</p>
-                 </div>
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="1000">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-      </section>
 
-      <!-- Section 23: Electronic Lesson Plan Details -->
-      <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">电子教案 / Electronic Lesson Plan</h2>
-         <div class="card mt-8" data-aos="fade-up" data-aos-delay="200">
-              <p class="text-lg leading-relaxed mb-4">
-                  教案中有家园沟通环节,课程结束后,可以直接将家园沟通环节的描述发到微信群中。
-              </p>
-              <div class="image-container mx-auto max-w-2xl">
-                  <!-- Placeholder image -->
-                  <img src="https://via.placeholder.com/600x400?text=Lesson+Plan+Excerpt" alt="Lesson Plan Excerpt">
-              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="400">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-      </section>
-
-       <!-- Section 24: Teaching Videos Details -->
-      <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-right">教学视频 / Teaching Videos</h2>
-         <div class="card mt-8" data-aos="fade-up" data-aos-delay="200">
-              <p class="text-lg leading-relaxed mb-4 text-center">
-                  手机扫描二维码<br>免费领取<br>在线观看备课
-              </p>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                 <div class="image-container" data-aos="fade-right" data-aos-delay="300">
-                     <!-- Placeholder image -->
-                     <img src="https://via.placeholder.com/400x600?text=Video+App+Screenshot+1" alt="Video App Screenshot 1">
-                 </div>
-                 <div class="image-container md:col-span-2" data-aos="fade-left" data-aos-delay="400">
-                     <!-- Placeholder image -->
-                     <img src="https://via.placeholder.com/800x600?text=Video+App+Screenshot+2" alt="Video App Screenshot 2">
-                 </div>
-              </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="600">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-      </section>
-
-      <!-- Section 25: Courseware Details -->
-      <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title">课件 / Courseware</h2>
-         <div class="card mt-8 image-container mx-auto max-w-4xl" data-aos="fade-up" data-aos-delay="200">
-              <!-- Placeholder image -->
-             <img src="https://via.placeholder.com/800x500?text=Courseware+Screenshot" alt="Courseware Screenshot">
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="400">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-      </section>
-
-      <!-- Section 26: Competition Activities Details -->
-      <section class="bento-section" data-aos="fade-up">
-        <h2 class="section-title text-center">竞赛活动 / Competition Activities</h2>
-         <div class="grid md:grid-cols-2 gap-8 mt-8">
-             <div class="card image-container" data-aos="fade-right" data-aos-delay="200">
-                 <h3 class="text-xl mb-4 text-center"><span class="highlight-number text-xl mr-2">1</span>亲子活动</h3>
-                  <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Parent+Child+Activity" alt="Parent Child Activity">
-             </div>
-              <div class="card image-container" data-aos="fade-left" data-aos-delay="300">
-                 <h3 class="text-xl mb-4 text-center"><span class="highlight-number text-xl mr-2">2</span>竞赛活动</h3>
-                  <!-- Placeholder image -->
-                 <img src="https://via.placeholder.com/600x400?text=Competition+Activity" alt="Competition Activity">
-             </div>
-         </div>
-          <div class="logo-footer" data-aos="fade-up" data-aos-delay="500">
-             <img src="https://via.placeholder.com/50x50?text=Logo" alt="Tanqi Planet Logo">
-             <span class="text-accent-blue">探奇星球</span>
-         </div>
-      </section>
-
-      <!-- Section 27: Thank You -->
-      <section class="bento-section text-center" data-aos="fade-in">
-         <div class="flex flex-col items-center" data-aos="fade-up" data-aos-delay="200">
-              <!-- Placeholder logo - replace with actual image -->
-             <img src="https://via.placeholder.com/100x100?text=Logo" alt="Tanqi Planet Logo" class="mb-4">
-             <span class="text-accent-blue text-4xl font-bold">探奇星球</span>
-         </div>
-         <p class="text-4xl font-bold mt-8 mb-8" data-aos="fade-up" data-aos-delay="300">感谢聆听</p>
-         <div class="image-container mt-8 mx-auto max-w-3xl" data-aos="fade-up" data-aos-delay="400">
-              <!-- Placeholder image -->
-             <img src="https://via.placeholder.com/800x400?text=Thank+You+Image" alt="Thank You Image">
-         </div>
-      </section>
+    </div> <!-- End schedule-list-container -->
 
 
     <!-- AOS Initialization Script -->
@@ -1327,23 +539,39 @@
     <!-- p5.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
 
-    <!-- Your p5.js Sketch for Particle Background (Connected dots style) -->
+    <!-- Your p5.js Sketch for Particle Background (Adapted for Motion/Exercise) -->
     <script>
         let particles = [];
-        const numParticles = 80; // Reduced density for a cleaner look on a lighter background
-        const maxDist = 150; // Increased distance for lines
-        let mouseParticle; // Particle following the mouse
+        const numParticles = 150; // Particle density
+        const maxDist = 120; // Max distance for lines
+        let mouseParticle; // Particle that follows the mouse
 
         class Particle {
-            constructor(x, y) {
-                this.pos = createVector(x, y);
-                this.vel = p5.Vector.random2D().mult(0.3); // Slower random velocity
-                this.size = random(1, 2); // Smaller size
+            constructor(isMouse = false) {
+                this.isMouse = isMouse;
+                if (isMouse) {
+                    this.pos = createVector(mouseX, mouseY);
+                } else {
+                    this.pos = createVector(random(width), random(height));
+                    this.vel = p5.Vector.random2D().mult(random(0.3, 1.5)); // Slower, random speed
+                    this.acc = createVector();
+                }
+                this.size = random(1.5, 3); // Random size
             }
 
             update() {
-                this.pos.add(this.vel);
-                this.edges();
+                if (this.isMouse) {
+                    this.pos.x = mouseX;
+                    this.pos.y = mouseY;
+                } else {
+                     // Add some slight random movement/noise
+                     this.vel.add(p5.Vector.random2D().mult(0.05)); // Subtle random force
+                     this.vel.limit(1.5); // Limit max speed
+
+                    this.pos.add(this.vel);
+                    this.acc.mult(0);
+                    this.edges();
+                }
             }
 
             edges() {
@@ -1356,69 +584,74 @@
 
             display() {
                 noStroke();
-                // Subtle light particles (white/gray)
-                fill(200, 200, 200, 120); // Semi-transparent gray
+                // Subtle white or light yellow particles matching the theme
+                 fill(255, 255, 255, this.isMouse ? 200 : 100); // Semi-transparent white
                 ellipse(this.pos.x, this.pos.y, this.size);
             }
 
             connect(other) {
                 const d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                 if (d < maxDist) {
-                    // Draw a line, opacity decreases as distance approaches maxDist
-                    const alpha = map(d, 0, maxDist, 100, 0); // Fade out lines
-                    // Subtle light lines
-                    stroke(200, 200, 200, alpha); // Semi-transparent gray lines
-                    strokeWeight(0.3); // Very thin lines
+                    const alpha = map(d, 0, maxDist, 150, 0); // Fade out lines
+                    let lineColor;
+
+                    if (this.isMouse || other.isMouse) {
+                         // Tesla Red lines near mouse
+                         lineColor = color(227, 25, 55, alpha);
+                    } else {
+                         // Lines between regular particles - Subtle yellow/gray
+                         lineColor = color(255, 215, 0, alpha * 0.5); // Semi-transparent yellow
+                    }
+
+                    stroke(lineColor);
+                    strokeWeight(0.5); // Thin lines
                     line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
                 }
             }
         }
 
         function setup() {
-            // Create canvas covering the entire window
-            let canvas = createCanvas(windowWidth, document.body.scrollHeight); // Canvas height matches total scrollable height
+            let canvas = createCanvas(windowWidth, windowHeight);
             canvas.position(0, 0);
             canvas.style('z-index', '-1');
             canvas.style('pointer-events', 'none');
 
-            // Create particles randomly across the *potential* scrollable area
             for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle(random(width), random(height)));
+                particles.push(new Particle());
             }
-
-             // Add a particle that follows the mouse
-             mouseParticle = new Particle(mouseX, mouseY);
-             mouseParticle.size = 0; // Make mouse particle invisible
-             mouseParticle.vel = createVector(0, 0); // No independent velocity
-
+            mouseParticle = new Particle(true);
+            particles.push(mouseParticle); // Add mouse particle to the list
         }
 
         function draw() {
-            // No background(0) here to keep the HTML background visible
-            clear(); // Clear canvas with transparency each frame
+            background(26, 26, 26, 80); // Semi-transparent dark background clear (allows particles to leave faint trails)
 
-            // Update mouse particle position
-            mouseParticle.pos.x = mouseX;
-            mouseParticle.pos.y = mouseY + window.scrollY; // Adjust for scroll position
+            // Update particles (mouse particle update handled automatically by tracking mouseX/mouseY)
+             for (let i = particles.length -1; i >= 0; i--) {
+                 particles[i].update();
+             }
 
-            // Update and display particles
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].display();
-
-                // Connect to other particles
+            // Connect and display particles
+             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     particles[i].connect(particles[j]);
                 }
-                 // Connect to mouse particle
-                 particles[i].connect(mouseParticle);
             }
+            for (let i = particles.length - 1; i >= 0; i--) {
+                 particles[i].display();
+             }
         }
 
         function windowResized() {
-            resizeCanvas(windowWidth, document.body.scrollHeight);
-            // When resizing, particles' positions might need adjustment if you want them to re-distribute
-            // For now, they will just continue from their scaled positions
+            resizeCanvas(windowWidth, windowHeight);
+        }
+
+        function mouseMoved() {
+             if (mouseParticle) {
+                mouseParticle.pos.x = mouseX;
+                mouseParticle.pos.y = mouseY;
+             }
+             return false; // Prevent default scroll/touch behavior
         }
 
     </script>
