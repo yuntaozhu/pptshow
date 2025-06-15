@@ -1,451 +1,473 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI驱动科研：构建您的ExtBrain外脑与费曼深度学习</title>
-    <!-- Tailwind CSS 3.0+ CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
-        @layer base {
-            html {
-                scroll-behavior: smooth; /* Smooth scrolling for nav */
-            }
-            body {
-                font-family: 'Inter', 'Noto Sans SC', sans-serif; /* Custom font, Noto Sans SC for Chinese */
-                @apply bg-gradient-to-br from-orange-200 to-orange-400 min-h-screen text-gray-900 overflow-x-hidden;
-            }
-            /* Custom highlight color with opacity */
-            .highlight-red {
-                color: #E31937;
-            }
-            .bg-highlight-red-opacity {
-                background-color: rgba(227, 25, 55, 0.1); /* Tesla Red with 10% opacity */
-            }
-            .border-highlight-red {
-                border-color: #E31937;
-            }
-            .text-outline {
-                -webkit-text-stroke: 1px #E31937; /* Outline text */
-                -webkit-text-fill-color: transparent;
-            }
-            .text-shadow-red {
-                text-shadow: 2px 2px 4px rgba(227, 25, 55, 0.4);
-            }
-            .grid-item {
-                @apply relative p-8 rounded-2xl shadow-xl backdrop-blur-sm transition-all duration-500 ease-out;
-                background-color: rgba(255, 255, 255, 0.1); /* Subtle transparent white */
-                border: 1px solid rgba(255, 255, 255, 0.2);
-            }
+    <title>湖南东晖耀建设有限公司 - 企业介绍</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS CSS CDN (for scroll-triggered animations) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --purple-start: #C084FC; /* Light purple */
+            --purple-end: #7E22CE;   /* Deep purple */
+             /* Using blue from the PPT as a secondary accent */
+            --blue-accent-light: #60a5fa; /* Light blue */
+            --blue-accent-dark: #2563eb; /* Dark blue */
+
+            --card-bg-light: #ffffff; /* White background for cards */
+            --card-bg-dark: #f3f4f6; /* Light gray background for cards */
+            --text-dark: #1f2937; /* Dark gray text for readability on light backgrounds */
+            --text-medium: #4b5563; /* Medium gray text */
+            --text-light: #9ca3af; /* Light gray text for descriptions/captions */
+            --shadow-color: rgba(0, 0, 0, 0.2); /* Subtle shadow color */
         }
+        body {
+            background-color: #0a0a0a; /* Near black background */
+            color: var(--text-dark); /* Default text color (cards override this) */
+            font-family: 'Segoe UI', Roboto, sans-serif; /* Clean modern font */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            position: relative;
+            padding: 2rem 1rem;
+            min-height: 100vh; /* Ensure min height */
+        }
+
+        /* Bento Grid Container */
+        .bento-grid-container {
+            display: grid;
+            gap: 1.5rem; /* Gap between cards */
+            max-width: 1200px; /* Max width of the grid */
+            margin: 0 auto; /* Center the grid */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+             z-index: 10; /* Ensure grid is above particles */
+             position: relative; /* Needs position for z-index to work reliably */
+        }
+
+        /* Card Styling */
+        .bento-card {
+            background-color: var(--card-bg-light); /* Default light card background */
+            border-radius: 20px; /* Large rounded corners */
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px var(--shadow-color); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: space-between; /* Distribute content vertically - adjust per card */
+            color: var(--text-dark); /* Ensure text is dark on light card */
+        }
+        .bento-card:hover {
+            transform: translateY(-8px); /* Lift effect on hover */
+            box-shadow: 0 15px 30px var(--shadow-color); /* Larger shadow on hover */
+        }
+         /* Optional: Alternate card background */
+         .bento-card.bg-alternate {
+             background-color: var(--card-bg-dark);
+         }
+
+
+        /* Typography */
+        .large-gradient-number {
+            font-size: clamp(3rem, 6vw, 5rem); /* Large responsive number */
+            font-weight: bold;
+            background: linear-gradient(to right, var(--purple-start), var(--purple-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+         .large-gradient-title {
+             font-size: clamp(2rem, 5vw, 3rem); /* Large responsive title */
+             font-weight: bold;
+             background: linear-gradient(to right, var(--purple-start), var(--purple-end));
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             text-fill-color: transparent;
+             line-height: 1.2;
+             margin-bottom: 1rem;
+         }
+         .card-main-title {
+             font-size: clamp(1.8rem, 4vw, 2.5rem); /* Large title for main sections */
+             font-weight: bold;
+             color: var(--text-dark);
+             margin-bottom: 1rem;
+         }
+
+
+        .card-title {
+            font-size: 1.25rem; /* Medium size */
+            font-weight: 600; /* Semibold */
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        .card-text {
+            font-size: 1rem; /* Small size */
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+         .card-description {
+             font-size: 0.9rem;
+             color: var(--text-light);
+             margin-top: 0.5rem;
+         }
+
+        /* Visual Elements */
+        .card-icon {
+            font-size: 2rem; /* Large icon size */
+            color: var(--purple-end); /* Deep purple icon color */
+            margin-bottom: 1rem;
+        }
+         /* Blue icons for different context */
+         .card-icon.blue {
+            color: var(--blue-accent-dark);
+         }
+
+         .progress-bar {
+             height: 10px;
+             background-color: var(--card-bg-dark);
+             border-radius: 5px;
+             overflow: hidden;
+             margin-top: 1rem;
+         }
+         .progress-fill {
+             height: 100%;
+             background: linear-gradient(to right, var(--blue-accent-light), var(--blue-accent-dark)); /* Using blue gradient for fills */
+             width: 70%; /* Example width, replace with data */
+             border-radius: 5px;
+         }
+         .capsule-tag {
+             display: inline-block;
+             background-color: rgba(126, 34, 206, 0.1); /* Light purple with transparency */
+             color: var(--purple-end);
+             font-size: 0.8rem;
+             font-weight: 600;
+             padding: 0.25rem 0.75rem;
+             border-radius: 9999px; /* Full rounded */
+             margin-right: 0.5rem;
+             margin-bottom: 0.5rem;
+         }
+         .list-item-icon {
+             color: var(--blue-accent-dark);
+             margin-right: 0.5rem;
+         }
+         .qr-code-placeholder {
+             width: 120px;
+             height: 120px;
+             background-color: var(--card-bg-dark);
+             border: 1px solid var(--text-light);
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 0.8rem;
+             text-align: center;
+             color: var(--text-medium);
+             margin-top: 1rem;
+         }
+
+
+         /* Specific grid spans */
+         .col-span-2 { grid-column: span 2 / span 2; }
+         .md\:col-span-2 { grid-column: md:span 2 / md:span 2; }
+         .lg\:col-span-2 { grid-column: lg:span 2 / lg:span 2; }
+         .lg\:col-span-3 { grid-column: lg:span 3 / lg:span 3; }
+
+
+         /* p5.js canvas styling */
+        canvas {
+            display: block;
+            position: fixed; /* Covers the entire viewport */
+            top: 0;
+            left: 0;
+            z-index: -1; /* Put behind other content */
+            pointer-events: none; /* Allow mouse events to pass through canvas */
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Intro Welcome Section */
+        .welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1rem;
+            min-height: 80vh; /* Give it some height */
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+        .welcome-title {
+            font-size: clamp(3rem, 10vw, 6rem); /* Very large welcome title */
+            font-weight: bold;
+            color: #fff; /* White text */
+            text-shadow: 0 0 20px rgba(126, 34, 206, 0.3); /* Subtle purple glow */
+            margin-bottom: 1rem;
+        }
+         .welcome-subtitle {
+             font-size: clamp(1.5rem, 6vw, 3rem);
+             font-weight: bold;
+             color: var(--blue-accent-light); /* Blue accent */
+             margin-top: 1rem;
+         }
+
+
     </style>
-    <!-- Google Fonts for Inter and Noto Sans SC (for better Chinese display) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Noto+Sans+SC:wght@700;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2jLxSZgFANGLG1u8JtyM6L+wWzlXfw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Framer Motion CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.20/dist/framer-motion.min.js"></script>
-    <!-- p5.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
-    <!-- Chart.js CDN for data visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- p5.js Canvas Container (Background) -->
-    <div id="p5-canvas-container" class="fixed inset-0 z-0 overflow-hidden"></div>
+    <!-- p5.js Canvas (will be created by the script) -->
+    <div id="p5-canvas-container"></div>
 
-    <!-- Main Content -->
-    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
-        <section class="max-w-7xl mx-auto py-16 text-center">
-            <motion.h1 
-                initial={{ opacity: 0, y: 50 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.8 }}
-                class="text-8xl font-black mb-6 text-gray-900 leading-tight text-shadow-red"
-            >
-                AI + 费曼学习法，<span class="highlight-red">认知跃迁！</span>
-            </motion.h1>
-            <motion.p 
-                initial={{ opacity: 0, y: 50 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 1, delay: 0.2 }}
-                class="text-3xl font-light text-gray-700 max-w-4xl mx-auto"
-            >
-                Building Your **ExtBrain ExoBrain**, Mastering **Feynman Deep Learning**. <br class="md:hidden">
-                <span class="highlight-red font-bold">赋能孩子决胜 AI 时代的硬核实力！</span>
-            </motion.p>
-            <motion.button 
-                initial={{ opacity: 0, y: 50 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 1.2, delay: 0.4 }}
-                class="mt-12 px-10 py-4 bg-[#E31937] text-white text-xl font-bold rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-            >
-                立即探索课程 <i class="fas fa-arrow-right ml-2"></i>
-            </motion.button>
-        </section>
+    <!-- Welcome Section -->
+    <section class="welcome-section" data-aos="fade-in" data-aos-duration="1500">
+         <h1 class="welcome-title" data-aos="fade-up" data-aos-delay="500">热烈欢迎</h1>
+         <h2 class="welcome-subtitle" data-aos="fade-up" data-aos-delay="800">各位领导莅临指导</h2>
+    </section>
 
-        <!-- Bento Grid Section -->
-        <section class="max-w-7xl mx-auto py-20 px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Grid Item 1: ExtBrain -->
-            <motion.div 
-                class="grid-item col-span-1 md:col-span-2 lg:col-span-1 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-                <div class="flex items-center space-x-4 mb-4">
-                    <i class="fas fa-brain text-5xl highlight-red"></i>
-                    <h2 class="text-4xl font-bold text-gray-900">构建 <span class="highlight-red">ExtBrain</span> 外脑</h2>
-                </div>
-                <p class="text-xl text-gray-800 mb-4">
-                    Your personal **AI Agent ExoBrain** – a powerful cognitive extension. <br>
-                    实现 <span class="font-semibold">记忆延伸 (Memory Extending)</span>、<span class="font-semibold">快速思考 (Fast Thinking)</span> 和 <span class="font-semibold">创新想法 (Idea Creating)</span>。 (PPT Slide 8)
-                </p>
-                <div class="flex justify-end mt-auto">
-                    <img src="https://via.placeholder.com/120x80/E31937/FFFFFF?text=ExtBrain" alt="ExtBrain Icon" class="h-20 w-auto">
-                </div>
-            </motion.div>
+    <!-- Bento Grid Layout -->
+    <main class="bento-grid-container">
 
-            <!-- Grid Item 2: Feynman Learning -->
-            <motion.div 
-                class="grid-item col-span-1 lg:col-span-1 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            >
-                <div class="flex items-center space-x-4 mb-4">
-                    <i class="fas fa-book-reader text-5xl highlight-red"></i>
-                    <h2 class="text-4xl font-bold text-gray-900">费曼学习法</h2>
-                </div>
-                <p class="text-xl text-gray-800 mb-4">
-                    Master **Feynman Deep Learning** – the most effective method for true understanding. <br>
-                    通过 **“以教促学”**，实现 **深度理解** 与 **知识内化**。 (PPT Feynman Steps Image)
-                </p>
-                <div class="flex justify-end mt-auto">
-                    <img src="https://via.placeholder.com/100x60/E31937/FFFFFF?text=Feynman" alt="Feynman Icon" class="h-16 w-auto">
-                </div>
-            </motion.div>
+        <!-- Company Overview -->
+        <div class="bento-card lg:col-span-3" data-aos="fade-up" data-aos-delay="100">
+             <h3 class="card-main-title">公司简介 / Company Introduction</h3>
+             <p class="card-text">湖南东晖耀建设有限公司成立于2014年11月。秉持“诚信、务实、凝聚、高效”的企业宗旨。公司管理人员及在建项目参保人员近百人，涵盖一级造价工程师、二级建造师等各类专业人才。</p>
+             <p class="card-description mt-4">服务范围涵盖：建筑、装饰装修、公路、水利、市政、桥梁、隧道、钢结构、公路路基路面、河湖整治、环保、施工劳务等领域。</p>
+        </div>
 
-            <!-- Grid Item 3: Education Equity -->
-            <motion.div 
-                class="grid-item col-span-1 lg:col-span-1 flex flex-col justify-center items-center text-center"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-                <div class="mb-4">
-                    <span class="text-8xl font-black highlight-red text-outline leading-none">0</span>
-                    <span class="text-6xl font-black highlight-red leading-none">门槛</span>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">教育平权效果</h2>
-                <p class="text-lg text-gray-800">
-                    AI empowers every child to participate in top-tier competitions. <br>
-                    打破精英壁垒，让更多孩子触及顶级竞赛与科研机会。(PPT Slide 1, 5)
-                </p>
-            </motion.div>
+         <!-- Key Numbers/Milestones -->
+         <div class="bento-card bg-alternate" data-aos="fade-up" data-aos-delay="200">
+             <i class="fas fa-building card-icon blue"></i>
+             <h3 class="card-title">成立年份</h3>
+             <p class="large-gradient-number">2014</p>
+             <p class="card-description">成立于充满机遇的2014年11月。</p>
+         </div>
 
-            <!-- Grid Item 4: Direct Problem Solving (Large emphasis) -->
-            <motion.div 
-                class="grid-item col-span-1 md:col-span-2 lg:col-span-2 flex flex-col justify-center items-center text-center bg-highlight-red-opacity"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            >
-                <div class="mb-4">
-                    <span class="text-9xl font-black highlight-red leading-none text-shadow-red">直面</span>
-                    <span class="text-6xl font-bold text-gray-900 leading-none">挑战</span>
-                </div>
-                <h2 class="text-4xl font-black text-gray-900 mb-4">新教学方法：直接解决复杂问题</h2>
-                <p class="text-xl text-gray-800 max-w-3xl mx-auto">
-                    No more lengthy theoretical accumulation. <span class="font-semibold">通过 AI 加持，孩子获得更高能力，直接解决现实世界中的复杂问题与挑战！</span> (PPT Slide 6)
-                    告别虚拟假设，直面真实世界。
-                </p>
-                <i class="fas fa-cogs text-6xl highlight-red mt-4"></i>
-            </motion.div>
+         <div class="bento-card" data-aos="fade-up" data-aos-delay="300">
+             <i class="fas fa-users card-icon blue"></i>
+             <h3 class="card-title">核心团队</h3>
+              <p class="large-gradient-number">~100</p> <!-- Approx 100 personnel -->
+             <p class="card-description">近百名管理及项目参保人员。</p>
+         </div>
 
-            <!-- Grid Item 5: Five Core Abilities -->
-            <motion.div 
-                class="grid-item col-span-1 lg:col-span-1 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            >
-                <div class="mb-4">
-                    <span class="text-8xl font-black highlight-red text-outline leading-none">5</span>
-                    <span class="text-6xl font-black highlight-red leading-none">大</span>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">核心能力全面极致提升</h2>
-                <ul class="text-xl text-gray-800 list-disc list-inside space-y-2">
-                    <li><i class="fas fa-feather-alt text-lg highlight-red mr-2"></i>**阅读/写作能力**：AI辅助高效创作。</li>
-                    <li><i class="fas fa-screwdriver text-lg highlight-red mr-2"></i>**工程能力**：代码实践与项目落地。</li>
-                    <li><i class="fas fa-chart-line text-lg highlight-red mr-2"></i>**建模能力**：数学思想与模型构建。</li>
-                    <li><i class="fas fa-magic text-lg highlight-red mr-2"></i>**预测能力**：数据分析与趋势洞察。</li>
-                    <li><i class="fas fa-search text-lg highlight-red mr-2"></i>**分析能力**：逻辑推理与科学决策。</li>
-                </ul>
-            </motion.div>
 
-            <!-- Grid Item 6: Systemic Thinking & Chart -->
-            <motion.div 
-                class="grid-item col-span-1 md:col-span-2 lg:col-span-2 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            >
-                <h2 class="text-4xl font-black text-gray-900 mb-4">系统性思维，构筑认知框架</h2>
-                <p class="text-xl text-gray-800 mb-6">
-                    Cultivate **Systemic Thinking** through mathematical modeling and research projects. (PPT Slide 4) <br>
-                    从全局视角，构建严密逻辑，深入解决复杂挑战。
-                </p>
-                <!-- Chart.js Placeholder -->
-                <div class="flex-grow flex items-center justify-center">
-                    <canvas id="skillGrowthChart" class="w-full max-w-xl h-auto"></canvas>
-                </div>
-                <p class="text-sm text-gray-600 mt-4 text-center">
-                    **<span class="highlight-red font-bold">图表：能力跃升对比</span>**：展示传统学习与AI+费曼学习法下的能力增长曲线。
-                </p>
-            </motion.div>
+        <!-- Qualifications -->
+        <div class="bento-card md:col-span-2 lg:col-span-2" data-aos="fade-up" data-aos-delay="400">
+            <i class="fas fa-certificate card-icon"></i>
+            <h3 class="card-title">企业资质 / Qualifications</h3>
+            <ul class="card-text list-none p-0 space-y-2">
+                <li><i class="fas fa-check-circle list-item-icon"></i>建筑工程施工总承包贰级</li>
+                <li><i class="fas fa-check-circle list-item-icon"></i>建筑装修装饰工程专业承包贰级</li>
+                <li><i class="fas fa-check-circle list-item-icon"></i>公路工程施工总承包叁级</li>
+                <li><i class="fas fa-check-circle list-item-icon"></i>水利水电工程施工总承包叁级</li>
+                <li><i class="fas fa-check-circle list-item-icon"></i>市政公用工程施工总承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>桥梁工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>隧道工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>钢结构工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>公路路面/路基工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>河湖整治工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>环保工程专业承包叁级</li>
+                 <li><i class="fas fa-check-circle list-item-icon"></i>施工劳务不分等级</li>
+            </ul>
+        </div>
 
-            <!-- Grid Item 7: Top Competitions & Research -->
-            <motion.div 
-                class="grid-item col-span-1 lg:col-span-1 flex flex-col justify-between"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            >
-                <div class="flex items-center space-x-4 mb-4">
-                    <i class="fas fa-trophy text-5xl highlight-red"></i>
-                    <h2 class="text-4xl font-bold text-gray-900">决胜顶级竞赛</h2>
-                </div>
-                <p class="text-xl text-gray-800 mb-4">
-                    Excel in top-tier competitions and cutting-edge research projects. <br>
-                    斩获 HIMCM、AMC 奖项，参与大学教授前沿课题。 (PPT Slide 5, 7, 12)
-                </p>
-                <div class="flex justify-end mt-auto">
-                    <img src="https://via.placeholder.com/100x60/E31937/FFFFFF?text=Trophy" alt="Trophy Icon" class="h-16 w-auto">
-                </div>
-            </motion.div>
+         <!-- Key Honors -->
+         <div class="bento-card md:col-span-2 lg:col-span-2 bg-alternate" data-aos="fade-up" data-aos-delay="500">
+             <i class="fas fa-award card-icon"></i>
+             <h3 class="card-title">企业荣誉 / Key Honors</h3>
+             <p class="card-text">公司荣获多项重要荣誉和认证：</p>
+              <ul class="card-text list-none p-0 space-y-2 mt-2">
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>连续多年荣获水利协会/省水利协会AAA级信用单位</li>
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>连续多年荣获省/市守合同重信用企业</li>
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获水利安全生产标准化二级单位</li>
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>通过质量、职业健康、环境管理三大体系认证</li>
+                  <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获税务评价A级</li>
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获多项商标专利</li>
+                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>承建项目荣获“优秀施工单位”</li>
+             </ul>
+         </div>
 
-        </section>
+         <!-- Branches / Reach -->
+         <div class="bento-card lg:col-span-2" data-aos="fade-up" data-aos-delay="600">
+             <i class="fas fa-map-marker-alt card-icon blue"></i>
+             <h3 class="card-title">经营范围与分支机构 / Reach & Branches</h3>
+             <p class="card-text">公司立足湖南，面向全国高质量发展。</p>
+             <p class="card-text mt-2 font-semibold">部分分支机构遍布全国：</p>
+             <ul class="card-text list-none p-0 space-y-1 mt-2 grid grid-cols-2">
+                 <li><i class="fas fa-city list-item-icon blue"></i>云南分公司</li>
+                 <li><i class="fas fa-city list-item-icon blue"></i>西藏分公司</li>
+                 <li><i class="fas fa-city list-item-icon blue"></i>江西分公司</li>
+                 <li><i class="fas fa-city list-item-icon blue"></i>新疆分公司</li>
+                 <li><i class="fas fa-city list-item-icon blue"></i>福建分公司</li>
+                 <li><i class="fas fa-city list-item-icon blue"></i>四川分公司</li>
+             </ul>
+              <p class="card-description mt-4">以及湖南省内多个县级分支机构。</p>
+         </div>
 
-        <!-- Call to Action Footer -->
-        <section class="max-w-7xl mx-auto py-16 text-center">
-            <motion.h2 
-                class="text-5xl font-black text-gray-900 mb-6 text-shadow-red"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-                投资孩子的大脑升级，抢占 AI 时代先机！
-            </motion.h2>
-            <motion.p 
-                class="text-2xl text-gray-700 mb-8 max-w-4xl mx-auto"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-                名额有限，立即报名，让您的孩子 **构建 “ExtBrain” 外脑**，**掌握费曼学习法**，成就 **智领未来的梦想**！
-            </motion.p>
-            <motion.button 
-                class="px-12 py-5 bg-[#E31937] text-white text-2xl font-bold rounded-full shadow-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            >
-                立即报名，开启卓越之旅！ <i class="fas fa-rocket ml-3"></i>
-            </motion.button>
-            <motion.p 
-                class="mt-12 text-lg text-gray-600"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            >
-                【咨询电话/微信：XXXX-XXXX-XXXX】
-            </motion.p>
-        </section>
-    </div>
+          <!-- Social Responsibility / Culture Motto -->
+         <div class="bento-card lg:col-span-2 bg-alternate" data-aos="fade-up" data-aos-delay="700">
+             <i class="fas fa-heart card-icon"></i>
+             <h3 class="card-title">社会责任与企业文化 / Social Responsibility & Culture</h3>
+             <p class="card-text">公司秉持“感恩 创新”的核心价值观，积极履行社会责任，多次参与抗疫捐赠、扶贫助学、志愿者活动等。</p>
+              <p class="card-text mt-2 font-semibold">企业宗旨：<span class="capsule-tag !bg-transparent !border !border-purple-end">诚信</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">务实</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">凝聚</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">高效</span></p>
+             <p class="card-description mt-4">公司注重团队建设，弘扬革命精神，坚持“以人为本”，回馈社会。</p>
+         </div>
 
-    <!-- JavaScript for p5.js particles, Framer Motion initialization, and Chart.js -->
+
+        <!-- Contact Information -->
+         <div class="bento-card md:col-span-2 lg:col-span-2" data-aos="fade-up" data-aos-delay="800">
+             <i class="fas fa-address-book card-icon"></i>
+             <h3 class="card-title">联系我们 / Contact Information</h3>
+             <p class="card-text">
+                 <i class="fas fa-map-marker-alt list-item-icon blue"></i>公司地址：长沙市经济技术开发区星沙1区9栋57号
+             </p>
+             <p class="card-text mt-2">
+                 <i class="fas fa-user list-item-icon blue"></i>联系人：林女士 13975146428
+             </p>
+              <p class="card-text mt-2">
+                 <i class="fas fa-user list-item-icon blue"></i>戴先生：13278846788
+             </p>
+              <p class="card-text mt-2">
+                 <i class="fas fa-phone list-item-icon blue"></i>电话：0731-84091758
+             </p>
+             <!-- QR Code Placeholder -->
+             <div class="qr-code-placeholder" data-aos="zoom-in" data-aos-delay="900">
+                 [ Placeholder QR Code ]
+             </div>
+         </div>
+
+
+    </main>
+
+
+    <!-- AOS Initialization Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // P5.js Particle Background
+      AOS.init({
+        duration: 800, // values from 0 to 3000, with step 50ms
+        easing: 'ease-in-out', // default easing for AOS animations
+        once: true, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        offset: 80, // offset (in px) from the original trigger point - adjusted slightly
+      });
+    </script>
+
+    <!-- p5.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+    <!-- Your p5.js Sketch for Subtle Particle Background -->
+    <script>
         let particles = [];
-        const numParticles = 80;
-        const highlightColor = [227, 25, 55]; // Tesla Red RGB
-        const bgColorStart = [255, 237, 213]; // Tailwind orange-200 equivalent
-        const bgColorEnd = [251, 191, 143];   // Tailwind orange-400 equivalent
+        const numParticles = 100; // Fewer particles for subtlety
+        const maxDist = 100; // Max distance for lines
 
         class Particle {
             constructor() {
-                this.x = random(width);
-                this.y = random(height);
-                this.vx = random(-0.5, 0.5);
-                this.vy = random(-0.5, 0.5);
-                this.alpha = random(50, 150); // Opacity
-                this.size = random(3, 8);
-                this.color = highlightColor; // Use highlight color
+                this.pos = createVector(random(width), random(height));
+                // Very slow random movement
+                this.vel = p5.Vector.random2D().mult(random(0.05, 0.3));
+                this.acc = createVector();
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= 0.8; // Fade out
-                if (this.alpha < 0) {
-                    this.reset();
-                }
+                 // Add subtle noise or Perlin noise based movement for organic feel
+                 let noiseFactor = noise(this.pos.x * 0.008, this.pos.y * 0.008, frameCount * 0.002); /* Slower noise */
+                 let angle = map(noiseFactor, 0, 1, 0, TWO_PI);
+                 let force = p5.Vector.fromAngle(angle).mult(0.02); /* Very subtle force */
+                 this.vel.add(force);
+                 this.vel.limit(0.3); // Keep speed very low
+
+
+                this.pos.add(this.vel);
+                this.edges();
+            }
+
+            edges() {
+                // Wrap particles around the screen edges
+                if (this.pos.x < 0) this.pos.x = width;
+                if (this.pos.x > width) this.pos.x = 0;
+                if (this.pos.y < 0) this.pos.y = height;
+                if (this.pos.y > height) this.pos.y = 0;
             }
 
             display() {
                 noStroke();
-                fill(this.color[0], this.color[1], this.color[2], this.alpha);
-                ellipse(this.x, this.y, this.size);
+                // Subtle white particles
+                 fill(255, 255, 255, 60); /* Very transparent white */
+                ellipse(this.pos.x, this.pos.y, this.size);
             }
 
-            reset() {
-                this.x = random(width);
-                this.y = random(height);
-                this.vx = random(-0.5, 0.5);
-                this.vy = random(-0.5, 0.5);
-                this.alpha = random(50, 150);
+            connect(other) {
+                const d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+                if (d < maxDist) {
+                    const alpha = map(d, 0, maxDist, 60, 0); // Fade out lines - very transparent
+                    // Lines use a mix of the blue and purple accents
+                    let lineColor = lerpColor(
+                         color(var(--blue-accent-light)),
+                         color(var(--purple-start)),
+                         map(d, 0, maxDist, 0, 1) /* Mix based on distance */
+                    );
+                    lineColor.setAlpha(alpha);
+
+
+                    stroke(lineColor);
+                    strokeWeight(0.4); // Very thin lines
+                    line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+                }
             }
         }
 
         function setup() {
             let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.parent('p5-canvas-container'); // Attach canvas to specific div
+            canvas.position(0, 0);
+            canvas.style('z-index', '-1');
+            canvas.style('pointer-events', 'none');
+
             for (let i = 0; i < numParticles; i++) {
                 particles.push(new Particle());
             }
+             // No mouse interaction particle for this minimalist style
         }
 
         function draw() {
-            // Create gradient background by drawing multiple transparent rectangles
-            let c1 = color(bgColorStart[0], bgColorStart[1], bgColorStart[2]);
-            let c2 = color(bgColorEnd[0], bgColorEnd[1], bgColorEnd[2]);
+            background(10, 10, 10, 30); // Very subtle semi-transparent black clear
 
-            for(let i=0; i<=height; i++){
-                let inter = map(i, 0, height, 0, 1);
-                let c = lerpColor(c1, c2, inter);
-                stroke(c);
-                line(0, i, width, i);
-            }
+            // Update particles
+             for (let i = particles.length -1; i >= 0; i--) {
+                 particles[i].update();
+             }
 
-            for (let p of particles) {
-                p.update();
-                p.display();
+            // Connect and display particles
+             for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    particles[i].connect(particles[j]);
+                }
             }
+            for (let i = particles.length - 1; i >= 0; i--) {
+                 particles[i].display();
+             }
         }
 
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
         }
 
-        // Framer Motion Initialization (automatic for elements with motion. attributes)
-        // Ensure this script runs after Framer Motion CDN is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            // Framer Motion automatically initializes elements with 'motion.' prefixes once its script is loaded.
-            // No explicit JS initialization needed for simple `initial` and `whileInView` props.
+         // Remove mouseMoved function if no mouse interaction
+         // function mouseMoved() { return false; }
 
-            // Chart.js for skill growth chart
-            const ctx = document.getElementById('skillGrowthChart');
-            if (ctx) {
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['L1 (入门)', 'L2 (应用)', 'L3 (高级)', 'L4 (专家)'],
-                        datasets: [
-                            {
-                                label: '传统学习路径',
-                                data: [30, 45, 55, 60],
-                                borderColor: 'rgba(75, 192, 192, 0.8)',
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderWidth: 2,
-                                fill: true,
-                                tension: 0.4
-                            },
-                            {
-                                label: 'AI + 费曼赋能 (本课程)',
-                                data: [50, 75, 90, 95], // Higher growth due to AI + Feynman
-                                borderColor: '#E31937', // Tesla Red
-                                backgroundColor: 'rgba(227, 25, 55, 0.2)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    font: {
-                                        size: 14,
-                                        family: 'Inter, Noto Sans SC'
-                                    },
-                                    color: '#333'
-                                }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: '课程模块/能力阶段',
-                                    font: {
-                                        size: 16,
-                                        family: 'Inter, Noto Sans SC',
-                                        weight: 'bold'
-                                    },
-                                    color: '#333'
-                                },
-                                ticks: {
-                                    font: {
-                                        family: 'Inter, Noto Sans SC'
-                                    },
-                                    color: '#333'
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: '能力水平 (百分比)',
-                                    font: {
-                                        size: 16,
-                                        family: 'Inter, Noto Sans SC',
-                                        weight: 'bold'
-                                    },
-                                    color: '#333'
-                                },
-                                max: 100,
-                                ticks: {
-                                    callback: function(value) {
-                                        return value + '%';
-                                    },
-                                    font: {
-                                        family: 'Inter, Noto Sans SC'
-                                    },
-                                    color: '#333'
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        });
+         // Helper function to convert CSS variable hex string to p5 color
+         function varToColor(varName) {
+             const hex = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+             return color(hex);
+         }
+
+
     </script>
+
 </body>
 </html>
