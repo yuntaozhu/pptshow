@@ -1,473 +1,462 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>湖南东晖耀建设有限公司 - 企业介绍</title>
-    <!-- Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- AOS CSS CDN (for scroll-triggered animations) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>AI 创想家 - 北京丰台区东高地科技馆多模态人工智能科普实验室策划方案</title>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/motion.umd.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --purple-start: #C084FC; /* Light purple */
-            --purple-end: #7E22CE;   /* Deep purple */
-             /* Using blue from the PPT as a secondary accent */
-            --blue-accent-light: #60a5fa; /* Light blue */
-            --blue-accent-dark: #2563eb; /* Dark blue */
-
-            --card-bg-light: #ffffff; /* White background for cards */
-            --card-bg-dark: #f3f4f6; /* Light gray background for cards */
-            --text-dark: #1f2937; /* Dark gray text for readability on light backgrounds */
-            --text-medium: #4b5563; /* Medium gray text */
-            --text-light: #9ca3af; /* Light gray text for descriptions/captions */
-            --shadow-color: rgba(0, 0, 0, 0.2); /* Subtle shadow color */
-        }
         body {
-            background-color: #0a0a0a; /* Near black background */
-            color: var(--text-dark); /* Default text color (cards override this) */
-            font-family: 'Segoe UI', Roboto, sans-serif; /* Clean modern font */
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            position: relative;
-            padding: 2rem 1rem;
-            min-height: 100vh; /* Ensure min height */
+            color: #EAEAEA;
+            overflow-x: hidden;
+            background-color: #1a1a1a;
         }
-
-        /* Bento Grid Container */
-        .bento-grid-container {
-            display: grid;
-            gap: 1.5rem; /* Gap between cards */
-            max-width: 1200px; /* Max width of the grid */
-            margin: 0 auto; /* Center the grid */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
-             z-index: 10; /* Ensure grid is above particles */
-             position: relative; /* Needs position for z-index to work reliably */
-        }
-
-        /* Card Styling */
-        .bento-card {
-            background-color: var(--card-bg-light); /* Default light card background */
-            border-radius: 20px; /* Large rounded corners */
-            padding: 1.5rem;
-            box-shadow: 0 10px 20px var(--shadow-color); /* Subtle shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            /* justify-content: space-between; /* Distribute content vertically - adjust per card */
-            color: var(--text-dark); /* Ensure text is dark on light card */
-        }
-        .bento-card:hover {
-            transform: translateY(-8px); /* Lift effect on hover */
-            box-shadow: 0 15px 30px var(--shadow-color); /* Larger shadow on hover */
-        }
-         /* Optional: Alternate card background */
-         .bento-card.bg-alternate {
-             background-color: var(--card-bg-dark);
-         }
-
-
-        /* Typography */
-        .large-gradient-number {
-            font-size: clamp(3rem, 6vw, 5rem); /* Large responsive number */
-            font-weight: bold;
-            background: linear-gradient(to right, var(--purple-start), var(--purple-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-         .large-gradient-title {
-             font-size: clamp(2rem, 5vw, 3rem); /* Large responsive title */
-             font-weight: bold;
-             background: linear-gradient(to right, var(--purple-start), var(--purple-end));
-             -webkit-background-clip: text;
-             -webkit-text-fill-color: transparent;
-             background-clip: text;
-             text-fill-color: transparent;
-             line-height: 1.2;
-             margin-bottom: 1rem;
-         }
-         .card-main-title {
-             font-size: clamp(1.8rem, 4vw, 2.5rem); /* Large title for main sections */
-             font-weight: bold;
-             color: var(--text-dark);
-             margin-bottom: 1rem;
-         }
-
-
-        .card-title {
-            font-size: 1.25rem; /* Medium size */
-            font-weight: 600; /* Semibold */
-            color: var(--text-dark);
-            margin-bottom: 0.75rem;
-        }
-        .card-text {
-            font-size: 1rem; /* Small size */
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-         .card-description {
-             font-size: 0.9rem;
-             color: var(--text-light);
-             margin-top: 0.5rem;
-         }
-
-        /* Visual Elements */
-        .card-icon {
-            font-size: 2rem; /* Large icon size */
-            color: var(--purple-end); /* Deep purple icon color */
-            margin-bottom: 1rem;
-        }
-         /* Blue icons for different context */
-         .card-icon.blue {
-            color: var(--blue-accent-dark);
-         }
-
-         .progress-bar {
-             height: 10px;
-             background-color: var(--card-bg-dark);
-             border-radius: 5px;
-             overflow: hidden;
-             margin-top: 1rem;
-         }
-         .progress-fill {
-             height: 100%;
-             background: linear-gradient(to right, var(--blue-accent-light), var(--blue-accent-dark)); /* Using blue gradient for fills */
-             width: 70%; /* Example width, replace with data */
-             border-radius: 5px;
-         }
-         .capsule-tag {
-             display: inline-block;
-             background-color: rgba(126, 34, 206, 0.1); /* Light purple with transparency */
-             color: var(--purple-end);
-             font-size: 0.8rem;
-             font-weight: 600;
-             padding: 0.25rem 0.75rem;
-             border-radius: 9999px; /* Full rounded */
-             margin-right: 0.5rem;
-             margin-bottom: 0.5rem;
-         }
-         .list-item-icon {
-             color: var(--blue-accent-dark);
-             margin-right: 0.5rem;
-         }
-         .qr-code-placeholder {
-             width: 120px;
-             height: 120px;
-             background-color: var(--card-bg-dark);
-             border: 1px solid var(--text-light);
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             font-size: 0.8rem;
-             text-align: center;
-             color: var(--text-medium);
-             margin-top: 1rem;
-         }
-
-
-         /* Specific grid spans */
-         .col-span-2 { grid-column: span 2 / span 2; }
-         .md\:col-span-2 { grid-column: md:span 2 / md:span 2; }
-         .lg\:col-span-2 { grid-column: lg:span 2 / lg:span 2; }
-         .lg\:col-span-3 { grid-column: lg:span 3 / lg:span 3; }
-
-
-         /* p5.js canvas styling */
-        canvas {
-            display: block;
-            position: fixed; /* Covers the entire viewport */
+        #p5-canvas {
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: -1; /* Put behind other content */
-            pointer-events: none; /* Allow mouse events to pass through canvas */
             width: 100vw;
             height: 100vh;
+            z-index: -1;
         }
-
-        /* Intro Welcome Section */
-        .welcome-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 1rem;
-            min-height: 80vh; /* Give it some height */
-            justify-content: center;
+        .bento-card {
+            background-color: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
             position: relative;
-            z-index: 10;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .welcome-title {
-            font-size: clamp(3rem, 10vw, 6rem); /* Very large welcome title */
-            font-weight: bold;
-            color: #fff; /* White text */
-            text-shadow: 0 0 20px rgba(126, 34, 206, 0.3); /* Subtle purple glow */
-            margin-bottom: 1rem;
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-         .welcome-subtitle {
-             font-size: clamp(1.5rem, 6vw, 3rem);
-             font-weight: bold;
-             color: var(--blue-accent-light); /* Blue accent */
-             margin-top: 1rem;
-         }
+        .highlight-text {
+            color: #E31937;
+        }
+        .highlight-bg {
+            background-color: #E31937;
+        }
+        .highlight-bg-glow {
+            background-color: rgba(227, 25, 55, 0.2);
+        }
+        .text-tesla-red { color: #E31937; }
+        .bg-tesla-red { background-color: #E31937; }
 
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+        }
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #999;
+            margin-top: 1rem;
+        }
 
+        /* Gradient glow effect */
+        .glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(227, 25, 55, 0.25) 0%, rgba(227, 25, 55, 0) 60%);
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            z-index: 0;
+        }
+        .bento-card:hover .glow::before {
+            opacity: 1;
+        }
+        .bento-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E31937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c2132d;
+        }
     </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-orange-900 via-black to-black">
 
-    <!-- p5.js Canvas (will be created by the script) -->
-    <div id="p5-canvas-container"></div>
+    <div id="p5-canvas"></div>
 
-    <!-- Welcome Section -->
-    <section class="welcome-section" data-aos="fade-in" data-aos-duration="1500">
-         <h1 class="welcome-title" data-aos="fade-up" data-aos-delay="500">热烈欢迎</h1>
-         <h2 class="welcome-subtitle" data-aos="fade-up" data-aos-delay="800">各位领导莅临指导</h2>
-    </section>
+    <div class="container mx-auto px-4 md:px-8 py-24">
 
+        <!-- 1. Hero Section -->
+        <header class="text-center min-h-screen flex flex-col justify-center items-center">
+            <motion.div initial="{ opacity: 0, y: 50 }" animate="{ opacity: 1, y: 0 }" transition="{ duration: 0.8 }">
+                <h1 class="text-8xl md:text-9xl font-black tracking-tighter">AI 创想家</h1>
+                <p class="text-2xl md:text-3xl font-light text-gray-300 mt-4 tracking-widest">AI DREAMER</p>
+                <div class="mt-12 text-gray-400">
+                    <p class="text-lg">北京丰台区东高地科技馆多模态人工智能科普实验室</p>
+                    <p class="mt-2 text-md">策划方案 | PLANNING PROPOSAL</p>
+                </div>
+                <div class="mt-20 text-gray-500 text-sm">
+                    <p>深圳图灵信奥科技有限公司</p>
+                    <p>2025年9月10日</p>
+                </div>
+            </motion.div>
+        </header>
 
-    <!-- Bento Grid Layout -->
-    <main class="bento-grid-container">
+        <!-- 2. Project Background & Goals -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">01</span> 项目愿景
+                </h2>
+                <p class="section-subtitle">PROJECT VISION & GOALS</p>
+            </motion.div>
 
-        <!-- Company Overview -->
-        <div class="bento-card lg:col-span-3" data-aos="fade-up" data-aos-delay="100">
-             <h3 class="card-main-title">公司简介 / Company Introduction</h3>
-             <p class="card-text">湖南东晖耀建设有限公司成立于2014年11月。秉持“诚信、务实、凝聚、高效”的企业宗旨。公司管理人员及在建项目参保人员近百人，涵盖一级造价工程师、二级建造师等各类专业人才。</p>
-             <p class="card-description mt-4">服务范围涵盖：建筑、装饰装修、公路、水利、市政、桥梁、隧道、钢结构、公路路基路面、河湖整治、环保、施工劳务等领域。</p>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <motion.div class="bento-card md:col-span-2 glow" data-motion>
+                    <h3 class="text-3xl font-bold mb-4">项目背景 <span class="text-gray-500 ml-2 font-light">BACKGROUND</span></h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        东高地科技馆依托深厚航天背景，肩负航天精神传承与科技人才培养使命。规划建设的“<span class="font-bold text-white">航天+人工智能</span>”科普实验室，旨在通过沉浸式体验与实践教学，激发青少年对航天AI的兴趣，为国家储备跨学科创新人才。同时，响应国务院《新一代人工智能发展规划》，将AI与教育的深度融合上升为国家战略，通过“<span class="font-bold highlight-text">空间-课程-赛事-管理</span>”四维联动，打造全国示范性的航天AI科普教育基地。
+                    </p>
+                </motion.div>
+                
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-rocket text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">科普启蒙</h4>
+                    <p class="text-gray-400">普及AI基本概念与核心技术在航天领域的应用，激发兴趣与好奇心。</p>
+                </motion.div>
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-drafting-compass text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">课程拓展</h4>
+                    <p class="text-gray-400">建立融合航天元素的人工智能课程体系，提升学生逻辑思维与创新能力。</p>
+                </motion.div>
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-trophy text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">赛事支撑</h4>
+                    <p class="text-gray-400">打造专业赛事环境，培养学生的竞争意识、团队协作精神与后备人才。</p>
+                </motion.div>
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-chalkboard-teacher text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">AI 教育</h4>
+                    <p class="text-gray-400">通过技术赋能、资源整合、数据驱动，帮助教师从“经验驱动型”转向“数据赋能型”。</p>
+                </motion.div>
+            </div>
+        </section>
 
-         <!-- Key Numbers/Milestones -->
-         <div class="bento-card bg-alternate" data-aos="fade-up" data-aos-delay="200">
-             <i class="fas fa-building card-icon blue"></i>
-             <h3 class="card-title">成立年份</h3>
-             <p class="large-gradient-number">2014</p>
-             <p class="card-description">成立于充满机遇的2014年11月。</p>
-         </div>
+        <!-- 3. System Architecture & Core Functions -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">02</span> 技术核心
+                </h2>
+                <p class="section-subtitle">ARCHITECTURE & CORE FUNCTIONS</p>
+            </motion.div>
 
-         <div class="bento-card" data-aos="fade-up" data-aos-delay="300">
-             <i class="fas fa-users card-icon blue"></i>
-             <h3 class="card-title">核心团队</h3>
-              <p class="large-gradient-number">~100</p> <!-- Approx 100 personnel -->
-             <p class="card-description">近百名管理及项目参保人员。</p>
-         </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <motion.div class="bento-card lg:col-span-2 glow" data-motion>
+                    <h3 class="text-3xl font-bold mb-6">系统架构 <span class="text-gray-500 ml-2 font-light">SYSTEM ARCHITECTURE</span></h3>
+                    <div class="space-y-4">
+                        <!-- Recreated Diagram -->
+                        <div class="text-center p-4 border border-dashed border-gray-600 rounded-lg">
+                            <p class="font-bold">用户层 (学生 / 教师 / 管理员)</p>
+                            <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                            <p class="font-mono text-sm highlight-text">互联网 / 局域网</p>
+                            <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                            <div class="grid grid-cols-2 gap-4 mt-2">
+                                <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">应用服务层</p><p class="text-xs text-gray-400">AI创想家平台、后台管理</p></div>
+                                <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">数据与服务层</p><p class="text-xs text-gray-400">主服务器、AI模型、数据库</p></div>
+                            </div>
+                             <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                            <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">硬件设备层</p><p class="text-xs text-gray-400">触感机器人、无人车、传感器、大屏</p></div>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <motion.div class="bento-card glow" data-motion>
+                    <h3 class="text-3xl font-bold mb-4">核心功能 <span class="text-gray-500 ml-2 font-light">FEATURES</span></h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li><strong class="text-white">教学工具创新:</strong><br>利用 AI 辅助教学准备、丰富教学资源。</li>
+                        <li><strong class="text-white">内容创作赋能:</strong><br>集成 <span class="highlight-text font-mono">Text-to-Image</span>, <span class="highlight-text font-mono">Text-to-Video</span>, <span class="highlight-text font-mono">Text-to-Music</span>, <span class="highlight-text font-mono">Text-to-SQL</span> 等技术进行艺术与科学创作。</li>
+                        <li><strong class="text-white">跨学科融合:</strong><br>通过“核心学科+关联学科+素养维度”的三维融合设计，培养复合型人才。</li>
+                    </ul>
+                </motion.div>
+            </div>
+        </section>
 
+        <!-- 4. Curriculum -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">03</span> 课程规划
+                </h2>
+                <p class="section-subtitle">AI POPULAR SCIENCE CURRICULUM</p>
+            </motion.div>
 
-        <!-- Qualifications -->
-        <div class="bento-card md:col-span-2 lg:col-span-2" data-aos="fade-up" data-aos-delay="400">
-            <i class="fas fa-certificate card-icon"></i>
-            <h3 class="card-title">企业资质 / Qualifications</h3>
-            <ul class="card-text list-none p-0 space-y-2">
-                <li><i class="fas fa-check-circle list-item-icon"></i>建筑工程施工总承包贰级</li>
-                <li><i class="fas fa-check-circle list-item-icon"></i>建筑装修装饰工程专业承包贰级</li>
-                <li><i class="fas fa-check-circle list-item-icon"></i>公路工程施工总承包叁级</li>
-                <li><i class="fas fa-check-circle list-item-icon"></i>水利水电工程施工总承包叁级</li>
-                <li><i class="fas fa-check-circle list-item-icon"></i>市政公用工程施工总承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>桥梁工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>隧道工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>钢结构工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>公路路面/路基工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>河湖整治工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>环保工程专业承包叁级</li>
-                 <li><i class="fas fa-check-circle list-item-icon"></i>施工劳务不分等级</li>
-            </ul>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Module Cards -->
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块一: 与多模态 AI 的第一次接触</h4><p class="text-sm text-gray-400 mt-2">THE FIRST CONTACT</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块二: AI 视觉艺术工坊 (Text-to-Image)</h4><p class="text-sm text-gray-400 mt-2">VISUAL ART WORKSHOP</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块三: AI 动态世界模拟 (Text-to-Video)</h4><p class="text-sm text-gray-400 mt-2">DYNAMIC WORLD SIMULATION</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块四: AI 旋律创作工坊 (Text-to-Music)</h4><p class="text-sm text-gray-400 mt-2">MELODY CREATION WORKSHOP</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块五: AI 数据洞察家 (Text-to-SQL)</h4><p class="text-sm text-gray-400 mt-2">DATA INSIGHTS</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块六: AI 机器手 (具身智能)</h4><p class="text-sm text-gray-400 mt-2">EMBODIED INTELLIGENCE</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块七: AI 智能体创作工坊</h4><p class="text-sm text-gray-400 mt-2">AI AGENT CREATION</p></motion.div>
+                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块八: AI 舞蹈教室 (姿态评估)</h4><p class="text-sm text-gray-400 mt-2">DANCE & POSE ESTIMATION</p></motion.div>
+                <motion.div class="bento-card bg-tesla-red text-white" data-motion>
+                  <h4 class="text-xl font-bold">模块九: 融合创新毕业项目</h4>
+                  <p class="text-sm text-gray-200 mt-2">FINAL PROJECT: MY UNIVERSE EXPLORATION PLAN</p>
+                </motion.div>
+            </div>
+             <motion.div class="bento-card mt-8" data-motion>
+                <h3 class="text-2xl font-bold mb-4">教学方法与互动设计</h3>
+                <p class="font-bold text-lg highlight-text">“引入-讲解-实践-创造-分享” 五步教学法</p>
+                <p class="mt-2 text-gray-300">通过情景引入、工具演示、主题挑战、项目驱动和作品展示互评，全方位激发学生兴趣，锻炼表达与思辨能力。</p>
+            </motion.div>
+        </section>
 
-         <!-- Key Honors -->
-         <div class="bento-card md:col-span-2 lg:col-span-2 bg-alternate" data-aos="fade-up" data-aos-delay="500">
-             <i class="fas fa-award card-icon"></i>
-             <h3 class="card-title">企业荣誉 / Key Honors</h3>
-             <p class="card-text">公司荣获多项重要荣誉和认证：</p>
-              <ul class="card-text list-none p-0 space-y-2 mt-2">
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>连续多年荣获水利协会/省水利协会AAA级信用单位</li>
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>连续多年荣获省/市守合同重信用企业</li>
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获水利安全生产标准化二级单位</li>
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>通过质量、职业健康、环境管理三大体系认证</li>
-                  <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获税务评价A级</li>
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>荣获多项商标专利</li>
-                 <li><i class="fas fa-star list-item-icon text-yellow-500"></i>承建项目荣获“优秀施工单位”</li>
-             </ul>
-         </div>
-
-         <!-- Branches / Reach -->
-         <div class="bento-card lg:col-span-2" data-aos="fade-up" data-aos-delay="600">
-             <i class="fas fa-map-marker-alt card-icon blue"></i>
-             <h3 class="card-title">经营范围与分支机构 / Reach & Branches</h3>
-             <p class="card-text">公司立足湖南，面向全国高质量发展。</p>
-             <p class="card-text mt-2 font-semibold">部分分支机构遍布全国：</p>
-             <ul class="card-text list-none p-0 space-y-1 mt-2 grid grid-cols-2">
-                 <li><i class="fas fa-city list-item-icon blue"></i>云南分公司</li>
-                 <li><i class="fas fa-city list-item-icon blue"></i>西藏分公司</li>
-                 <li><i class="fas fa-city list-item-icon blue"></i>江西分公司</li>
-                 <li><i class="fas fa-city list-item-icon blue"></i>新疆分公司</li>
-                 <li><i class="fas fa-city list-item-icon blue"></i>福建分公司</li>
-                 <li><i class="fas fa-city list-item-icon blue"></i>四川分公司</li>
-             </ul>
-              <p class="card-description mt-4">以及湖南省内多个县级分支机构。</p>
-         </div>
-
-          <!-- Social Responsibility / Culture Motto -->
-         <div class="bento-card lg:col-span-2 bg-alternate" data-aos="fade-up" data-aos-delay="700">
-             <i class="fas fa-heart card-icon"></i>
-             <h3 class="card-title">社会责任与企业文化 / Social Responsibility & Culture</h3>
-             <p class="card-text">公司秉持“感恩 创新”的核心价值观，积极履行社会责任，多次参与抗疫捐赠、扶贫助学、志愿者活动等。</p>
-              <p class="card-text mt-2 font-semibold">企业宗旨：<span class="capsule-tag !bg-transparent !border !border-purple-end">诚信</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">务实</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">凝聚</span> <span class="capsule-tag !bg-transparent !border !border-purple-end">高效</span></p>
-             <p class="card-description mt-4">公司注重团队建设，弘扬革命精神，坚持“以人为本”，回馈社会。</p>
-         </div>
-
-
-        <!-- Contact Information -->
-         <div class="bento-card md:col-span-2 lg:col-span-2" data-aos="fade-up" data-aos-delay="800">
-             <i class="fas fa-address-book card-icon"></i>
-             <h3 class="card-title">联系我们 / Contact Information</h3>
-             <p class="card-text">
-                 <i class="fas fa-map-marker-alt list-item-icon blue"></i>公司地址：长沙市经济技术开发区星沙1区9栋57号
-             </p>
-             <p class="card-text mt-2">
-                 <i class="fas fa-user list-item-icon blue"></i>联系人：林女士 13975146428
-             </p>
-              <p class="card-text mt-2">
-                 <i class="fas fa-user list-item-icon blue"></i>戴先生：13278846788
-             </p>
-              <p class="card-text mt-2">
-                 <i class="fas fa-phone list-item-icon blue"></i>电话：0731-84091758
-             </p>
-             <!-- QR Code Placeholder -->
-             <div class="qr-code-placeholder" data-aos="zoom-in" data-aos-delay="900">
-                 [ Placeholder QR Code ]
+        <!-- 5. Platform & Space -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">04</span> 平台与空间
+                </h2>
+                <p class="section-subtitle">PLATFORM & SPACE PLANNING</p>
+            </motion.div>
+             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                 <motion.div class="bento-card lg:col-span-3 glow" data-motion>
+                    <h3 class="text-3xl font-bold mb-4">“AI 创想家” 学习与教学平台</h3>
+                     <p class="text-gray-400 mb-6">一个基于Web端的一体化学习工具，整合课程学习、实践操作、数据分析、课件管理，提供无缝的数字化学习环境。</p>
+                     <div class="space-y-3">
+                         <p><i class="fas fa-vr-cardboard highlight-text w-6"></i> <strong class="text-white">虚实结合：</strong>通过 WebGL 技术实现火星车模拟驾驶、触感机器人云端操控。</p>
+                         <p><i class="fas fa-chart-line highlight-text w-6"></i> <strong class="text-white">数据驱动：</strong>自动记录学习行为，生成可视化报告，精准评估学生能力。</p>
+                         <p><i class="fas fa-universal-access highlight-text w-6"></i> <strong class="text-white">跨平台访问：</strong>无需下载APP，适配 PC、平板、手机等多终端。</p>
+                     </div>
+                 </motion.div>
+                 <motion.div class="bento-card lg:col-span-2 glow" data-motion>
+                     <h3 class="text-3xl font-bold mb-4">后台管理系统</h3>
+                     <ul class="list-disc list-inside text-gray-300 space-y-2">
+                         <li>内容展示模块</li>
+                         <li>师资培训模块</li>
+                         <li>课件制作模块</li>
+                         <li>作品管理模块</li>
+                         <li>教学评分模块</li>
+                         <li>赛事记录模块</li>
+                     </ul>
+                 </motion.div>
+                 
+                 <motion.div class="bento-card lg:col-span-5 text-center" data-motion>
+                     <h3 class="text-3xl font-bold mb-6">空间规划方案</h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">科普学习区</h4><p class="text-gray-300 text-sm">配备20台学习机，安装Python、Scratch等编程软件，进行基础学习与智能体打造。</p></div>
+                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">人工智能实验区</h4><p class="text-gray-300 text-sm">动手实践区，开展太空机器人路径规划、AI辨别天体等项目，配备触感机器人与无人车。</p></div>
+                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">观摩导览区</h4><p class="text-gray-300 text-sm">教室门口设数字化大屏，展示课程与活动，设置迎宾机器人进行互动。</p></div>
+                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">赛事活动区</h4><p class="text-gray-300 text-sm">灵活布局的比赛场地，配备专业设备与道具，满足机器人竞赛、算法挑战赛等需求。</p></div>
+                     </div>
+                 </motion.div>
              </div>
-         </div>
+        </section>
 
+        <!-- 6. Teacher Training & Events (NEW SECTION) -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">05</span> 师训及赛课
+                </h2>
+                <p class="section-subtitle">TEACHER TRAINING & EVENTS</p>
+            </motion.div>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-chalkboard-teacher text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h3 class="text-3xl font-bold mb-4">教师培训 <span class="text-gray-500 ml-2 font-light">TRAINING</span></h3>
+                    <ul class="space-y-3 text-gray-300 list-disc list-inside">
+                        <li>定期参与AI与航天领域的专业课程与学术研讨会。</li>
+                        <li>鼓励参与在线学习平台，提升自身专业素养。</li>
+                        <li>邀请航天领域专家到校开展培训与交流，分享项目经验。</li>
+                        <li>促进教师教学能力与实践能力的深度融合。</li>
+                    </ul>
+                </motion.div>
+                
+                <motion.div class="bento-card glow" data-motion>
+                    <i class="fas fa-comments text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
+                    <h3 class="text-3xl font-bold mb-4">赛课活动 <span class="text-gray-500 ml-2 font-light">ACTIVITIES</span></h3>
+                    <ul class="space-y-3 text-gray-300 list-disc list-inside">
+                        <li>定期组织教学研讨活动，交流教学心得。</li>
+                        <li>共同解决教学过程中遇到的问题。</li>
+                        <li>针对融合航天元素的教学内容，进行教学设计研讨。</li>
+                        <li>持续优化课程教学方案，提高整体教学质量。</li>
+                    </ul>
+                </motion.div>
+            </div>
+        </section>
 
-    </main>
+        <!-- 7. Implementation (Renumbered) -->
+        <section class="my-32">
+            <motion.div class="text-center mb-16" data-motion>
+                <h2 class="section-title">
+                    <span class="highlight-text">06</span> 实施规划
+                </h2>
+                <p class="section-subtitle">IMPLEMENTATION PLAN</p>
+            </motion.div>
 
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <motion.div class="bento-card" data-motion>
+                    <h3 class="text-2xl font-bold mb-4">运营管理</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><strong>开放时间:</strong> 面向学校、社会团体预约开放。</li>
+                        <li><strong>设备维护:</strong> 专业人员定期检查维护，建立设备档案。</li>
+                        <li><strong>安全管理:</strong> 严格的安全制度与应急预案，定期演练。</li>
+                    </ul>
+                </motion.div>
 
-    <!-- AOS Initialization Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+                <motion.div class="bento-card lg:col-span-2" data-motion>
+                    <h3 class="text-2xl font-bold mb-6">项目时间表 (预估) <span class="text-gray-500 font-light text-xl ml-2">TIMELINE</span></h3>
+                    <div class="relative pl-6 border-l-2 border-tesla-red border-opacity-50 space-y-8">
+                        <!-- Timeline Item 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
+                            <p class="font-mono text-tesla-red">2026.3.1 - 3.15</p>
+                            <p class="font-bold text-white">阶段一: 启动</p>
+                            <p class="text-gray-400">完成场地设计、设备采购招标及合同签订。</p>
+                        </div>
+                        <!-- Timeline Item 2 -->
+                        <div class="relative">
+                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
+                            <p class="font-mono text-tesla-red">2026.3.16 - 4.15</p>
+                            <p class="font-bold text-white">阶段二: 建设</p>
+                            <p class="text-gray-400">进行场地装修施工、设备陆续进场。</p>
+                        </div>
+                        <!-- Timeline Item 3 -->
+                         <div class="relative">
+                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
+                            <p class="font-mono text-tesla-red">2026.4.15 - 4.20</p>
+                            <p class="font-bold text-white">阶段三: 调试</p>
+                            <p class="text-gray-400">设备安装调试、课程及管理系统最终优化。</p>
+                        </div>
+                         <!-- Timeline Item 4 -->
+                         <div class="relative">
+                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
+                            <p class="font-mono text-tesla-red">2026.4.21 - 5.1</p>
+                            <p class="font-bold text-white">阶段四: 试运行</p>
+                            <p class="text-gray-400">进行试运行，排查问题并整改，确保实验室正常运行。</p>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                 <motion.div class="bento-card lg:col-span-3 text-center" data-motion>
+                    <h3 class="text-2xl font-bold mb-2">项目预算 (预估)</h3>
+                    <p class="text-7xl font-black text-gray-700">暂略</p>
+                     <p class="text-gray-500">BUDGET OMITTED</p>
+                 </motion.div>
+            </div>
+        </section>
+
+    </div>
+
     <script>
-      AOS.init({
-        duration: 800, // values from 0 to 3000, with step 50ms
-        easing: 'ease-in-out', // default easing for AOS animations
-        once: true, // whether animation should happen only once - while scrolling down
-        mirror: false, // whether elements should animate out while scrolling past them
-        offset: 80, // offset (in px) from the original trigger point - adjusted slightly
-      });
-    </script>
+        // P5.js sketch for background particles
+        function setup() {
+            let canvas = createCanvas(windowWidth, windowHeight);
+            canvas.parent('p5-canvas');
+            particles = [];
+            for(let i = 0; i<width/10; i++){
+                particles.push(new Particle());
+            }
+        }
 
-    <!-- p5.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-
-    <!-- Your p5.js Sketch for Subtle Particle Background -->
-    <script>
-        let particles = [];
-        const numParticles = 100; // Fewer particles for subtlety
-        const maxDist = 100; // Max distance for lines
-
-        class Particle {
-            constructor() {
+        function draw() {
+            background(10,10,10);
+            particles.forEach((p, index)=>{
+                p.update();
+                p.draw();
+                p.checkParticles(particles.slice(index));
+            });
+        }
+        
+        class Particle{
+            constructor(){
                 this.pos = createVector(random(width), random(height));
-                // Very slow random movement
-                this.vel = p5.Vector.random2D().mult(random(0.05, 0.3));
-                this.acc = createVector();
+                this.vel = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
+                this.size = 2;
             }
 
-            update() {
-                 // Add subtle noise or Perlin noise based movement for organic feel
-                 let noiseFactor = noise(this.pos.x * 0.008, this.pos.y * 0.008, frameCount * 0.002); /* Slower noise */
-                 let angle = map(noiseFactor, 0, 1, 0, TWO_PI);
-                 let force = p5.Vector.fromAngle(angle).mult(0.02); /* Very subtle force */
-                 this.vel.add(force);
-                 this.vel.limit(0.3); // Keep speed very low
-
-
+            update(){
                 this.pos.add(this.vel);
                 this.edges();
             }
 
-            edges() {
-                // Wrap particles around the screen edges
-                if (this.pos.x < 0) this.pos.x = width;
-                if (this.pos.x > width) this.pos.x = 0;
-                if (this.pos.y < 0) this.pos.y = height;
-                if (this.pos.y > height) this.pos.y = 0;
-            }
-
-            display() {
+            draw(){
                 noStroke();
-                // Subtle white particles
-                 fill(255, 255, 255, 60); /* Very transparent white */
-                ellipse(this.pos.x, this.pos.y, this.size);
+                fill('rgba(255,255,255,0.5)');
+                circle(this.pos.x, this.pos.y, this.size);
             }
 
-            connect(other) {
-                const d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
-                if (d < maxDist) {
-                    const alpha = map(d, 0, maxDist, 60, 0); // Fade out lines - very transparent
-                    // Lines use a mix of the blue and purple accents
-                    let lineColor = lerpColor(
-                         color(var(--blue-accent-light)),
-                         color(var(--purple-start)),
-                         map(d, 0, maxDist, 0, 1) /* Mix based on distance */
-                    );
-                    lineColor.setAlpha(alpha);
+            edges(){
+                if(this.pos.x < 0 || this.pos.x > width){ this.vel.x *= -1; }
+                if(this.pos.y < 0 || this.pos.y > height){ this.vel.y *= -1; }
+            }
 
-
-                    stroke(lineColor);
-                    strokeWeight(0.4); // Very thin lines
-                    line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
-                }
+            checkParticles(particles){
+                particles.forEach(particle =>{
+                    const d = dist(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y);
+                    if(d<120){
+                        stroke('rgba(255,255,255,0.1)');
+                        line(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y)
+                    }
+                });
             }
         }
-
-        function setup() {
-            let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.position(0, 0);
-            canvas.style('z-index', '-1');
-            canvas.style('pointer-events', 'none');
-
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
-            }
-             // No mouse interaction particle for this minimalist style
-        }
-
-        function draw() {
-            background(10, 10, 10, 30); // Very subtle semi-transparent black clear
-
-            // Update particles
-             for (let i = particles.length -1; i >= 0; i--) {
-                 particles[i].update();
-             }
-
-            // Connect and display particles
-             for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    particles[i].connect(particles[j]);
-                }
-            }
-            for (let i = particles.length - 1; i >= 0; i--) {
-                 particles[i].display();
-             }
-        }
-
+        
         function windowResized() {
-            resizeCanvas(windowWidth, windowHeight);
+          resizeCanvas(windowWidth, windowHeight);
         }
 
-         // Remove mouseMoved function if no mouse interaction
-         // function mouseMoved() { return false; }
+        // Framer Motion scroll animations
+        document.addEventListener("DOMContentLoaded", () => {
+            const { animate } = motion;
 
-         // Helper function to convert CSS variable hex string to p5 color
-         function varToColor(varName) {
-             const hex = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-             return color(hex);
-         }
+            const elementsToAnimate = document.querySelectorAll('[data-motion]');
+            
+            elementsToAnimate.forEach(element => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animate(
+                                entry.target,
+                                { opacity: [0, 1], y: [30, 0] },
+                                { duration: 0.8, ease: "easeOut" }
+                            );
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
 
+                observer.observe(element);
+            });
 
+             // Animate hero section on load
+            animate(
+                "header > div",
+                { opacity: [0, 1], y: [50, 0] },
+                { duration: 0.8, delay: 0.2, ease: "easeOut" }
+            )
+        });
     </script>
-
 </body>
 </html>
