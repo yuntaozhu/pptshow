@@ -3,459 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 创想家 - 北京丰台区东高地科技馆多模态人工智能科普实验室策划方案</title>
-    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/motion.umd.js"></script>
+    <title>Homeiliving - Agent驱动的家居创新平台</title>
+
+    <!-- Reveal.js Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+    <!-- A clean, professional theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css" id="theme">
+    
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            color: #EAEAEA;
-            overflow-x: hidden;
-            background-color: #1a1a1a;
-        }
-        #p5-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
-        .bento-card {
-            background-color: rgba(30, 30, 30, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 2.5rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .bento-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .highlight-text {
-            color: #E31937;
-        }
-        .highlight-bg {
-            background-color: #E31937;
-        }
-        .highlight-bg-glow {
-            background-color: rgba(227, 25, 55, 0.2);
-        }
-        .text-tesla-red { color: #E31937; }
-        .bg-tesla-red { background-color: #E31937; }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-        }
-        .section-subtitle {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: #999;
-            margin-top: 1rem;
+        /* Custom Styles to match your requested aesthetic */
+        :root {
+            --r-main-font: 'Noto Sans SC', sans-serif;
+            --r-heading-font: 'Noto Sans SC', sans-serif;
+            --r-main-font-size: 36px; /* Globally reduced font size */
+            --r-heading-font-weight: 900;
+            --r-main-color: #333;
+            --r-heading-color: #111;
+            --r-link-color: #E31937;
+            --highlight-red: #E31937;
         }
 
-        /* Gradient glow effect */
-        .glow::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(227, 25, 55, 0.25) 0%, rgba(227, 25, 55, 0) 60%);
-            transform: translate(-50%, -50%);
-            transition: opacity 0.5s ease;
-            opacity: 0;
-            z-index: 0;
-        }
-        .bento-card:hover .glow::before {
-            opacity: 1;
-        }
-        .bento-card > * {
-            position: relative;
-            z-index: 1;
+        .reveal .slides section {
+            text-align: left;
         }
 
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-align: center;
+            font-weight: 900;
         }
-        ::-webkit-scrollbar-track {
-            background: #1e1e1e;
+
+        .reveal .highlight {
+            color: var(--highlight-red);
+            font-weight: bold;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #E31937;
-            border-radius: 4px;
+
+        .reveal .large-number {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: var(--highlight-red);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #c2132d;
+        
+        .reveal .text-center {
+            text-align: center;
+        }
+
+        .columns {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .column {
+            flex: 1;
+        }
+        .column.is-two-thirds { flex: 2; }
+        .column.is-one-third { flex: 1; }
+
+        .feature-box {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--highlight-red);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .reveal ul {
+          list-style-type: none;
+          padding-left: 0;
+        }
+        
+        .reveal ul li {
+          margin-bottom: 10px;
+        }
+
+        .reveal ul li::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: "\f058"; /* fa-check-circle */
+            color: var(--highlight-red);
+            margin-right: 15px;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-orange-900 via-black to-black">
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section class="text-center">
+                <h1 style="font-size: 2.2em;">Homeiliving 跨境家居平台</h1>
+                <h2 style="font-size: 1.6em; color: var(--highlight-red);">Agent驱动的家居创新平台</h2>
+                <p style="margin-top: 50px; font-size: 1.1em;">创始人: 赵露忆</p>
+                <p style="font-size: 0.9em;">2025 年度促进产业高质量发展专项资金</p>
+            </section>
 
-    <div id="p5-canvas"></div>
-
-    <div class="container mx-auto px-4 md:px-8 py-24">
-
-        <!-- 1. Hero Section -->
-        <header class="text-center min-h-screen flex flex-col justify-center items-center">
-            <motion.div initial="{ opacity: 0, y: 50 }" animate="{ opacity: 1, y: 0 }" transition="{ duration: 0.8 }">
-                <h1 class="text-8xl md:text-9xl font-black tracking-tighter">AI 创想家</h1>
-                <p class="text-2xl md:text-3xl font-light text-gray-300 mt-4 tracking-widest">AI DREAMER</p>
-                <div class="mt-12 text-gray-400">
-                    <p class="text-lg">北京丰台区东高地科技馆多模态人工智能科普实验室</p>
-                    <p class="mt-2 text-md">策划方案 | PLANNING PROPOSAL</p>
+            <!-- 1. Background (Full Page) -->
+            <section>
+                <h2>一、项目背景与市场痛点</h2>
+                <div class="columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3 style="text-align: left; font-size: 1.2em;">市场机遇</h3>
+                        <div class="feature-box">
+                            <i class="fas fa-chart-line fa-2x" style="color:var(--highlight-red);"></i>
+                            <h4 style="text-align:left; font-size: 1em; margin-top: 10px;"><b>北美华人家居定制需求激增</b></h4>
+                            <p>25-45岁北美华人家庭年增长率达 <span class="highlight" style="font-size: 1.5em;">15%</span>，形成一个高增长、高价值的精准市场。</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 style="text-align: left; font-size: 1.2em;">传统跨境家居行业痛点</h3>
+                         <ul style="font-size: 0.9em;">
+                            <li><b>非标品适配难:</b> 尺寸、风格与本地化需求难以匹配。</li>
+                            <li><b>交付周期长:</b> 平均 <span class="highlight">60</span> 天的漫长等待，严重影响客户体验。</li>
+                            <li><b>文化差异大:</b> 设计理念与北美华人生活习惯存在鸿沟。</li>
+                            <li><b>价格虚高:</b> 本土定制服务溢价高达 <span class="highlight">60%</span>，性价比低。</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="mt-20 text-gray-500 text-sm">
-                    <p>深圳图灵信奥科技有限公司</p>
-                    <p>2025年9月10日</p>
-                </div>
-            </motion.div>
-        </header>
+            </section>
 
-        <!-- 2. Project Background & Goals -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">01</span> 项目愿景
-                </h2>
-                <p class="section-subtitle">PROJECT VISION & GOALS</p>
-            </motion.div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <motion.div class="bento-card md:col-span-2 glow" data-motion>
-                    <h3 class="text-3xl font-bold mb-4">项目背景 <span class="text-gray-500 ml-2 font-light">BACKGROUND</span></h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        东高地科技馆依托深厚航天背景，肩负航天精神传承与科技人才培养使命。规划建设的“<span class="font-bold text-white">航天+人工智能</span>”科普实验室，旨在通过沉浸式体验与实践教学，激发青少年对航天AI的兴趣，为国家储备跨学科创新人才。同时，响应国务院《新一代人工智能发展规划》，将AI与教育的深度融合上升为国家战略，通过“<span class="font-bold highlight-text">空间-课程-赛事-管理</span>”四维联动，打造全国示范性的航天AI科普教育基地。
+            <!-- Our Solution (New Slide) -->
+            <section class="text-center">
+                <h2>我们的解决方案</h2>
+                <div class="feature-box" style="margin-top: 50px;">
+                    <p style="font-size: 1.2em;">
+                        构建一个 <span class="highlight">“敏捷供应 - 精准定制 - 生态扩张”</span> 的跨境家居创新体系。
                     </p>
-                </motion.div>
-                
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-rocket text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h4 class="text-2xl font-bold mb-3">科普启蒙</h4>
-                    <p class="text-gray-400">普及AI基本概念与核心技术在航天领域的应用，激发兴趣与好奇心。</p>
-                </motion.div>
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-drafting-compass text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h4 class="text-2xl font-bold mb-3">课程拓展</h4>
-                    <p class="text-gray-400">建立融合航天元素的人工智能课程体系，提升学生逻辑思维与创新能力。</p>
-                </motion.div>
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-trophy text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h4 class="text-2xl font-bold mb-3">赛事支撑</h4>
-                    <p class="text-gray-400">打造专业赛事环境，培养学生的竞争意识、团队协作精神与后备人才。</p>
-                </motion.div>
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-chalkboard-teacher text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h4 class="text-2xl font-bold mb-3">AI 教育</h4>
-                    <p class="text-gray-400">通过技术赋能、资源整合、数据驱动，帮助教师从“经验驱动型”转向“数据赋能型”。</p>
-                </motion.div>
-            </div>
-        </section>
+                     <p style="font-size: 1.1em; margin-top: 20px;">
+                        通过 <b class="highlight">AI Agent + MR</b> 技术的深度融合，以技术驱动重构整个价值链，打造极致的效率和个性化体验，形成强大的差异化竞争优势。
+                    </p>
+                </div>
+            </section>
+            
+            <!-- The Power of AI Agents (New Slide) -->
+            <section>
+                <h2>核心理念：AI Agent 的颠覆性价值</h2>
+                <p class="text-center">我们不仅仅是使用AI工具，而是构建能够自主执行复杂任务的 <span class="highlight">AI智能体 (Agent)</span>。</p>
+                <div class="columns" style="margin-top: 40px; font-size: 0.85em;">
+                    <div class="column feature-box">
+                        <i class="fas fa-brain fa-2x highlight"></i>
+                        <h4 style="text-align:left;">AI Agent的核心价值</h4>
+                        <p>Agent具备感知、决策和执行能力，能自主完成从设计方案生成到营销内容创作的完整任务，实现业务流程的高度自动化。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <i class="fas fa-chart-line fa-2x highlight"></i>
+                        <h4 style="text-align:left;">AI Agent的发展趋势</h4>
+                        <p>正从单一任务工具进化为能够协同工作的多智能体系统 (Multi-Agent System)。我们的三大Agent正是这一趋势的实践，它们将协同作战。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <i class="fas fa-globe fa-2x highlight"></i>
+                        <h4 style="text-align:left;">对家居行业的影响</h4>
+                        <p>将彻底改变行业依赖人力的现状，实现规模化的精准定制和个性化服务，从根本上提升产业效率，重塑商业模式。</p>
+                    </div>
+                </div>
+            </section>
 
-        <!-- 3. System Architecture & Core Functions -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">02</span> 技术核心
-                </h2>
-                <p class="section-subtitle">ARCHITECTURE & CORE FUNCTIONS</p>
-            </motion.div>
+            <!-- AI Agent Trinity Intro -->
+            <section>
+                <h2>核心驱动：三大AI智能体 (Agents)</h2>
+                <p class="text-center">我们构建了一个由三大核心AI智能体驱动的业务中枢，协同完成从设计、翻译到营销的全链路任务。</p>
+                <div class="columns" style="margin-top: 40px;">
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-home fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">AI家居设计Agent</h3>
+                        <p>从照片到可实现的家</p>
+                    </div>
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-language fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">家居行业翻译引擎</h3>
+                        <p>打破跨境贸易语言壁垒</p>
+                    </div>
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-store fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">电商数据设计引擎</h3>
+                        <p>数据驱动的爆款孵化器</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- AI Agent Details... (same as before, with reduced font) -->
+            <section>
+                <h3>1. AI家居设计Agent：从想象到现实</h3>
+                <p class="text-center" style="font-size:0.9em">将繁琐的专业室内设计流程，转变为用户动动手指即可完成的自动化、智能化体验。</p>
+                <ol style="margin-top: 30px; font-size: 0.8em;">
+                    <li><span class="highlight">空间智能识别:</span> 用户上传房间照片，系统通过CV技术自动识别空间结构、尺寸和光照，生成3D数字孪生空间。</li>
+                    <li><span class="highlight">智能家具匹配与布局:</span> AI基于空间数据和设计美学，从数据库中智能匹配家具，自动生成科学、美观的排布方案。</li>
+                    <li><span class="highlight">方案文档自动生成:</span> 一键生成包含多视角预览、家具清单、尺寸、品牌信息的专业PDF方案。</li>
+                    <li><span class="highlight">AIGC照片级效果图渲染:</span> 调用自研图像引擎，将场景渲染成无限接近真实照片的高质量效果图，<b class="highlight">最大程度保持家具与原始产品在纹理、光影上的一致性</b>，实现“所见即所得”。</li>
+                </ol>
+                <p class="text-center" style="margin-top: 20px;">设计效率提升 <span class="large-number">5</span> 倍，方案确认率达 <span class="highlight">82%</span></p>
+            </section>
+            <section>
+                <h3>2. 家居行业翻译引擎：精准无碍</h3>
+                <p class="text-center" style="font-size:0.9em">专为家居行业打造的垂直领域翻译解决方案，解决通用工具“失真”、“失准”的痛点。</p>
+                <div class="columns" style="margin-top: 30px;">
+                    <div class="column feature-box">
+                        <h4 class="highlight">构建行业专有数据库</h4>
+                        <p style="font-size:0.9em">我们构建了包含海量专业术语（如木材、工艺、风格）和专业语句的家居行业多语言平行语料库，这是精准翻译的基石。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <h4 class="highlight">先进混合模型训练</h4>
+                        <p style="font-size:0.9em">综合运用 <b class="highlight">Fine-tuning (模型微调)</b> 和 <b class="highlight">RAG (检索增强生成)</b> 技术，让AI既懂得行业语言风格，又能确保专业术语100%准确。</p>
+                    </div>
+                </div>
+                <p class="text-center" style="margin-top: 30px; font-size: 1.1em;">实现远超通用引擎的翻译质量，为跨境贸易保驾护航。</p>
+            </section>
+            <section>
+                <h3>3. 基于电商数据的设计引擎：爆款孵化</h3>
+                <p class="text-center" style="font-size:0.9em">整合市场分析、AI辅助设计和AIGC内容生成，帮助企业做出更明智的决策，并以极低成本创造营销素材。</p>
+                <ul style="font-size: 0.8em; margin-top: 30px;">
+                    <li><b class="highlight">全球市场趋势洞察:</b> 实时监控主流电商平台，AI分析热销品，提供可视化数据报告。</li>
+                    <li><b class="highlight">AI辅助创意设计:</b> 基于趋势提供新品灵感，或为已有产品生成更受欢迎的设计变体，并融入品牌故事。</li>
+                    <li><b class="highlight">AIGC营销内容矩阵生成:</b> 自动生成融入品牌故事的图片、社交媒体文案甚至AI动画。</li>
+                    <li><b class="highlight">受众分析与精准投放:</b> AI分析用户画像，为新品提供精准的客群定位和投放策略。</li>
+                </ul>
+                <p class="text-center" style="margin-top: 20px;">需求预测准确率 <span class="highlight">92%</span>，指导生产；动态库存管理使周转天数从55天缩短至 <span class="highlight">22</span> 天。</p>
+            </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <motion.div class="bento-card lg:col-span-2 glow" data-motion>
-                    <h3 class="text-3xl font-bold mb-6">系统架构 <span class="text-gray-500 ml-2 font-light">SYSTEM ARCHITECTURE</span></h3>
-                    <div class="space-y-4">
-                        <!-- Recreated Diagram -->
-                        <div class="text-center p-4 border border-dashed border-gray-600 rounded-lg">
-                            <p class="font-bold">用户层 (学生 / 教师 / 管理员)</p>
-                            <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-                            <p class="font-mono text-sm highlight-text">互联网 / 局域网</p>
-                            <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-                            <div class="grid grid-cols-2 gap-4 mt-2">
-                                <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">应用服务层</p><p class="text-xs text-gray-400">AI创想家平台、后台管理</p></div>
-                                <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">数据与服务层</p><p class="text-xs text-gray-400">主服务器、AI模型、数据库</p></div>
-                            </div>
-                             <svg class="mx-auto my-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-                            <div class="p-3 bg-gray-800 rounded-md"><p class="font-bold">硬件设备层</p><p class="text-xs text-gray-400">触感机器人、无人车、传感器、大屏</p></div>
+            <!-- MR Application -->
+            <section>
+                <h2>Hoomix MR 家居应用</h2>
+                <div class="columns">
+                    <div class="column"><h4 class="highlight">核心功能模块</h4><ul><li><b>空间预览:</b> 身临其境感受真实空间效果</li><li><b>家具预览:</b> <span class="highlight">10万+</span> 产品3D展示</li><li><b>实时调整:</b> 材质、颜色、尺寸动态变化</li></ul></div>
+                    <div class="column"><h4 class="highlight">技术实现优势</h4><ul><li><b>基于Meta Quest 3:</b> 无线自由，高性能</li><li><b>Unity游戏引擎:</b> 跨平台，卓越视觉</li><li><b>空间映射技术:</b> <span class="highlight">精确到1厘米</span></li></ul></div>
+                </div>
+                <div class="feature-box text-center" style="margin-top:30px;"><h4 class="highlight">AI + MR 融合创新点</h4><p style="font-size: 0.8em;"><b>智能场景生成:</b> AI分析用户需求 → 自动生成MR场景 → 实时交互调整。</p><p style="font-size: 0.8em;"><b>个性化体验优化:</b> 用户行为数据AI分析 → MR体验个性化定制 → 持续优化用户旅程。</p><p style="font-size: 0.8em;"><b>全流程数字化闭环:</b> 从AI设计到MR体验，从生产制造到安装交付，实现全链路数字化管控。</p></div>
+            </section>
+            
+            <!-- Competitor Analysis (New Slide) -->
+            <section>
+                <h2>竞品分析 (Competitive Analysis)</h2>
+                <div class="columns">
+                    <div class="column">
+                        <h3 style="font-size: 1.1em;" class="highlight">国内竞品</h3>
+                        <div class="feature-box" style="font-size: 0.8em;">
+                            <b>酷家乐, 三维家</b><br>
+                            <b>弱点:</b> 软件操作复杂，学习成本高；设计与真实可购商品脱节，无法形成交易闭环；传统屏幕体验，缺乏沉浸感。
                         </div>
                     </div>
-                </motion.div>
-                
-                <motion.div class="bento-card glow" data-motion>
-                    <h3 class="text-3xl font-bold mb-4">核心功能 <span class="text-gray-500 ml-2 font-light">FEATURES</span></h3>
-                    <ul class="space-y-4 text-gray-300">
-                        <li><strong class="text-white">教学工具创新:</strong><br>利用 AI 辅助教学准备、丰富教学资源。</li>
-                        <li><strong class="text-white">内容创作赋能:</strong><br>集成 <span class="highlight-text font-mono">Text-to-Image</span>, <span class="highlight-text font-mono">Text-to-Video</span>, <span class="highlight-text font-mono">Text-to-Music</span>, <span class="highlight-text font-mono">Text-to-Analysis 数字人</span> 等技术进行艺术与科学创作。</li>
-                        <li><strong class="text-white">跨学科融合:</strong><br>通过“核心学科+关联学科+素养维度”的三维融合设计，培养复合型人才。</li>
-                    </ul>
-                </motion.div>
-            </div>
-        </section>
-
-        <!-- 4. Curriculum -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">03</span> 课程规划
-                </h2>
-                <p class="section-subtitle">AI POPULAR SCIENCE CURRICULUM</p>
-            </motion.div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Module Cards -->
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块一: 与多模态 AI 的第一次接触</h4><p class="text-sm text-gray-400 mt-2">THE FIRST CONTACT</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块二: AI 视觉艺术工坊 (Text-to-Image)</h4><p class="text-sm text-gray-400 mt-2">VISUAL ART WORKSHOP</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块三: AI 动态世界模拟 (Text-to-Video)</h4><p class="text-sm text-gray-400 mt-2">DYNAMIC WORLD SIMULATION</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块四: AI 旋律创作工坊 (Text-to-Music)</h4><p class="text-sm text-gray-400 mt-2">MELODY CREATION WORKSHOP</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块五: AI 数据洞察家 (Text-to-Analysis 数字人)</h4><p class="text-sm text-gray-400 mt-2">DATA INSIGHTS</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块六: AI 编程火星探测车</h4><p class="text-sm text-gray-400 mt-2">EMBODIED INTELLIGENCE</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块七: AI 智能体创作工坊</h4><p class="text-sm text-gray-400 mt-2">AI AGENT CREATION</p></motion.div>
-                <motion.div class="bento-card" data-motion><h4 class="text-xl font-bold">模块八: AI 舞蹈教室 (姿态评估)</h4><p class="text-sm text-gray-400 mt-2">DANCE & POSE ESTIMATION</p></motion.div>
-                <motion.div class="bento-card bg-tesla-red text-white" data-motion>
-                  <h4 class="text-xl font-bold">模块九: 融合创新毕业项目</h4>
-                  <p class="text-sm text-gray-200 mt-2">FINAL PROJECT: MY UNIVERSE EXPLORATION PLAN</p>
-                </motion.div>
-            </div>
-             <motion.div class="bento-card mt-8" data-motion>
-                <h3 class="text-2xl font-bold mb-4">教学方法与互动设计</h3>
-                <p class="font-bold text-lg highlight-text">“引入-讲解-实践-创造-分享” 五步教学法</p>
-                <p class="mt-2 text-gray-300">通过情景引入、工具演示、主题挑战、项目驱动和作品展示互评，全方位激发学生兴趣，锻炼表达与思辨能力。</p>
-            </motion.div>
-        </section>
-
-        <!-- 5. Platform & Space -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">04</span> 平台与空间
-                </h2>
-                <p class="section-subtitle">PLATFORM & SPACE PLANNING</p>
-            </motion.div>
-             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                 <motion.div class="bento-card lg:col-span-3 glow" data-motion>
-                    <h3 class="text-3xl font-bold mb-4">“AI 创想家” 学习与教学平台</h3>
-                     <p class="text-gray-400 mb-6">一个基于Web端的一体化学习工具，整合课程学习、实践操作、数据分析、课件管理，提供无缝的数字化学习环境。</p>
-                     <div class="space-y-3">
-                         <p><i class="fas fa-vr-cardboard highlight-text w-6"></i> <strong class="text-white">虚实结合：</strong>通过 WebGL 技术实现火星车模拟驾驶、触感机器人云端操控。</p>
-                         <p><i class="fas fa-chart-line highlight-text w-6"></i> <strong class="text-white">数据驱动：</strong>自动记录学习行为，生成可视化报告，精准评估学生能力。</p>
-                         <p><i class="fas fa-universal-access highlight-text w-6"></i> <strong class="text-white">跨平台访问：</strong>无需下载APP，适配 PC、平板、手机等多终端。</p>
-                     </div>
-                 </motion.div>
-                 <motion.div class="bento-card lg:col-span-2 glow" data-motion>
-                     <h3 class="text-3xl font-bold mb-4">后台管理系统</h3>
-                     <ul class="list-disc list-inside text-gray-300 space-y-2">
-                         <li>内容展示模块</li>
-                         <li>师资培训模块</li>
-                         <li>课件制作模块</li>
-                         <li>作品管理模块</li>
-                         <li>教学评分模块</li>
-                         <li>赛事记录模块</li>
-                     </ul>
-                 </motion.div>
-                 
-                 <motion.div class="bento-card lg:col-span-5 text-center" data-motion>
-                     <h3 class="text-3xl font-bold mb-6">空间规划方案</h3>
-                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">科普学习区</h4><p class="text-gray-300 text-sm">配备20台学习机，安装Python、Scratch等编程软件，进行基础学习与智能体打造。</p></div>
-                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">人工智能实验区</h4><p class="text-gray-300 text-sm">动手实践区，开展太空机器人路径规划、AI辨别天体等项目，配备触感机器人与无人车。</p></div>
-                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">观摩导览区</h4><p class="text-gray-300 text-sm">教室门口设数字化大屏，展示课程与活动，设置迎宾机器人进行互动。</p></div>
-                         <div class="p-6 highlight-bg-glow rounded-xl"><h4 class="font-bold text-white text-lg">赛事活动区</h4><p class="text-gray-300 text-sm">灵活布局的比赛场地，配备专业设备与道具，满足机器人竞赛、算法挑战赛等需求。</p></div>
-                     </div>
-                 </motion.div>
-             </div>
-        </section>
-
-        <!-- 6. Teacher Training & Events (NEW SECTION) -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">05</span> 师训及赛课
-                </h2>
-                <p class="section-subtitle">TEACHER TRAINING & EVENTS</p>
-            </motion.div>
-        
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-chalkboard-teacher text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h3 class="text-3xl font-bold mb-4">教师培训 <span class="text-gray-500 ml-2 font-light">TRAINING</span></h3>
-                    <ul class="space-y-3 text-gray-300 list-disc list-inside">
-                        <li>定期参与AI与航天领域的专业课程与学术研讨会。</li>
-                        <li>鼓励参与在线学习平台，提升自身专业素养。</li>
-                        <li>邀请航天领域专家到校开展培训与交流，分享项目经验。</li>
-                        <li>促进教师教学能力与实践能力的深度融合。</li>
-                    </ul>
-                </motion.div>
-                
-                <motion.div class="bento-card glow" data-motion>
-                    <i class="fas fa-comments text-5xl text-tesla-red opacity-20 absolute -top-4 -left-4"></i>
-                    <h3 class="text-3xl font-bold mb-4">赛课活动 <span class="text-gray-500 ml-2 font-light">ACTIVITIES</span></h3>
-                    <ul class="space-y-3 text-gray-300 list-disc list-inside">
-                        <li>定期组织教学研讨活动，交流教学心得。</li>
-                        <li>共同解决教学过程中遇到的问题。</li>
-                        <li>针对融合航天元素的教学内容，进行教学设计研讨。</li>
-                        <li>持续优化课程教学方案，提高整体教学质量。</li>
-                    </ul>
-                </motion.div>
-            </div>
-        </section>
-
-        <!-- 7. Implementation (Renumbered) -->
-        <section class="my-32">
-            <motion.div class="text-center mb-16" data-motion>
-                <h2 class="section-title">
-                    <span class="highlight-text">06</span> 实施规划
-                </h2>
-                <p class="section-subtitle">IMPLEMENTATION PLAN</p>
-            </motion.div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <motion.div class="bento-card" data-motion>
-                    <h3 class="text-2xl font-bold mb-4">运营管理</h3>
-                    <ul class="text-gray-400 space-y-2">
-                        <li><strong>开放时间:</strong> 面向学校、社会团体预约开放。</li>
-                        <li><strong>设备维护:</strong> 专业人员定期检查维护，建立设备档案。</li>
-                        <li><strong>安全管理:</strong> 严格的安全制度与应急预案，定期演练。</li>
-                    </ul>
-                </motion.div>
-
-                <motion.div class="bento-card lg:col-span-2" data-motion>
-                    <h3 class="text-2xl font-bold mb-6">项目时间表 (预估) <span class="text-gray-500 font-light text-xl ml-2">TIMELINE</span></h3>
-                    <div class="relative pl-6 border-l-2 border-tesla-red border-opacity-50 space-y-8">
-                        <!-- Timeline Item 1 -->
-                        <div class="relative">
-                            <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
-                            <p class="font-mono text-tesla-red">2026.3.1 - 3.15</p>
-                            <p class="font-bold text-white">阶段一: 启动</p>
-                            <p class="text-gray-400">完成场地设计、设备采购招标及合同签订。</p>
-                        </div>
-                        <!-- Timeline Item 2 -->
-                        <div class="relative">
-                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
-                            <p class="font-mono text-tesla-red">2026.3.16 - 4.15</p>
-                            <p class="font-bold text-white">阶段二: 建设</p>
-                            <p class="text-gray-400">进行场地装修施工、设备陆续进场。</p>
-                        </div>
-                        <!-- Timeline Item 3 -->
-                         <div class="relative">
-                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
-                            <p class="font-mono text-tesla-red">2026.4.15 - 4.20</p>
-                            <p class="font-bold text-white">阶段三: 调试</p>
-                            <p class="text-gray-400">设备安装调试、课程及管理系统最终优化。</p>
-                        </div>
-                         <!-- Timeline Item 4 -->
-                         <div class="relative">
-                           <div class="absolute -left-[35px] top-1 w-6 h-6 bg-tesla-red rounded-full"></div>
-                            <p class="font-mono text-tesla-red">2026.4.21 - 5.1</p>
-                            <p class="font-bold text-white">阶段四: 试运行</p>
-                            <p class="text-gray-400">进行试运行，排查问题并整改，确保实验室正常运行。</p>
+                    <div class="column">
+                        <h3 style="font-size: 1.1em;" class="highlight">国外竞品</h3>
+                        <div class="feature-box" style="font-size: 0.8em;">
+                           <b>Interior AI, IKEA Place</b><br>
+                           <b>弱点:</b> AI生成结果随机，不可控，非真实商品；零售商AR应用功能单一，仅能预览，选择有限，沉浸感弱。
                         </div>
                     </div>
-                </motion.div>
-                
-                 <motion.div class="bento-card lg:col-span-3 text-center" data-motion>
-                    <h3 class="text-2xl font-bold mb-2">项目预算 (预估)</h3>
-                    <p class="text-7xl font-black text-gray-700">暂略</p>
-                     <p class="text-gray-500">BUDGET OMITTED</p>
-                 </motion.div>
-            </div>
-        </section>
+                </div>
+                <hr>
+                <h3 class="text-center" style="font-size: 1.1em;">我们的独特优势</h3>
+                <p class="text-center" style="font-size: 0.9em;">
+                    我们是市场上<span class="highlight">唯一</span>将 <span class="highlight">“后台三大AI Agent协同”</span> 与 <span class="highlight">“前端沉浸式MR体验”</span> 及 <span class="highlight">“开放式B2B2C平台”</span> 深度结合的解决方案，构筑了强大的技术与商业模式护城河。
+                </p>
+            </section>
 
+            <!-- Team (Updated Slide) -->
+            <section>
+                <h2>三、团队优势：国际化与专业化</h2>
+                <div class="columns" style="font-size: 0.75em;">
+                    <div class="column">
+                        <h3 style="font-size: 1.2em;" class="highlight">中国团队 (AI & 供应链)</h3>
+                        <div class="feature-box">
+                            <b>赵露忆 - CEO</b><br><small>复旦EMBA, 10年跨境电商与供应链管理经验, 负责公司项目运营和管理。</small><br><br>
+                            <b>朱云涛 - CTO</b><br><small>香港大学金融工程研究生, 连续创业者, 负责公司AI架构, 深度理解AI算法与金融科技。</small>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 style="font-size: 1.2em;" class="highlight">北美团队 (产品 & MR)</h3>
+                        <div class="feature-box">
+                           <b>幸冠宇 - 产品经理</b><br><small>南加州大学数据分析, 负责整体产品规划与需求把控。</small><br><br>
+                           <b>刘伟德 - Unity开发工程师</b><br><small>西蒙菲莎大学计算机, 专注于核心功能开发与MR交互实现。</small><br><br>
+                           <b>徐海韵 - UI/UX设计师</b><br><small>西蒙菲莎大学交互设计, 负责界面设计与用户体验优化。</small><br><br>
+                           <b>刘鑫彦 - 用户研究与交互设计</b><br><small>英属哥伦比亚大学市场营销, 负责收集用户反馈与需求验证。</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Other slides (Progress, Funding, etc.) follow, with reduced font -->
+            <section>
+                <h2>四、项目进展与成果</h2>
+                <div class="columns" style="font-size:0.9em"><div class="column"><h3 class="highlight">技术成果</h3><ul><li>AI设计算法准确率: <span class="highlight">92%</span></li><li>MR体验误差: <span class="highlight">≤1 厘米</span></li><li>核心专利: <span class="highlight">15</span> 项已授权</li><li>软件著作权: <span class="highlight">8</span> 项</li></ul></div><div class="column"><h3 class="highlight">市场表现</h3><ul><li>用户数: <span class="highlight">10 万+</span></li><li>定制订单: <span class="highlight">5000+</span> 单</li><li>入驻供应商: <span class="highlight">100+</span> 家</li><li>GMV: <span class="highlight">1000 万</span> 加元</li></ul></div></div>
+                <div class="feature-box text-center" style="font-size:0.9em"><h3 class="highlight">运营数据亮点</h3><p>设计效率提升: <span class="highlight">5倍</span> | 交付周期: 从60天到 <span class="highlight">15-20天</span> | 用户获取成本: <span class="highlight">40加元</span> | 复购率: <span class="highlight">38%</span></p></div>
+            </section>
+            <section>
+                <h2>五、资金需求与使用规划</h2>
+                <h3 class="text-center">申请专项资金: <span class="large-number">500</span> 万元</h3>
+                <div class="columns text-center"><div class="column"><p class="large-number" style="font-size: 2.5em;">40%</p><p><b>AI技术研发升级 (200万)</b></p></div><div class="column"><p class="large-number" style="font-size: 2.5em;">30%</p><p><b>MR技术创新应用 (150万)</b></p></div></div>
+                <div class="columns text-center" style="margin-top: 20px;"><div class="column"><p class="large-number" style="font-size: 2.5em;">20%</p><p><b>市场推广 (100万)</b></p></div><div class="column"><p class="large-number" style="font-size: 2.5em;">10%</p><p><b>团队与运营 (50万)</b></p></div></div>
+            </section>
+            <section>
+                <h2>六、预期成果与社会价值</h2>
+                <div class="columns" style="font-size: 0.7em;"><div class="column"><h4 class="highlight">短期目标 (6-12月)</h4><ul><li>技术: HomeGPT大模型发布, MR应用用户破50万</li><li>市场: GMV达3000万加元, 用户增长至30万</li></ul></div><div class="column"><h4 class="highlight">中期目标 (1-2年)</h4><ul><li>技术: AI+MR技术达行业领先水平</li><li>市场: 覆盖北美20城, 供应商达500家</li></ul></div><div class="column"><h4 class="highlight">长期目标 (3-5年)</h4><ul><li>布局: 拓展欧洲、澳新市场, 构建全球生态</li><li>影响: 成为跨境家居电商标杆企业</li></ul></div></div>
+                <hr><h3 class="highlight text-center">社会价值</h3>
+                <ul style="font-size: 0.8em;"><li><b>推动产业数字化转型</b></li><li><b>促进跨境贸易发展</b></li><li><b>创造就业机会 (1000+)</b></li><li><b>环保可持续，减少浪费</b></li></ul>
+            </section>
+            
+            <!-- Final Slides -->
+            <section class="text-center">
+                <h2>总结与展望</h2>
+                <p>Homeiliving 平台通过 <b class="highlight">AI Agent</b> 与 <b class="highlight">MR</b> 技术的深度融合, 正在重塑跨境家居行业的商业模式和用户体验。</p>
+                <div style="margin-top: 50px; font-size: 1.1em; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <ul>
+                        <li><b class="highlight">技术创新突破:</b> 打造行业领先的 AI+MR 技术平台。</li>
+                        <li><b class="highlight">市场规模扩张:</b> 快速占领北美华人家居定制市场。</li>
+                        <li><b class="highlight">生态体系构建:</b> 形成完整的跨境家居生态链。</li>
+                        <li><b class="highlight">社会价值实现:</b> 推动产业升级，促进经济发展。</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="text-center">
+                <h2 style="font-size: 2em;">谢谢各位评委的聆听!</h2>
+                <p style="margin-top: 50px; font-size: 1.5em;" class="highlight">期待您的指导和支持!</p>
+            </section>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
     <script>
-        // P5.js sketch for background particles
-        function setup() {
-            let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.parent('p5-canvas');
-            particles = [];
-            for(let i = 0; i<width/10; i++){
-                particles.push(new Particle());
-            }
-        }
-
-        function draw() {
-            background(10,10,10);
-            particles.forEach((p, index)=>{
-                p.update();
-                p.draw();
-                p.checkParticles(particles.slice(index));
-            });
-        }
-        
-        class Particle{
-            constructor(){
-                this.pos = createVector(random(width), random(height));
-                this.vel = createVector(random(-0.5, 0.5), random(-0.5, 0.5));
-                this.size = 2;
-            }
-
-            update(){
-                this.pos.add(this.vel);
-                this.edges();
-            }
-
-            draw(){
-                noStroke();
-                fill('rgba(255,255,255,0.5)');
-                circle(this.pos.x, this.pos.y, this.size);
-            }
-
-            edges(){
-                if(this.pos.x < 0 || this.pos.x > width){ this.vel.x *= -1; }
-                if(this.pos.y < 0 || this.pos.y > height){ this.vel.y *= -1; }
-            }
-
-            checkParticles(particles){
-                particles.forEach(particle =>{
-                    const d = dist(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y);
-                    if(d<120){
-                        stroke('rgba(255,255,255,0.1)');
-                        line(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y)
-                    }
-                });
-            }
-        }
-        
-        function windowResized() {
-          resizeCanvas(windowWidth, windowHeight);
-        }
-
-        // Framer Motion scroll animations
-        document.addEventListener("DOMContentLoaded", () => {
-            const { animate } = motion;
-
-            const elementsToAnimate = document.querySelectorAll('[data-motion]');
-            
-            elementsToAnimate.forEach(element => {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            animate(
-                                entry.target,
-                                { opacity: [0, 1], y: [30, 0] },
-                                { duration: 0.8, ease: "easeOut" }
-                            );
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-
-                observer.observe(element);
-            });
-
-             // Animate hero section on load
-            animate(
-                "header > div",
-                { opacity: [0, 1], y: [50, 0] },
-                { duration: 0.8, delay: 0.2, ease: "easeOut" }
-            )
+        Reveal.initialize({
+            hash: true,
+            plugins: [ RevealNotes ],
+            width: 1280,
+            height: 720,
         });
     </script>
 </body>
