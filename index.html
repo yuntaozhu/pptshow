@@ -1,150 +1,525 @@
-<!-- Reveal.js Core CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
-<!-- A clean, professional theme -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css" id="theme">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homeiliving - Agent驱动的家居创新平台</title>
 
-<!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<!-- Google Fonts for typography -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
-
-<style>
-    /* Custom Styles to match your requested aesthetic */
-    :root {
-        --r-main-font: 'Noto Sans SC', sans-serif;
-        --r-heading-font: 'Noto Sans SC', sans-serif;
-        --r-main-font-size: 36px; /* Globally reduced font size */
-        --r-heading-font-weight: 900;
-        --r-main-color: #333;
-        --r-heading-color: #111;
-        --r-link-color: #E31937;
-        --highlight-red: #E31937;
-    }
-
-    .reveal .slides section {
-        text-align: left;
-    }
-
-    .reveal h1, .reveal h2, .reveal h3 {
-        text-align: center;
-        font-weight: 900;
-    }
-
-    .reveal .highlight {
-        color: var(--highlight-red);
-        font-weight: bold;
-    }
+    <!-- Reveal.js Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+    <!-- A clean, professional theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css" id="theme">
     
-    .reveal .highlight-bg {
-         background-color: rgba(227, 25, 55, 0.1);
-    }
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    .reveal .large-number {
-        font-size: 3.5em;
-        font-weight: 900;
-        color: var(--highlight-red);
-    }
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
 
-    .reveal .mega-number {
-        font-size: clamp(8em, 25vw, 15em);
-        font-weight: 900;
-        line-height: 1;
-        color: var(--highlight-red);
-    }
-    
-    .reveal .text-center {
-        text-align: center;
-    }
+    <style>
+        /* Custom Styles to match your requested aesthetic */
+        :root {
+            --r-main-font: 'Noto Sans SC', sans-serif;
+            --r-heading-font: 'Noto Sans SC', sans-serif;
+            --r-main-font-size: 36px; /* Globally reduced font size */
+            --r-heading-font-weight: 900;
+            --r-main-color: #333;
+            --r-heading-color: #111;
+            --r-link-color: #E31937;
+            --highlight-red: #E31937;
+        }
 
-    .columns {
-        display: flex;
-        gap: 20px;
-        width: 100%;
-    }
-    .column {
-        flex: 1;
-    }
-    .column.is-two-thirds { flex: 2; }
-    .column.is-one-third { flex: 1; }
+        .reveal .slides section {
+            text-align: left;
+        }
 
-    .feature-box {
-        background-color: #f9f9f9;
-        border-left: 5px solid var(--highlight-red);
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        height: 100%;
-    }
-    
-    .reveal ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    
-    .reveal ul li {
-      margin-bottom: 10px;
-    }
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-align: center;
+            font-weight: 900;
+        }
 
-    .reveal ul li::before {
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        content: "\f058"; /* fa-check-circle */
-        color: var(--highlight-red);
-        margin-right: 15px;
-    }
+        .reveal .highlight {
+            color: var(--highlight-red);
+            font-weight: bold;
+        }
+        
+        .reveal .highlight-bg {
+             background-color: rgba(227, 25, 55, 0.1);
+        }
 
-    .canvas-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-        width: 100%;
-        height: 80%;
-        font-size: 0.6em;
-    }
-    .canvas-item {
-        background-color: #f9f9f9;
-        padding: 15px;
-        border-radius: 8px;
-    }
-    .canvas-item h4 {
-        font-size: 1.2em;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-align: left;
-    }
-    .canvas-item p, .canvas-item li {
-        font-size: 0.9em;
-        text-align: left;
-    }
-    .canvas-item ul li::before {
-        margin-right: 8px;
-    }
+        .reveal .large-number {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: var(--highlight-red);
+        }
 
-    .timeline {
-        position: relative;
-        margin-top: 20px;
-    }
-    .timeline-item {
-        padding-left: 40px;
-        position: relative;
-        padding-bottom: 20px;
-        border-left: 3px solid #ddd;
-    }
-    .timeline-item:last-child {
-        border-left: 3px solid transparent;
-    }
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        left: -11px;
-        top: 5px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: var(--highlight-red);
-        border: 3px solid #fff;
-    }
-</style>
+        .reveal .mega-number {
+            font-size: clamp(8em, 25vw, 15em);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--highlight-red);
+        }
+        
+        .reveal .text-center {
+            text-align: center;
+        }
+
+        .columns {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .column {
+            flex: 1;
+        }
+        .column.is-two-thirds { flex: 2; }
+        .column.is-one-third { flex: 1; }
+
+        .feature-box {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--highlight-red);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .reveal ul {
+          list-style-type: none;
+          padding-left: 0;
+        }
+        
+        .reveal ul li {
+          margin-bottom: 10px;
+        }
+
+        .reveal ul li::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: "\f058"; /* fa-check-circle */
+            color: var(--highlight-red);
+            margin-right: 15px;
+        }
+
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            width: 100%;
+            height: 80%;
+            font-size: 0.6em;
+        }
+        .canvas-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .canvas-item h4 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .canvas-item p, .canvas-item li {
+            font-size: 0.9em;
+            text-align: left;
+        }
+        .canvas-item ul li::before {
+            margin-right: 8px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid var(--highlight-red);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--highlight-red);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Title Slide -->
+            <section class="text-center">
+                <h1 style="font-size: 2.2em;">Homeiliving 跨境家居平台</h1>
+                <h2 style="font-size: 1.6em; color: var(--highlight-red);">Agent驱动的家居创新平台</h2>
+                <p style="margin-top: 50px; font-size: 1.1em;">创始人: 赵露忆</p>
+                <p style="font-size: 0.9em;">2025 年度促进产业高质量发展专项资金</p>
+            </section>
+
+            <!-- 1. Background (Full Page) -->
+            <section>
+                <h2>一、项目背景与市场痛点</h2>
+                <div class="columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3 style="text-align: left; font-size: 1.2em;">市场机遇</h3>
+                        <div class="feature-box">
+                            <i class="fas fa-chart-line fa-2x" style="color:var(--highlight-red);"></i>
+                            <h4 style="text-align:left; font-size: 1em; margin-top: 10px;"><b>北美华人家居定制需求激增</b></h4>
+                            <p>25-45岁北美华人家庭年增长率达 <span class="highlight" style="font-size: 1.5em;">15%</span>，形成一个高增长、高价值的精准市场。</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 style="text-align: left; font-size: 1.2em;">传统跨境家居行业痛点</h3>
+                         <ul style="font-size: 0.9em;">
+                            <li><b>非标品适配难:</b> 尺寸、风格与本地化需求难以匹配。</li>
+                            <li><b>交付周期长:</b> 平均 <span class="highlight">60</span> 天的漫长等待，严重影响客户体验。</li>
+                            <li><b>文化差异大:</b> 设计理念与北美华人生活习惯存在鸿沟。</li>
+                            <li><b>价格虚高:</b> 本土定制服务溢价高达 <span class="highlight">60%</span>，性价比低。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Solution -->
+            <section class="text-center">
+                <h2>我们的解决方案</h2>
+                <div class="feature-box" style="margin-top: 50px;">
+                    <p style="font-size: 1.2em;">
+                        构建一个 <span class="highlight">“敏捷供应 - 精准定制 - 生态扩张”</span> 的跨境家居创新体系。
+                    </p>
+                     <p style="font-size: 1.1em; margin-top: 20px;">
+                        通过 <b class="highlight">AI Agent + MR</b> 技术的深度融合，以技术驱动重构整个价值链，打造极致的效率和个性化体验，形成强大的差异化竞争优势。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Company Overview (NEW SLIDE) -->
+            <section>
+                <h2>二、公司概览与发展里程碑</h2>
+                <div class="columns" style="font-size: 0.8em;">
+                    <div class="column is-one-third">
+                        <h3 style="text-align: left; font-size: 1.2em;">公司介绍</h3>
+                        <p>上海伊口信息技术有限公司成立于2020年8月，是一家专注于跨境家居电商平台技术研发与运营的高新技术企业。我们致力于通过AI和MR技术创新，为全球消费者提供沉浸式的家居购物体验。</p>
+                        <hr>
+                        <h3 style="text-align: left; font-size: 1.2em;">业务布局</h3>
+                         <ul>
+                            <li><b>总部:</b> 中国上海</li>
+                            <li><b>研发中心:</b> 加拿大温哥华</li>
+                            <li><b>运营中心:</b> 北美、欧洲、亚太</li>
+                        </ul>
+                        <a href="https://www.homeiliving.com" target="_blank">www.homeiliving.com</a>
+                    </div>
+                    <div class="column is-two-thirds">
+                         <h3 style="text-align: left; font-size: 1.2em;">发展历程 (营收)</h3>
+                         <div class="timeline">
+                             <div class="timeline-item">
+                                <b>2020-2021:</b> <span class="highlight">技术奠基</span><br>
+                                <small>团队投入大量资源进行技术研发和市场调研。</small>
+                             </div>
+                             <div class="timeline-item">
+                                <b>2023:</b> <span class="highlight">商业化启动</span><br>
+                                <small>成功实现商业化运营，全年收入达到人民币95万元。</small>
+                             </div>
+                              <div class="timeline-item">
+                                <b>2024:</b> <span class="highlight">快速增长</span><br>
+                                <small>实现收入人民币330万元，出口创汇46万美金。</small>
+                             </div>
+                             <div class="timeline-item">
+                                <b>2025 (截至8月):</b> <span class="highlight">规模扩大</span><br>
+                                <small>出口创汇收入已达到498万元，业务规模持续扩大。</small>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- The Power of AI Agents -->
+            <section>
+                <h2>核心理念：AI Agent 的颠覆性价值</h2>
+                <p class="text-center">我们不仅仅是使用AI工具，而是构建能够自主执行复杂任务的 <span class="highlight">AI智能体 (Agent)</span>。</p>
+                <div class="columns" style="margin-top: 40px; font-size: 0.85em;">
+                    <div class="column feature-box">
+                        <i class="fas fa-brain fa-2x highlight"></i>
+                        <h4 style="text-align:left;">AI Agent的核心价值</h4>
+                        <p>Agent具备感知、决策和执行能力，能自主完成从设计方案生成到营销内容创作的完整任务，实现业务流程的高度自动化。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <i class="fas fa-chart-line fa-2x highlight"></i>
+                        <h4 style="text-align:left;">AI Agent的发展趋势</h4>
+                        <p>正从单一任务工具进化为能够协同工作的多智能体系统 (Multi-Agent System)。我们的三大Agent正是这一趋势的实践，它们将协同作战。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <i class="fas fa-globe fa-2x highlight"></i>
+                        <h4 style="text-align:left;">对家居行业的影响</h4>
+                        <p>将彻底改变行业依赖人力的现状，实现规模化的精准定制和个性化服务，从根本上提升产业效率，重塑商业模式。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Agent Trinity Intro -->
+            <section>
+                <h2>核心驱动：三大AI智能体 (Agents)</h2>
+                <p class="text-center">我们构建了一个由三大核心AI智能体驱动的业务中枢，协同完成从设计、翻译到营销的全链路任务。</p>
+                <div class="columns" style="margin-top: 40px;">
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-home fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">AI家居设计Agent</h3>
+                        <p>从照片到可实现的家</p>
+                    </div>
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-language fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">家居行业翻译引擎</h3>
+                        <p>打破跨境贸易语言壁垒</p>
+                    </div>
+                    <div class="column text-center feature-box">
+                        <i class="fas fa-store fa-3x highlight"></i>
+                        <h3 style="font-size: 1.1em;">电商数据设计引擎</h3>
+                        <p>数据驱动的爆款孵化器</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- AI Agent Details... -->
+            <section>
+                <h3>1. AI家居设计Agent：从想象到现实</h3>
+                <p class="text-center" style="font-size:0.9em">将繁琐的专业室内设计流程，转变为用户动动手指即可完成的自动化、智能化体验。</p>
+                <ol style="margin-top: 30px; font-size: 0.8em;">
+                    <li><span class="highlight">空间智能识别:</span> 用户上传房间照片，系统通过CV技术自动识别空间结构、尺寸和光照，生成3D数字孪生空间。</li>
+                    <li><span class="highlight">智能家具匹配与布局:</span> AI基于空间数据和设计美学，从数据库中智能匹配家具，自动生成科学、美观的排布方案。</li>
+                    <li><span class="highlight">方案文档自动生成:</span> 一键生成包含多视角预览、家具清单、尺寸、品牌信息的专业PDF方案。</li>
+                    <li><span class="highlight">AIGC照片级效果图渲染:</span> 调用自研图像引擎，将场景渲染成无限接近真实照片的高质量效果图，<b class="highlight">最大程度保持家具与原始产品在纹理、光影上的一致性</b>，实现“所见即所得”。</li>
+                </ol>
+                <p class="text-center" style="margin-top: 20px;">设计效率提升 <span class="large-number">5</span> 倍，方案确认率达 <span class="highlight">82%</span></p>
+            </section>
+            <section>
+                <h3>2. 家居行业翻译引擎：精准无碍</h3>
+                <p class="text-center" style="font-size:0.9em">专为家居行业打造的垂直领域翻译解决方案，解决通用工具“失真”、“失准”的痛点。</p>
+                <div class="columns" style="margin-top: 30px;">
+                    <div class="column feature-box">
+                        <h4 class="highlight">构建行业专有数据库</h4>
+                        <p style="font-size:0.9em">我们构建了包含海量专业术语（如木材、工艺、风格）和专业语句的家居行业多语言平行语料库，这是精准翻译的基石。</p>
+                    </div>
+                    <div class="column feature-box">
+                        <h4 class="highlight">先进混合模型训练</h4>
+                        <p style="font-size:0.9em">综合运用 <b class="highlight">Fine-tuning (模型微调)</b> 和 <b class="highlight">RAG (检索增强生成)</b> 技术，让AI既懂得行业语言风格，又能确保专业术语100%准确。</p>
+                    </div>
+                </div>
+                <p class="text-center" style="margin-top: 30px; font-size: 1.1em;">实现远超通用引擎的翻译质量，为跨境贸易保驾护航。</p>
+            </section>
+            <section>
+                <h3>3. 基于电商数据的设计引擎：爆款孵化</h3>
+                <p class="text-center" style="font-size:0.9em">整合市场分析、AI辅助设计和AIGC内容生成，帮助企业做出更明智的决策，并以极低成本创造营销素材。</p>
+                <ul style="font-size: 0.8em; margin-top: 30px;">
+                    <li><b class="highlight">全球市场趋势洞察:</b> 实时监控主流电商平台，AI分析热销品，提供可视化数据报告。</li>
+                    <li><b class="highlight">AI辅助创意设计:</b> 基于趋势提供新品灵感，或为已有产品生成更受欢迎的设计变体，并融入品牌故事。</li>
+                    <li><b class="highlight">AIGC营销内容矩阵生成:</b> 自动生成融入品牌故事的图片、社交媒体文案甚至AI动画。</li>
+                    <li><b class="highlight">受众分析与精准投放:</b> AI分析用户画像，为新品提供精准的客群定位和投放策略。</li>
+                </ul>
+                <p class="text-center" style="margin-top: 20px;">需求预测准确率 <span class="highlight">92%</span>，指导生产；动态库存管理使周转天数从55天缩短至 <span class="highlight">22</span> 天。</p>
+            </section>
+
+            <!-- MR Application -->
+            <section>
+                <h2>Hoomix MR 家居应用</h2>
+                <div class="columns">
+                    <div class="column"><h4 class="highlight">核心功能模块</h4><ul><li><b>空间预览:</b> 身临其境感受真实空间效果</li><li><b>家具预览:</b> <span class="highlight">10万+</span> 产品3D展示</li><li><b>实时调整:</b> 材质、颜色、尺寸动态变化</li></ul></div>
+                    <div class="column"><h4 class="highlight">技术实现优势</h4><ul><li><b>基于Meta Quest 3:</b> 无线自由，高性能</li><li><b>Unity游戏引擎:</b> 跨平台，卓越视觉</li><li><b>空间映射技术:</b> <span class="highlight">精确到1厘米</span></li></ul></div>
+                </div>
+                <div class="feature-box text-center" style="margin-top:30px;"><h4 class="highlight">AI + MR 融合创新点</h4><p style="font-size: 0.8em;"><b>智能场景生成:</b> AI分析用户需求 → 自动生成MR场景 → 实时交互调整。</p><p style="font-size: 0.8em;"><b>个性化体验优化:</b> 用户行为数据AI分析 → MR体验个性化定制 → 持续优化用户旅程。</p><p style="font-size: 0.8em;"><b>全流程数字化闭环:</b> 从AI设计到MR体验，从生产制造到安装交付，实现全链路数字化管控。</p></div>
+            </section>
+            
+            <!-- Competitor Analysis -->
+            <section>
+                <h2>竞品分析 (Competitive Analysis)</h2>
+                <div class="columns">
+                    <div class="column">
+                        <h3 style="font-size: 1.1em;" class="highlight">国内竞品</h3>
+                        <div class="feature-box" style="font-size: 0.8em;">
+                            <b>酷家乐, 三维家</b><br>
+                            <b>弱点:</b> 软件操作复杂，学习成本高；设计与真实可购商品脱节，无法形成交易闭环；传统屏幕体验，缺乏沉浸感。
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 style="font-size: 1.1em;" class="highlight">国外竞品</h3>
+                        <div class="feature-box" style="font-size: 0.8em;">
+                           <b>Interior AI, IKEA Place</b><br>
+                           <b>弱点:</b> AI生成结果随机，不可控，非真实商品；零售商AR应用功能单一，仅能预览，选择有限，沉浸感弱。
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="text-center" style="font-size: 1.1em;">我们的独特优势</h3>
+                <p class="text-center" style="font-size: 0.9em;">
+                    我们是市场上<span class="highlight">唯一</span>将 <span class="highlight">“后台三大AI Agent协同”</span> 与 <span class="highlight">“前端沉浸式MR体验”</span> 及 <span class="highlight">“开放式B2B2C平台”</span> 深度结合的解决方案，构筑了强大的技术与商业模式护城河。
+                </p>
+            </section>
+
+            <!-- Channel Strategy -->
+            <section>
+                <h2>渠道能力与市场通路 (Go-to-Market)</h2>
+                <p class="text-center" style="font-size: 0.9em;">我们采用“B端先行，C端跟随”的双轨并行策略，通过赋能商家构建内容护城河，从而吸引海量消费者。</p>
+                <div class="columns" style="margin-top: 40px; align-items: center;">
+                    <div class="column text-center">
+                        <div class="feature-box">
+                            <i class="fas fa-users fa-3x highlight"></i>
+                            <h3 style="font-size: 1.1em;">B2B 商家获取</h3>
+                            <ul style="font-size: 0.8em;">
+                                <li><b>定向销售:</b> 精准对接头部品牌</li>
+                                <li><b>行业合作:</b> 携手家居协会与卖场</li>
+                                <li><b>全球展会:</b> 建立国际品牌影响力</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column text-center">
+                        <i class="fas fa-arrow-right fa-3x highlight"></i>
+                        <p style="font-weight:bold;">构建内容<br>& 生态</p>
+                    </div>
+                    <div class="column text-center">
+                        <div class="feature-box">
+                             <i class="fas fa-child fa-3x highlight"></i>
+                            <h3 style="font-size: 1.1em;">B2C 用户触达</h3>
+                            <ul style="font-size: 0.8em;">
+                                <li><b>内容营销:</b> 联合KOL与设计师</li>
+                                <li><b>应用商店:</b> Meta Quest Store推广</li>
+                                <li><b>硬件捆绑:</b> 寻求与MR设备商合作</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Model Canvas -->
+            <section>
+                <h2>商业模式画布 (Business Model Canvas)</h2>
+                <div class="canvas-grid">
+                    <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">重要伙伴</h4><ul><li>云服务商</li><li>数据供应商</li><li>行业协会</li><li>MR硬件厂商</li></ul></div>
+                    <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">关键业务</h4><ul><li>平台研发</li><li>算法迭代</li><li>数据库构建</li><li>市场营销</li></ul></div>
+                    <div class="canvas-item highlight-bg" style="grid-column: span 1; grid-row: span 2;"><h4 class="highlight">价值主张</h4><p>为家居产业提供“降本、增效、创收”的一站式AI+MR赋能解决方案，为消费者提供“所见即所得”的极致体验。</p></div>
+                    <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">客户关系</h4><ul><li>自助SaaS服务</li><li>专属客户支持</li><li>用户社区</li></ul></div>
+                    <div class="canvas-item" style="grid-column: span 1; grid-row: span 2;"><h4 class="highlight">客户细分</h4><b>B端:</b><ul><li>家居制造商/品牌方</li><li>跨境电商</li><li>设计师</li></ul><b>C端:</b><ul><li>有装修/购买需求的消费者</li></ul></div>
+                    <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">核心资源</h4><ul><li>核心算法</li><li>专有数据库</li><li>复合型团队</li></ul></div>
+                    <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">渠道通路</h4><ul><li>线上营销</li><li>线下展会</li><li>渠道合作</li></ul></div>
+                    <div class="canvas-item" style="grid-column: span 2;"><h4 class="highlight">成本结构</h4><p>研发成本 (人力), 基础设施成本 (算力), 数据成本, 市场营销成本</p></div>
+                    <div class="canvas-item" style="grid-column: span 3;"><h4 class="highlight">收入来源</h4><p>SaaS订阅费, 模型制作服务, 平台交易佣金, 增值服务</p></div>
+                </div>
+            </section>
+
+            <!-- Team -->
+            <section>
+                <h2>团队优势：国际化与专业化</h2>
+                <div class="columns" style="font-size: 0.75em;">
+                    <div class="column">
+                        <h3 style="font-size: 1.2em;" class="highlight">中国团队 (AI & 供应链)</h3>
+                        <div class="feature-box">
+                            <b>赵露忆 - CEO</b><br><small>复旦EMBA, 10年跨境电商与供应链管理经验, 负责公司项目运营和管理。</small><br><br>
+                            <b>朱云涛 - CTO</b><br><small>香港大学金融工程研究生, 连续创业者, 负责公司AI架构, 深度理解AI算法与金融科技。</small>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3 style="font-size: 1.2em;" class="highlight">北美团队 (产品 & MR)</h3>
+                        <div class="feature-box">
+                           <b>幸冠宇 - 产品经理</b><br><small>南加州大学数据分析, 负责整体产品规划与需求把控。</small><br><br>
+                           <b>刘伟德 - Unity开发工程师</b><br><small>西蒙菲莎大学计算机, 专注于核心功能开发与MR交互实现。</small><br><br>
+                           <b>徐海韵 - UI/UX设计师</b><br><small>西蒙菲莎大学交互设计, 负责界面设计与用户体验优化。</small><br><br>
+                           <b>刘鑫彦 - 用户研究与交互设计</b><br><small>英属哥伦比亚大学市场营销, 负责收集用户反馈与需求验证。</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Progress -->
+            <section>
+                <h2>项目进展与成果</h2>
+                <div class="columns" style="font-size:0.9em"><div class="column"><h3 class="highlight">技术成果</h3><ul><li>AI设计算法准确率: <span class="highlight">92%</span></li><li>MR体验误差: <span class="highlight">≤1 厘米</span></li><li>核心专利: <span class="highlight">15</span> 项已授权</li><li>软件著作权: <span class="highlight">8</span> 项</li></ul></div><div class="column"><h3 class="highlight">市场表现</h3><ul><li>用户数: <span class="highlight">10 万+</span></li><li>定制订单: <span class="highlight">5000+</span> 单</li><li>入驻供应商: <span class="highlight">100+</span> 家</li><li>GMV: <span class="highlight">1000 万</span> 加元</li></ul></div></div>
+                <div class="feature-box text-center" style="font-size:0.9em"><h3 class="highlight">运营数据亮点</h3><p>设计效率提升: <span class="highlight">5倍</span> | 交付周期: 从60天到 <span class="highlight">15-20天</span> | 用户获取成本: <span class="highlight">40加元</span> | 复购率: <span class="highlight">38%</span></p></div>
+            </section>
+
+            <!-- Redesigned Funding Slide -->
+            <section>
+                <h2>资金需求与使用规划</h2>
+                <div class="columns" style="align-items: center; height: 100%;">
+                    <div class="column text-center">
+                        <h3 style="font-size: 1em;">申请专项资金</h3>
+                        <div class="mega-number">500</div>
+                        <h3 style="font-size: 1.5em; margin-top: -30px;">万元</h3>
+                    </div>
+                    <div class="column" style="display: flex; flex-direction: column; justify-content: space-around; height: 80%; font-size: 0.9em;">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                             <i class="fas fa-brain fa-3x highlight"></i>
+                             <div>
+                                 <p style="font-size: 1.5em; font-weight: bold;">40%</p>
+                                 <p><b>AI技术研发升级</b> (200万)</p>
+                             </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                             <i class="fas fa-vr-cardboard fa-3x highlight"></i>
+                             <div>
+                                 <p style="font-size: 1.5em; font-weight: bold;">30%</p>
+                                 <p><b>MR技术创新应用</b> (150万)</p>
+                             </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                             <i class="fas fa-bullhorn fa-3x highlight"></i>
+                             <div>
+                                 <p style="font-size: 1.5em; font-weight: bold;">20%</p>
+                                 <p><b>市场推广与用户获取</b> (100万)</p>
+                             </div>
+                        </div>
+                         <div style="display: flex; align-items: center; gap: 20px;">
+                             <i class="fas fa-users fa-3x highlight"></i>
+                             <div>
+                                 <p style="font-size: 1.5em; font-weight: bold;">10%</p>
+                                 <p><b>团队建设与运营</b> (50万)</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals & Value -->
+            <section>
+                <h2>预期成果与社会价值</h2>
+                <div class="columns" style="font-size: 0.7em;"><div class="column"><h4 class="highlight">短期目标 (6-12月)</h4><ul><li>技术: HomeGPT大模型发布, MR应用用户破50万</li><li>市场: GMV达3000万加元, 用户增长至30万</li></ul></div><div class="column"><h4 class="highlight">中期目标 (1-2年)</h4><ul><li>技术: AI+MR技术达行业领先水平</li><li>市场: 覆盖北美20城, 供应商达500家</li></ul></div><div class="column"><h4 class="highlight">长期目标 (3-5年)</h4><ul><li>布局: 拓展欧洲、澳新市场, 构建全球生态</li><li>影响: 成为跨境家居电商标杆企业</li></ul></div></div>
+                <hr><h3 class="highlight text-center">社会价值</h3>
+                <ul style="font-size: 0.8em;"><li><b>推动产业数字化转型</b></li><li><b>促进跨境贸易发展</b></li><li><b>创造就业机会 (1000+)</b></li><li><b>环保可持续，减少浪费</b></li></ul>
+            </section>
+            
+            <!-- Final Slides -->
+            <section class="text-center">
+                <h2>总结与展望</h2>
+                <p>Homeiliving 平台通过 <b class="highlight">AI Agent</b> 与 <b class="highlight">MR</b> 技术的深度融合, 正在重塑跨境家居行业的商业模式和用户体验。</p>
+                <div style="margin-top: 50px; font-size: 1.1em; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <ul>
+                        <li><b class="highlight">技术创新突破:</b> 打造行业领先的 AI+MR 技术平台。</li>
+                        <li><b class="highlight">市场规模扩张:</b> 快速占领北美华人家居定制市场。</li>
+                        <li><b class="highlight">生态体系构建:</b> 形成完整的跨境家居生态链。</li>
+                        <li><b class="highlight">社会价值实现:</b> 推动产业升级，促进经济发展。</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="text-center">
+                <h2 style="font-size: 2em;">谢谢各位评委的聆听!</h2>
+                <p style="margin-top: 50px; font-size: 1.5em;" class="highlight">期待您的指导和支持!</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            plugins: [ RevealNotes ],
+            width: 1280,
+            height: 720,
+        });
+    </script>
+</body>
+</html>
