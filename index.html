@@ -5,37 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>达芬奇计划 | Project Da Vinci</title>
     
-    <!-- 字体与图标 -->
+    <!-- 字体与图标库 -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
-    <!-- Lottie (保留用于装饰，但不影响内容显示) -->
+    <!-- Lottie (保留作装饰，不影响内容显示) -->
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     
     <style>
         :root {
-            /* 基础色板 */
+            /* 核心色板 */
             --bg-color: #050505;
-            --surface: #111111;
-            --surface-hover: #1a1a1a;
+            --surface-dark: #0a0a0a;
+            --surface-card: #111111;
+            --surface-hover: #181818;
             --border: #333;
             
             /* 文字颜色 */
             --text-main: #ffffff;
-            --text-muted: #b0b0b0;
-            --text-dim: #777777;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
             
-            /* 强调色 */
+            /* 强调色 (Neon) */
             --accent-green: #00ff9d; 
             --accent-red: #ff0055;   
             --accent-blue: #00d2ff;  
             --accent-purple: #bd00ff;
+            --accent-orange: #ff9d00;
             
             /* 字体 */
-            --font-body: 'Exo 2', sans-serif;
+            --font-main: 'Exo 2', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
             
-            --container: 1100px;
+            --container-width: 1000px;
+            --section-spacing: 100px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,256 +46,314 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: var(--font-body);
+            font-family: var(--font-main);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 布局工具 --- */
-        .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
-        .section-padding { padding: 80px 0; }
+        /* --- 布局工具类 --- */
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        .section-padding { padding: var(--section-spacing) 0; }
         
         /* 标题体系 */
         .section-header { text-align: center; margin-bottom: 60px; }
         .tag-pill {
-            display: inline-block; padding: 4px 12px; 
+            display: inline-block; padding: 4px 14px; 
             border: 1px solid var(--accent-green); color: var(--accent-green);
-            border-radius: 50px; font-size: 0.8rem; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;
+            background: rgba(0, 255, 157, 0.05); border-radius: 50px; 
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; 
+            text-transform: uppercase; margin-bottom: 16px;
         }
-        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .section-title { 
+            font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 15px; 
+            text-transform: uppercase; line-height: 1.1;
+        }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
 
-        /* 强调文字 */
+        /* 文本高亮 */
         .highlight { color: var(--accent-green); font-weight: bold; }
-        .text-code { font-family: var(--font-code); font-size: 0.9em; }
+        .code-font { font-family: var(--font-code); font-size: 0.9em; }
+
+        /* 按钮 */
+        .btn {
+            padding: 16px 40px; background: var(--accent-green); color: #000; font-weight: 800;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;
+            display: inline-block; transition: 0.2s; cursor: pointer; border: none;
+        }
+        .btn:hover { background: #fff; transform: translateY(-2px); }
+        .btn.outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; }
+        .btn.outline:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .btn-share { background: var(--accent-blue); color: #000; }
 
         /* --- 1. Hero --- */
-        #hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #050505 70%); }
-        .hero-title { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
-        .hero-desc { font-size: 1.25rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px auto; }
-        
-        .btn {
-            padding: 15px 40px; background: var(--accent-green); color: #000; 
-            text-decoration: none; font-weight: 800; border-radius: 4px; 
-            text-transform: uppercase; display: inline-block; transition: 0.3s;
+        #hero { 
+            min-height: 90vh; display: flex; align-items: center; justify-content: center; 
+            background: radial-gradient(circle at center, #111 0%, #050505 70%);
+            border-bottom: 1px solid var(--border);
         }
-        .btn:hover { background: #fff; transform: translateY(-3px); }
+        .hero-content { text-align: center; max-width: 800px; }
+        .hero-title-main { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px; }
+        .hero-desc { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; }
 
-        /* --- 2. The Trinity (Vision & Pillars) --- */
-        #vision { border-bottom: 1px solid var(--border); }
-        
-        .vision-card {
-            background: linear-gradient(180deg, #151515 0%, #0a0a0a 100%);
-            border: 1px solid var(--border); border-radius: 16px; padding: 50px; text-align: center;
+        /* --- 2. The Trinity (Intro) --- */
+        #intro { background: #080808; }
+        .vision-box {
+            background: linear-gradient(180deg, rgba(20,20,20,0.8) 0%, rgba(0,0,0,0) 100%);
+            border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center;
             margin-bottom: 60px;
         }
-        .vision-main-text { font-size: 1.2rem; color: #ddd; line-height: 1.8; }
         
-        /* 科学支柱卡片 */
-        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .pillar-card {
-            background: var(--surface); padding: 30px; border-radius: 12px; border: 1px solid var(--border);
+            background: var(--surface-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border);
             height: 100%; transition: 0.3s;
         }
         .pillar-card:hover { border-color: #555; background: var(--surface-hover); }
         
-        .pillar-icon { font-size: 2rem; margin-bottom: 20px; }
-        .pillar-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid #333; padding-bottom: 10px; display: inline-block; }
+        .pillar-head h4 { font-size: 1.3rem; margin-bottom: 5px; color: #fff; }
+        .pillar-head span { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .pillar-desc { font-size: 0.95rem; color: #999; margin: 15px 0 20px 0; min-height: 45px; }
         
-        .pillar-list { list-style: none; text-align: left; }
-        .pillar-list li { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #333; }
-        .pillar-list strong { display: block; color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
-        .pillar-list span { display: block; color: #888; font-size: 0.85rem; }
+        .pillar-item { margin-top: 15px; padding-left: 12px; border-left: 2px solid #333; }
+        .pillar-item strong { display: block; color: #ddd; font-size: 0.9rem; margin-bottom: 4px; }
+        .pillar-item span { display: block; color: #777; font-size: 0.85rem; line-height: 1.4; }
 
         /* --- 3. Six Layers (Grid) --- */
         .layers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        .layer-item {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-            padding: 25px; display: flex; gap: 20px; align-items: flex-start;
+        .layer-card {
+            background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 25px; display: flex; gap: 20px; transition: 0.3s;
         }
-        .layer-id {
-            background: #000; border: 1px solid #333; width: 50px; height: 50px;
+        .layer-card:hover { border-color: var(--accent-blue); background: var(--surface-hover); }
+        
+        .layer-badge {
+            width: 50px; height: 50px; flex-shrink: 0; background: #000; border: 1px solid #333; border-radius: 8px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-radius: 8px; flex-shrink: 0;
         }
-        .lid-num { font-family: var(--font-code); font-weight: 700; font-size: 1.2rem; color: #fff; }
-        .lid-tag { font-size: 0.6rem; text-transform: uppercase; color: #666; }
+        .lb-num { font-family: var(--font-code); font-weight: 700; color: #fff; font-size: 1.2rem; }
+        .lb-txt { font-size: 0.6rem; color: #666; text-transform: uppercase; }
         
-        .layer-info h3 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
-        .layer-goal { color: #888; font-size: 0.9rem; margin-bottom: 12px; display: block; font-style: italic; }
-        
-        .tags-row { display: flex; flex-wrap: wrap; gap: 8px; }
-        .tech-tag { 
-            font-size: 0.75rem; padding: 2px 8px; background: rgba(0, 210, 255, 0.1); 
-            color: var(--accent-blue); border-radius: 4px; font-family: var(--font-code); 
+        .layer-info h4 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+        .layer-goal { font-size: 0.9rem; color: #888; font-style: italic; margin-bottom: 12px; display: block; }
+        .layer-tags span {
+            font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; margin-right: 6px; display: inline-block; margin-bottom: 4px;
         }
-        .artifact-tag {
-            font-size: 0.75rem; padding: 2px 8px; background: rgba(0, 255, 157, 0.1); 
-            color: var(--accent-green); border-radius: 4px; font-weight: 600;
-        }
+        .t-tech { background: rgba(0, 210, 255, 0.1); color: var(--accent-blue); font-family: var(--font-code); }
+        .t-art { background: rgba(0, 255, 157, 0.1); color: var(--accent-green); border: 1px solid rgba(0, 255, 157, 0.2); }
 
         /* --- 4. Outcomes --- */
-        #outcomes { background: #080808; }
-        .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .outcome-box {
-            background: var(--surface); padding: 40px; border-radius: 12px; border: 1px solid var(--border);
+        #outcomes { background: #050505; }
+        .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .outcome-card {
+            background: var(--surface-card); padding: 35px; border-radius: 12px; border: 1px solid var(--border);
             position: relative; overflow: hidden;
         }
-        .outcome-box::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-        }
-        .b-blue::before { background: var(--accent-blue); }
-        .b-red::before { background: var(--accent-red); }
-        .b-purple::before { background: var(--accent-purple); }
-        .b-green::before { background: var(--accent-green); }
+        .outcome-bar { position: absolute; top: 0; left: 0; width: 100%; height: 4px; }
+        .outcome-card h3 { font-size: 1.3rem; color: #fff; margin: 15px 0 10px 0; }
+        .outcome-card p { color: var(--text-muted); font-size: 0.95rem; }
+        .outcome-icon { font-size: 2rem; margin-bottom: 10px; display: inline-block; }
 
-        .outcome-box h3 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; }
-        .outcome-box p { color: #aaa; font-size: 0.95rem; }
-
-        /* --- 5. Delivery Mode --- */
+        /* --- 5. Delivery (OMO) --- */
         #delivery { border-top: 1px solid var(--border); }
         .omo-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
         .omo-card {
-            border: 1px dashed #444; padding: 40px; border-radius: 16px; background: rgba(255,255,255,0.02);
+            border: 1px dashed #444; padding: 30px; border-radius: 16px; background: rgba(255,255,255,0.02);
         }
-        .omo-head { text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
-        .omo-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 25px; }
+        .omo-head { text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; display: block; margin-bottom: 10px; }
+        .omo-title { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
+        .omo-list li { margin-bottom: 12px; color: #aaa; font-size: 0.95rem; list-style: none; display: flex; gap: 10px; }
+        .omo-list i { margin-top: 4px; }
+        .omo-hl { color: #fff; font-weight: 700; }
+
+        /* --- 6. Case Study (Detailed) --- */
+        #case-study { background: #080808; border-top: 1px solid var(--border); }
+        .evolution-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 40px; }
+        .evo-card {
+            background: var(--surface-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border);
+            position: relative;
+        }
+        /* Arrows for PC */
+        .evo-card:not(:last-child)::after {
+            content: "➜"; position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+            color: #333; font-size: 1.5rem; font-weight: 900; z-index: 2;
+        }
         
-        .omo-detail { margin-bottom: 15px; display: flex; gap: 10px; color: #aaa; font-size: 0.95rem; }
-        .omo-detail i { margin-top: 4px; }
-        .omo-label { color: #fff; font-weight: bold; margin-right: 5px; }
-
-        /* Color Themes for OMO */
-        .theme-action { border-color: rgba(255, 85, 0, 0.5); }
-        .theme-action .omo-head, .theme-action i { color: #ff5500; }
+        .evo-phase { font-family: var(--font-code); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px; display: block; }
+        .evo-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .evo-desc { font-size: 0.9rem; color: #999; margin-bottom: 15px; min-height: 40px; }
         
-        .theme-cognitive { border-color: rgba(0, 210, 255, 0.5); }
-        .theme-cognitive .omo-head, .theme-cognitive i { color: var(--accent-blue); }
+        .data-display { background: #000; padding: 15px; border-radius: 6px; border-left: 3px solid #333; }
+        .data-label { font-size: 0.75rem; color: #666; display: block; text-transform: uppercase; }
+        .data-val { font-size: 1.4rem; font-weight: 700; color: #fff; font-family: var(--font-code); }
+        .data-change { font-size: 0.8rem; float: right; margin-top: 5px; }
 
-        /* --- Existing Sections (Case Study/Syllabus) Simplified --- */
-        .simple-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .simple-card { background: #111; padding: 20px; border: 1px solid #333; border-radius: 8px; }
+        /* --- 7. Syllabus (Detailed List) --- */
+        #syllabus { background: var(--surface-dark); border-top: 1px solid var(--border); }
+        .syllabus-list { max-width: 800px; margin: 0 auto; position: relative; }
+        /* Line */
+        .syllabus-list::before {
+            content: ''; position: absolute; left: 24px; top: 20px; bottom: 20px; width: 2px; background: #222;
+        }
+        
+        .session-item {
+            position: relative; margin-bottom: 30px; background: var(--surface-card);
+            border: 1px solid var(--border); border-radius: 12px; padding: 25px 25px 25px 70px;
+            transition: 0.3s;
+        }
+        .session-item:hover { border-color: var(--accent-blue); transform: translateX(5px); }
+        
+        .session-num {
+            position: absolute; left: -25px; top: 0; width: 50px; height: 50px;
+            background: #000; border: 2px solid #333; color: #666; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-family: var(--font-code); z-index: 2; margin-left: 25px; /* Adjusting for wrapper */
+        }
+        .session-item:hover .session-num { border-color: var(--accent-blue); color: var(--accent-blue); }
+        
+        .s-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block; font-weight: 700; }
+        .st-blue { background: rgba(0, 210, 255, 0.1); color: var(--accent-blue); }
+        .st-green { background: rgba(0, 255, 157, 0.1); color: var(--accent-green); }
+        .st-red { background: rgba(255, 0, 85, 0.1); color: var(--accent-red); }
+        .st-orange { background: rgba(255, 165, 0, 0.1); color: var(--accent-orange); }
+        
+        .s-title { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .s-desc { color: #999; font-size: 0.9rem; margin-bottom: 10px; }
+        .s-meta { border-top: 1px solid #222; padding-top: 10px; color: #666; font-size: 0.8rem; font-family: var(--font-code); }
 
-        /* --- Mobile Responsive --- */
+        /* --- 8. FAQ --- */
+        #faq { background: #050505; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .faq-card { background: var(--surface-card); border: 1px solid var(--border); padding: 30px; border-radius: 12px; }
+        .faq-q { color: #fff; font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .faq-q i { color: var(--accent-green); }
+        .faq-a { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- Mobile --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .pillars-grid, .layers-grid, .outcomes-grid, .omo-wrapper, .simple-grid {
+            .hero-title-main { font-size: 2.5rem; }
+            .pillars-grid, .layers-grid, .outcomes-grid, .omo-wrapper, .evolution-row, .faq-grid {
                 grid-template-columns: 1fr;
             }
-            .vision-card { padding: 25px; }
-            .pillar-card, .outcome-box, .omo-card { padding: 25px; }
+            .evolution-row { gap: 40px; }
+            .evo-card:not(:last-child)::after {
+                content: "↓"; right: 50%; top: auto; bottom: -35px; transform: translateX(50%);
+            }
+            .session-item { padding-left: 20px; padding-top: 60px; }
+            .session-num { top: 15px; left: 15px; width: 36px; height: 36px; font-size: 0.9rem; margin-left: 0; }
+            .syllabus-list::before { left: 32px; }
         }
-        
+
         /* 微信蒙层 */
         #wx-mask { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; text-align:right; padding:20px; }
     </style>
 </head>
 <body>
 
-    <!-- 微信分享图片占位 -->
-    <div style="display:none;"><img src="share-icon.png" alt=""></div>
+    <!-- 微信分享图片占位 (必须放在根目录) -->
+    <div style="display:none;"><img src="share-icon.png" alt="logo"></div>
     
     <!-- 微信引导蒙层 -->
     <div id="wx-mask" onclick="this.style.display='none'">
-        <div style="color:#fff; font-size:1.2rem; font-weight:bold;">点击右上角 ... 分享 <i class="ri-arrow-right-up-line"></i></div>
+        <div style="color:#fff; font-size:1.2rem; font-weight:bold; margin-top:20px; margin-right:20px;">
+            点击右上角 ... 分享 <i class="ri-arrow-right-up-line" style="font-size:1.5rem; color:#00ff9d;"></i>
+        </div>
     </div>
 
-    <!-- HERO SECTION -->
+    <!-- 1. HERO -->
     <section id="hero">
-        <div class="container">
-            <span class="tag-pill">Project Da Vinci</span>
-            <h1 class="hero-title">成为 AI 时代的<br><span class="highlight">躯体架构师</span></h1>
+        <div class="container hero-content">
+            <div class="tag-pill">Project Da Vinci</div>
+            <h1 class="hero-title-main">成为 AI 时代的<br><span class="highlight">躯体架构师</span></h1>
             <p class="hero-desc">
-                拒绝做题家。10周时间，驾驭 Python 与 CV 技术解码身体数据，
-                利用运动重塑大脑，构建属于你的 AI 外脑。
+                拒绝做题家。10周时间，驾驭 <strong>AI Coding</strong> 解码身体数据，
+                像架构师一样思考，构建属于你的 AI 外脑。
             </p>
-            <div style="margin-top: 30px;">
-                <a href="#vision" class="btn">探索课程理念</a>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#contact" class="btn">立即预约</a>
+                <a href="javascript:void(0)" onclick="document.getElementById('wx-mask').style.display='block'" class="btn btn-share">分享给朋友</a>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: THE TRINITY (愿景与科学) -->
-    <section id="vision" class="section-padding">
+    <!-- 2. THE TRINITY -->
+    <section id="intro" class="section-padding">
         <div class="container">
             <div class="section-header">
-                <span class="tag-pill">The Trinity</span>
+                <span class="tag-pill">Philosophy</span>
                 <h2 class="section-title">课程愿景与科学支柱</h2>
-                <p class="section-subtitle">打破“为了编程而编程”的旧模式，这是体育、AI工程学与认知科学的交叉学科。</p>
+                <p class="section-subtitle">体育 × AI 工程学 × 认知科学，打破“为了编程而编程”的旧模式。</p>
             </div>
 
-            <!-- Vision -->
-            <div class="vision-card">
-                <h3 style="color:#fff; margin-bottom:20px; font-size:1.5rem;">愿景：构建“AI 外脑”</h3>
-                <p class="vision-main-text">
-                    我们拒绝培养会被算法替代的“做题家”。本课程致力于培养未来的 
-                    <span class="highlight">Somatic Architects（躯体架构师）</span>。<br><br>
-                    通过将体育运动（身体）、计算机科学（技术）与脑科学（认知）深度融合，
-                    引导学生构建属于自己的“AI外脑”。学生将利用代码监控身体，利用运动重塑大脑，
-                    最终获得顶级的学习专注力、考试抗压能力和终身受益的健康体魄。
+            <div class="vision-box">
+                <h3 style="color:#fff; font-size:1.5rem; margin-bottom:15px;">愿景：构建“AI 外脑”</h3>
+                <p style="color:#aaa; font-size:1.05rem; line-height:1.8;">
+                    在AI时代，单纯的知识记忆将被算法替代。本课程致力于培养未来的 <span class="highlight">Somatic Architects (躯体架构师)</span>。
+                    引导学生利用代码监控身体，利用运动重塑大脑，最终获得顶级的学习专注力、考试抗压能力和终身受益的健康体魄。
                 </p>
             </div>
 
-            <!-- Scientific Pillars -->
             <div class="pillars-grid">
-                <!-- 1. 生物能学 -->
+                <!-- Pillar 1 -->
                 <div class="pillar-card">
-                    <i class="ri-pulse-line pillar-icon" style="color: var(--accent-green);"></i><br>
-                    <span class="pillar-title" style="border-color:var(--accent-green)">生物能学</span>
-                    <ul class="pillar-list">
-                        <li>
-                            <strong style="color:var(--accent-green)">有氧系统 = 专注底座</strong>
-                            <span>消除“脑雾”，支持2小时+深度阅读与思考。</span>
-                        </li>
-                        <li>
-                            <strong style="color:var(--accent-red)">糖酵解 = 抗压防火墙</strong>
-                            <span>基于ANLS理论，训练大脑在高压（乳酸堆积）下保持冷静逻辑。</span>
-                        </li>
-                        <li>
-                            <strong style="color:var(--accent-blue)">ATP-CP = 神经火花</strong>
-                            <span>提升神经突触传递速度，增强审题直觉与灵感。</span>
-                        </li>
-                    </ul>
+                    <div class="pillar-head">
+                        <h4>生物能学</h4>
+                        <span>Bioenergetics</span>
+                    </div>
+                    <p class="pillar-desc">身体供能与大脑状态的深度映射。</p>
+                    <div class="pillar-item">
+                        <strong style="color:var(--accent-green)">有氧系统 = 专注底座</strong>
+                        <span>消除“脑雾”，支持2小时+深度思考。</span>
+                    </div>
+                    <div class="pillar-item">
+                        <strong style="color:var(--accent-red)">糖酵解 = 抗压防火墙</strong>
+                        <span>基于ANLS理论，训练大脑在高压（乳酸堆积）下保持逻辑。</span>
+                    </div>
+                    <div class="pillar-item">
+                        <strong style="color:var(--accent-blue)">ATP-CP = 神经火花</strong>
+                        <span>提升神经突触传递速度，增强审题直觉。</span>
+                    </div>
                 </div>
 
-                <!-- 2. 控制论 -->
+                <!-- Pillar 2 -->
                 <div class="pillar-card">
-                    <i class="ri-cpu-line pillar-icon" style="color: var(--accent-blue);"></i><br>
-                    <span class="pillar-title" style="border-color:var(--accent-blue)">控制论与外脑</span>
-                    <ul class="pillar-list">
-                        <li>
-                            <strong>客观观察者</strong>
-                            <span>消除主观偏差（“我觉得不累” vs “数据表明已力竭”）。</span>
-                        </li>
-                        <li>
-                            <strong>闭环进化</strong>
-                            <span class="text-code">感知(Sense) -> 分析(Analyze) -> 调整(Adjust)</span>
-                        </li>
-                    </ul>
+                    <div class="pillar-head">
+                        <h4>控制论与外脑</h4>
+                        <span>Cybernetics</span>
+                    </div>
+                    <p class="pillar-desc">构建客观的数字观察者，消除主观偏差。</p>
+                    <div class="pillar-item">
+                        <strong>客观数据</strong>
+                        <span>解决“我觉得不累” vs “数据表明已力竭”的感知偏差。</span>
+                    </div>
+                    <div class="pillar-item">
+                        <strong>闭环进化</strong>
+                        <span class="code-font">感知(Sense) -> 分析(Analyze) -> 调整(Adjust)</span>
+                    </div>
                 </div>
 
-                <!-- 3. 主权 -->
+                <!-- Pillar 3 -->
                 <div class="pillar-card">
-                    <i class="ri-flag-line pillar-icon" style="color: var(--accent-purple);"></i><br>
-                    <span class="pillar-title" style="border-color:var(--accent-purple)">敏捷交付与主权</span>
-                    <ul class="pillar-list">
-                        <li>
-                            <strong>创造者思维</strong>
-                            <span>赋予高中生成人级的技术能力，从技术的消费者转变为创造者。</span>
-                        </li>
-                        <li>
-                            <strong>身心主权</strong>
-                            <span>实现对身体状态和精神状态的绝对掌控。</span>
-                        </li>
-                    </ul>
+                    <div class="pillar-head">
+                        <h4>主权与创造者</h4>
+                        <span>Sovereignty</span>
+                    </div>
+                    <p class="pillar-desc">从被动消费者转变为主动创造者。</p>
+                    <div class="pillar-item">
+                        <strong style="color:var(--accent-purple)">技术赋权</strong>
+                        <span>赋予高中生成人级的技术能力。</span>
+                    </div>
+                    <div class="pillar-item">
+                        <strong>身心主权</strong>
+                        <span>实现对身体状态和精神状态的绝对掌控。</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: 6 LAYERS (功能层) -->
-    <section id="layers" class="section-padding" style="background: #0a0a0a;">
+    <!-- 3. SIX LAYERS -->
+    <section id="layers" class="section-padding" style="background:#0a0a0a;">
         <div class="container">
             <div class="section-header">
                 <span class="tag-pill">Architecture</span>
@@ -302,86 +363,74 @@
 
             <div class="layers-grid">
                 <!-- L1 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L1</span><span class="lid-tag">感知</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L1</span><span class="lb-txt">感知</span></div>
                     <div class="layer-info">
-                        <h3>数字之眼 (Digital Eye)</h3>
+                        <h4>数字之眼 (Digital Eye)</h4>
                         <span class="layer-goal">让电脑“看见”并量化人体，坐标归一化。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">OpenCV</span>
-                            <span class="tech-tag">MediaPipe</span>
-                            <span class="artifact-tag">产出：数字骨骼脚本</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">OpenCV</span> <span class="t-tech">MediaPipe</span>
+                            <span class="t-art">产出: 数字骨骼脚本</span>
                         </div>
                     </div>
                 </div>
-
                 <!-- L2 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L2</span><span class="lid-tag">逻辑</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L2</span><span class="lb-txt">逻辑</span></div>
                     <div class="layer-info">
-                        <h3>AI 教练 (Logic Core)</h3>
-                        <span class="layer-goal">像工程师一样定义动作标准，规则算法化。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">Logic Control</span>
-                            <span class="tech-tag">State Machine</span>
-                            <span class="artifact-tag">产出：自动纠错器</span>
+                        <h4>AI 教练 (Logic Core)</h4>
+                        <span class="layer-goal">将模糊的感觉转化为精确规则 (If-Else)。</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">Python Logic</span> <span class="t-tech">State Machine</span>
+                            <span class="t-art">产出: 自动纠错器</span>
                         </div>
                     </div>
                 </div>
-
                 <!-- L3 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L3</span><span class="lid-tag">专注</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L3</span><span class="lb-txt">专注</span></div>
                     <div class="layer-info">
-                        <h3>耐力引擎 (Endurance)</h3>
+                        <h4>耐力引擎 (Endurance)</h4>
                         <span class="layer-goal">量化“专注力续航”，构建有氧基座。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">Data Analysis</span>
-                            <span class="artifact-tag">产出：专注力续航报告</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">Pandas</span> <span class="t-tech">Data Analysis</span>
+                            <span class="t-art">产出: 专注力报告</span>
                         </div>
                     </div>
                 </div>
-
                 <!-- L4 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L4</span><span class="lid-tag">抗压</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L4</span><span class="lb-txt">抗压</span></div>
                     <div class="layer-info">
-                        <h3>抗压防火墙 (Resilience)</h3>
-                        <span class="layer-goal">预测力竭点，在高压下保持冷静。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">LSTM</span>
-                            <span class="tech-tag">Regression</span>
-                            <span class="artifact-tag">产出：疲劳预警算法</span>
+                        <h4>抗压防火墙 (Resilience)</h4>
+                        <span class="layer-goal">预测力竭点，训练高压下的冷静决策。</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">LSTM</span> <span class="t-tech">Regression</span>
+                            <span class="t-art">产出: 疲劳预警算法</span>
                         </div>
                     </div>
                 </div>
-
                 <!-- L5 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L5</span><span class="lid-tag">爆发</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L5</span><span class="lb-txt">爆发</span></div>
                     <div class="layer-info">
-                        <h3>神经火花 (Spark)</h3>
-                        <span class="layer-goal">计算瞬间速度与加速度，提升神经敏捷度。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">Physics</span>
-                            <span class="tech-tag">Smoothing</span>
-                            <span class="artifact-tag">产出：爆发力可视化工具</span>
+                        <h4>神经火花 (Spark)</h4>
+                        <span class="layer-goal">计算瞬间速度，提升神经敏捷度。</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">Physics</span> <span class="t-tech">Smoothing</span>
+                            <span class="t-art">产出: 爆发力可视化</span>
                         </div>
                     </div>
                 </div>
-
                 <!-- L6 -->
-                <div class="layer-item">
-                    <div class="layer-id"><span class="lid-num">L6</span><span class="lid-tag">集成</span></div>
+                <div class="layer-card">
+                    <div class="layer-badge"><span class="lb-num">L6</span><span class="lb-txt">集成</span></div>
                     <div class="layer-info">
-                        <h3>系统发布 (Release)</h3>
+                        <h4>系统发布 (Release)</h4>
                         <span class="layer-goal">构建个人数字资产，实现外脑交互。</span>
-                        <div class="tags-row">
-                            <span class="tech-tag">Streamlit</span>
-                            <span class="tech-tag">LLM API</span>
-                            <span class="artifact-tag">产出：个人AI助教 App</span>
+                        <div class="layer-tags">
+                            <span class="t-tech">Streamlit</span> <span class="t-tech">LLM API</span>
+                            <span class="t-art">产出: 个人AI助教 App</span>
                         </div>
                     </div>
                 </div>
@@ -389,137 +438,276 @@
         </div>
     </section>
 
-    <!-- SECTION: OUTCOMES (核心收益) -->
+    <!-- 4. KEY OUTCOMES -->
     <section id="outcomes" class="section-padding">
         <div class="container">
             <div class="section-header">
                 <span class="tag-pill">Value Proposition</span>
                 <h2 class="section-title">核心收益</h2>
-                <p class="section-subtitle">不仅是技能的堆叠，更是竞争力的维度升级。</p>
             </div>
-
             <div class="outcomes-grid">
-                <div class="outcome-box b-blue">
+                <div class="outcome-card">
+                    <div class="outcome-bar" style="background:var(--accent-blue)"></div>
+                    <i class="ri-terminal-box-line outcome-icon" style="color:var(--accent-blue)"></i>
                     <h3>硬核科技技能</h3>
-                    <p>掌握 Python 编程语言、计算机视觉（CV）原理、大模型（LLM）调用与应用开发能力。不再是“调包侠”，而是理解底层原理的开发者。</p>
+                    <p>掌握 Python、计算机视觉 (CV)、大模型 (LLM) 应用开发。不再是“调包侠”，而是理解底层原理的开发者。</p>
                 </div>
-                <div class="outcome-box b-red">
+                <div class="outcome-card">
+                    <div class="outcome-bar" style="background:var(--accent-red)"></div>
+                    <i class="ri-heart-pulse-line outcome-icon" style="color:var(--accent-red)"></i>
                     <h3>强健体魄与表现</h3>
-                    <p>建立科学的运动习惯，针对性提升心肺耐力（学习底座）和爆发力。让身体成为支撑高强度脑力劳动的最强容器。</p>
+                    <p>针对性提升心肺耐力（学习底座）和爆发力。让身体成为支撑高强度脑力劳动的最强容器。</p>
                 </div>
-                <div class="outcome-box b-purple">
+                <div class="outcome-card">
+                    <div class="outcome-bar" style="background:var(--accent-purple)"></div>
+                    <i class="ri-trophy-line outcome-icon" style="color:var(--accent-purple)"></i>
                     <h3>升学背景提升</h3>
-                    <p>拥有一套自己独立开发的 AI 运动分析软件（含代码库 + 可运行Web App），这是申请国内外名校理工科专业时极具差异化竞争力的作品集。</p>
+                    <p>拥有一套自己独立开发的 AI 运动分析软件（含 GitHub 代码库 + 可运行 Web App）。这是理工科申请的强力作品集。</p>
                 </div>
-                <div class="outcome-box b-green">
+                <div class="outcome-card">
+                    <div class="outcome-bar" style="background:var(--accent-green)"></div>
+                    <i class="ri-mind-map outcome-icon" style="color:var(--accent-green)"></i>
                     <h3>元认知与自我管理</h3>
-                    <p>学会跳出主观感觉，用客观数据监控自己的状态。这种“自我管理能力”是伴随终身的财富。</p>
+                    <p>跳出主观感觉，用客观数据监控状态。这种“基于数据的自我管理能力”是伴随终身的财富。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: DELIVERY (OMO 模式) -->
-    <section id="delivery" class="section-padding">
+    <!-- 5. DELIVERY MODE -->
+    <section id="delivery" class="section-padding" style="background:#0a0a0a;">
         <div class="container">
             <div class="section-header">
                 <span class="tag-pill">Delivery Mode</span>
                 <h2 class="section-title">OMO 双循环模式</h2>
                 <p class="section-subtitle">解决“学”与“练”的分离，让学习高效且有趣。</p>
             </div>
-
             <div class="omo-wrapper">
-                <!-- Action Loop -->
-                <div class="omo-card theme-action">
-                    <span class="omo-head">Step 01 - The Action Loop</span>
+                <div class="omo-card" style="border-color: rgba(255, 85, 0, 0.5);">
+                    <span class="omo-head" style="color:#ff5500;">Step 01 - The Action Loop</span>
                     <h3 class="omo-title">线下行动环</h3>
-                    <div class="omo-detail">
-                        <i class="ri-map-pin-line"></i>
-                        <span><span class="omo-label">地点：</span>家中客厅、社区球场、健身房。</span>
-                    </div>
-                    <div class="omo-detail">
-                        <i class="ri-user-3-line"></i>
-                        <span><span class="omo-label">角色：</span>学生（运动员）、家长（数据官/摄影师）。</span>
-                    </div>
-                    <div class="omo-detail">
-                        <i class="ri-camera-lens-line"></i>
-                        <span><span class="omo-label">任务：</span>进行真实的体育锻炼，拍摄高帧率视频，采集真实数据。</span>
-                    </div>
+                    <ul class="omo-list">
+                        <li><i class="ri-map-pin-line" style="color:#ff5500;"></i> <span class="omo-hl">地点：</span>家中客厅、社区球场、健身房。</li>
+                        <li><i class="ri-user-3-line" style="color:#ff5500;"></i> <span class="omo-hl">角色：</span>学生（运动员）、家长（数据官）。</li>
+                        <li><i class="ri-camera-lens-line" style="color:#ff5500;"></i> <span class="omo-hl">任务：</span>真实体育锻炼，拍摄高帧率视频，采集数据。</li>
+                    </ul>
                 </div>
-
-                <!-- Cognitive Loop -->
-                <div class="omo-card theme-cognitive">
-                    <span class="omo-head">Step 02 - The Cognitive Loop</span>
+                <div class="omo-card" style="border-color: rgba(0, 210, 255, 0.5);">
+                    <span class="omo-head" style="color:var(--accent-blue);">Step 02 - The Cognitive Loop</span>
                     <h3 class="omo-title">线上认知环</h3>
-                    <div class="omo-detail">
-                        <i class="ri-computer-line"></i>
-                        <span><span class="omo-label">地点：</span>腾讯会议（结对编程模式）。</span>
-                    </div>
-                    <div class="omo-detail">
-                        <i class="ri-user-settings-line"></i>
-                        <span><span class="omo-label">角色：</span>学生（Coder）、导师（导航员）。</span>
-                    </div>
-                    <div class="omo-detail">
-                        <i class="ri-code-box-line"></i>
-                        <span><span class="omo-label">任务：</span>在导师引导下编写代码分析视频。体验看着代码跑出自己运动的数据，实现“身心映射”。</span>
-                    </div>
+                    <ul class="omo-list">
+                        <li><i class="ri-computer-line" style="color:var(--accent-blue);"></i> <span class="omo-hl">地点：</span>腾讯会议（结对编程）。</li>
+                        <li><i class="ri-user-settings-line" style="color:var(--accent-blue);"></i> <span class="omo-hl">角色：</span>学生（架构师）、导师（导航员）。</li>
+                        <li><i class="ri-code-s-slash-line" style="color:var(--accent-blue);"></i> <span class="omo-hl">任务：</span>编写代码分析视频。看着代码跑出自己的运动数据，实现“身心映射”。</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION: CASE STUDY (简化版) -->
-    <section class="section-padding" style="border-top:1px solid #333;">
+    <!-- 6. CASE STUDY (Detailed) -->
+    <section id="case-study" class="section-padding">
         <div class="container">
             <div class="section-header">
                 <span class="tag-pill">Case Study</span>
                 <h2 class="section-title">Alex 的进化档案</h2>
+                <p class="section-subtitle">14岁壁球少年，如何指挥AI解决“启动慢”难题。</p>
             </div>
-            <div class="simple-grid">
-                <div class="simple-card">
-                    <h4 style="color:#fff;">1. 发现问题</h4>
-                    <p style="color:#aaa; font-size:0.9rem;">主观觉得快，数据测出反应时 0.65s (慢)。</p>
+            
+            <div class="evolution-row">
+                <!-- Phase 1 -->
+                <div class="evo-card">
+                    <span class="evo-phase">PHASE 1: 发现问题</span>
+                    <h4 class="evo-title">“感觉”不可靠</h4>
+                    <p class="evo-desc">Alex 觉得自己跑得很快，但教练总说他启动慢。主观感觉欺骗了他。</p>
+                    <div class="data-display" style="border-color:#666;">
+                        <span class="data-label">启动反应时 (Before)</span>
+                        <div class="data-val" style="color:#888;">0.65s</div>
+                        <span class="data-change">凭感觉</span>
+                    </div>
                 </div>
-                <div class="simple-card">
-                    <h4 style="color:var(--accent-blue);">2. AI 介入</h4>
-                    <p style="color:#aaa; font-size:0.9rem;">编写 Python 脚本，用红线标记爆发瞬间。</p>
+
+                <!-- Phase 2 -->
+                <div class="evo-card">
+                    <span class="evo-phase" style="color:var(--accent-blue)">PHASE 2: AI 介入</span>
+                    <h4 class="evo-title">指挥 AI 生成工具</h4>
+                    <p class="evo-desc">Alex 指挥 AI 编写了脚本：当脚踝速度 > 0.05 时，让骨骼线<span style="color:var(--accent-red)">变红</span>。</p>
+                    <div class="data-display" style="border-color:var(--accent-blue);">
+                        <span class="data-label">开发成果</span>
+                        <div class="data-val" style="color:var(--accent-blue); font-size:1.1rem;">Neural_Spark.py</div>
+                        <span class="data-change">可视化反馈</span>
+                    </div>
                 </div>
-                <div class="simple-card">
-                    <h4 style="color:var(--accent-green);">3. 结果验证</h4>
-                    <p style="color:#aaa; font-size:0.9rem;">反应时提升至 0.32s，提升 50%。</p>
+
+                <!-- Phase 3 -->
+                <div class="evo-card">
+                    <span class="evo-phase" style="color:var(--accent-green)">PHASE 3: 进化结果</span>
+                    <h4 class="evo-title">数据驱动身体</h4>
+                    <p class="evo-desc">通过观看回放中的红线时机，修正发力模式，10周后数据验证成果。</p>
+                    <div class="data-display" style="border-color:var(--accent-green);">
+                        <span class="data-label">启动反应时 (After)</span>
+                        <div class="data-val" style="color:var(--accent-green);">0.32s</div>
+                        <span class="data-change" style="color:var(--accent-green);">▲ 提升 50%</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- 7. SYLLABUS (Detailed 10-Steps) -->
+    <section id="syllabus" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag-pill">The Roadmap</span>
+                <h2 class="section-title">10 课时冲刺地图</h2>
+                <p class="section-subtitle">从环境配置到产品发布，学会让AI为你工作。</p>
+            </div>
+
+            <div class="syllabus-list">
+                <!-- 01 -->
+                <div class="session-item">
+                    <div class="session-num">01</div>
+                    <span class="s-tag st-blue">L1 感知层</span>
+                    <h4 class="s-title">数字自我：指挥 AI 识别骨骼</h4>
+                    <p class="s-desc">学习 Prompt 技巧，指挥 AI 调用 MediaPipe 库，在视频中画出全身 33 个骨骼关键点，第一次看到“数字化的自己”。</p>
+                    <div class="s-meta">涉及: AI Vision, MediaPipe</div>
+                </div>
+                <!-- 02 -->
+                <div class="session-item">
+                    <div class="session-num">02</div>
+                    <span class="s-tag st-green">L2 逻辑层</span>
+                    <h4 class="s-title">几何裁判：构建判定逻辑</h4>
+                    <p class="s-desc">利用 AI 生成数学计算代码（勾股定理）。设计逻辑规则：若击球后 3 秒未回 T 点，自动判定为失误。</p>
+                    <div class="s-meta">涉及: Logic Design, Geometry</div>
+                </div>
+                <!-- 03 -->
+                <div class="session-item">
+                    <div class="session-num">03</div>
+                    <span class="s-tag st-red">L5 爆发层</span>
+                    <h4 class="s-title">物理引擎：AI 代码实现公式</h4>
+                    <p class="s-desc">让 AI 将物理公式 v=Δd/Δt 转化为 Python 函数，计算脚踝的瞬时速度。</p>
+                    <div class="s-meta">涉及: Physics to Code</div>
+                </div>
+                <!-- 04 -->
+                <div class="session-item">
+                    <div class="session-num">04</div>
+                    <span class="s-tag st-red">L5 爆发层</span>
+                    <h4 class="s-title">神经火花：数据可视化</h4>
+                    <p class="s-desc">设定“爆发阈值”。引导 AI 编写渲染逻辑：当速度超过临界点时，将屏幕骨骼渲染为红色特效。</p>
+                    <div class="s-meta">涉及: Data Viz, Thresholds</div>
+                </div>
+                <!-- 05 -->
+                <div class="session-item">
+                    <div class="session-num">05</div>
+                    <span class="s-tag st-blue">L5 进阶</span>
+                    <h4 class="s-title">算法优化：AI 降噪处理</h4>
+                    <p class="s-desc">发现数据抖动。询问 AI 解决方案，引入平滑滤波算法 (Smoothing Algorithm) 去除噪点，绘制完美曲线。</p>
+                    <div class="s-meta">涉及: Algorithms, Optimization</div>
+                </div>
+                <!-- 06 -->
+                <div class="session-item">
+                    <div class="session-num">06</div>
+                    <span class="s-tag st-orange">L3 耐力层</span>
+                    <h4 class="s-title">耐力侦探：数据采集实战</h4>
+                    <p class="s-desc">进行 20 分钟连续 Ghosting 训练。采集长时间运动下的骨骼数据，体验有氧系统的极限。</p>
+                    <div class="s-meta">涉及: Data Mining, Endurance</div>
+                </div>
+                <!-- 07 -->
+                <div class="session-item">
+                    <div class="session-num">07</div>
+                    <span class="s-tag st-orange">L3 耐力层</span>
+                    <h4 class="s-title">疲劳算法：量化专注力</h4>
+                    <p class="s-desc">让 AI 分析第 1 分钟与第 19 分钟的动作方差。用数据证明“大脑何时开始走神”。</p>
+                    <div class="s-meta">涉及: Statistics, Data Analysis</div>
+                </div>
+                <!-- 08 -->
+                <div class="session-item">
+                    <div class="session-num">08</div>
+                    <span class="s-tag st-blue">L6 集成层</span>
+                    <h4 class="s-title">产品构建：Web App 雏形</h4>
+                    <p class="s-desc">借助 AI 快速搭建 Streamlit 框架。将零散的脚本整合为一个有按钮、有视频框的完整网页应用。</p>
+                    <div class="s-meta">涉及: Streamlit, Web Dev</div>
+                </div>
+                <!-- 09 -->
+                <div class="session-item">
+                    <div class="session-num">09</div>
+                    <span class="s-tag st-blue">L6 集成层</span>
+                    <h4 class="s-title">注入灵魂：接入大模型</h4>
+                    <p class="s-desc">接入 LLM API。让你的 App 能读取疲劳数据，并自动生成文字版的战术改进建议。</p>
+                    <div class="s-meta">涉及: LLM Integration, API</div>
+                </div>
+                <!-- 10 -->
+                <div class="session-item">
+                    <div class="session-num">10</div>
+                    <span class="s-tag st-green">L6 交付层</span>
+                    <h4 class="s-title">终极路演：发布智能作品</h4>
+                    <p class="s-desc">向父母和朋友演示你的 AI App。展示你如何利用技术解决现实世界的运动难题。</p>
+                    <div class="s-meta">涉及: Presentation, Demo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FAQ (Detailed) -->
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag-pill">Q & A</span>
+                <h2 class="section-title">常见问题解答</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <div class="faq-q"><i class="ri-question-line"></i> 孩子没有编程基础可以学吗？</div>
+                    <div class="faq-a">
+                        <strong>完全可以。</strong> 这是一个面向 AI 时代的课程。我们不要求孩子死记硬背语法，而是教他们如何通过 <strong>自然语言</strong> 指挥 AI 写代码。只要逻辑清晰，零基础也能做出复杂的应用。
+                    </div>
+                </div>
+                <div class="faq-card">
+                    <div class="faq-q"><i class="ri-computer-line"></i> 需要准备什么硬件设备？</div>
+                    <div class="faq-a">
+                        1. 一台笔记本电脑（用于运行 AI 代码）。<br>
+                        2. 一部智能手机（用于拍摄高帧率运动视频）。<br>
+                        3. 一个稳固的三脚架（用于固定拍摄角度）。
+                    </div>
+                </div>
+                <div class="faq-card">
+                    <div class="faq-q"><i class="ri-book-open-line"></i> 这对校内学习有什么帮助？</div>
+                    <div class="faq-a">
+                        有直接帮助。有氧训练能显著提升长篇阅读的专注力续航；抗压训练能解决考试最后15分钟的心慌问题；编程过程将抽象的数学、物理知识具象化，让孩子真正理解公式的用途。
+                    </div>
+                </div>
+                <div class="faq-card">
+                    <div class="faq-q"><i class="ri-code-box-line"></i> 这和普通的 Python 课有什么区别？</div>
+                    <div class="faq-a">
+                        普通 Python 课教你写 <code>print("Hello World")</code>。我们教你<strong>构建 AI 工具</strong>来分析真实世界的运动数据。一个是学习计算机语言，一个是利用计算机能力解决问题。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
     <section id="contact" class="section-padding" style="background:#000; border-top:1px solid #333;">
-        <div class="container text-center">
+        <div class="container" style="text-align:center;">
             <h2 class="section-title">立即预约评估</h2>
-            <p style="color:#888; margin-bottom:40px;">首期仅开放 10 个席位</p>
+            <p style="color:#888; margin-bottom:40px;">首期仅开放 10 个席位，额满即止。</p>
             
-            <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
-                <div style="width:200px; background:#111; padding:15px; border-radius:10px; border:1px solid #333;">
-                    <img src="pic1.png" style="width:100%; border-radius:5px; margin-bottom:10px;">
-                    <div style="color:#fff; font-weight:bold;">课程咨询</div>
+            <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:40px;">
+                <div style="width:220px; background:#111; padding:20px; border-radius:12px; border:1px solid #333;">
+                    <img src="pic1.png" style="width:100%; border-radius:8px; margin-bottom:15px; display:block;" alt="QR1">
+                    <div style="color:#fff; font-weight:bold; margin-bottom:5px;">课程咨询</div>
+                    <div style="color:#666; font-size:0.8rem;">添加导师微信</div>
                 </div>
-                <div style="width:200px; background:#111; padding:15px; border-radius:10px; border:1px solid #333;">
-                    <img src="pic2.png" style="width:100%; border-radius:5px; margin-bottom:10px;">
-                    <div style="color:#fff; font-weight:bold;">官方频道</div>
+                <div style="width:220px; background:#111; padding:20px; border-radius:12px; border:1px solid #333;">
+                    <img src="pic2.png" style="width:100%; border-radius:8px; margin-bottom:15px; display:block;" alt="QR2">
+                    <div style="color:#fff; font-weight:bold; margin-bottom:5px;">官方频道</div>
+                    <div style="color:#666; font-size:0.8rem;">获取更多案例</div>
                 </div>
             </div>
             
-            <div style="margin-top:40px;">
-                <button class="btn" style="background:var(--accent-blue);" onclick="document.getElementById('wx-mask').style.display='block'">分享给朋友</button>
-            </div>
+            <p style="color:#555; font-size:0.9rem;">&copy; 2026 Project Da Vinci. All Rights Reserved.</p>
         </div>
     </section>
-
-    <footer>
-        <div class="container" style="text-align:center; padding:40px 0; color:#555;">
-            &copy; 2026 Project Da Vinci. All Rights Reserved.
-        </div>
-    </footer>
 
 </body>
 </html>
