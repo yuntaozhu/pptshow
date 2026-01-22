@@ -3,770 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homeiliving - Agent驱动的家居创新平台</title>
-
-    <!-- Reveal.js Core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
-    <!-- A clean, professional theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css" id="theme">
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Google Fonts for typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Project Da Vinci | 达芬奇计划 - 少年AI运动进化</title>
+    <meta name="description" content="用Python重塑青少年的运动表现与逻辑思维">
+    
+    <!-- 字体库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Lottie 动画库 (用于加载卡通动态) -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
     <style>
-        /* Custom Styles to match your requested aesthetic */
         :root {
-            --r-main-font: 'Noto Sans SC', sans-serif;
-            --r-heading-font: 'Noto Sans SC', sans-serif;
-            --r-main-font-size: 36px; /* Globally reduced font size */
-            --r-heading-font-weight: 900;
-            --r-main-color: #333;
-            --r-heading-color: #111;
-            --r-link-color: #E31937;
-            --highlight-red: #E31937;
+            /* 核心色板 */
+            --bg-color: #050505;
+            --surface-dark: #0a0a0a;
+            --surface-card: rgba(20, 20, 20, 0.7);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            
+            /* 能量色系 */
+            --accent-green: #00ff9d; /* 逻辑/耐力/通过 */
+            --accent-red: #ff0055;   /* 爆发/抗压/警告 */
+            --accent-blue: #00d2ff;  /* 科技/感知/数据 */
+            --accent-purple: #bd00ff; /* 神秘/未来 */
+            
+            --font-main: 'Exo 2', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            
+            --container-width: 1200px;
+            --section-spacing: 100px;
         }
 
-        .reveal .slides section {
-            text-align: left;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .reveal h1, .reveal h2, .reveal h3 {
+        /* --- 1. 沉浸式背景特效 --- */
+        .cyber-grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background: 
+                linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2);
+            animation: gridMove 15s linear infinite;
+            pointer-events: none;
+        }
+        
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 80%);
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 60px; }
+        }
+
+        /* --- UI 组件 --- */
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        
+        .text-center { text-align: center; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 20%, #777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.15);
+        }
+
+        .highlight-green { color: var(--accent-green); text-shadow: 0 0 10px rgba(0,255,157,0.4); }
+        .highlight-blue { color: var(--accent-blue); }
+        .highlight-red { color: var(--accent-red); }
+
+        .section-padding { padding: var(--section-spacing) 0; }
+        
+        .section-tag {
+            display: inline-block; padding: 6px 16px; 
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green); 
+            background: rgba(0, 255, 157, 0.05);
+            border-radius: 100px; font-size: 0.75rem; font-weight: 700;
+            margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+        
+        .section-title { 
+            font-size: 3rem; font-weight: 900; text-transform: uppercase; 
+            margin-bottom: 16px; line-height: 1.1; letter-spacing: -1px;
+        }
+        
+        .section-subtitle { 
+            color: var(--text-secondary); font-size: 1.1rem; 
+            max-width: 600px; margin: 0 auto; line-height: 1.8;
+        }
+
+        /* 霓虹按钮 */
+        .btn {
+            padding: 18px 45px; 
+            background: var(--accent-green); 
+            color: #000; 
+            font-weight: 800;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 1px; 
+            border-radius: 4px;
+            display: inline-block; 
+            position: relative; overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.4);
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+            transform: skewX(-20deg);
+        }
+        .btn:hover::before { left: 150%; }
+        .btn:hover { transform: translateY(-4px); box-shadow: 0 0 50px rgba(0, 255, 157, 0.6); background: #fff; }
+
+        .btn.outline { 
+            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3); color: #fff; box-shadow: none; 
+        }
+        .btn.outline:hover { border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh; display: flex; align-items: center; position: relative;
+            padding-top: 60px;
+        }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; gap: 40px; }
+        .hero-title-main { font-size: 4.8rem; line-height: 0.95; font-weight: 900; margin-bottom: 24px; }
+        .hero-desc { font-size: 1.2rem; color: #ccc; margin-bottom: 40px; max-width: 90%; }
+        
+        .hero-visual { 
+            height: 500px; display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        /* 浮动动画 */
+        .hero-anim-wrapper {
+            width: 120%; height: 120%;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(0, 210, 255, 0.15));
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- Paradox Cards --- */
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .problem-card {
+            background: var(--surface-card); backdrop-filter: blur(10px);
+            padding: 40px 30px; border-radius: 16px; border: 1px solid #222; 
+            transition: 0.4s; position: relative; overflow: hidden;
             text-align: center;
-            font-weight: 900;
+        }
+        .problem-card:hover { transform: translateY(-10px); border-color: #444; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        .lottie-icon { width: 150px; height: 150px; margin: 0 auto; }
+        
+        /* --- Case Study --- */
+        #case-study { background: linear-gradient(180deg, #050505 0%, #0e0e0e 100%); border-top: 1px solid #222; }
+        .evo-step {
+            background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px;
+            border: 1px solid #222; position: relative; transition: 0.3s;
+        }
+        .evo-step:hover { background: rgba(255,255,255,0.05); transform: translateY(-5px); border-color: #444; }
+        
+        .evolution-container { 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 50px;
+        }
+        /* 箭头 */
+        .evo-step:not(:last-child)::after {
+            content: "➜"; position: absolute; right: -25px; top: 50%; transform: translateY(-50%);
+            color: #333; font-size: 1.5rem; font-weight: 900; z-index: 2;
         }
 
-        .reveal .highlight {
-            color: var(--highlight-red);
-            font-weight: bold;
+        .data-display {
+            font-family: var(--font-code); background: #000; padding: 15px; 
+            border-radius: 6px; margin-top: 15px; border-left: 2px solid #333;
         }
 
-        .reveal .highlight-bg {
-            background-color: rgba(227, 25, 55, 0.1);
+        /* --- Syllabus Timeline --- */
+        #syllabus { background: var(--surface-dark); }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-line {
+            position: absolute; left: 30px; top: 0; bottom: 0; width: 2px; 
+            background: #222;
+        }
+        .timeline-progress {
+            position: absolute; left: 30px; top: 0; width: 2px; height: 0%;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-green));
+            box-shadow: 0 0 10px var(--accent-green);
+            transition: height 1s linear;
+        }
+        
+        .session-item {
+            position: relative; margin-bottom: 40px; padding-left: 80px;
+        }
+        .session-marker {
+            position: absolute; left: 9px; top: 0; width: 44px; height: 44px;
+            background: #000; border: 2px solid #333; color: #666;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-family: var(--font-code); z-index: 2; transition: 0.3s;
+        }
+        .session-item:hover .session-marker { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 15px rgba(0,255,157,0.4); transform: scale(1.1); }
+        
+        /* --- Contact QR Section (New) --- */
+        #contact {
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #222;
+        }
+        /* 扫描线背景 */
+        #contact::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 255, 157, 0.03) 2px, rgba(0, 255, 157, 0.03) 3px);
+            pointer-events: none;
         }
 
-        .reveal .large-number {
-            font-size: 3.5em;
-            font-weight: 900;
-            color: var(--highlight-red);
-        }
-
-        .reveal .mega-number {
-            font-size: clamp(7em, 22vw, 13em); /* Slightly smaller */
-            font-weight: 900;
-            line-height: 1;
-            color: var(--highlight-red);
-        }
-
-        .reveal .text-center {
+        .contact-wrapper {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
+            position: relative;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
         }
 
-        .columns {
+        .qr-grid {
             display: flex;
-            gap: 20px;
-            width: 100%;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
         }
-        .column {
-            flex: 1;
-        }
-        .column.is-two-thirds { flex: 2; }
-        .column.is-one-third { flex: 1; }
 
-        .feature-box {
-            background-color: #f9f9f9;
-            border-left: 5px solid var(--highlight-red);
+        .qr-card {
+            background: #050505;
             padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            height: 100%;
+            border-radius: 12px;
+            border: 1px solid #333;
+            width: 240px;
+            transition: 0.3s;
+            position: relative;
         }
-
-        .reveal ul {
-            list-style-type: none;
-            padding-left: 0;
+        
+        /* 二维码扫描条动画 */
+        .qr-card::after {
+            content: ''; position: absolute; top: 20px; left: 20px; right: 20px; height: 2px;
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            opacity: 0;
+            animation: scanQR 2.5s infinite ease-in-out;
         }
+        
+        .qr-card:hover { border-color: var(--accent-green); transform: translateY(-5px); }
+        .qr-card:hover::after { opacity: 1; }
 
-        .reveal ul li {
-            margin-bottom: 10px;
-        }
-
-        .reveal ul li::before {
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            content: "\f058"; /* fa-check-circle */
-            color: var(--highlight-red);
-            margin-right: 15px;
-        }
-
-        .canvas-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+        .qr-img {
             width: 100%;
-            height: 80%;
-            font-size: 0.6em;
+            aspect-ratio: 1/1;
+            background: #222; /* 占位色，防止图片加载失败时太难看 */
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: block;
         }
-        .canvas-item {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
+        
+        .qr-label {
+            color: #fff; font-weight: 700; font-size: 1.1rem; margin-bottom: 5px;
         }
-        .canvas-item h4 {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-        .canvas-item p, .canvas-item li {
-            font-size: 0.9em;
-            text-align: left;
-        }
-        .canvas-item ul li::before {
-            margin-right: 8px;
+        .qr-sub {
+            color: #666; font-size: 0.85rem; font-family: var(--font-code);
         }
 
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-            border-left: 3px solid var(--highlight-red);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -38px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--highlight-red);
+        @keyframes scanQR {
+            0% { top: 20px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: calc(100% - 70px); opacity: 0; }
         }
 
+        /* Footer */
+        footer { padding: 40px 0; text-align: center; border-top: 1px solid #222; color: #555; font-size: 0.85rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-title-main { font-size: 2.8rem; }
+            .hero-visual { height: 350px; order: -1; }
+            .evolution-container { grid-template-columns: 1fr; }
+            .evo-step:not(:last-child)::after {
+                content: "↓"; right: 50%; top: auto; bottom: -30px; transform: translateX(50%);
+            }
+            .qr-grid { gap: 30px; }
+            .contact-wrapper { padding: 30px 20px; }
+            .timeline-line, .timeline-progress { left: 21px; }
+        }
     </style>
 </head>
 <body>
-<div class="reveal">
-    <div class="slides">
-        <!-- Title Slide -->
-        <section class="text-center"
-                 data-background-image="background.png"
-                 data-background-size="cover"
-                 data-background-color="rgba(0,0,0,0.5)">
-            <div style="background-color: rgba(0,0,30,0.6); padding: 20px; border-radius: 15px; color: white;">
-                <h1 style="font-size: 2.2em; color: white;">Homeiliving 跨境家居平台</h1>
-                <h2 style="font-size: 1.6em; color: var(--highlight-red);">Agent驱动的家居创新平台</h2>
-                <p style="margin-top: 150px; font-size: 1.1em;">上海伊口信息技术有限公司</p>
-                <p style="margin-top: 10px; font-size: 1.1em;">2025年9月</p>
 
+    <!-- 背景层 -->
+    <div class="cyber-grid-bg"></div>
+    <div class="bg-overlay"></div>
 
-            </div>
-        </section>
-
-        <!-- Company Overview (REDESIGNED 3-COLUMN SLIDE) -->
-        <section>
-            <h2>公司概览与发展里程碑</h2>
-            <div class="columns" style="font-size: 0.75em; margin-top: 40px; align-items: stretch;">
-                <!-- Column 1: About Us -->
-                <div class="column">
-                    <div class="feature-box">
-                        <h3 style="text-align:left; font-size: 1.2em;">关于我们</h3>
-                        <p>上海伊口信息技术有限公司成立于2020年8月，是一家专注于跨境家居电商平台技术研发与运营的高新技术企业。 <a href="https://www.homeiliving.com" target="_blank">www.homeiliving.com</a> </p>
-                        <p>
-                            我们致力于通过AI和MR技术创新，为全球消费者提供沉浸式的家居购物体验。
-                        </p>
-                    </div>
-                </div>
-                <!-- Column 2: Timeline -->
-                <div class="column">
-                    <div class="feature-box">
-                        <h3 style="text-align: left; font-size: 1.2em;">发展历程 (营收)</h3>
-                        <div class="timeline">
-                            <div class="timeline-item"><p><b>2020-2021:</b> <span class="highlight">技术奠基</span></p></div>
-                            <div class="timeline-item"><p><b>2023:</b> <span class="highlight">商业化启动</span><br><small>收入 ¥95万</small></p></div>
-                            <div class="timeline-item"><p><b>2024:</b> <span class="highlight">快速增长</span><br><small>收入 ¥330万, 出口创汇 $46万</small></p></div>
-                            <div class="timeline-item"><p><b>2025 (YTD):</b> <span class="highlight">规模扩大</span><br><small>出口创汇 ¥498万</small></p></div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Column 3: Business Layout -->
-                <div class="column">
-                    <div class="feature-box">
-                        <h3 style="text-align:left; font-size: 1.2em;">全球业务布局</h3>
-                        <ul>
-                            <li><i class="fas fa-flag"></i> <b>总部 (HQ):</b> 中国上海</li>
-                            <li><i class="fas fa-flask"></i> <b>研发中心 (R&D):</b> 加拿大温哥华，中国上海</li>
-                            <li><i class="fas fa-globe-americas"></i> <b>运营中心 (Ops):</b> 温哥华、洛杉矶、多伦多，香港、上海，深圳，南京</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Vision & Mission -->
-        <section class="text-center">
-            <h2>愿景与核心价值</h2>
-            <div class="columns" style="margin-top: 80px;">
-                <div class="column">
-
-                    <h3 style="font-size: 1.2em;">愿景 (Vision)</h3>
-                    <h3 style="font-size: 1.2em;">            </h3>
-                    <h3 style="font-size: 1.2em;">            </h3>
-                    <h3 style="font-size: 1.2em;">            </h3>
-                    <p class="feature-box" style="font-size: 1.1em;">成为全球领先的 <span class="highlight">AI+MR</span> 跨境家居新零售平台。</p>
-                </div>
-                <div class="column">
-                    <h3 style="font-size: 1.2em;">核心价值 (Core Values)</h3>
-                    <ul style="font-size: 0.9em; text-align: left; margin: 0 auto; max-width: 400px;">
-                        <li>科技驱动</li>
-                        <li>用户至上</li>
-                        <li>创新引领</li>
-                        <li>全球服务</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 1. Background (Full Page) -->
-        <section>
-            <h2>一、项目背景与市场痛点</h2>
-            <div class="columns" style="margin-top: 40px;">
-                <div class="column">
-                    <h3 style="text-align: left; font-size: 1.2em;">市场机遇</h3>
-                    <div class="feature-box">
-                        <i class="fas fa-chart-line fa-2x" style="color:var(--highlight-red);"></i>
-                        <h4 style="text-align:left; font-size: 1em; margin-top: 10px;"><b>北美华人家居定制需求激增</b></h4>
-                        <p>25-45岁北美华人家庭年增长率达 <span class="highlight" style="font-size: 1.5em;">15%</span>，形成一个高增长、高价值的精准市场。</p>
-                    </div>
-                </div>
-                <div class="column">
-                    <h3 style="text-align: left; font-size: 1.2em;">传统跨境家居行业痛点</h3>
-                    <ul style="font-size: 0.9em;">
-                        <li><b>非标品适配难:</b> 尺寸、风格与本地化需求难以匹配。</li>
-                        <li><b>交付周期长:</b> 平均 <span class="highlight">60</span> 天的漫长等待，严重影响客户体验。</li>
-                        <li><b>文化差异大:</b> 设计理念与北美华人生活习惯存在鸿沟。</li>
-                        <li><b>价格虚高:</b> 本土定制服务溢价高达 <span class="highlight">60%</span>，性价比低。</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Solution -->
-        <section class="text-center">
-            <h2>我们的解决方案</h2>
-            <div class="feature-box" style="margin-top: 50px;">
-                <p style="font-size: 1.2em;">
-                    构建一个 <span class="highlight">“敏捷供应 - 精准定制 - 生态扩张”</span> 的跨境家居创新体系。
-                </p>
-                <p style="font-size: 1.1em; margin-top: 20px;">
-                    通过 <b class="highlight">AI Agent + MR</b> 技术的深度融合，以技术驱动重构整个价值链，打造极致的效率和个性化体验，形成强大的差异化竞争优势。
-                </p>
-            </div>
-        </section>
-
-        <!-- The Power of AI Agents -->
-        <section>
-            <h2>核心理念：AI Agent 的颠覆性价值</h2>
-            <p class="text-center">我们不仅仅是使用AI工具，而是构建能够自主执行复杂任务的 <span class="highlight">AI智能体 (Agent)</span>。</p>
-            <div class="columns" style="margin-top: 40px; font-size: 0.85em;">
-                <div class="column feature-box">
-                    <i class="fas fa-brain fa-2x highlight"></i>
-                    <h4 style="text-align:left;">AI Agent的核心价值</h4>
-                    <p>Agent具备感知、决策和执行能力，能自主完成从设计方案生成到营销内容创作的完整任务，实现业务流程的高度自动化。</p>
-                </div>
-                <div class="column feature-box">
-                    <i class="fas fa-chart-line fa-2x highlight"></i>
-                    <h4 style="text-align:left;">AI Agent的发展趋势</h4>
-                    <p>正从单一任务工具进化为能够协同工作的多智能体系统 (Multi-Agent System)。我们的三大Agent正是这一趋势的实践，它们将协同作战。</p>
-                </div>
-                <div class="column feature-box">
-                    <i class="fas fa-globe fa-2x highlight"></i>
-                    <h4 style="text-align:left;">对家居行业的影响</h4>
-                    <p>将彻底改变行业依赖人力的现状，实现规模化的精准定制和个性化服务，从根本上提升产业效率，重塑商业模式。</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Agent Trinity Intro -->
-        <section>
-            <h2>核心驱动：三大AI智能体 (Agents)</h2>
-            <p class="text-center">我们构建了一个由三大核心AI智能体驱动的业务中枢，协同完成从设计、翻译到营销的全链路任务。</p>
-            <div class="columns" style="margin-top: 40px;">
-                <div class="column text-center feature-box">
-                    <i class="fas fa-home fa-3x highlight"></i>
-                    <h3 style="font-size: 1.1em;">AI家居设计Agent</h3>
-                    <p>从照片到可实现的家</p>
-                </div>
-                <div class="column text-center feature-box">
-                    <i class="fas fa-language fa-3x highlight"></i>
-                    <h3 style="font-size: 1.1em;">家居行业翻译引擎</h3>
-                    <p>打破跨境贸易语言壁垒</p>
-                </div>
-                <div class="column text-center feature-box">
-                    <i class="fas fa-store fa-3x highlight"></i>
-                    <h3 style="font-size: 1.1em;">电商数据设计引擎</h3>
-                    <p>数据驱动的爆款孵化器</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Agent Details... -->
-        <section>
-            <h3>1. AI家居设计Agent：从想象到现实</h3>
-            <p class="text-center" style="font-size:0.9em">将繁琐的专业室内设计流程，转变为用户动动手指即可完成的自动化、智能化体验。</p>
-            <ol style="margin-top: 30px; font-size: 0.8em;">
-                <li><span class="highlight">空间智能识别:</span> 用户上传房间照片，系统通过CV技术自动识别空间结构、尺寸和光照，生成3D数字孪生空间。</li>
-                <li><span class="highlight">智能家具匹配与布局:</span> AI基于空间数据和设计美学，从数据库中智能匹配家具，自动生成科学、美观的排布方案。</li>
-                <li><span class="highlight">方案文档自动生成:</span> 一键生成包含多视角预览、家具清单、尺寸、品牌信息的专业PDF方案。</li>
-                <li><span class="highlight">AIGC照片级效果图渲染:</span> 调用自研图像引擎，将场景渲染成无限接近真实照片的高质量效果图，<b class="highlight">最大程度保持家具与原始产品在纹理、光影上的一致性</b>，实现“所见即所得”。</li>
-            </ol>
-            <p class="text-center" style="margin-top: 20px;">设计效率提升 <span class="large-number">5</span> 倍，方案确认率达 <span class="highlight">82%</span></p>
-        </section>
-
-        <!-- AI Design Agent Showcase -->
-        <section>
-            <h2>AI设计Agent：效果展示</h2>
-            <div class="columns" style="align-items: center;">
-                <div class="column text-center">
-                    <img  style="height: auto; width:800px; border-radius: 20px;" src="img1.jpg"  alt="User Photo" style="border-radius: 15px;">
-                    <p style="font-weight: normal;">1. 用户家俱照片</p>
-                </div>
-                <div class="column text-center">
-                    <i class="fas fa-arrow-right fa-3x highlight"></i>
-                    <p><b>AI Agent</b></p>
-                </div>
-                <div class="column text-center">
-                    <img style="height: auto; width: 600px; border-radius: 20px;" src="img2.jpg" alt="AI Layout" style="border-radius: 15px;">
-                    <p style="font-weight: normal;">2. AI分析与智能布局</p>
-                </div>
-                <div class="column text-center">
-                    <i class="fas fa-arrow-right fa-3x highlight"></i>
-                    <p><b>AIGC</b></p>
-                </div>
-                <div class="column text-center">
-                    <img style="height: 350px; width: 700px; border-radius: 20px;"src="img.png" alt="Final Render" style="border-radius: 15px;">
-                    <p style="font-weight: normal;">3. 生成照片级效果图</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h3>2. 家居行业翻译引擎：精准无碍</h3>
-            <p class="text-center" style="font-size:0.9em">专为家居行业打造的垂直领域翻译解决方案，解决通用工具“失真”、“失准”的痛点。</p>
-            <div class="columns" style="margin-top: 30px;">
-                <div class="column feature-box">
-                    <h4 class="highlight">构建行业专有数据库</h4>
-                    <p style="font-size:0.9em">我们构建了包含海量专业术语（如木材、工艺、风格）和专业语句的家居行业多语言平行语料库，这是精准翻译的基石。</p>
-                </div>
-                <div class="column feature-box">
-                    <h4 class="highlight">先进混合模型训练</h4>
-                    <p style="font-size:0.9em">综合运用 <b class="highlight">Fine-tuning (模型微调)</b> 和 <b class="highlight">RAG (检索增强生成)</b> 技术，让AI既懂得行业语言风格，又能确保专业术语100%准确。</p>
-                </div>
-            </div>
-            <p class="text-center" style="margin-top: 30px; font-size: 1.1em;">实现远超通用引擎的翻译质量，为跨境贸易保驾护航。</p>
-        </section>
-
-        <section>
-            <h3>3. 基于电商数据的设计引擎：爆款孵化</h3>
-            <p class="text-center" style="font-size:0.9em">整合市场分析、AI辅助设计和AIGC内容生成，帮助企业做出更明智的决策，并以极低成本创造营销素材。</p>
-            <ul style="font-size: 0.8em; margin-top: 30px;">
-                <li><b class="highlight">全球市场趋势洞察:</b> 实时监控主流电商平台，AI分析热销品，提供可视化数据报告。</li>
-                <li><b class="highlight">AI辅助创意设计:</b> 基于趋势提供新品灵感，或为已有产品生成更受欢迎的设计变体，并融入品牌故事。</li>
-                <li><b class="highlight">AIGC营销内容矩阵生成:</b> 自动生成融入品牌故事的图片、社交媒体文案甚至AI动画。</li>
-                <li><b class="highlight">受众分析与精准投放:</b> AI分析用户画像，为新品提供精准的客群定位和投放策略。</li>
-            </ul>
-            <p class="text-center" style="margin-top: 20px;">需求预测准确率 <span class="highlight">92%</span>，指导生产；动态库存管理使周转天数从55天缩短至 <span class="highlight">22</span> 天。</p>
-        </section>
-
-        <!-- E-commerce Engine Showcase -->
-        <section>
-            <h2>电商数据引擎：效果展示</h2>
-            <div class="columns" style="align-items: center;">
-                <div class="column text-center">
-                    <img src="trend.jpg" alt="Market Trends" style="border-radius: 15px;">
-                    <p style="font-weight: bold;">1. AI洞察市场热销趋势</p>
-                </div>
-                <div class="column text-center">
-                    <img src="image4.jpeg" alt="AI Design" style="border-radius: 15px;">
-                    <p style="font-weight: bold;">2. AI生成全新产品设计</p>
-                </div>
-                <div class="column text-center">
-                    <video style="height: 300px; width: auto; border-radius: 20px;" controls muted loop autoplay src="video3.mp4"></video>
-                    <p style="font-weight: bold;">3. AIGC生成营销内容</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- MR Application (UPDATED WITH 9:16 VIDEOS) -->
-        <section>
-            <h2>Hoomix MR 家居应用</h2>
-            <div class="columns" style="align-items: center; height: 100%;">
-                <div class="column" style="flex: 1.2; font-size: 0.8em;">
-                    <h4 class="highlight">核心功能模块</h4>
-                    <ul><li><b>空间预览:</b> 身临其境感受真实空间效果</li><li><b>家具预览:</b> <span class="highlight">10万+</span> 产品3D展示</li><li><b>实时调整:</b> 材质、颜色、尺寸动态变化</li></ul>
-                    <hr>
-                    <h4 class="highlight">技术实现优势</h4>
-                    <ul><li><b>基于Meta Quest 3:</b> 无线自由，高性能</li><li><b>Unity游戏引擎:</b> 跨平台，卓越视觉</li><li><b>空间映射技术:</b> <span class="highlight">精确到1厘米</span></li></ul>
-                </div>
-                <div class="column">
-                    <div class="columns">
-                        <div class="column text-center">
-                            <video style="height: 500px; width: auto; border-radius: 20px;" controls muted loop autoplay src="video1.mp4"></video>
-                            <p style="font-size:0.8em"><b>智能空间预览</b></p>
-                        </div>
-                        <div class="column text-center">
-                            <video style="height: 500px; width: auto; border-radius: 20px;" controls muted loop autoplay src="video2.mp4"></video>
-                            <p style="font-size:0.8em"><b>实时家具替换</b></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- AI+MR Fusion Architecture -->
-        <section>
-            <h2>AI+MR 融合创新架构</h2>
-            <div class="columns">
-                <div class="column">
-                    <h3 style="font-size: 1.1em;">技术融合架构</h3>
-                    <ul style="font-size: 0.8em;">
-                        <li><b class="highlight">数据层融合:</b> 统一采集平台，多模态数据融合，实时同步。</li>
-                        <li><b class="highlight">算法层融合:</b> AI设计与MR渲染协同，实时交互优化，多场景自适应。</li>
-                        <li><b class="highlight">应用层融合:</b> 无缝用户体验流程，跨设备同步，个性化交互。</li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h3 style="font-size: 1.1em;">创新应用场景</h3>
-                    <ul style="font-size: 0.8em;">
-                        <li><b class="highlight">智能设计助手:</b> AI生成方案，MR实时预览与调整。</li>
-                        <li><b class="highlight">沉浸式购物体验:</b> 虚拟试摆，实时信息展示，社交分享。</li>
-                        <li><b class="highlight">远程设计服务:</b> 设计师远程指导，与客户实时协作。</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Project Showcase (NEW, REDESIGNED & REFINED LAYOUT) -->
-        <!-- Project Showcase (FINAL VISUAL-FIRST LAYOUT) -->
-        <section>
-            <h2>项目展示 (PROJECT SHOWCASE)</h2>
-            <div class="columns" style="align-items: center; gap: 40px; height: 100%;">
-
-                <!-- Left Column for Text (Minimalist) -->
-                <div class="column" style="flex: 0 0 35%;">
-                    <div style="background-color: #fdfdfd; padding: 40px; border-radius: 20px; box-shadow: 0 10px Tesseract Gaming is a cutting-edge technology company focused on creating immersive and interactive gaming experiences. Our mission is to push the boundaries of virtual reality and artificial intelligence, developing games that are not just entertaining but also intellectually stimulating. We believe in the power of play to inspire creativity, foster social connections, and unlock new worlds of possibility.30px rgba(0,0,0,0.05);">
-                        <h3 style="text-align: left; font-size: 1.1em; margin-bottom: 25px;">我们的定制流程</h3>
-                        <hr style="margin-bottom: 25px;">
-                        <ol style="list-style-type: none; padding-left: 0; font-size: 0.8em;">
-                            <li style="padding-left: 10px; margin-bottom: 20px; display: flex; align-items: center;">
-                                <span style="font-weight: bold; font-size: 1.8em; color: var(--highlight-red); margin-right: 20px;">1.</span>
-                                <div><strong>沟通需求</strong></div>
-                            </li>
-                            <li style="padding-left: 10px; margin-bottom: 20px; display: flex; align-items: center;">
-                                <span style="font-weight: bold; font-size: 1.8em; color: var(--highlight-red); margin-right: 20px;">2.</span>
-                                <div><strong>设计方案</strong></div>
-                            </li>
-                            <li style="padding-left: 10px; margin-bottom: 20px; display: flex; align-items: center;">
-                                <span style="font-weight: bold; font-size: 1.8em; color: var(--highlight-red); margin-right: 20px;">3.</span>
-                                <div><strong>确认选材</strong></div>
-                            </li>
-                            <li style="padding-left: 10px; margin-bottom: 20px; display: flex; align-items: center;">
-                                <span style="font-weight: bold; font-size: 1.8em; color: var(--highlight-red); margin-right: 20px;">4.</span>
-                                <div><strong>生产制造</strong></div>
-                            </li>
-                            <li style="padding-left: 10px; display: flex; align-items: center;">
-                                <span style="font-weight: bold; font-size: 1.8em; color: var(--highlight-red); margin-right: 20px;">5.</span>
-                                <div><strong>交付安装</strong></div>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Right Column for Images (Maximized) -->
-                <div class="column" style="flex: 1;">
-                    <div class="columns" style="gap: 20px;">
-                        <div class="column">
-                            <img src="img11.jpg" alt="地毯定制" style="width: 100%; height: 600px; object-fit: cover; border-radius: 15px;">
-                        </div>
-                        <div class="column">
-                            <img src="img22.jpg" alt="定制工厂" style="width: 100%; height: 600px; object-fit: cover; border-radius: 15px;">
-                        </div>
-                        <div class="column">
-                            <img src="img33.jpg" alt="全屋定制" style="width: 100%; height: 600px; object-fit: cover; border-radius: 15px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Project Showcase II (NEW SLIDE FOR GIFs) -->
-        <section>
-            <h2>项目展示二 (PROJECT SHOWCASE II)</h2>
-            <div class="columns" style="align-items: center; gap: 30px; margin-top: 40px;">
-
-                <!-- GIF 1 -->
-                <div class="column text-center">
-                    <img src="SET-2.gif" alt="GIF Animation 1" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <p style="font-size: 0.8em; margin-top: 15px; font-weight: bold;">效果展示一</p>
-                </div>
-
-                <!-- GIF 2 -->
-                <div class="column text-center">
-                    <img src="SET-3.gif" alt="GIF Animation 2" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <p style="font-size: 0.8em; margin-top: 15px; font-weight: bold;">效果展示二</p>
-                </div>
-
-                <!-- GIF 3 -->
-                <div class="column text-center">
-                    <img src="SET-5.gif" alt="GIF Animation 3" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <p style="font-size: 0.8em; margin-top: 15px; font-weight: bold;">效果展示三</p>
-
-            </div>
-        </section>
-
-        <!-- Tech Achievements -->
-        <section>
-            <h2>技术研发成果</h2>
-            <div class="columns">
-                <div class="column">
-                    <h3 style="font-size: 1.1em;" class="highlight">平台技术成果</h3>
-                    <div class="feature-box" style="font-size: 0.8em;">
-                        <ul>
-                            <li>支持多语言、多币种的国际化架构</li>
-                            <li>实现日均10万+用户访问的性能优化</li>
-                            <li>完善的数据分析和用户行为追踪系统</li>
-                            <li>支持多种支付方式和物流配送方案</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="column">
-                    <h3 style="font-size: 1.1em;" class="highlight">核心技术突破</h3>
-                    <div class="feature-box" style="font-size: 0.8em;">
-                        <ul>
-                            <li>自主研发的HomeGPT家居设计大模型</li>
-                            <li>Hoomix混合现实应用平台</li>
-                            <li>AI+MR融合技术架构</li>
-                            <li>3D内容自动生成和优化系统</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-            <!-- Competitor Analysis -->
-        <section>
-            <h2>竞品分析 (COMPETITIVE ANALYSIS)</h2>
-            <div style="font-size: 0.9em;">
-                <div class="columns" style="gap: 40px;">
-                    <!-- Domestic Competitors -->
-                    <div class="column">
-                        <h3 style="font-size: 1.2em;" class="highlight">国内竞品</h3>
-                        <div style="position: relative; padding-left: 30px; min-height: 250px;">
-                            <div style="position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--highlight-red); border-radius: 2px;"></div>
-                            <h4 style="text-align: left; font-weight: bold;">酷家乐, 三维家</h4>
-                            <p style="font-size: 0.9em;"><b>弱点:</b> 软件操作复杂, 学习成本高; 设计与真实可购商品脱节, 无法形成交易闭环; 传统屏幕体验, 缺乏沉浸感。</p>
-                        </div>
-                    </div>
-                    <!-- Foreign Competitors -->
-                    <div class="column">
-                        <h3 style="font-size: 1.2em;" class="highlight">国外竞品</h3>
-                        <div style="position: relative; padding-left: 30px; min-height: 250px;">
-                            <div style="position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--highlight-red); border-radius: 2px;"></div>
-                            <h4 style="text-align: left; font-weight: bold;">Interior AI, IKEA Place</h4>
-                            <p style="font-size: 0.9em;"><b>弱点:</b> AI生成结果随机, 不可控, 非真实商品; 零售商AR应用功能单一, 仅能预览, 选择有限, 沉浸感弱。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <hr style="margin: 30px auto; width: 80%;">
-
-                <div class="text-center">
-                    <h3 style="font-size: 1.2em;">我们的独特优势</h3>
-                    <p style="font-size: 1em; max-width: 900px; margin: 20px auto 0;">
-                        我们是市场上<span class="highlight">唯一</span>将 “<b class="highlight">后台三大AI Agent协同</b>” 与 “<b class="highlight">前端沉浸式MR体验</b>” 及 “<b class="highlight">开放式B2B2C平台</b>” 深度结合的解决方案，构筑了强大的技术与商业模式护城河。
+    <!-- 1. HERO -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="section-tag">Since 2025 · Somatics Planet</div>
+                    <h1 class="hero-title-main gradient-text">PROJECT<br>DA VINCI</h1>
+                    <p class="hero-desc">
+                        青少年 <span class="highlight-green">AI学霸运动员</span> 进化系统。<br>
+                        像黑客一样解码身体，像运动员一样训练大脑。
                     </p>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Channel Strategy -->
-        <section>
-            <h2>渠道能力：构建全球化的双向通路</h2>
-            <p class="text-center" style="font-size: 0.9em;">我们独特的优势在于整合并打通了国内供应端与海外市场端的核心资源，形成了一个高效的跨境S2B2C赋能平台。</p>
-            <div class="columns" style="align-items: center; margin-top: 40px;">
-                <div class="column text-center">
-                    <div class="feature-box">
-                        <i class="fas fa-industry fa-3x highlight"></i>
-                        <h3 style="font-size:1.1em;">中国: 供应链整合</h3>
-                        <p style="font-size:0.8em">整合国内优质家居制造商、原材料供应商和设计师资源，形成强大、敏捷的供应链网络。</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 30px;">
+                        <a href="#contact" class="btn">加入进化 (扫码)</a>
+                        <a href="#syllabus" class="btn outline">查看 10 课时路线图</a>
                     </div>
                 </div>
-                <div class="column text-center">
-                    <i class="fas fa-globe fa-4x highlight"></i>
-                    <p style="font-weight:bold;">跨境赋能</p>
-                </div>
-                <div class="column text-center">
-                    <div class="feature-box">
-                        <i class="fas fa-store fa-3x highlight"></i>
-                        <h3 style="font-size:1.1em;">北美: 市场通路</h3>
-                        <p style="font-size:0.8em">通过500+加盟商、10,000+地产经纪的战略合作网络，精准触达和服务终端消费者。</p>
+                <div class="hero-visual">
+                    <!-- 动态宇航员/未来战士 -->
+                    <div class="hero-anim-wrapper">
+                        <dotlottie-player 
+                            src="https://lottie.host/801a21e4-e005-4f7f-8d26-47b864a7c06c/7j6YvXqQO5.json" 
+                            background="transparent" speed="1" style="width: 100%; height: 100%" loop autoplay>
+                        </dotlottie-player>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Business Model Canvas (RESTORED GRID) -->
-        <section>
-            <h2>商业模式画布 (Business Model Canvas)</h2>
-            <div class="canvas-grid">
-                <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">重要伙伴</h4><ul><li>云服务商</li><li>数据供应商</li><li>行业协会</li><li>MR硬件厂商</li></ul></div>
-                <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">关键业务</h4><ul><li>平台研发</li><li>算法迭代</li><li>数据库构建</li><li>市场营销</li></ul></div>
-                <div class="canvas-item highlight-bg" style="grid-column: span 1; grid-row: span 2;"><h4 class="highlight">价值主张</h4><p>为家居产业提供“降本、增效、创收”的一站式AI+MR赋能解决方案，为消费者提供“所见即所得”的极致体验。</p></div>
-                <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">客户关系</h4><ul><li>自助SaaS服务</li><li>专属客户支持</li><li>用户社区</li></ul></div>
-                <div class="canvas-item" style="grid-column: span 1; grid-row: span 2;"><h4 class="highlight">客户细分</h4><b>B端:</b><ul><li>家居制造商/品牌方</li><li>跨境电商</li><li>设计师</li></ul><b>C端:</b><ul><li>有装修/购买需求的消费者</li></ul></div>
-                <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">核心资源</h4><ul><li>核心算法</li><li>专有数据库</li><li>复合型团队</li></ul></div>
-                <div class="canvas-item" style="grid-column: span 1;"><h4 class="highlight">渠道通路</h4><ul><li>线上营销</li><li>线下展会</li><li>渠道合作</li></ul></div>
-                <div class="canvas-item" style="grid-column: span 2;"><h4 class="highlight">成本结构</h4><p>研发成本 (人力), 基础设施成本 (算力), 数据成本, 市场营销成本</p></div>
-                <div class="canvas-item" style="grid-column: span 3;"><h4 class="highlight">收入来源</h4><p>SaaS订阅费, 模型制作服务, 平台交易佣金, 增值服务，产品销售收入</p></div>
+    <!-- 2. PARADOX -->
+    <section id="problem" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Paradox</h2>
+                <p class="section-subtitle">为什么传统的“死读书”和“傻练”在 AI 时代失效了？</p>
             </div>
-        </section>
-
-        <!-- Team -->
-        <section>
-            <h2>团队优势：国际化与专业化</h2>
-            <div class="columns" style="font-size: 0.75em;">
-                <div class="column">
-                    <h3 style="font-size: 1.2em;" class="highlight">中国团队 (AI & 供应链)</h3>
-                    <div class="feature-box">
-                        <!-- CEO with Photo -->
-                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px;">
-                            <img src="zhao.jpg" alt="Zhao Luyi - CEO" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                            <div>
-                                <b>赵露忆 - CEO</b><br>
-                                <small>复旦大学EMBA, 总经理（法人代表），多年投资及项目运营，企业管理经验，负责伊口全球供应链管理、战略合作拓展等。曾担任香港主板上市公司董事会主席、执行董事。</small>
-                            </div>
-                        </div>
-
-                        <!-- CTO with Photo -->
-                        <div style="display: flex; align-items: center; gap: 20px;">
-                            <img src="zhu.jpg" alt="Zhu Yuntao - CTO" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-                            <div>
-                                <b>朱云涛 - CTO</b><br>
-                                <small>香港大学金融工程研究生，上海交通大学MBA, 连续创业者，曾任职于TCL通讯和联发科MTK, 负责公司AI架构, 深度理解AI算法，软件架构与金融科技。</small>
-                            </div>
-                        </div>
+            <div class="problem-grid">
+                <!-- Card 1 -->
+                <div class="problem-card">
+                    <div class="lottie-icon">
+                        <dotlottie-player src="https://lottie.host/82dfc706-5389-4a9c-959c-67af447f523c/42yHw01k8Q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
                     </div>
+                    <h3 style="margin: 15px 0;">专注力断崖</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">大脑消耗全身20%氧气。有氧底座缺失导致长考后“脑雾”，学习效率随时间指数级下降。</p>
                 </div>
-                <div class="column">
-                    <h3 style="font-size: 1.2em;" class="highlight">北美团队 (产品 & MR)</h3>
-                    <div class="feature-box">
-                        <b>幸冠宇 - 产品经理</b><br><small>南加州大学数据分析, 负责整体产品规划与需求把控。</small><br><br>
-                        <b>刘伟德 - Unity开发工程师</b><br><small>西蒙菲莎大学计算机, 专注于核心功能开发与MR交互实现。</small><br><br>
-                        <b>徐海韵 - UI/UX设计师</b><br><small>西蒙菲莎大学交互设计, 负责界面设计与用户体验优化。</small><br><br>
-                        <b>刘鑫彦 - 用户研究与交互设计</b><br><small>英属哥伦比亚大学市场营销, 负责收集用户反馈与需求验证。</small>
+                <!-- Card 2 -->
+                <div class="problem-card">
+                    <div class="lottie-icon">
+                        <dotlottie-player src="https://lottie.host/2e424260-8446-419b-a36c-9c748c9735d5/Kj9kQ5vH4T.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
                     </div>
+                    <h3 style="margin: 15px 0;">高压下崩盘</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">缺乏乳酸耐受训练。考试最后15分钟心慌手抖，无法调用逻辑思维，导致压轴题失分。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="problem-card">
+                    <div class="lottie-icon">
+                        <dotlottie-player src="https://lottie.host/c50c0273-0d2d-4223-bd76-a0709b11786c/0S0e8K8e5q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                    </div>
+                    <h3 style="margin: 15px 0;">被动消费者</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">只会玩游戏，不会造游戏。在AI时代，如果不掌握技术主权，终将被算法替代。</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Progress -->
-        <section>
-            <h2>项目进展与成果</h2>
-            <div class="columns" style="font-size:0.9em"><div class="column"><h3 class="highlight">技术成果</h3><ul><li>AI设计算法准确率: <span class="highlight">92%</span></li><li>MR体验误差: <span class="highlight">≤1 厘米</span></li><li>核心专利: <span class="highlight">15</span> 项已授权</li><li>软件著作权: <span class="highlight">8</span> 项</li></ul></div><div class="column"><h3 class="highlight">市场表现</h3><ul><li>用户数: <span class="highlight">10 万+</span></li><li>定制订单: <span class="highlight">5000+</span> 单</li><li>入驻供应商: <span class="highlight">100+</span> 家</li><li>GMV: <span class="highlight">1000 万</span> 加元</li></ul></div></div>
-            <div class="feature-box text-center" style="font-size:0.9em"><h3 class="highlight">运营数据亮点</h3><p>设计效率提升: <span class="highlight">5倍</span> | 交付周期: 从60天到 <span class="highlight">15-20天</span> | 用户获取成本: <span class="highlight">40加元</span> | 复购率: <span class="highlight">38%</span></p></div>
-        </section>
+    <!-- 3. CASE STUDY -->
+    <section id="case-study" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" style="border-color: var(--accent-red); color: var(--accent-red);">Case Study</span>
+                <h2 class="section-title">Alex 的进化档案</h2>
+                <p class="section-subtitle">一个 14 岁壁球少年，如何通过 Python 代码将身体“数据化”。</p>
+            </div>
 
-        <!-- Redesigned Funding Slide -->
-        <section>
-            <h2 style="margin-bottom: 0;">资金需求与使用规划</h2>
-            <div class="columns" style="align-items: center; height: 100%;">
-                <div class="column text-center" style="flex: 1.5;">
-                    <p style="font-size: 0.8em; margin-bottom: -20px;">申请专项资金</p>
-                    <div class="mega-number">300</div>
-                    <p style="font-size: 1.2em; margin-top: -30px;">万元</p>
+            <div class="evolution-container">
+                <!-- Step 1 -->
+                <div class="evo-step">
+                    <span style="font-family:var(--font-code); color:var(--accent-blue); font-size:0.8rem;">PHASE 1</span>
+                    <h4 style="font-size:1.2rem; color:#fff; margin:10px 0;">感觉不可靠</h4>
+                    <p style="color:#888; font-size:0.9rem;">Alex 觉得自己很快，但总接不到球。主观感觉与客观事实存在巨大偏差。</p>
+                    <div class="data-display" style="border-color: #555;">
+                        <div style="color:#666; font-size:0.75rem;">REACTION TIME</div>
+                        <div style="font-size:1.5rem; color:#888;">0.65s</div>
+                        <div style="color:#666; font-size:0.8rem;">(凭感觉)</div>
+                    </div>
                 </div>
-                <div class="column" style="display: flex; flex-direction: column; justify-content: space-around; height: 70%; font-size: calc(var(--r-main-font-size) - 7px);">
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fas fa-brain fa-2x highlight"></i>
-                        <div>
-                            <p style="font-size: 1.5em; font-weight: bold;">40%</p>
-                            <p><b>AI技术研发升级</b> (120万)</p>
-                        </div>
+
+                <!-- Step 2 -->
+                <div class="evo-step" style="border-color: var(--accent-blue);">
+                    <span style="font-family:var(--font-code); color:var(--accent-blue); font-size:0.8rem;">PHASE 2</span>
+                    <h4 style="font-size:1.2rem; color:#fff; margin:10px 0;">代码做外挂</h4>
+                    <p style="color:#888; font-size:0.9rem;">编写 Python 脚本计算脚踝瞬时速度。当速度 > 0.05 时，将骨骼线渲染为红色。</p>
+                    <div class="data-display" style="border-color: var(--accent-blue);">
+                        <div style="color:#666; font-size:0.75rem;">STATUS</div>
+                        <div style="font-size:1.1rem; color:var(--accent-blue);">Visualizing...</div>
+                        <div style="color:#666; font-size:0.8rem;">Neural_Spark.py</div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fas fa-vr-cardboard fa-2x highlight"></i>
-                        <div>
-                            <p style="font-size: 1.5em; font-weight: bold;">30%</p>
-                            <p><b>MR技术创新应用</b> (90万)</p>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fas fa-bullhorn fa-2x highlight"></i>
-                        <div>
-                            <p style="font-size: 1.5em; font-weight: bold;">20%</p>
-                            <p><b>市场推广与用户获取</b> (60万)</p>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <i class="fas fa-users fa-2x highlight"></i>
-                        <div>
-                            <p style="font-size: 1.5em; font-weight: bold;">10%</p>
-                            <p><b>团队建设与运营</b> (30万)</p>
-                        </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="evo-step" style="border-color: var(--accent-green);">
+                    <span style="font-family:var(--font-code); color:var(--accent-green); font-size:0.8rem;">PHASE 3</span>
+                    <h4 style="font-size:1.2rem; color:#fff; margin:10px 0;">数据驱动肉体</h4>
+                    <p style="color:#888; font-size:0.9rem;">通过视觉反馈修正发力模式，10周后数据证明了一切。</p>
+                    <div class="data-display" style="border-color: var(--accent-green);">
+                        <div style="color:#666; font-size:0.75rem;">NEW RECORD</div>
+                        <div style="font-size:1.5rem; color:var(--accent-green); text-shadow:0 0 10px rgba(0,255,157,0.5);">0.32s</div>
+                        <div style="color:var(--accent-green); font-size:0.8rem;">▲ 提升 50%</div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Goals & Value -->
-        <section>
-            <h2>预期成果与社会价值</h2>
-            <div class="columns" style="font-size: 0.7em;"><div class="column"><h4 class="highlight">短期目标 (6-12月)</h4><ul><li>技术: HomeGPT大模型发布, MR应用用户破50万</li><li>市场: GMV达3000万加元, 用户增长至30万</li></ul></div><div class="column"><h4 class="highlight">中期目标 (1-2年)</h4><ul><li>技术: AI+MR技术达行业领先水平</li><li>市场: 覆盖北美20城, 供应商达500家</li></ul></div><div class="column"><h4 class="highlight">长期目标 (3-5年)</h4><ul><li>布局: 拓展欧洲、澳新市场, 构建全球生态</li><li>影响: 成为跨境家居电商标杆企业</li></ul></div></div>
-            <hr><h3 class="highlight text-center">社会价值</h3>
-            <ul style="font-size: 0.8em;"><li><b>推动产业数字化转型</b></li><li><b>促进跨境贸易发展</b></li><li><b>创造就业机会 (1000+)</b></li><li><b>环保可持续，减少浪费</b></li></ul>
-        </section>
+    <!-- 4. SYLLABUS -->
+    <section id="syllabus" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" style="border-color:var(--accent-blue); color:var(--accent-blue);">Roadmap</span>
+                <h2 class="section-title">10 课时冲刺地图</h2>
+                <p class="section-subtitle">从环境配置到 App 发布的完整旅程</p>
+            </div>
 
-        <!-- Final Slides -->
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-progress"></div>
+                
+                <div class="session-item">
+                    <div class="session-marker">01</div>
+                    <h4 style="color:#fff; font-size:1.2rem;">数字自我：环境与骨骼</h4>
+                    <p style="color:#888;">配置 Python 开发环境。调用 MediaPipe 库，在视频中画出全身 33 个骨骼关键点。</p>
+                </div>
+                
+                <div class="session-item">
+                    <div class="session-marker">02</div>
+                    <h4 style="color:#fff; font-size:1.2rem;">几何裁判：T 点回位检测</h4>
+                    <p style="color:#888;">利用勾股定理计算位置。编写逻辑：如果击球后 3 秒未回位，判定为失误。</p>
+                </div>
 
-        <section class="text-center">
-            <h2 style="font-size: 2em; margin-bottom: 40px;">谢谢各位评委的聆听!</h2>
+                <div class="session-item">
+                    <div class="session-marker">05</div>
+                    <h4 style="color:#fff; font-size:1.2rem;">神经火花：爆发力可视化</h4>
+                    <p style="color:#888;">设定“爆发阈值”。当速度超过临界点时，将屏幕骨骼渲染为红色，直观看到 ATP-CP 系统。</p>
+                </div>
 
-            <!-- Centered Business Card Image -->
-            <img
-                    src="namecard.jpg"
-                    alt="联系方式名片 - 赵露忆"
-                    style="
-                        display: block;
-                        margin: 0 auto 30px auto;
-                        height: 500px;
-                        width: auto;
-                        border-radius: 20px;
-                        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-                    ">
+                <div class="session-item">
+                    <div class="session-marker">08</div>
+                    <h4 style="color:#fff; font-size:1.2rem;">产品构建：Web App 雏形</h4>
+                    <p style="color:#888;">学习 Streamlit 框架。将之前的脚本功能模块化，搭建一个有按钮、有视频框的网页应用。</p>
+                </div>
 
-            <p style="font-size: 1.2em;" class="text-center">期待您的指导和支持!</p>
-        </section>
+                <div class="session-item">
+                    <div class="session-marker">10</div>
+                    <h4 style="color:#fff; font-size:1.2rem;">终极路演：发布作品</h4>
+                    <p style="color:#888;">向父母和朋友演示你的 AI App，解释数据背后的运动原理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
-</div>
+    <!-- 5. CONTACT / QR CODE SECTION (NEW) -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="section-tag" style="margin-bottom: 20px;">Access Terminal</div>
+                <h2 class="section-title" style="font-size: 2.5rem;">立即预约评估</h2>
+                <p class="section-subtitle">扫描下方二维码，获取课程详情或预约试听。</p>
+                
+                <div class="qr-grid">
+                    <!-- QR 1 -->
+                    <div class="qr-card">
+                        <img src="pic1.png" alt="咨询微信" class="qr-img">
+                        <div class="qr-label">课程咨询</div>
+                        <div class="qr-sub">添加导师微信</div>
+                    </div>
+                    
+                    <!-- QR 2 -->
+                    <div class="qr-card">
+                        <img src="pic2.png" alt="公众号" class="qr-img">
+                        <div class="qr-label">官方频道</div>
+                        <div class="qr-sub">关注获取更多案例</div>
+                    </div>
+                </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
-<script>
-    Reveal.initialize({
-        hash: true,
-        plugins: [ RevealNotes ],
-        width: 1280,
-        height: 720,
-    });
-</script>
+                <p style="margin-top: 40px; color: #555; font-size: 0.8rem;">
+                    * 首期“达芬奇计划”仅开放 10 个席位，额满即止。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Project Da Vinci | Somatics Planet. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 动画脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // 标题上浮
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: { trigger: title, start: "top 85%" },
+                y: 30, opacity: 0, duration: 0.8, ease: "power2.out"
+            });
+        });
+
+        // 进度条填充
+        gsap.to(".timeline-progress", {
+            scrollTrigger: { 
+                trigger: ".timeline", 
+                start: "top center", 
+                end: "bottom center", 
+                scrub: true 
+            },
+            height: "100%",
+            ease: "none"
+        });
+
+        // 卡片依次浮入
+        gsap.from(".problem-card", {
+            scrollTrigger: { trigger: ".problem-grid", start: "top 80%" },
+            y: 50, opacity: 0, duration: 0.6, stagger: 0.2
+        });
+        
+        gsap.from(".qr-card", {
+            scrollTrigger: { trigger: ".qr-grid", start: "top 85%" },
+            y: 30, opacity: 0, duration: 0.8, stagger: 0.2, ease: "back.out(1.7)"
+        });
+    </script>
 </body>
 </html>
