@@ -6,12 +6,7 @@
     
     <!-- 微信分享抓取的关键信息 -->
     <title>达芬奇计划 | 少年AI学霸运动员进化系统</title>
-    <meta name="description" content="用Python重塑青少年的运动表现。10周时间，像黑客一样解码身体，像运动员一样训练大脑。">
-    
-    <!-- Open Graph 协议 (部分平台和微信旧版本会读取) -->
-    <meta property="og:title" content="达芬奇计划 | Project Da Vinci">
-    <meta property="og:description" content="用Python重塑青少年的运动表现与逻辑思维。">
-    <meta property="og:image" content="http://your-website.com/share-icon.png"> <!-- 请替换为您的实际网址+图片 -->
+    <meta name="description" content="不仅是运动，更是认知进化。10周时间，驾驭 AI Coding 解码身体数据，像架构师一样思考。">
     
     <!-- 字体库 -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,9 +14,7 @@
     
     <!-- Lottie 动画库 -->
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-    <!-- 微信 JSSDK -->
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-
+    
     <style>
         :root {
             --bg-color: #050505;
@@ -32,7 +25,7 @@
             --accent-green: #00ff9d; 
             --accent-red: #ff0055;   
             --accent-blue: #00d2ff;  
-            --accent-orange: #ff9d00; 
+            --accent-purple: #bd00ff;
             --font-main: 'Exo 2', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
             --container-width: 1000px;
@@ -54,25 +47,13 @@
         #wx-share-mask {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 9999;
-            display: none; /* 默认隐藏 */
-            text-align: right; padding: 20px 30px 0 0;
+            display: none; text-align: right; padding: 20px 30px 0 0;
             backdrop-filter: blur(5px);
         }
-        .share-arrow {
-            width: 100px; transform: rotate(-10deg);
-            filter: drop-shadow(0 0 10px var(--accent-green));
-        }
-        .share-text {
-            color: #fff; font-size: 1.2rem; font-weight: 700;
-            margin-top: 10px; text-align: center; margin-right: 20px;
-            line-height: 1.5;
-        }
+        .share-arrow { width: 100px; transform: rotate(-10deg); filter: drop-shadow(0 0 10px var(--accent-green)); }
+        .share-text { color: #fff; font-size: 1.2rem; font-weight: 700; margin-top: 10px; text-align: center; margin-right: 20px; line-height: 1.5; }
         .share-highlight { color: var(--accent-green); }
-
-        /* --- 只有在微信里为了Hack缩略图隐藏的图片 --- */
-        .wx-thumb-hack {
-            position: absolute; width: 300px; height: 300px; top: -1000px; left: 0; opacity: 0;
-        }
+        .wx-thumb-hack { position: absolute; width: 300px; height: 300px; top: -1000px; left: 0; opacity: 0; }
 
         /* --- 背景特效 --- */
         .cyber-grid-bg {
@@ -136,6 +117,20 @@
         .hero-anim { width: 100%; height: 500px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
+        /* --- Course Intro (The Trinity) --- */
+        #intro { background: rgba(10,10,10,0.5); border-bottom: 1px solid #222; }
+        .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .intro-card {
+            background: var(--surface-card); padding: 40px 30px; border-radius: 16px; border: 1px solid #222;
+            transition: 0.3s; text-align: center; position: relative; overflow: hidden;
+        }
+        .intro-card:hover { transform: translateY(-10px); border-color: var(--accent-blue); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+        .intro-icon { height: 140px; margin-bottom: 20px; }
+        .intro-label { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
+        .intro-p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
+        .intro-divider { height: 3px; width: 40px; background: #333; margin: 0 auto 15px auto; transition: 0.3s; }
+        .intro-card:hover .intro-divider { width: 80px; background: var(--accent-green); }
+
         /* --- Case Study --- */
         #case-study { background: linear-gradient(180deg, #050505 0%, #111 100%); border-top: 1px solid #222; }
         .evolution-container { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 40px; }
@@ -156,22 +151,14 @@
         /* --- Syllabus --- */
         #syllabus { background: var(--surface-dark); }
         .roadmap-list { position: relative; max-width: 800px; margin: 0 auto; }
-        .roadmap-line {
-            position: absolute; left: 30px; top: 20px; bottom: 20px; width: 2px; 
-            background: #222; z-index: 0;
-        }
-        .roadmap-progress {
-            position: absolute; left: 30px; top: 20px; width: 2px; height: 0; 
-            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green)); z-index: 0;
-        }
+        .roadmap-line { position: absolute; left: 30px; top: 20px; bottom: 20px; width: 2px; background: #222; z-index: 0; }
+        .roadmap-progress { position: absolute; left: 30px; top: 20px; width: 2px; height: 0; background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green)); z-index: 0; }
 
         .session-card {
             background: var(--surface-card); border: 1px solid #222; border-radius: 12px;
-            padding: 25px; margin-bottom: 30px; margin-left: 70px; position: relative;
-            transition: 0.3s;
+            padding: 25px; margin-bottom: 30px; margin-left: 70px; position: relative; transition: 0.3s;
         }
         .session-card:hover { border-color: var(--accent-green); transform: translateX(5px); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
-        
         .session-idx {
             position: absolute; left: -70px; top: 0; width: 44px; height: 44px;
             background: #000; border: 2px solid #333; color: #666; border-radius: 50%;
@@ -180,10 +167,7 @@
         }
         .session-card:hover .session-idx { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 15px rgba(0,255,157,0.3); }
 
-        .tag-badge {
-            display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px;
-            margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.1);
-        }
+        .tag-badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.1); }
         .t-blue { color: var(--accent-blue); background: rgba(0, 210, 255, 0.1); }
         .t-green { color: var(--accent-green); background: rgba(0, 255, 157, 0.1); }
         .t-red { color: var(--accent-red); background: rgba(255, 0, 85, 0.1); }
@@ -230,6 +214,10 @@
             .hero-desc { font-size: 1rem; line-height: 1.6; }
             .hero-content .btn { width: 100%; margin-bottom: 10px; display: block; }
             .hero-content div[style*="flex"] { display: block !important; }
+            
+            /* Intro Section */
+            .intro-grid { grid-template-columns: 1fr; gap: 30px; }
+            
             .evolution-container { grid-template-columns: 1fr; gap: 40px; }
             .evo-step::after { content: "↓"; right: 50%; top: auto; bottom: -30px; transform: translateX(50%); font-size: 1.5rem; }
             .roadmap-list { max-width: 100%; }
@@ -247,9 +235,8 @@
 </head>
 <body>
     
-    <!-- 微信卡片缩略图 Trick (用于无后端时尽可能让微信抓取到正确图片) -->
+    <!-- 微信卡片缩略图 -->
     <div class="wx-thumb-hack">
-        <!-- 务必确保 share-icon.png 存在，建议尺寸 300x300 -->
         <img src="share-icon.png" alt="icon">
     </div>
 
@@ -275,12 +262,11 @@
                     <div class="section-tag">Since 2025 · Somatics Planet</div>
                     <h1 class="hero-title-main gradient-text">PROJECT<br>DA VINCI</h1>
                     <p class="hero-desc">
-                        青少年 <strong style="color:var(--accent-green)">AI学霸运动员</strong> 进化系统。<br>
-                        通过 Python 编程分析运动数据，用算法重塑大脑与身体。
+                        青少年 <strong style="color:var(--accent-green)">AI 架构师</strong> 进化系统。<br>
+                        不再是单纯的敲代码。而是学会 <strong>构建 AI 能力</strong>，让 AI Coding 成为你的分析师，用算法重塑大脑与身体。
                     </p>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 30px;">
                         <a href="#contact" class="btn">立即加入 (扫码)</a>
-                        <!-- 新增分享按钮 -->
                         <div onclick="toggleShareMask()" class="btn btn-share">分享给朋友</div>
                     </div>
                 </div>
@@ -293,19 +279,67 @@
         </div>
     </section>
 
-    <!-- 2. CASE STUDY -->
+    <!-- 2. COURSE INTRO (THE TRINITY) -->
+    <section id="intro" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">THE TRINITY</h2>
+                <p class="section-subtitle">打破“为了编程而编程”的旧模式。<br>这是一门 <strong>体育、AI 工程学与认知科学</strong> 的交叉学科。</p>
+            </div>
+            
+            <div class="intro-grid">
+                <!-- Card 1: Sports -->
+                <div class="intro-card">
+                    <div class="intro-icon">
+                        <dotlottie-player src="https://lottie.host/626d9c6c-8439-4467-bc09-4700d89c02b2/sN8J3Xm5hB.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                    </div>
+                    <div class="intro-divider"></div>
+                    <div class="intro-label" style="color:var(--accent-red)">01. 运动实验室</div>
+                    <p class="intro-p">
+                        我们将球场和客厅视为<strong>数据源头</strong>。每一次挥拍、每一次冲刺，都是待分析的珍贵样本。运动不只是流汗，更是数据的生成过程。
+                    </p>
+                </div>
+
+                <!-- Card 2: Code -->
+                <div class="intro-card">
+                    <div class="intro-icon">
+                        <dotlottie-player src="https://lottie.host/c50c0273-0d2d-4223-bd76-a0709b11786c/0S0e8K8e5q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                    </div>
+                    <div class="intro-divider"></div>
+                    <div class="intro-label" style="color:var(--accent-blue)">02. AI Coding 掌控力</div>
+                    <p class="intro-p">
+                        拒绝死记硬背。我们教授 <strong>Prompt Engineering (提示词工程)</strong>。你将学会像架构师一样思考，指挥 AI 编写 Python 脚本，处理复杂的视觉数据。
+                    </p>
+                </div>
+
+                <!-- Card 3: Mind -->
+                <div class="intro-card">
+                    <div class="intro-icon">
+                        <dotlottie-player src="https://lottie.host/82dfc706-5389-4a9c-959c-67af447f523c/42yHw01k8Q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                    </div>
+                    <div class="intro-divider"></div>
+                    <div class="intro-label" style="color:var(--accent-green)">03. 认知进化</div>
+                    <p class="intro-p">
+                        从数据中发现弱点，在训练中重塑大脑。利用 AI 这一“外脑”来辅助“生物脑”，提升<strong>深度专注力</strong>与<strong>逻辑决策力</strong>。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CASE STUDY -->
     <section id="case-study" class="section-padding">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag" style="border-color:var(--accent-red); color:var(--accent-red);">Case Study</span>
                 <h2 class="section-title">Alex 的进化档案</h2>
-                <p class="section-subtitle">一个 14 岁壁球少年，如何通过 Python 解决“启动慢”的难题。</p>
+                <p class="section-subtitle">一个 14 岁壁球少年，如何指挥 AI 解决“启动慢”的难题。</p>
             </div>
             <div class="evolution-container">
                 <div class="evo-step">
                     <span class="tag-badge t-blue">PHASE 1</span>
                     <h4 class="session-title">“我为什么总是慢？”</h4>
-                    <p style="color:#888; font-size:0.9rem;">主观感觉与客观数据存在偏差。</p>
+                    <p style="color:#888; font-size:0.9rem;">Alex 觉得自己跑得快，但总是接不到球。主观感觉欺骗了他。</p>
                     <div class="data-box" style="border-color:#666;">
                         <div style="color:#666; font-size:0.75rem;">反应时 (Before)</div>
                         <div style="font-size:1.4rem; color:#888;">0.65s</div>
@@ -313,17 +347,17 @@
                 </div>
                 <div class="evo-step">
                     <span class="tag-badge t-blue">PHASE 2</span>
-                    <h4 class="session-title">编写“外挂”</h4>
-                    <p style="color:#888; font-size:0.9rem;">当速度 > 0.05 时，骨骼线<span style="color:var(--accent-red)">变红</span>。</p>
+                    <h4 class="session-title">AI 生成“外挂”</h4>
+                    <p style="color:#888; font-size:0.9rem;">Alex 指挥 AI 编写了视觉捕捉脚本：当速度 > 0.05 时，让骨骼线<span style="color:var(--accent-red)">变红</span>。</p>
                     <div class="data-box" style="border-color:var(--accent-blue);">
-                        <div style="color:#666; font-size:0.75rem;">Script Running</div>
+                        <div style="color:#666; font-size:0.75rem;">AI Generating...</div>
                         <div style="font-size:1.1rem; color:var(--accent-blue);">Neural_Spark.py</div>
                     </div>
                 </div>
                 <div class="evo-step">
                     <span class="tag-badge t-green">PHASE 3</span>
                     <h4 class="session-title">数据驱动肉体</h4>
-                    <p style="color:#888; font-size:0.9rem;">修正发力模式，数据证明一切。</p>
+                    <p style="color:#888; font-size:0.9rem;">通过红线反馈修正发力模式，数据证明了“智能模型”的有效性。</p>
                     <div class="data-box" style="border-color:var(--accent-green);">
                         <div style="color:#666; font-size:0.75rem;">反应时 (After)</div>
                         <div style="font-size:1.4rem; color:var(--accent-green);">0.32s <span style="font-size:0.8rem;">(▲50%)</span></div>
@@ -333,13 +367,13 @@
         </div>
     </section>
 
-    <!-- 3. SYLLABUS -->
+    <!-- 4. SYLLABUS -->
     <section id="syllabus" class="section-padding">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag" style="border-color:var(--accent-blue); color:var(--accent-blue);">The Roadmap</span>
                 <h2 class="section-title">10 课时冲刺地图</h2>
-                <p class="section-subtitle">从零开始，打造属于你的 AI 运动助教。</p>
+                <p class="section-subtitle">从环境配置到 AI 产品发布，学会让 AI 为你工作。</p>
             </div>
             <div class="roadmap-list">
                 <div class="roadmap-line"></div>
@@ -349,10 +383,10 @@
                 <div class="session-card">
                     <div class="session-idx">01</div>
                     <span class="tag-badge t-blue">L1 感知层</span>
-                    <h4 class="session-title">数字自我：环境与骨骼</h4>
-                    <p class="session-desc">配置 Python 环境。调用 MediaPipe，在视频中画出全身 33 个骨骼关键点，第一次看到“数字化的自己”。</p>
+                    <h4 class="session-title">数字自我：指挥 AI 识别骨骼</h4>
+                    <p class="session-desc">学习 Prompt 技巧，指挥 AI 调用 MediaPipe 库，在视频中画出全身 33 个骨骼关键点，第一次看到“数字化的自己”。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-code-line"></i> MediaPipe / OpenCV</span>
+                        <span class="meta-item"><i class="ri-code-line"></i> AI Vision / MediaPipe</span>
                     </div>
                 </div>
 
@@ -360,10 +394,10 @@
                 <div class="session-card">
                     <div class="session-idx">02</div>
                     <span class="tag-badge t-green">L2 逻辑层</span>
-                    <h4 class="session-title">几何裁判：T 点回位检测</h4>
-                    <p class="session-desc">利用勾股定理计算人与 T 点的距离。逻辑：若击球后 3 秒未回位，判定失误。</p>
+                    <h4 class="session-title">几何裁判：构建判定逻辑</h4>
+                    <p class="session-desc">利用 AI 生成数学计算代码（勾股定理）。设计逻辑规则：若击球后 3 秒未回 T 点，自动判定为失误。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-code-line"></i> Math / Logic</span>
+                        <span class="meta-item"><i class="ri-code-line"></i> Logic Design</span>
                     </div>
                 </div>
 
@@ -371,10 +405,10 @@
                 <div class="session-card">
                     <div class="session-idx">03</div>
                     <span class="tag-badge t-red">L5 爆发层</span>
-                    <h4 class="session-title">物理引擎：速度公式实现</h4>
-                    <p class="session-desc">编写 v=Δd/Δt 公式。计算脚踝的瞬时速度，理解物理公式在现实中的应用。</p>
+                    <h4 class="session-title">物理引擎：AI 代码实现公式</h4>
+                    <p class="session-desc">让 AI 将物理公式 $v=\Delta d/\Delta t$ 转化为 Python 函数，计算脚踝的瞬时速度。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-code-line"></i> Physics</span>
+                        <span class="meta-item"><i class="ri-code-line"></i> Physics to Code</span>
                     </div>
                 </div>
 
@@ -382,8 +416,8 @@
                 <div class="session-card">
                     <div class="session-idx">04</div>
                     <span class="tag-badge t-red">L5 爆发层</span>
-                    <h4 class="session-title">神经火花：可视化特效</h4>
-                    <p class="session-desc">设定“爆发阈值”。当速度超过临界点时，将屏幕骨骼渲染为红色，直观看到爆发瞬间。</p>
+                    <h4 class="session-title">神经火花：数据可视化</h4>
+                    <p class="session-desc">设定“爆发阈值”。引导 AI 编写渲染逻辑：当速度超过临界点时，将屏幕骨骼渲染为红色特效。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Data Viz</span>
                     </div>
@@ -393,8 +427,8 @@
                 <div class="session-card">
                     <div class="session-idx">05</div>
                     <span class="tag-badge t-blue">L5 进阶</span>
-                    <h4 class="session-title">算法优化：去除数据噪点</h4>
-                    <p class="session-desc">发现数据抖动。引入平滑滤波算法 (Smoothing Algorithm) 去除噪点，绘制完美曲线。</p>
+                    <h4 class="session-title">算法优化：AI 降噪处理</h4>
+                    <p class="session-desc">发现数据抖动。询问 AI 解决方案，引入平滑滤波算法 (Smoothing Algorithm) 去除噪点，绘制完美曲线。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Algorithms</span>
                     </div>
@@ -416,9 +450,9 @@
                     <div class="session-idx">07</div>
                     <span class="tag-badge t-orange">L3 耐力层</span>
                     <h4 class="session-title">疲劳算法：量化专注力</h4>
-                    <p class="session-desc">对比第 1 分钟与第 19 分钟的动作一致性。用数据证明“大脑何时开始走神”。</p>
+                    <p class="session-desc">让 AI 分析第 1 分钟与第 19 分钟的动作方差。用数据证明“大脑何时开始走神”。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-code-line"></i> Statistics</span>
+                        <span class="meta-item"><i class="ri-code-line"></i> Data Analysis</span>
                     </div>
                 </div>
 
@@ -427,9 +461,9 @@
                     <div class="session-idx">08</div>
                     <span class="tag-badge t-blue">L6 集成层</span>
                     <h4 class="session-title">产品构建：Web App 雏形</h4>
-                    <p class="session-desc">学习 Streamlit 框架。将之前的脚本功能模块化，搭建一个有按钮、有视频框的网页应用。</p>
+                    <p class="session-desc">借助 AI 快速搭建 Streamlit 框架。将零散的脚本整合为一个有按钮、有视频框的完整网页应用。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-layout-line"></i> Streamlit</span>
+                        <span class="meta-item"><i class="ri-layout-line"></i> Streamlit / Web</span>
                     </div>
                 </div>
 
@@ -437,10 +471,10 @@
                 <div class="session-card">
                     <div class="session-idx">09</div>
                     <span class="tag-badge t-blue">L6 集成层</span>
-                    <h4 class="session-title">注入灵魂：AI 教练接口</h4>
-                    <p class="session-desc">接入 LLM API。让 AI 读取你的疲劳数据，并生成文字版的战术改进建议。</p>
+                    <h4 class="session-title">注入灵魂：接入大模型</h4>
+                    <p class="session-desc">接入 LLM API。让你的 App 能读取疲劳数据，并自动生成文字版的战术改进建议。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-openai-line"></i> AI API</span>
+                        <span class="meta-item"><i class="ri-openai-line"></i> LLM Integration</span>
                     </div>
                 </div>
 
@@ -448,8 +482,8 @@
                 <div class="session-card">
                     <div class="session-idx">10</div>
                     <span class="tag-badge t-green">L6 交付层</span>
-                    <h4 class="session-title">终极路演：发布你的作品</h4>
-                    <p class="session-desc">向父母和朋友演示你的 AI App。解释数据背后的运动原理，展现自信。</p>
+                    <h4 class="session-title">终极路演：发布智能作品</h4>
+                    <p class="session-desc">向父母和朋友演示你的 AI App。展示你如何利用技术解决现实世界的运动难题。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-mic-line"></i> Presentation</span>
                     </div>
@@ -458,7 +492,7 @@
         </div>
     </section>
 
-    <!-- 4. FAQ -->
+    <!-- 5. FAQ -->
     <section id="faq" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -472,7 +506,7 @@
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        <strong>完全可以。</strong> 采用“脚手架”式教学。导师提供基础框架，孩子专注于核心逻辑填空。
+                        <strong>完全可以。</strong> 这是一个面向 AI 时代的课程。我们不要求孩子死记硬背语法，而是教他们如何通过 **自然语言** 指挥 AI 写代码。只要逻辑清晰，零基础也能做出复杂的应用。
                     </div>
                 </div>
                 <div class="faq-item">
@@ -481,23 +515,23 @@
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        1. 笔记本电脑。<br>2. 智能手机（拍视频）。<br>3. 三脚架（固定拍摄）。
+                        1. 笔记本电脑（用于运行 AI 代码）。<br>2. 智能手机（用于拍摄高帧率运动视频）。<br>3. 三脚架（固定拍摄角度）。
                     </div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-header">
-                        <span>对校内学习有帮助吗？</span>
+                        <span>这和普通的 Python 课有什么区别？</span>
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        有。有氧训练提升专注力；抗压训练解决考试心慌；编程将数学物理具象化。
+                        普通 Python 课教你写 `print("Hello World")`。我们教你**构建 AI 工具**来分析真实世界的运动数据。一个是学习计算机语言，一个是利用计算机能力解决问题。
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. CONTACT -->
+    <!-- 6. CONTACT -->
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="contact-box">
@@ -536,27 +570,29 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
         
-        // 1. 分享蒙层控制
         function toggleShareMask() {
             const mask = document.getElementById('wx-share-mask');
-            if (mask.style.display === 'block') {
-                mask.style.display = 'none';
-            } else {
-                mask.style.display = 'block';
-            }
+            mask.style.display = (mask.style.display === 'block') ? 'none' : 'block';
         }
 
-        // 2. 基础动画
         gsap.utils.toArray('.section-title').forEach(title => {
             gsap.from(title, {
                 scrollTrigger: { trigger: title, start: "top 85%" },
                 y: 30, opacity: 0, duration: 0.8
             });
         });
+        
         gsap.to(".roadmap-progress", {
             scrollTrigger: { trigger: ".roadmap-list", start: "top center", end: "bottom center", scrub: true },
             height: "100%", ease: "none"
         });
+
+        // Intro Cards Animation
+        gsap.from(".intro-card", {
+            scrollTrigger: { trigger: ".intro-grid", start: "top 80%" },
+            y: 50, opacity: 0, duration: 0.6, stagger: 0.2
+        });
+
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
@@ -570,36 +606,6 @@
                 x: 30, opacity: 0, duration: 0.5
             });
         });
-
-        // 3. 微信分享 JSSDK 配置 (注意：需要后端支持)
-        // 如果您有服务器，请请求后端获取 timestamp, nonceStr, signature
-        /*
-        const shareData = {
-            title: '达芬奇计划 | 少年AI学霸运动员进化系统',
-            desc: '用Python解码身体数据，10周重塑运动表现与大脑逻辑。',
-            link: window.location.href,
-            imgUrl: 'http://your-domain.com/share-icon.png' // 必须是绝对路径
-        };
-
-        // 模拟请求后端签名 (请替换为真实接口)
-        // fetch('/api/wechat-sign?url=' + encodeURIComponent(window.location.href))
-        //    .then(res => res.json())
-        //    .then(data => {
-        //        wx.config({
-        //            debug: false,
-        //            appId: data.appId,
-        //            timestamp: data.timestamp,
-        //            nonceStr: data.nonceStr,
-        //            signature: data.signature,
-        //            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
-        //        });
-        //
-        //        wx.ready(function () {
-        //            wx.updateAppMessageShareData(shareData);
-        //            wx.updateTimelineShareData(shareData);
-        //        });
-        //    });
-        */
     </script>
 </body>
 </html>
