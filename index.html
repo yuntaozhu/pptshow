@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Project Da Vinci | 达芬奇计划 - 少年AI运动进化</title>
+    
+    <!-- 微信分享抓取的关键信息 -->
+    <title>达芬奇计划 | 少年AI学霸运动员进化系统</title>
+    <meta name="description" content="用Python重塑青少年的运动表现。10周时间，像黑客一样解码身体，像运动员一样训练大脑。">
+    
+    <!-- Open Graph 协议 (部分平台和微信旧版本会读取) -->
+    <meta property="og:title" content="达芬奇计划 | Project Da Vinci">
+    <meta property="og:description" content="用Python重塑青少年的运动表现与逻辑思维。">
+    <meta property="og:image" content="http://your-website.com/share-icon.png"> <!-- 请替换为您的实际网址+图片 -->
     
     <!-- 字体库 -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -11,26 +19,22 @@
     
     <!-- Lottie 动画库 -->
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <!-- 微信 JSSDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 
     <style>
         :root {
-            /* 核心色板 */
             --bg-color: #050505;
             --surface-dark: #0a0a0a;
             --surface-card: rgba(20, 20, 20, 0.8);
-            
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            
-            /* 能量色系 */
             --accent-green: #00ff9d; 
             --accent-red: #ff0055;   
             --accent-blue: #00d2ff;  
             --accent-orange: #ff9d00; 
-            
             --font-main: 'Exo 2', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
-            
             --container-width: 1000px;
             --section-spacing: 100px;
         }
@@ -44,6 +48,30 @@
             overflow-x: hidden;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 微信分享指引蒙层 --- */
+        #wx-share-mask {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 9999;
+            display: none; /* 默认隐藏 */
+            text-align: right; padding: 20px 30px 0 0;
+            backdrop-filter: blur(5px);
+        }
+        .share-arrow {
+            width: 100px; transform: rotate(-10deg);
+            filter: drop-shadow(0 0 10px var(--accent-green));
+        }
+        .share-text {
+            color: #fff; font-size: 1.2rem; font-weight: 700;
+            margin-top: 10px; text-align: center; margin-right: 20px;
+            line-height: 1.5;
+        }
+        .share-highlight { color: var(--accent-green); }
+
+        /* --- 只有在微信里为了Hack缩略图隐藏的图片 --- */
+        .wx-thumb-hack {
+            position: absolute; width: 300px; height: 300px; top: -1000px; left: 0; opacity: 0;
         }
 
         /* --- 背景特效 --- */
@@ -93,12 +121,12 @@
             padding: 16px 40px; background: var(--accent-green); color: #000; font-weight: 800;
             text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;
             display: inline-block; position: relative; overflow: hidden; transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
-            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3); text-align: center; cursor: pointer;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 255, 157, 0.6); background: #fff; }
         .btn.outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; box-shadow: none; }
         .btn.outline:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .btn-share { background: var(--accent-blue); color: #000; border-color: var(--accent-blue); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
 
         /* --- Hero --- */
         #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 60px; }
@@ -125,7 +153,7 @@
             font-family: var(--font-code);
         }
 
-        /* --- Syllabus (Detailed List) --- */
+        /* --- Syllabus --- */
         #syllabus { background: var(--surface-dark); }
         .roadmap-list { position: relative; max-width: 800px; margin: 0 auto; }
         .roadmap-line {
@@ -163,108 +191,77 @@
 
         .session-title { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
         .session-desc { color: #aaa; font-size: 0.9rem; margin-bottom: 15px; }
-        
-        .session-meta {
-            border-top: 1px solid #333; padding-top: 12px; display: flex; gap: 20px; font-size: 0.85rem; color: #666;
-        }
+        .session-meta { border-top: 1px solid #333; padding-top: 12px; display: flex; gap: 20px; font-size: 0.85rem; color: #666; }
         .meta-item i { margin-right: 6px; color: var(--text-secondary); }
 
-        /* --- FAQ Section (Accordion) --- */
+        /* --- FAQ --- */
         #faq { background: #080808; border-top: 1px solid #222; }
         .faq-grid { max-width: 800px; margin: 0 auto; }
-        .faq-item {
-            background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: 0.3s;
-        }
+        .faq-item { background: #121212; border: 1px solid #222; border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: 0.3s; }
         .faq-item:hover { border-color: #444; }
         .faq-item.active { border-color: var(--accent-green); background: #151515; }
-        
-        .faq-header {
-            padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            font-weight: 700; color: #fff; font-size: 1.05rem;
-        }
+        .faq-header { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: #fff; font-size: 1.05rem; }
         .faq-icon { transition: 0.3s; color: var(--accent-green); font-size: 1.2rem; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
-        
-        .faq-body {
-            max-height: 0; overflow: hidden; transition: all 0.4s ease; padding: 0 25px; color: #bbb; font-size: 0.95rem; line-height: 1.7;
-        }
+        .faq-body { max-height: 0; overflow: hidden; transition: all 0.4s ease; padding: 0 25px; color: #bbb; font-size: 0.95rem; line-height: 1.7; }
         .faq-item.active .faq-body { padding-bottom: 25px; max-height: 300px; }
 
-        /* --- Contact QR --- */
+        /* --- Contact --- */
         #contact { background: #000; border-top: 1px solid #222; overflow: hidden; }
-        .contact-box {
-            background: #0a0a0a; border: 1px solid #333; border-radius: 20px; padding: 60px;
-            max-width: 900px; margin: 0 auto; text-align: center; position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
+        .contact-box { background: #0a0a0a; border: 1px solid #333; border-radius: 20px; padding: 60px; max-width: 900px; margin: 0 auto; text-align: center; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .qr-row { display: flex; justify-content: center; gap: 50px; margin-top: 40px; flex-wrap: wrap; }
-        .qr-card {
-            background: #000; padding: 15px; border-radius: 12px; border: 1px solid #333; width: 220px;
-            position: relative; transition: 0.3s;
-        }
+        .qr-card { background: #000; padding: 15px; border-radius: 12px; border: 1px solid #333; width: 220px; position: relative; transition: 0.3s; }
         .qr-card:hover { border-color: var(--accent-green); transform: translateY(-5px); }
         .qr-img { width: 100%; aspect-ratio: 1/1; background: #222; border-radius: 4px; display: block; margin-bottom: 15px; }
-        /* 扫描线动画 */
-        .qr-card::after {
-            content: ''; position: absolute; top: 15px; left: 15px; right: 15px; height: 2px;
-            background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green);
-            animation: scan 2s infinite ease-in-out; opacity: 0;
-        }
+        .qr-card::after { content: ''; position: absolute; top: 15px; left: 15px; right: 15px; height: 2px; background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); animation: scan 2s infinite ease-in-out; opacity: 0; }
         .qr-card:hover::after { opacity: 1; }
         @keyframes scan { 0% { top: 15px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: calc(100% - 60px); opacity: 0; } }
 
-        /* Footer */
         footer { padding: 40px 0; text-align: center; border-top: 1px solid #222; color: #555; font-size: 0.85rem; }
 
-        /* --- MOBILE OPTIMIZATION (Enhanced) --- */
+        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
             :root { --section-spacing: 60px; }
-            
-            /* 全局文字调整 */
             .section-title { font-size: 2.2rem; letter-spacing: -1px; }
             .section-subtitle { font-size: 1rem; padding: 0 10px; }
-            
-            /* Hero 区域 */
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 20px; }
             .hero-visual { order: -1; height: 300px; margin-bottom: 0; }
             .hero-title-main { font-size: 2.8rem; margin-bottom: 15px; }
             .hero-desc { font-size: 1rem; line-height: 1.6; }
             .hero-content .btn { width: 100%; margin-bottom: 10px; display: block; }
             .hero-content div[style*="flex"] { display: block !important; }
-
-            /* Case Study 区域 */
             .evolution-container { grid-template-columns: 1fr; gap: 40px; }
-            .evo-step::after { 
-                content: "↓"; right: 50%; top: auto; bottom: -30px; 
-                transform: translateX(50%); font-size: 1.5rem; 
-            }
-
-            /* Syllabus 时间轴 (移动端重构) */
+            .evo-step::after { content: "↓"; right: 50%; top: auto; bottom: -30px; transform: translateX(50%); font-size: 1.5rem; }
             .roadmap-list { max-width: 100%; }
             .roadmap-line { left: 15px; }
             .roadmap-progress { left: 15px; }
-            
-            .session-card { 
-                margin-left: 40px; /* 缩减左侧边距 */
-                padding: 20px 15px; 
-            }
-            .session-idx { 
-                left: -42px; top: 0; /* 调整圆圈位置以对齐新线 */
-                width: 36px; height: 36px; font-size: 0.8rem; 
-            }
+            .session-card { margin-left: 40px; padding: 20px 15px; }
+            .session-idx { left: -42px; top: 0; width: 36px; height: 36px; font-size: 0.8rem; }
             .session-meta { flex-direction: column; gap: 5px; }
-
-            /* Contact 区域 */
             .contact-box { padding: 40px 20px; }
             .qr-row { gap: 30px; }
             .qr-card { width: 100%; max-width: 260px; margin: 0 auto; }
-            
-            /* FAQ */
             .faq-header { padding: 15px 20px; font-size: 0.95rem; }
         }
     </style>
 </head>
 <body>
+    
+    <!-- 微信卡片缩略图 Trick (用于无后端时尽可能让微信抓取到正确图片) -->
+    <div class="wx-thumb-hack">
+        <!-- 务必确保 share-icon.png 存在，建议尺寸 300x300 -->
+        <img src="share-icon.png" alt="icon">
+    </div>
+
+    <!-- 微信分享引导蒙层 -->
+    <div id="wx-share-mask" onclick="toggleShareMask()">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2934.png" class="share-arrow" alt="arrow">
+        <div class="share-text">
+            点击右上角 <span style="font-size:1.5em; vertical-align:middle;">...</span><br>
+            选择 <span class="share-highlight">发送给朋友</span> <br>
+            或 <span class="share-highlight">分享到朋友圈</span>
+        </div>
+    </div>
 
     <!-- 背景 -->
     <div class="cyber-grid-bg"></div>
@@ -283,7 +280,8 @@
                     </p>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 30px;">
                         <a href="#contact" class="btn">立即加入 (扫码)</a>
-                        <a href="#syllabus" class="btn outline">查看课程大纲</a>
+                        <!-- 新增分享按钮 -->
+                        <div onclick="toggleShareMask()" class="btn btn-share">分享给朋友</div>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -295,7 +293,7 @@
         </div>
     </section>
 
-    <!-- 2. CASE STUDY (Alex) -->
+    <!-- 2. CASE STUDY -->
     <section id="case-study" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -303,32 +301,29 @@
                 <h2 class="section-title">Alex 的进化档案</h2>
                 <p class="section-subtitle">一个 14 岁壁球少年，如何通过 Python 解决“启动慢”的难题。</p>
             </div>
-
             <div class="evolution-container">
                 <div class="evo-step">
                     <span class="tag-badge t-blue">PHASE 1</span>
                     <h4 class="session-title">“我为什么总是慢？”</h4>
-                    <p style="color:#888; font-size:0.9rem;">Alex 觉得自己跑得快，但总是接不到球。主观感觉与客观数据存在偏差。</p>
+                    <p style="color:#888; font-size:0.9rem;">主观感觉与客观数据存在偏差。</p>
                     <div class="data-box" style="border-color:#666;">
                         <div style="color:#666; font-size:0.75rem;">反应时 (Before)</div>
                         <div style="font-size:1.4rem; color:#888;">0.65s</div>
                     </div>
                 </div>
-
                 <div class="evo-step">
                     <span class="tag-badge t-blue">PHASE 2</span>
                     <h4 class="session-title">编写“外挂”</h4>
-                    <p style="color:#888; font-size:0.9rem;">编写代码计算速度。当速度 > 0.05 时，骨骼线<span style="color:var(--accent-red)">变红</span>，直观看到爆发瞬间。</p>
+                    <p style="color:#888; font-size:0.9rem;">当速度 > 0.05 时，骨骼线<span style="color:var(--accent-red)">变红</span>。</p>
                     <div class="data-box" style="border-color:var(--accent-blue);">
                         <div style="color:#666; font-size:0.75rem;">Script Running</div>
                         <div style="font-size:1.1rem; color:var(--accent-blue);">Neural_Spark.py</div>
                     </div>
                 </div>
-
                 <div class="evo-step">
                     <span class="tag-badge t-green">PHASE 3</span>
                     <h4 class="session-title">数据驱动肉体</h4>
-                    <p style="color:#888; font-size:0.9rem;">通过视觉反馈修正发力模式，10周后启动速度大幅提升。</p>
+                    <p style="color:#888; font-size:0.9rem;">修正发力模式，数据证明一切。</p>
                     <div class="data-box" style="border-color:var(--accent-green);">
                         <div style="color:#666; font-size:0.75rem;">反应时 (After)</div>
                         <div style="font-size:1.4rem; color:var(--accent-green);">0.32s <span style="font-size:0.8rem;">(▲50%)</span></div>
@@ -338,7 +333,7 @@
         </div>
     </section>
 
-    <!-- 3. DETAILED SYLLABUS -->
+    <!-- 3. SYLLABUS -->
     <section id="syllabus" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -346,20 +341,18 @@
                 <h2 class="section-title">10 课时冲刺地图</h2>
                 <p class="section-subtitle">从零开始，打造属于你的 AI 运动助教。</p>
             </div>
-
             <div class="roadmap-list">
                 <div class="roadmap-line"></div>
                 <div class="roadmap-progress"></div>
-
+                
                 <!-- 01 -->
                 <div class="session-card">
                     <div class="session-idx">01</div>
                     <span class="tag-badge t-blue">L1 感知层</span>
                     <h4 class="session-title">数字自我：环境与骨骼</h4>
-                    <p class="session-desc">配置 Python 开发环境。调用 MediaPipe 库，在视频中画出全身 33 个骨骼关键点，第一次看到“数字化的自己”。</p>
+                    <p class="session-desc">配置 Python 环境。调用 MediaPipe，在视频中画出全身 33 个骨骼关键点，第一次看到“数字化的自己”。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> MediaPipe / OpenCV</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：数字骨骼脚本</span>
                     </div>
                 </div>
 
@@ -368,10 +361,9 @@
                     <div class="session-idx">02</div>
                     <span class="tag-badge t-green">L2 逻辑层</span>
                     <h4 class="session-title">几何裁判：T 点回位检测</h4>
-                    <p class="session-desc">利用勾股定理计算人与球场中心 T 点的距离。编写逻辑：如果击球后 3 秒未回位，判定为失误。</p>
+                    <p class="session-desc">利用勾股定理计算人与 T 点的距离。逻辑：若击球后 3 秒未回位，判定失误。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Math / Logic</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：回位检测器</span>
                     </div>
                 </div>
 
@@ -383,7 +375,6 @@
                     <p class="session-desc">编写 v=Δd/Δt 公式。计算脚踝的瞬时速度，理解物理公式在现实中的应用。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Physics</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：速度计算脚本</span>
                     </div>
                 </div>
 
@@ -392,10 +383,9 @@
                     <div class="session-idx">04</div>
                     <span class="tag-badge t-red">L5 爆发层</span>
                     <h4 class="session-title">神经火花：可视化特效</h4>
-                    <p class="session-desc">设定“爆发阈值”。当速度超过临界点时，将屏幕骨骼渲染为红色，直观看到 ATP-CP 系统的激活。</p>
+                    <p class="session-desc">设定“爆发阈值”。当速度超过临界点时，将屏幕骨骼渲染为红色，直观看到爆发瞬间。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Data Viz</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：爆发力可视化工具</span>
                     </div>
                 </div>
 
@@ -404,10 +394,9 @@
                     <div class="session-idx">05</div>
                     <span class="tag-badge t-blue">L5 进阶</span>
                     <h4 class="session-title">算法优化：去除数据噪点</h4>
-                    <p class="session-desc">发现原始数据的抖动问题。引入平滑滤波算法 (Smoothing Algorithm) 去除噪点，绘制完美曲线。</p>
+                    <p class="session-desc">发现数据抖动。引入平滑滤波算法 (Smoothing Algorithm) 去除噪点，绘制完美曲线。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Algorithms</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：专业速度波形图</span>
                     </div>
                 </div>
 
@@ -419,7 +408,6 @@
                     <p class="session-desc">进行 20 分钟连续 Ghosting 训练。采集长时间运动下的骨骼数据，体验有氧系统的极限。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-run-line"></i> Data Mining</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：耐力数据集</span>
                     </div>
                 </div>
 
@@ -428,10 +416,9 @@
                     <div class="session-idx">07</div>
                     <span class="tag-badge t-orange">L3 耐力层</span>
                     <h4 class="session-title">疲劳算法：量化专注力</h4>
-                    <p class="session-desc">对比第 1 分钟与第 19 分钟的动作一致性（方差分析）。用数据证明“大脑何时开始走神”。</p>
+                    <p class="session-desc">对比第 1 分钟与第 19 分钟的动作一致性。用数据证明“大脑何时开始走神”。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-code-line"></i> Statistics</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：疲劳分析报告</span>
                     </div>
                 </div>
 
@@ -443,7 +430,6 @@
                     <p class="session-desc">学习 Streamlit 框架。将之前的脚本功能模块化，搭建一个有按钮、有视频框的网页应用。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-layout-line"></i> Streamlit</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：App v0.1</span>
                     </div>
                 </div>
 
@@ -452,10 +438,9 @@
                     <div class="session-idx">09</div>
                     <span class="tag-badge t-blue">L6 集成层</span>
                     <h4 class="session-title">注入灵魂：AI 教练接口</h4>
-                    <p class="session-desc">接入 Google Gemini API。让 AI 读取你的疲劳数据，并生成文字版的战术改进建议。</p>
+                    <p class="session-desc">接入 LLM API。让 AI 读取你的疲劳数据，并生成文字版的战术改进建议。</p>
                     <div class="session-meta">
-                        <span class="meta-item"><i class="ri-openai-line"></i> LLM API</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：智能对话功能</span>
+                        <span class="meta-item"><i class="ri-openai-line"></i> AI API</span>
                     </div>
                 </div>
 
@@ -464,26 +449,22 @@
                     <div class="session-idx">10</div>
                     <span class="tag-badge t-green">L6 交付层</span>
                     <h4 class="session-title">终极路演：发布你的作品</h4>
-                    <p class="session-desc">向父母和朋友演示你的 AI App。解释数据背后的运动原理，展现“身心主权者”的自信。</p>
+                    <p class="session-desc">向父母和朋友演示你的 AI App。解释数据背后的运动原理，展现自信。</p>
                     <div class="session-meta">
                         <span class="meta-item"><i class="ri-mic-line"></i> Presentation</span>
-                        <span class="meta-item"><i class="ri-file-list-3-line"></i> 产出：结业路演视频</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- 4. FAQ SECTION -->
+    <!-- 4. FAQ -->
     <section id="faq" class="section-padding">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag" style="border-color:#fff; color:#fff;">Q&A</span>
-                <h2 class="section-title">常见问题解答</h2>
-                <p class="section-subtitle">关于课程的准备、难度与收益。</p>
+                <h2 class="section-title">常见问题</h2>
             </div>
-
             <div class="faq-grid">
                 <div class="faq-item">
                     <div class="faq-header">
@@ -491,77 +472,60 @@
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        <strong>完全可以。</strong> 我们采用“脚手架”式教学。导师会提供基础代码框架，孩子只需要专注于核心逻辑（如物理公式、判断规则）的填空与调试。重点培养的是工程思维，而不是死记语法。
+                        <strong>完全可以。</strong> 采用“脚手架”式教学。导师提供基础框架，孩子专注于核心逻辑填空。
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-header">
                         <span>需要准备什么硬件设备？</span>
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        1. 一台笔记本电脑（Windows 或 Mac 均可）。<br>
-                        2. 一部智能手机（用于拍摄高帧率视频）。<br>
-                        3. 一个稳固的三脚架（用于固定拍摄角度，非常重要）。<br>
-                        4. (可选) Apple Watch 或运动手环，用于采集心率数据。
+                        1. 笔记本电脑。<br>2. 智能手机（拍视频）。<br>3. 三脚架（固定拍摄）。
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-header">
-                        <span>这对校内学习有什么帮助？</span>
+                        <span>对校内学习有帮助吗？</span>
                         <i class="ri-arrow-down-s-line faq-icon"></i>
                     </div>
                     <div class="faq-body">
-                        有直接帮助。有氧训练能显著提升长篇阅读的专注力续航；抗压训练能解决考试最后15分钟的心慌问题；编程过程将抽象的数学、物理知识具象化，让孩子真正理解公式的用途。
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-header">
-                        <span>孩子不喜欢运动怎么办？</span>
-                        <i class="ri-arrow-down-s-line faq-icon"></i>
-                    </div>
-                    <div class="faq-body">
-                        这正是本课程的魔力。我们将运动变成了“为AI采集数据”的游戏过程。为了让代码跑出漂亮的结果（如红色的爆发线），孩子往往会主动去优化自己的动作，从而爱上运动。
+                        有。有氧训练提升专注力；抗压训练解决考试心慌；编程将数学物理具象化。
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. CONTACT / QR CODE -->
+    <!-- 5. CONTACT -->
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="contact-box">
                 <div class="section-tag">Access Terminal</div>
                 <h2 class="section-title">立即预约评估</h2>
-                <p class="section-subtitle">首期“达芬奇计划”仅开放 10 个席位，额满即止。</p>
-                
+                <p class="section-subtitle">首期仅开放 10 个席位，额满即止。</p>
                 <div class="qr-row">
-                    <!-- Pic 1 -->
                     <div class="qr-card">
                         <img src="pic1.png" alt="课程咨询" class="qr-img">
                         <div style="color:#fff; font-weight:700;">课程咨询</div>
                         <div style="color:#666; font-size:0.8rem;">添加导师微信</div>
                     </div>
-                    
-                    <!-- Pic 2 -->
                     <div class="qr-card">
                         <img src="pic2.png" alt="官方频道" class="qr-img">
                         <div style="color:#fff; font-weight:700;">官方频道</div>
                         <div style="color:#666; font-size:0.8rem;">获取更多案例</div>
                     </div>
                 </div>
+                <div style="margin-top: 40px;">
+                    <div onclick="toggleShareMask()" class="btn btn-share">推荐给朋友</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 Project Da Vinci | Somatics Planet. All Rights Reserved.</p>
+            <p>&copy; 2026 Project Da Vinci | Somatics Planet.</p>
         </div>
     </footer>
 
@@ -572,21 +536,27 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
         
-        // 标题动画
+        // 1. 分享蒙层控制
+        function toggleShareMask() {
+            const mask = document.getElementById('wx-share-mask');
+            if (mask.style.display === 'block') {
+                mask.style.display = 'none';
+            } else {
+                mask.style.display = 'block';
+            }
+        }
+
+        // 2. 基础动画
         gsap.utils.toArray('.section-title').forEach(title => {
             gsap.from(title, {
                 scrollTrigger: { trigger: title, start: "top 85%" },
                 y: 30, opacity: 0, duration: 0.8
             });
         });
-
-        // 路线图进度条
         gsap.to(".roadmap-progress", {
             scrollTrigger: { trigger: ".roadmap-list", start: "top center", end: "bottom center", scrub: true },
             height: "100%", ease: "none"
         });
-
-        // FAQ 交互
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
@@ -594,14 +564,42 @@
                 if (!isActive) item.classList.add('active');
             });
         });
-
-        // 课程卡片入场
         gsap.utils.toArray('.session-card').forEach((card, i) => {
             gsap.from(card, {
                 scrollTrigger: { trigger: card, start: "top 90%" },
                 x: 30, opacity: 0, duration: 0.5
             });
         });
+
+        // 3. 微信分享 JSSDK 配置 (注意：需要后端支持)
+        // 如果您有服务器，请请求后端获取 timestamp, nonceStr, signature
+        /*
+        const shareData = {
+            title: '达芬奇计划 | 少年AI学霸运动员进化系统',
+            desc: '用Python解码身体数据，10周重塑运动表现与大脑逻辑。',
+            link: window.location.href,
+            imgUrl: 'http://your-domain.com/share-icon.png' // 必须是绝对路径
+        };
+
+        // 模拟请求后端签名 (请替换为真实接口)
+        // fetch('/api/wechat-sign?url=' + encodeURIComponent(window.location.href))
+        //    .then(res => res.json())
+        //    .then(data => {
+        //        wx.config({
+        //            debug: false,
+        //            appId: data.appId,
+        //            timestamp: data.timestamp,
+        //            nonceStr: data.nonceStr,
+        //            signature: data.signature,
+        //            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
+        //        });
+        //
+        //        wx.ready(function () {
+        //            wx.updateAppMessageShareData(shareData);
+        //            wx.updateTimelineShareData(shareData);
+        //        });
+        //    });
+        */
     </script>
 </body>
 </html>
