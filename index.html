@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Project Da Vinci | 达芬奇计划 - 少年AI运动进化</title>
     
     <!-- 字体库 -->
@@ -23,10 +23,10 @@
             --text-secondary: #a0a0a0;
             
             /* 能量色系 */
-            --accent-green: #00ff9d; /* 逻辑/通过 */
-            --accent-red: #ff0055;   /* 爆发/警告 */
-            --accent-blue: #00d2ff;  /* 科技/数据 */
-            --accent-orange: #ff9d00; /* 耐力 */
+            --accent-green: #00ff9d; 
+            --accent-red: #ff0055;   
+            --accent-blue: #00d2ff;  
+            --accent-orange: #ff9d00; 
             
             --font-main: 'Exo 2', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
@@ -94,6 +94,7 @@
             text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;
             display: inline-block; position: relative; overflow: hidden; transition: 0.3s;
             box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+            text-align: center;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 255, 157, 0.6); background: #fff; }
         .btn.outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; box-shadow: none; }
@@ -215,14 +216,51 @@
         /* Footer */
         footer { padding: 40px 0; text-align: center; border-top: 1px solid #222; color: #555; font-size: 0.85rem; }
 
-        /* Mobile */
+        /* --- MOBILE OPTIMIZATION (Enhanced) --- */
         @media (max-width: 768px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-visual { order: -1; height: 350px; }
-            .hero-title-main { font-size: 3rem; }
-            .evolution-container { grid-template-columns: 1fr; }
-            .evo-step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -30px; transform: translateX(50%); }
-            .session-card { padding: 20px; }
+            :root { --section-spacing: 60px; }
+            
+            /* 全局文字调整 */
+            .section-title { font-size: 2.2rem; letter-spacing: -1px; }
+            .section-subtitle { font-size: 1rem; padding: 0 10px; }
+            
+            /* Hero 区域 */
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+            .hero-visual { order: -1; height: 300px; margin-bottom: 0; }
+            .hero-title-main { font-size: 2.8rem; margin-bottom: 15px; }
+            .hero-desc { font-size: 1rem; line-height: 1.6; }
+            .hero-content .btn { width: 100%; margin-bottom: 10px; display: block; }
+            .hero-content div[style*="flex"] { display: block !important; }
+
+            /* Case Study 区域 */
+            .evolution-container { grid-template-columns: 1fr; gap: 40px; }
+            .evo-step::after { 
+                content: "↓"; right: 50%; top: auto; bottom: -30px; 
+                transform: translateX(50%); font-size: 1.5rem; 
+            }
+
+            /* Syllabus 时间轴 (移动端重构) */
+            .roadmap-list { max-width: 100%; }
+            .roadmap-line { left: 15px; }
+            .roadmap-progress { left: 15px; }
+            
+            .session-card { 
+                margin-left: 40px; /* 缩减左侧边距 */
+                padding: 20px 15px; 
+            }
+            .session-idx { 
+                left: -42px; top: 0; /* 调整圆圈位置以对齐新线 */
+                width: 36px; height: 36px; font-size: 0.8rem; 
+            }
+            .session-meta { flex-direction: column; gap: 5px; }
+
+            /* Contact 区域 */
+            .contact-box { padding: 40px 20px; }
+            .qr-row { gap: 30px; }
+            .qr-card { width: 100%; max-width: 260px; margin: 0 auto; }
+            
+            /* FAQ */
+            .faq-header { padding: 15px 20px; font-size: 0.95rem; }
         }
     </style>
 </head>
