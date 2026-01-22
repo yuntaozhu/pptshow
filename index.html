@@ -6,7 +6,7 @@
     
     <!-- 微信分享抓取的关键信息 -->
     <title>达芬奇计划 | 少年AI学霸运动员进化系统</title>
-    <meta name="description" content="不仅是运动，更是认知进化。10周时间，驾驭 AI Coding 解码身体数据，像架构师一样思考。">
+    <meta name="description" content="拒绝做题家，成为躯体架构师。10周时间，驾驭 AI Coding 解码身体数据，像架构师一样思考。">
     
     <!-- 字体库 -->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -96,6 +96,7 @@
             background: linear-gradient(135deg, #fff 20%, #888 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .highlight-term { color: var(--accent-green); font-weight: bold; border-bottom: 1px dashed var(--accent-green); }
 
         /* 按钮 */
         .btn {
@@ -117,19 +118,101 @@
         .hero-anim { width: 100%; height: 500px; animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* --- Course Intro (The Trinity) --- */
-        #intro { background: rgba(10,10,10,0.5); border-bottom: 1px solid #222; }
-        .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
-        .intro-card {
-            background: var(--surface-card); padding: 40px 30px; border-radius: 16px; border: 1px solid #222;
-            transition: 0.3s; text-align: center; position: relative; overflow: hidden;
+        /* --- 2. THE TRINITY Section --- */
+        #intro { background: #080808; border-bottom: 1px solid #222; position: relative; }
+        
+        /* Vision */
+        .vision-box {
+            text-align: center; margin-bottom: 80px; padding: 40px;
+            background: linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(0,0,0,0) 100%);
+            border: 1px solid #222; border-radius: 16px;
         }
-        .intro-card:hover { transform: translateY(-10px); border-color: var(--accent-blue); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
-        .intro-icon { height: 140px; margin-bottom: 20px; }
-        .intro-label { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 15px; text-transform: uppercase; }
-        .intro-p { color: #aaa; font-size: 0.95rem; line-height: 1.6; }
-        .intro-divider { height: 3px; width: 40px; background: #333; margin: 0 auto 15px auto; transition: 0.3s; }
-        .intro-card:hover .intro-divider { width: 80px; background: var(--accent-green); }
+        .vision-title { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 20px; text-transform: uppercase; }
+        .vision-desc { color: #aaa; font-size: 1.05rem; max-width: 800px; margin: 0 auto; line-height: 1.8; }
+
+        /* Pillars */
+        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
+        .pillar-card {
+            background: var(--surface-card); padding: 30px; border-radius: 12px; border: 1px solid #222;
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .pillar-card:hover { transform: translateY(-5px); border-color: #444; }
+        .pillar-bar { height: 4px; width: 40px; margin-bottom: 20px; transition: 0.3s; }
+        .p-green .pillar-bar { background: var(--accent-green); }
+        .p-blue .pillar-bar { background: var(--accent-blue); }
+        .p-purple .pillar-bar { background: var(--accent-purple); }
+        .pillar-card:hover .pillar-bar { width: 100%; }
+        .pillar-head { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .pillar-body { font-size: 0.9rem; color: #999; line-height: 1.6; }
+        .pillar-sub-item { margin-top: 10px; padding-left: 10px; border-left: 2px solid #333; }
+        .sub-title { display: block; color: #ddd; font-weight: 600; font-size: 0.85rem; }
+        .sub-desc { display: block; color: #777; font-size: 0.8rem; }
+
+        /* Layers */
+        .layers-header { text-align: center; margin-bottom: 40px; }
+        .layers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .layer-card {
+            background: #0f0f0f; border: 1px solid #222; border-radius: 12px; padding: 25px;
+            display: flex; gap: 20px; transition: 0.3s;
+        }
+        .layer-card:hover { border-color: var(--accent-blue); background: #141414; }
+        .layer-badge {
+            width: 50px; height: 50px; flex-shrink: 0;
+            background: #000; border: 1px solid #333; border-radius: 8px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-family: var(--font-code); font-weight: 700;
+        }
+        .lb-num { font-size: 1.2rem; color: #fff; line-height: 1; }
+        .lb-txt { font-size: 0.6rem; color: #666; text-transform: uppercase; margin-top: 2px; }
+        .layer-content h4 { color: #fff; font-size: 1.1rem; margin-bottom: 8px; }
+        .layer-goal { color: #bbb; font-size: 0.9rem; margin-bottom: 12px; font-style: italic; }
+        .layer-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tech-tag { font-size: 0.7rem; padding: 2px 8px; background: rgba(0, 210, 255, 0.1); color: var(--accent-blue); border-radius: 4px; font-family: var(--font-code); }
+        .artifact-tag { font-size: 0.7rem; padding: 2px 8px; background: rgba(0, 255, 157, 0.1); color: var(--accent-green); border-radius: 4px; border: 1px solid rgba(0, 255, 157, 0.2); }
+
+        /* --- 3. Key Outcomes --- */
+        #outcomes { background: #050505; position: relative; }
+        .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px; }
+        .outcome-card {
+            background: var(--surface-card); padding: 35px; border-radius: 16px; 
+            border: 1px solid #222; transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .outcome-card:hover { transform: translateY(-5px); background: #1a1a1a; }
+        .outcome-top-bar { position: absolute; top: 0; left: 0; width: 100%; height: 4px; }
+        .outcome-icon-box {
+            width: 60px; height: 60px; border-radius: 12px; background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.8rem;
+        }
+        .outcome-title { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .outcome-desc { color: #999; font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- 4. Delivery Mode --- */
+        #delivery { background: #0a0a0a; border-top: 1px solid #222; }
+        .omo-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; position: relative; }
+        .omo-connector {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: #000; border: 2px solid #333; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.5rem; z-index: 2;
+        }
+        .omo-step {
+            padding: 40px; border-radius: 20px; border: 1px dashed #444; position: relative;
+            transition: 0.3s; background: rgba(255,255,255,0.02);
+        }
+        .omo-step:hover { border-style: solid; background: rgba(255,255,255,0.04); }
+        .step-label { font-family: var(--font-code); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .step-title { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
+        .info-list { list-style: none; margin-top: 20px; }
+        .info-item { margin-bottom: 12px; font-size: 0.95rem; color: #aaa; display: flex; align-items: flex-start; }
+        .info-item i { margin-right: 10px; margin-top: 4px; }
+        .info-highlight { color: #fff; font-weight: 600; }
+        .mode-action { border-color: rgba(255, 85, 0, 0.3); }
+        .mode-action:hover { border-color: #ff5500; box-shadow: 0 0 30px rgba(255, 85, 0, 0.1); }
+        .mode-action .step-label { color: #ff5500; }
+        .mode-action .info-item i { color: #ff5500; }
+        .mode-cognitive { border-color: rgba(0, 210, 255, 0.3); }
+        .mode-cognitive:hover { border-color: var(--accent-blue); box-shadow: 0 0 30px rgba(0, 210, 255, 0.1); }
+        .mode-cognitive .step-label { color: var(--accent-blue); }
+        .mode-cognitive .info-item i { color: var(--accent-blue); }
 
         /* --- Case Study --- */
         #case-study { background: linear-gradient(180deg, #050505 0%, #111 100%); border-top: 1px solid #222; }
@@ -153,7 +236,6 @@
         .roadmap-list { position: relative; max-width: 800px; margin: 0 auto; }
         .roadmap-line { position: absolute; left: 30px; top: 20px; bottom: 20px; width: 2px; background: #222; z-index: 0; }
         .roadmap-progress { position: absolute; left: 30px; top: 20px; width: 2px; height: 0; background: linear-gradient(to bottom, var(--accent-blue), var(--accent-green)); z-index: 0; }
-
         .session-card {
             background: var(--surface-card); border: 1px solid #222; border-radius: 12px;
             padding: 25px; margin-bottom: 30px; margin-left: 70px; position: relative; transition: 0.3s;
@@ -166,13 +248,11 @@
             font-weight: 700; font-family: var(--font-code); z-index: 2; transition: 0.3s;
         }
         .session-card:hover .session-idx { border-color: var(--accent-green); color: var(--accent-green); box-shadow: 0 0 15px rgba(0,255,157,0.3); }
-
         .tag-badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.1); }
         .t-blue { color: var(--accent-blue); background: rgba(0, 210, 255, 0.1); }
         .t-green { color: var(--accent-green); background: rgba(0, 255, 157, 0.1); }
         .t-red { color: var(--accent-red); background: rgba(255, 0, 85, 0.1); }
         .t-orange { color: var(--accent-orange); background: rgba(255, 157, 0, 0.1); }
-
         .session-title { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
         .session-desc { color: #aaa; font-size: 0.9rem; margin-bottom: 15px; }
         .session-meta { border-top: 1px solid #333; padding-top: 12px; display: flex; gap: 20px; font-size: 0.85rem; color: #666; }
@@ -216,8 +296,18 @@
             .hero-content div[style*="flex"] { display: block !important; }
             
             /* Intro Section */
-            .intro-grid { grid-template-columns: 1fr; gap: 30px; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .layers-grid { grid-template-columns: 1fr; }
+            .layer-card { flex-direction: column; gap: 15px; }
+            .layer-badge { width: 100%; height: 40px; flex-direction: row; gap: 10px; }
+            .lb-txt { margin-top: 0; font-size: 0.8rem; }
             
+            /* Outcomes & OMO */
+            .outcomes-grid { grid-template-columns: 1fr; }
+            .omo-container { grid-template-columns: 1fr; gap: 30px; }
+            .omo-connector { display: none; } 
+            .omo-step { padding: 30px 20px; }
+
             .evolution-container { grid-template-columns: 1fr; gap: 40px; }
             .evo-step::after { content: "↓"; right: 50%; top: auto; bottom: -30px; transform: translateX(50%); font-size: 1.5rem; }
             .roadmap-list { max-width: 100%; }
@@ -263,7 +353,7 @@
                     <h1 class="hero-title-main gradient-text">PROJECT<br>DA VINCI</h1>
                     <p class="hero-desc">
                         青少年 <strong style="color:var(--accent-green)">AI 架构师</strong> 进化系统。<br>
-                        不再是单纯的敲代码。而是学会 <strong>构建 AI 能力</strong>，让 AI Coding 成为你的分析师，用算法重塑大脑与身体。
+                        拒绝被算法替代。10周时间，学会<strong>指挥 AI Coding</strong> 解码身体数据，像架构师一样思考。
                     </p>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 30px;">
                         <a href="#contact" class="btn">立即加入 (扫码)</a>
@@ -279,55 +369,310 @@
         </div>
     </section>
 
-    <!-- 2. COURSE INTRO (THE TRINITY) -->
+    <!-- 2. THE TRINITY: 深度课程介绍 -->
     <section id="intro" class="section-padding">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">THE TRINITY</h2>
-                <p class="section-subtitle">打破“为了编程而编程”的旧模式。<br>这是一门 <strong>体育、AI 工程学与认知科学</strong> 的交叉学科。</p>
+                <span class="section-tag" style="border-color:#fff; color:#fff;">Philosophy</span>
+                <h2 class="section-title">The Trinity</h2>
+                <p class="section-subtitle">
+                    体育 × AI 工程学 × 认知科学<br>
+                    打破“为了编程而编程”的旧模式。
+                </p>
+            </div>
+
+            <!-- Vision: 愿景 -->
+            <div class="vision-box">
+                <h3 class="vision-title">拒绝培养“做题家”，孵化“躯体架构师”</h3>
+                <p class="vision-desc">
+                    在 AI 时代，单纯的知识记忆将被算法替代。本课程致力于培养未来的 <span class="highlight-term">Somatic Architects (躯体架构师)</span>。
+                    我们将引导学生利用代码监控身体，利用运动重塑大脑，构建属于自己的 <strong>“AI 外脑 (extBrain)”</strong>，
+                    从而获得顶级的学习专注力、考试抗压能力和终身受益的健康体魄。
+                </p>
+            </div>
+
+            <!-- Scientific Pillars: 三大科学支柱 -->
+            <h3 class="text-center" style="color:#fff; margin-bottom:30px; font-size:1.5rem;">核心科学支柱</h3>
+            <div class="pillars-grid">
+                <!-- Pillar 1 -->
+                <div class="pillar-card p-green">
+                    <div class="pillar-bar"></div>
+                    <h4 class="pillar-head">生物能学<br><span style="font-size:0.8em; color:#666;">Bioenergetics</span></h4>
+                    <p class="pillar-body">身体供能与大脑状态的深度映射。</p>
+                    <div class="pillar-sub-item">
+                        <span class="sub-title" style="color:var(--accent-green)">有氧系统 = 专注底座</span>
+                        <span class="sub-desc">消除“脑雾”，支持2小时+深度思考。</span>
+                    </div>
+                    <div class="pillar-sub-item">
+                        <span class="sub-title" style="color:var(--accent-red)">糖酵解 = 抗压防火墙</span>
+                        <span class="sub-desc">训练大脑在高压（乳酸堆积）下保持逻辑。</span>
+                    </div>
+                    <div class="pillar-sub-item">
+                        <span class="sub-title" style="color:var(--accent-blue)">ATP-CP = 神经火花</span>
+                        <span class="sub-desc">提升神经突触速度，增强审题直觉。</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="pillar-card p-blue">
+                    <div class="pillar-bar"></div>
+                    <h4 class="pillar-head">控制论与外脑<br><span style="font-size:0.8em; color:#666;">Cybernetics</span></h4>
+                    <p class="pillar-body">
+                        构建客观的数字观察者。消除主观偏差（“我觉得不累” vs “数据表明已力竭”）。
+                    </p>
+                    <div style="margin-top:15px; border:1px dashed #333; padding:10px; border-radius:8px; font-family:var(--font-code); font-size:0.8rem; color:#888;">
+                        感知 (Sense) -> <br>
+                        分析 (Analyze) -> <br>
+                        调整 (Adjust)
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="pillar-card p-purple">
+                    <div class="pillar-bar"></div>
+                    <h4 class="pillar-head">敏捷交付与主权<br><span style="font-size:0.8em; color:#666;">Sovereignty</span></h4>
+                    <p class="pillar-body">
+                        赋予高中生成人级的技术能力。
+                    </p>
+                    <div class="pillar-sub-item">
+                        <span class="sub-title" style="color:var(--accent-purple)">创造者思维</span>
+                        <span class="sub-desc">从技术的被动消费者，转变为对身心拥有绝对掌控权的创造者。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The 6 Functional Layers: 六大功能层 -->
+            <div class="layers-header">
+                <h3 style="color:#fff; font-size:1.5rem;">课程架构：六大功能层</h3>
+                <p style="color:#666; font-size:0.9rem;">根据个人目标动态调用的核心能力模块</p>
             </div>
             
-            <div class="intro-grid">
-                <!-- Card 1: Sports -->
-                <div class="intro-card">
-                    <div class="intro-icon">
-                        <dotlottie-player src="https://lottie.host/626d9c6c-8439-4467-bc09-4700d89c02b2/sN8J3Xm5hB.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+            <div class="layers-grid">
+                <!-- L1 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L1</span>
+                        <span class="lb-txt">感知</span>
                     </div>
-                    <div class="intro-divider"></div>
-                    <div class="intro-label" style="color:var(--accent-red)">01. 运动实验室</div>
-                    <p class="intro-p">
-                        我们将球场和客厅视为<strong>数据源头</strong>。每一次挥拍、每一次冲刺，都是待分析的珍贵样本。运动不只是流汗，更是数据的生成过程。
+                    <div class="layer-content">
+                        <h4>数字之眼 (Digital Eye)</h4>
+                        <p class="layer-goal">让电脑“看见”并量化人体，坐标归一化。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">MediaPipe</span>
+                            <span class="artifact-tag">产出: 数字骨骼脚本</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L2 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L2</span>
+                        <span class="lb-txt">逻辑</span>
+                    </div>
+                    <div class="layer-content">
+                        <h4>AI 教练 (Logic Core)</h4>
+                        <p class="layer-goal">将模糊的感觉转化为精确规则 (If-Else)。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">Python Logic</span>
+                            <span class="tech-tag">State Machine</span>
+                            <span class="artifact-tag">产出: 自动纠错器</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L3 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L3</span>
+                        <span class="lb-txt">专注</span>
+                    </div>
+                    <div class="layer-content">
+                        <h4>耐力引擎 (Endurance)</h4>
+                        <p class="layer-goal">量化“专注力续航”，构建有氧基座。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="artifact-tag">产出: 专注力续航报告</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L4 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L4</span>
+                        <span class="lb-txt">抗压</span>
+                    </div>
+                    <div class="layer-content">
+                        <h4>抗压防火墙 (Resilience)</h4>
+                        <p class="layer-goal">预测力竭点，训练高压下的冷静决策。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">Linear Regression</span>
+                            <span class="tech-tag">LSTM</span>
+                            <span class="artifact-tag">产出: 疲劳预警算法</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L5 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L5</span>
+                        <span class="lb-txt">爆发</span>
+                    </div>
+                    <div class="layer-content">
+                        <h4>神经火花 (Spark)</h4>
+                        <p class="layer-goal">计算瞬间速度，提升神经敏捷度。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">Physics Calc</span>
+                            <span class="tech-tag">Smoothing</span>
+                            <span class="artifact-tag">产出: 爆发力可视化</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L6 -->
+                <div class="layer-card">
+                    <div class="layer-badge">
+                        <span class="lb-num">L6</span>
+                        <span class="lb-txt">集成</span>
+                    </div>
+                    <div class="layer-content">
+                        <h4>系统发布 (Release)</h4>
+                        <p class="layer-goal">构建个人数字资产，实现外脑交互。</p>
+                        <div class="layer-tags">
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">LLM API</span>
+                            <span class="artifact-tag">产出: 个人AI助教 App</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. KEY OUTCOMES: 核心价值 -->
+    <section id="outcomes" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Value Proposition</span>
+                <h2 class="section-title">核心收益</h2>
+                <p class="section-subtitle">不仅是技能的堆叠，更是竞争力的维度升级。</p>
+            </div>
+
+            <div class="outcomes-grid">
+                <!-- Outcome 1: Tech -->
+                <div class="outcome-card">
+                    <div class="outcome-top-bar" style="background: var(--accent-blue);"></div>
+                    <div class="outcome-icon-box" style="color: var(--accent-blue);">
+                        <i class="ri-terminal-box-line"></i>
+                    </div>
+                    <h3 class="outcome-title">硬核科技技能</h3>
+                    <p class="outcome-desc">
+                        掌握 Python 编程语言、计算机视觉 (CV) 原理、大模型 (LLM) 调用与应用开发能力。不再是“调包侠”，而是理解底层原理的开发者。
                     </p>
                 </div>
 
-                <!-- Card 2: Code -->
-                <div class="intro-card">
-                    <div class="intro-icon">
-                        <dotlottie-player src="https://lottie.host/c50c0273-0d2d-4223-bd76-a0709b11786c/0S0e8K8e5q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                <!-- Outcome 2: Body -->
+                <div class="outcome-card">
+                    <div class="outcome-top-bar" style="background: var(--accent-red);"></div>
+                    <div class="outcome-icon-box" style="color: var(--accent-red);">
+                        <i class="ri-heart-pulse-line"></i>
                     </div>
-                    <div class="intro-divider"></div>
-                    <div class="intro-label" style="color:var(--accent-blue)">02. AI Coding 掌控力</div>
-                    <p class="intro-p">
-                        拒绝死记硬背。我们教授 <strong>Prompt Engineering (提示词工程)</strong>。你将学会像架构师一样思考，指挥 AI 编写 Python 脚本，处理复杂的视觉数据。
+                    <h3 class="outcome-title">强健体魄与表现</h3>
+                    <p class="outcome-desc">
+                        建立科学的运动习惯。针对性提升<strong>心肺耐力</strong>（学习底座）和<strong>爆发力</strong>。让身体成为支撑高强度脑力劳动的最强容器。
                     </p>
                 </div>
 
-                <!-- Card 3: Mind -->
-                <div class="intro-card">
-                    <div class="intro-icon">
-                        <dotlottie-player src="https://lottie.host/82dfc706-5389-4a9c-959c-67af447f523c/42yHw01k8Q.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
+                <!-- Outcome 3: Background -->
+                <div class="outcome-card">
+                    <div class="outcome-top-bar" style="background: #bd00ff;"></div>
+                    <div class="outcome-icon-box" style="color: #bd00ff;">
+                        <i class="ri-trophy-line"></i>
                     </div>
-                    <div class="intro-divider"></div>
-                    <div class="intro-label" style="color:var(--accent-green)">03. 认知进化</div>
-                    <p class="intro-p">
-                        从数据中发现弱点，在训练中重塑大脑。利用 AI 这一“外脑”来辅助“生物脑”，提升<strong>深度专注力</strong>与<strong>逻辑决策力</strong>。
+                    <h3 class="outcome-title">升学背景提升</h3>
+                    <p class="outcome-desc">
+                        拥有一套自己独立开发的 <strong>AI 运动分析软件</strong>（含 GitHub 代码库 + 可运行 Web App）。这是申请国内外名校理工科专业时，极具差异化竞争力的作品集。
+                    </p>
+                </div>
+
+                <!-- Outcome 4: Meta-Cognition -->
+                <div class="outcome-card">
+                    <div class="outcome-top-bar" style="background: var(--accent-green);"></div>
+                    <div class="outcome-icon-box" style="color: var(--accent-green);">
+                        <i class="ri-mind-map"></i>
+                    </div>
+                    <h3 class="outcome-title">元认知与自我管理</h3>
+                    <p class="outcome-desc">
+                        学会跳出主观感觉，用客观数据监控自己的状态。这种<strong>“基于数据的自我管理能力”</strong>是伴随终身的财富，让你在任何领域都比别人更了解自己。
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. CASE STUDY -->
+    <!-- 4. DELIVERY MODE: OMO 双循环 -->
+    <section id="delivery" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" style="border-color:#fff; color:#fff;">Delivery Mode</span>
+                <h2 class="section-title">OMO 双循环模式</h2>
+                <p class="section-subtitle">解决“学”与“练”的分离，让学习高效且有趣。</p>
+            </div>
+
+            <div class="omo-container">
+                <!-- Connector Icon -->
+                <div class="omo-connector">
+                    <i class="ri-refresh-line"></i>
+                </div>
+
+                <!-- Step 1: Offline -->
+                <div class="omo-step mode-action">
+                    <span class="step-label">Step 01 - The Action Loop</span>
+                    <h3 class="step-title">线下行动环</h3>
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <i class="ri-map-pin-line"></i>
+                            <span><span class="info-highlight">地点：</span>家中客厅、社区球场、健身房</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="ri-user-3-line"></i>
+                            <span><span class="info-highlight">角色：</span>学生（运动员）+ 家长（数据官/摄影师）</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="ri-camera-lens-line"></i>
+                            <span><span class="info-highlight">任务：</span>进行真实的体育锻炼（出汗、体验），拍摄高帧率视频，采集真实数据。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 2: Online -->
+                <div class="omo-step mode-cognitive">
+                    <span class="step-label">Step 02 - The Cognitive Loop</span>
+                    <h3 class="step-title">线上认知环</h3>
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <i class="ri-computer-line"></i>
+                            <span><span class="info-highlight">地点：</span>腾讯会议（结对编程模式）</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="ri-user-settings-line"></i>
+                            <span><span class="info-highlight">角色：</span>学生（架构师/Coder）+ 导师（导航员）</span>
+                        </li>
+                        <li class="info-item">
+                            <i class="ri-code-s-slash-line"></i>
+                            <span><span class="info-highlight">任务：</span>共享屏幕，在导师引导下编写代码分析视频。看着代码跑出自己的运动数据，实现“身心映射”。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CASE STUDY -->
     <section id="case-study" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -367,7 +712,7 @@
         </div>
     </section>
 
-    <!-- 4. SYLLABUS -->
+    <!-- 6. SYLLABUS -->
     <section id="syllabus" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -492,7 +837,7 @@
         </div>
     </section>
 
-    <!-- 5. FAQ -->
+    <!-- 7. FAQ -->
     <section id="faq" class="section-padding">
         <div class="container">
             <div class="section-header">
@@ -531,7 +876,7 @@
         </div>
     </section>
 
-    <!-- 6. CONTACT -->
+    <!-- 8. CONTACT -->
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="contact-box">
@@ -587,11 +932,12 @@
             height: "100%", ease: "none"
         });
 
-        // Intro Cards Animation
-        gsap.from(".intro-card", {
-            scrollTrigger: { trigger: ".intro-grid", start: "top 80%" },
-            y: 50, opacity: 0, duration: 0.6, stagger: 0.2
-        });
+        // Intro & Outcomes Animation
+        gsap.from(".vision-box", { scrollTrigger: { trigger: "#intro", start: "top 70%" }, y: 30, opacity: 0, duration: 0.8 });
+        gsap.from(".pillar-card", { scrollTrigger: { trigger: ".pillars-grid", start: "top 80%" }, y: 50, opacity: 0, duration: 0.6, stagger: 0.2 });
+        gsap.from(".layer-card", { scrollTrigger: { trigger: ".layers-grid", start: "top 85%" }, x: -20, opacity: 0, duration: 0.5, stagger: 0.1 });
+        gsap.from(".outcome-card", { scrollTrigger: { trigger: ".outcomes-grid", start: "top 85%" }, y: 40, opacity: 0, duration: 0.6, stagger: 0.15 });
+        gsap.from(".omo-step", { scrollTrigger: { trigger: ".omo-container", start: "top 80%" }, x: (i) => i === 0 ? -50 : 50, opacity: 0, duration: 0.8 });
 
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', () => {
