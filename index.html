@@ -1,749 +1,540 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <title>千奇百怪的南瓜 - Reveal.js 演示文稿</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-  <!-- Reveal.js CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css" id="theme">
-
-  <style>
-    /* 全局自定义样式 */
-    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-      font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-      font-weight: bold;
-      text-transform: none;
-    }
-    .reveal section {
-      text-align: left;
-    }
-    .reveal p, .reveal li {
-      font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-    }
+    <meta charset="utf-8">
+    <title>Agentic Commerce - 下一代智能电商出海解决方案</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    /* 装饰性元素 */
-    .header-text {
-      position: absolute;
-      top: 0px;
-      left: 10px;
-      font-size: 0.4em;
-      color: #aaa;
-      font-family: 'Microsoft YaHei';
-      z-index: 10;
-    }
-    .footer-text {
-      position: absolute;
-      bottom: 0px;
-      right: 10px;
-      font-size: 0.3em;
-      color: #666;
-      font-family: 'Microsoft YaHei';
-      z-index: 10;
-    }
-    .img-placeholder {
-      border: 2px dashed #888;
-      background-color: #333;
-      color: #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6em;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    }
-    .rect-placeholder {
-      border-radius: 10px;
-    }
-    .color-block {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 10px;
-      border: 2px dashed;
-      margin: 5px;
-      font-size: 0.7em;
-      font-weight: bold;
-      text-align: center;
-    }
-    .highlight-yellow { color: #ffeb3b; }
-    .highlight-green { color: #8bc34a; }
-    .highlight-red { color: #e91e63; }
-    .highlight-blue { color: #29b6f6; }
-    .highlight-orange { color: #ff9800; }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
 
-    .stamp {
-      position: absolute;
-      background: #ffeb3b;
-      color: #d32f2f;
-      padding: 10px 30px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.5em;
-      border: 4px solid #fff;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-      z-index: 100;
-    }
-  </style>
+    <style>
+        /* 强制高质量打印输出配置 */
+        @page {
+            size: 1280px 720px; /* 强制 PDF 尺寸匹配 16:9 幻灯片 */
+            margin: 0;
+        }
+
+        :root {
+            --primary-color: #0A192F; /* 科技深蓝 */
+            --accent-color: #00B4D8;  /* 未来亮蓝 */
+            --bg-color: #ffffff;
+            --gray-light: #f7f9fa;
+            --text-main: #333333;
+        }
+        
+        /* 强制背景颜色在 PDF 中打印出来 */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .reveal {
+            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+            color: var(--text-main);
+        }
+
+        /* 标题排版优化，稍微缩小字号防止溢出 */
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: inherit;
+            color: var(--primary-color);
+            text-transform: none;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .reveal h1 { font-size: 48px; margin-bottom: 20px;}
+        .reveal h2 { font-size: 36px; margin-bottom: 35px; text-align: left; border-left: 6px solid var(--accent-color); padding-left: 15px;}
+        .reveal h3 { font-size: 22px; margin-bottom: 12px; font-weight: bold;}
+
+        /* 正文排版优化，增加行高，缩小字号 */
+        .reveal p, .reveal li {
+            font-size: 19px;
+            line-height: 1.65;
+            text-align: left;
+            color: var(--text-main);
+        }
+
+        .reveal ul { display: block; margin-left: 30px; }
+        .reveal li { margin-bottom: 10px; }
+        
+        .highlight { color: var(--accent-color); font-weight: bold; }
+
+        /* 布局网格，增大 Gap 让版面更透气 */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; align-items: start; }
+
+        /* 浅色卡片 */
+        .card {
+            background: var(--gray-light);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+            box-sizing: border-box;
+        }
+        
+        /* 强调型深色卡片 (解决截图中的溢出问题) */
+        .card-dark {
+            background: var(--primary-color);
+            padding: 35px 30px;
+            border-radius: 8px;
+            color: #ffffff;
+            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.15);
+        }
+        .card-dark h3 { color: var(--accent-color); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 12px; margin-bottom: 20px;}
+        .card-dark p { color: #d0d5da; font-size: 18px; line-height: 1.7; }
+
+        /* 强调型彩色卡片 */
+        .card-color {
+            background: #00A67E; /* 墨绿色背景 */
+            padding: 35px 30px;
+            border-radius: 8px;
+            color: #ffffff;
+            box-sizing: border-box;
+        }
+        .card-color h3 { color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 12px; margin-bottom: 20px;}
+        .card-color p { color: #f0f0f0; font-size: 18px; line-height: 1.7; }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 统一边距防止溢出 */
+        .reveal .slides section {
+            padding: 40px 60px;
+            box-sizing: border-box;
+            height: 100%;
+        }
+
+        /* 修复 PDF 打印分页问题 */
+        @media print {
+            .reveal .slides { transform: none !important; width: 100% !important; height: 100% !important; }
+            .reveal .slides section { top: 0 !important; left: 0 !important; opacity: 1 !important; visibility: visible !important; display: block !important; page-break-after: always !important; }
+        }
+    </style>
 </head>
 <body>
+    <div class="reveal">
+        <div class="slides">
 
-  <div class="reveal">
-    <div class="slides">
+            <!-- Page 1: 封面 -->
+            <section>
+                <div style="text-align: left; margin-top: 12%;">
+                    <h2 style="font-size: 28px; margin-bottom: 15px; font-weight: bold; border-left: none; padding-left: 0; color: #555;">出海智能解决方案</h2>
+                    <h1 style="font-weight: bold; border-bottom: 4px solid var(--accent-color); display: inline-block; padding-bottom: 15px; font-size: 56px;">
+                        Agentic Commerce<br>驱动中国制造卖向全球
+                    </h1>
+                    <p style="font-size: 22px; color: var(--primary-color); margin-top: 30px; font-weight: bold;">
+                        基于 OpenClaw 架构与 AI Agent 的下一代出海全渠道方案
+                    </p>
+                    <p style="font-size: 16px; color: #999; margin-top: 60px; letter-spacing: 1px;">
+                        SERVICE OVERVIEW 2026 | CONFIDENTIAL
+                    </p>
+                </div>
+            </section>
 
-      <!-- Page 1 -->
-      <section data-background-color="#fff8e1">
-        <div style="text-align: left; color: #ffca28; font-size: 0.8em; font-weight: bold; padding-top: 20px;">南瓜小游戏</div>
-        <h1 style="color: #ff9800; font-size: 3.5em; text-align: center; margin-top: 50px; text-shadow: 2px 2px #fff, -2px -2px #fff; letter-spacing: 10px;">给南瓜上个色</h1>
-        
-        <div style="display:flex; justify-content:center; margin-top: 50px;">
-          <!-- 使用SVG绘制未上色的南瓜轮廓 -->
-          <svg width="600" height="250" viewBox="0 0 600 250">
-            <!-- 南瓜1 -->
-            <g transform="translate(150, 130)">
-              <ellipse cx="0" cy="0" rx="70" ry="80" fill="none" stroke="#333" stroke-width="4"/>
-              <ellipse cx="0" cy="0" rx="40" ry="80" fill="none" stroke="#333" stroke-width="4"/>
-              <ellipse cx="0" cy="0" rx="15" ry="80" fill="none" stroke="#333" stroke-width="4"/>
-              <path d="M 0 -80 Q -10 -110 20 -120" fill="none" stroke="#333" stroke-width="5" stroke-linecap="round"/>
-            </g>
-            <!-- 南瓜2 -->
-            <g transform="translate(320, 150)">
-              <ellipse cx="0" cy="0" rx="80" ry="60" fill="none" stroke="#333" stroke-width="4"/>
-              <ellipse cx="0" cy="0" rx="45" ry="60" fill="none" stroke="#333" stroke-width="4"/>
-              <ellipse cx="0" cy="0" rx="20" ry="60" fill="none" stroke="#333" stroke-width="4"/>
-              <path d="M 0 -60 Q 15 -100 30 -90" fill="none" stroke="#333" stroke-width="5" stroke-linecap="round"/>
-            </g>
-            <!-- 南瓜3 -->
-            <g transform="translate(480, 140)">
-              <ellipse cx="0" cy="0" rx="60" ry="70" fill="none" stroke="#333" stroke-width="4"/>
-              <ellipse cx="0" cy="0" rx="35" ry="70" fill="none" stroke="#333" stroke-width="4"/>
-              <path d="M 0 -70 Q -20 -100 0 -110" fill="none" stroke="#333" stroke-width="5" stroke-linecap="round"/>
-            </g>
-          </svg>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 1</div>
-      </section>
+            <!-- Page 2: 行业痛点 -->
+            <section>
+                <h2>中国供应链出海的增长困境</h2>
+                <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 40px;">"产品做工一流，但在海外既没有品牌信任度，也拼不过高昂的流量成本。"</p>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>流量获客成本失控</h3>
+                        <p>传统平台（Amazon/Wayfair）内卷加剧，买量成本逐年攀升。传统独立站缺乏自然流量，SEO/SEM 投入犹如无底洞，ROI 持续走低。</p>
+                    </div>
+                    <div class="card">
+                        <h3>内容生产难以负荷</h3>
+                        <p>海外社媒种草需要大量的真实场景实拍与短视频。传统的海外场地租赁、外籍模特实拍动辄上万美元，且无法实现高频产出。</p>
+                    </div>
+                    <div class="card">
+                        <h3>客户沟通转化极低</h3>
+                        <p>跨国时差导致买家询盘回复慢；普通客服难以专业解答复杂的材质参数与合规认证，直接导致高意向的 B/C 端订单流失。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 2 -->
-      <section data-background-color="#212121">
-        <div class="header-text" style="color: #666;">千奇百怪的南瓜</div>
-        <div style="display: flex; justify-content: space-between; align-items: center; height: 80vh; padding: 0 50px;">
-          <div style="display: flex; flex-direction: column; gap: 30px; position: relative;">
-            <!-- 连接虚线SVG -->
-            <svg style="position: absolute; top: 50px; left: 50px; z-index: -1;" width="200" height="400">
-                <path d="M 50 0 C 150 100, -50 200, 50 300" fill="none" stroke="yellow" stroke-width="3" stroke-dasharray="5,5"/>
-            </svg>
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: #e91e63; border: 3px dashed yellow; display: flex; align-items: center; justify-content: center; color: yellow; font-size: 2.5em; font-weight: bold; margin-left: 80px;">变</div>
-            <div style="width: 80px; height: 80px; border-radius: 50%; background: #1b5e20; border: 3px dashed yellow; display: flex; align-items: center; justify-content: center; color: yellow; font-size: 1.8em; font-weight: bold;">百</div>
-            <div style="width: 90px; height: 90px; border-radius: 50%; background: #0d47a1; border: 3px dashed yellow; display: flex; align-items: center; justify-content: center; color: yellow; font-size: 2em; font-weight: bold; margin-left: 60px;">精</div>
-            <div style="width: 70px; height: 70px; border-radius: 50%; background: #673ab7; border: 3px dashed yellow; display: flex; align-items: center; justify-content: center; color: yellow; font-size: 1.5em; font-weight: bold; margin-left: 150px; margin-top: -80px;">灵</div>
-          </div>
-          <div style="text-align: right;">
-            <h2 class="highlight-yellow" style="font-size: 1.5em; margin: 0; letter-spacing: 5px;">蔬 菜</h2>
-            <h1 class="highlight-green" style="font-size: 3.5em; margin: 0; text-shadow: 2px 2px #000;">多样性之最</h1>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 2</div>
-      </section>
+            <!-- Page 3: 时代剧变 (McKinsey洞察) - 修复溢出 -->
+            <section>
+                <h2>时代剧变：Agentic Commerce（代理电商）到来</h2>
+                <p>根据麦肯锡 2025 年最新报告，传统的“搜索 - 比较 - 购买”电商模式正在被彻底颠覆。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div>
+                        <ul>
+                            <li style="margin-bottom: 15px;"><strong style="color:#000;">消费者决策被全面接管：</strong> 买家不再花数小时浏览网页比价。他们只需告诉 AI：“我刚搬家，预算2000刀，需要一套遮光窗帘”，AI代理将全网搜寻并完成下单。</li>
+                            <li><strong style="color:#000;">全新的底层基础设施：</strong> 互联网正向“机器可读网”演进。通过 MCP（模型上下文协议）和 AP2 协议，AI 已具备跨平台自主购物的权限与能力。</li>
+                        </ul>
+                    </div>
+                    <div class="card-dark">
+                        <h3>麦肯锡商业洞察</h3>
+                        <p>“数字代理每天要在商业生态中做出数百万次微小决策。品牌必须彻底重构数字层——<strong style="color:white;">不再仅仅是为人类消费者建站，而是要为代表他们行动的 AI 代理构建系统。</strong>”</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 3 -->
-      <section data-background-color="#e0f2f1">
-        <h1 style="color: #4caf50; font-size: 3.5em; text-align: center; text-shadow: 2px 2px #fff; margin-top: 10vh;">南瓜 模仿秀</h1>
-        <div style="display: flex; justify-content: center; margin-top: 50px;">
-          <div class="img-placeholder" style="width: 350px; height: 350px; background: #fff; color: #333; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 5px solid #fff;">
-            [占位符：纸折南瓜手工作品图片]
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 3</div>
-      </section>
+            <!-- Page 4: 游戏规则重写 -->
+            <section>
+                <h2>游戏规则重写：你的客户变成了 AI 模型</h2>
+                <p>在 AI 代理电商时代，如何让你的产品被 ChatGPT、Google Gemini 第一时间选中并推荐？</p>
+                
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <div class="card-icon">1</div>
+                        <h3>从 SEO 转向 GEO</h3>
+                        <p style="font-size: 18px;">基于关键词的搜索引擎优化（SEO）正在失效。品牌必须进行生成式引擎优化（GEO）：通过底层的结构化数据（Schema），让 AI 在抓取时“秒懂”你的复杂参数与核心优势。</p>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <div class="card-icon">2</div>
+                        <h3>建立“深度可信度” (E-E-A-T)</h3>
+                        <p style="font-size: 18px;">AI 代理不看花哨的广告图。它们依赖专业、权威、信任的信号。你需要提供深度的测评数据、参数对比表格与详尽的知识库，来在逻辑上“说服”大语言模型。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 4 -->
-      <section data-background-color="#3e2723">
-        <div class="header-text">南瓜果实表征多样性 -果皮色泽多样性</div>
-        <div style="text-align: center; margin-top: 25vh;">
-          <h2>
-            <span class="highlight-yellow">南瓜果实的</span> 
-            <span class="highlight-red" style="font-size: 1.8em; text-shadow: 2px 2px #fff;">果皮</span>
-          </h2>
-          <h2 class="highlight-yellow">有哪些颜色呢？</h2>
-        </div>
-        <div style="position: absolute; bottom: 10%; right: 10%; width: 120px; height: 120px; border-radius: 50%; background: #e67e22; display: flex; align-items: center; justify-content: center; border: 4px solid #fff; font-size: 1.5em; font-weight: bold; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5);">
-          观察
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 4</div>
-      </section>
+            <!-- Page 5: 我们的核心解决方案 -->
+            <section>
+                <h2>我们的破局核心：面向未来的 AI 智能架构</h2>
+                <p>我们将麦肯锡的前瞻理论落地为实战代码。为您提供一套基于 <span class="highlight">OpenClaw</span> 系统的全渠道架构。</p>
+                
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card" style="background-color: #eaf8fb; border-color: var(--accent-color);">
+                        <h3 style="color: var(--primary-color);">1. AI Agent 独立站</h3>
+                        <p>这不仅仅是一个官网，它是全渠道数据的 Master Data（主数据源），更是拦截未来 AI 流量的核心中枢节点。</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. 平台自动化控盘</h3>
+                        <p>打通独立站与 Amazon、Wayfair 等主流平台，自动监控库存成本，实现商品数据毫秒级同步与动态调价。</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. 视觉与内容引擎</h3>
+                        <p>利用顶级大模型批量产出 4K 场景图与数字人讲解视频，极低成本降维打击各大社媒与兴趣电商流量池。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 5 -->
-      <section data-background-color="#000">
-        <div class="header-text">南瓜果实表征多样性 -果皮色泽多样性</div>
-        <div style="display: flex; height: 100%; align-items: center; margin-top: 50px;">
-          <div style="width: 20%; display: flex; flex-direction: column; align-items: center;">
-            <h1 style="color: red; writing-mode: vertical-rl; text-shadow: 2px 2px #fff; font-size: 3em; margin: 0;">彩色</h1>
-            <h2 style="color: yellow; writing-mode: vertical-rl; font-size: 2em; margin: 0; letter-spacing: 10px;">的南瓜</h2>
-          </div>
-          <div style="width: 80%; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px;">
-            <div style="width: 100%; display: flex; align-items: center; justify-content: space-around;">
-              <div class="color-block" style="border-color: #888; color: #ccc;">黑色、绿色<br>青色、褐色</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[黑绿南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[青色南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[西葫芦]</div>
-            </div>
-            <div style="width: 100%; display: flex; align-items: center; justify-content: space-around;">
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[黄南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[橙南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[红南瓜]</div>
-              <div class="color-block" style="border-color: #ffeb3b; color: #ffeb3b;">黄色、橙色<br>红色、白色</div>
-            </div>
-            <div style="width: 100%; display: flex; align-items: center; justify-content: space-around;">
-              <div class="color-block" style="border-color: #aaa; color: #aaa;">灰色、双色<br>斑点、条纹</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[灰南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[双色南瓜]</div>
-              <div class="img-placeholder" style="width: 120px; height: 120px;">[条纹南瓜]</div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 5</div>
-      </section>
+            <!-- Page 6: 重点剖析 - AI 独立站 -->
+            <section>
+                <h2>核心驱动：重新定义独立站 (DTC)</h2>
+                <p>过去的独立站是一本“静态画册”，我们构建的新一代独立站，是具备 <span class="highlight">AI Agent 功能的“超级中枢”</span>。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div>
+                        <ul style="font-size: 18px;">
+                            <li style="margin-bottom: 20px;"><strong>拦截 AI 推荐流量：</strong> 通过代码级语义优化，迎合最新大模型的抓取机制，成为大模型购物决策的“唯一首选引用源”。</li>
+                            <li style="margin-bottom: 20px;"><strong>超级业务员 24/7 在线：</strong> 站内嵌入对话式 Agent，替代繁琐的菜单，用自然语言提供极致的高定导购服务。</li>
+                            <li><strong>全网唯一数据源 (Master Data)：</strong> 价格、库存等复杂参数在独立站修改后，一键自动分发至所有关联平台。</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="padding: 20px;">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 4px; object-fit: cover; height: 160px; margin-bottom: 15px;">
+                        <h3 style="font-size: 20px;">兼具“体验”与“产能”</h3>
+                        <p style="font-size: 15px; margin:0;">它是所有出海动作的指挥塔。极少人的团队即可同时驾驭多国度、多平台的商品订单流转。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 6 -->
-      <section data-background-color="#000">
-        <div class="header-text">南瓜果实表征多样性 -果皮色泽多样性</div>
-        <div style="display: flex; height: 100%; align-items: center; margin-top: 50px;">
-          <div style="width: 20%; display: flex; flex-direction: column; align-items: center;">
-            <h1 style="color: red; writing-mode: vertical-rl; text-shadow: 2px 2px #fff; font-size: 3em; margin: 0;">彩色</h1>
-            <h2 style="color: yellow; writing-mode: vertical-rl; font-size: 2em; margin: 0; letter-spacing: 10px;">的南瓜</h2>
-          </div>
-          <div style="width: 80%; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;">
-            <div style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px;">
-              <div class="color-block" style="border-color: #fff; color: #fff;">白色、黄色<br>黄绿色</div>
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[白肉南瓜剖面]</div>
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[黄肉南瓜剖面]</div>
-            </div>
-            <div style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px;">
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[橙黄肉剖面]</div>
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[红肉剖面]</div>
-              <div class="color-block" style="border-color: #ff5722; color: #ff5722;">橙黄、橙红<br>红色</div>
-            </div>
-            <div style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px;">
-              <div class="color-block" style="border-color: #8bc34a; color: #8bc34a;">绿色、绿橙<br>绿白复色</div>
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[绿白肉剖面]</div>
-              <div class="img-placeholder" style="width: 150px; height: 150px;">[绿肉剖面]</div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 6</div>
-      </section>
+            <!-- Page 7: AI 独立站能力 1：GEO -->
+            <section>
+                <h2>独立站能力 1：机器语义与 GEO 霸权</h2>
+                <p>底层代码级的优化，确保品牌在推荐引擎中拥有不可撼动的优先抓取权。</p>
+                
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <div class="card-icon">{}</div>
+                        <h3>JSON-LD 深度注入</h3>
+                        <p style="font-size: 17px;">在前端代码中深度植入结构化 Schema。自动将商品隐藏的复杂参数精准喂给 AI 爬虫。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">☁️</div>
+                        <h3>GMC 毫秒级推送</h3>
+                        <p style="font-size: 17px;">通过 Content API 将高度结构化的数据实时推送到 Google Merchant Center，确保权威性。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>极致 SSR 性能</h3>
+                        <p style="font-size: 17px;">基于服务端渲染，首屏极速加载。图片自动转 WebP 格式，完美霸榜 Google Web Vitals 评分。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 7 -->
-      <section data-background-color="#1c2833">
-        <div class="header-text">南瓜的结构</div>
-        <div style="position: relative; width: 100%; height: 600px; margin-top: 50px;">
-          <!-- 中心结构图 SVG 重绘 -->
-          <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
-            <svg width="500" height="400" viewBox="0 0 500 400">
-              <!-- 叶子与藤蔓 -->
-              <path d="M 350 300 Q 400 200 350 50" fill="none" stroke="#4caf50" stroke-width="8"/>
-              <path d="M 350 150 Q 450 120 480 180 Q 400 220 350 150" fill="#8bc34a" stroke="#2e7d32" stroke-width="2"/>
-              <path d="M 350 250 Q 450 250 450 300 C 450 350, 350 350, 380 320" fill="none" stroke="#8bc34a" stroke-width="3"/> <!-- 卷须 -->
-              
-              <!-- 剖面南瓜主体 -->
-              <path d="M 150 100 C 50 150, 50 300, 150 350 C 250 350, 250 150, 150 100 Z" fill="#b0bec5" stroke="#78909c" stroke-width="3"/>
-              <!-- 切开的黄色瓜瓤区域 -->
-              <path d="M 150 100 C 120 180, 120 280, 150 350 C 220 300, 220 180, 150 100 Z" fill="#ff9800"/>
-              <!-- 种子 -->
-              <ellipse cx="160" cy="200" rx="5" ry="10" fill="#fff" transform="rotate(20 160 200)"/>
-              <ellipse cx="150" cy="220" rx="5" ry="10" fill="#fff" transform="rotate(45 150 220)"/>
-              <ellipse cx="170" cy="240" rx="5" ry="10" fill="#fff" transform="rotate(-10 170 240)"/>
-              <!-- 果柄 -->
-              <rect x="140" y="60" width="20" height="45" fill="#d7ccc8" stroke="#8d6e63" stroke-width="2"/>
-              
-              <!-- 完整南瓜 -->
-              <ellipse cx="350" cy="300" rx="80" ry="70" fill="#ff5722" stroke="#d84315" stroke-width="3"/>
-              <path d="M 350 230 C 320 250, 320 350, 350 370" fill="none" stroke="#d84315" stroke-width="3"/>
-              <path d="M 350 230 C 380 250, 380 350, 350 370" fill="none" stroke="#d84315" stroke-width="3"/>
-              <rect x="345" y="200" width="10" height="30" fill="#4caf50"/>
-            </svg>
-          </div>
-          
-          <!-- 标签定位 -->
-          <div style="position: absolute; top: 10%; left: 10%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">南瓜柄</div>
-          <div style="position: absolute; top: 30%; left: 5%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">外果皮</div>
-          <div style="position: absolute; top: 55%; left: 5%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">瓜瓤</div>
-          <div style="position: absolute; top: 75%; left: 10%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">南瓜蒂</div>
-          
-          <div style="position: absolute; top: 20%; left: 45%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">内果皮</div>
-          <div style="position: absolute; top: 45%; left: 45%; border: 1px dashed #ff9800; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">南瓜籽</div>
-          <div style="position: absolute; top: 65%; left: 45%; border: 1px dashed #8bc34a; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">果实</div>
-          
-          <div style="position: absolute; top: 15%; right: 20%; border: 1px dashed #8bc34a; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">南瓜茎</div>
-          <div style="position: absolute; top: 30%; right: 5%; border: 1px dashed #8bc34a; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">南瓜叶</div>
-          <div style="position: absolute; top: 65%; right: 5%; border: 1px dashed #8bc34a; padding: 5px 10px; color: #fff; background: rgba(0,0,0,0.6);">卷须</div>
-          
-          <!-- 连线 (简略示意) -->
-          <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-             <line x1="160" y1="90" x2="250" y2="100" stroke="#fff" stroke-dasharray="2,2"/>
-             <!-- 更多连线按需添加，基于绝对定位的中心点 -->
-          </svg>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 7</div>
-      </section>
+            <!-- Page 8: AI 独立站能力 2：智能交互 -->
+            <section>
+                <h2>独立站能力 2：多语种交互式 Agent</h2>
+                <p>从"有询盘"到"成交"，利用专属客服 Agent 消除人工回复的时差和专业度波动。</p>
+                
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card" style="text-align: center;">
+                        <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">48h → 1h</h1>
+                        <h3 style="font-size: 20px;">极速意图响应</h3>
+                        <p style="font-size: 16px; text-align: center;">Agent 秒级判断采购意向，起草地道多语种回复。跟进速度飞跃，订单转化率大幅提升。</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">7 × 24</h1>
+                        <h3 style="font-size: 20px;">全天候在线导购</h3>
+                        <p style="font-size: 16px; text-align: center;">打破北美时差限制。系统可通过对话或视觉化配置器，深夜无休引导买家完成复杂选品。</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">100%</h1>
+                        <h3 style="font-size: 20px;">专家级业务对答</h3>
+                        <p style="font-size: 16px; text-align: center;">精准回答商品参数、海关清关政策、北美安全认证等专业问题，让每一次对话都无比权威。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 8 -->
-      <section data-background-color="#4e342e">
-        <div class="header-text">南瓜果实表征多样性 –果皮表面多样性</div>
-        <div style="height: 80vh; display: flex; align-items: center; justify-content: center;">
-          <h1 class="highlight-yellow" style="text-shadow: 3px 3px #000;">
-            摸一摸 南瓜的 
-            <span class="highlight-blue" style="font-size: 1.5em; background: #fff; padding: 0 10px; border-radius: 10px; text-shadow: none;">手感</span> 
-            好吗？
-          </h1>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 8</div>
-      </section>
+            <!-- Page 9: AI 独立站能力 3：OpenClaw 控盘 -->
+            <section>
+                <h2>独立站能力 3：基于 OpenClaw 的平台一键联动</h2>
+                <p>告别多团队在多个后台繁琐操作，将独立站升级为全球销售网的神经中枢。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="card">
+                        <h3>亚马逊 (Amazon) 自动调度</h3>
+                        <ul style="margin-top: 15px; font-size: 18px;">
+                            <li>深度接入 Amazon SP-API。</li>
+                            <li>OpenClaw 自动监控 FBA 实时库存情况。</li>
+                            <li>根据独立站维护的原材料成本波动，<strong>自动动态调整</strong>亚马逊各个变体的最终售价。</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Wayfair 等垂直平台对接</h3>
+                        <ul style="margin-top: 15px; font-size: 18px;">
+                            <li>全面接入 Wayfair API。</li>
+                            <li>将独立站沉淀的 3D 渲染图自动下发平台。</li>
+                            <li>自动将复杂的内部参数（如承重、透光度等）<strong>转化为垂直平台所需的格式表格</strong>并自动上架。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 9 -->
-      <section data-background-color="#212121">
-        <div class="header-text">南瓜果实表征多样性 –果皮表面多样性</div>
-        <h2 style="text-align: right; color: #ffeb3b; margin-top: 30px;">
-          <span class="highlight-blue" style="font-size: 1.5em; border-bottom: 4px solid #29b6f6;">表皮</span> 多样的南瓜
-        </h2>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px;">
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[光滑表面：长条南瓜]</div>
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[有棱沟：普通南瓜]</div>
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[瘤突表面：满身疙瘩南瓜]</div>
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[飞碟形/底部突起南瓜]</div>
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[顶部突起/多色交织南瓜]</div>
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 180px;">[光滑带条纹南瓜]</div>
-        </div>
-        <div style="text-align: right; margin-top: 20px;">
-          <span style="color: #fff; border: 1px solid #fff; padding: 10px 20px; border-radius: 20px; font-size: 0.8em;">
-            表皮光滑、有棱沟、皱缩、瘤突、底部或顶部突起
-          </span>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 9</div>
-      </section>
+            <!-- Page 10: 营销基建：AI 内容生产工厂 -->
+            <section>
+                <h2>营销基建：顶尖的 AI 视觉内容引擎</h2>
+                <p>彻底解决 Instagram、TikTok 和 YouTube 高频营销视频的“成本绝境”。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <div class="card-icon">A</div>
+                        <h3>大片级场景生成</h3>
+                        <p style="font-size: 18px;">无需飞往海外租赁公寓实拍。通过精准指令输入，系统即可利用先进模型生成极具真实光影感的高分辨率空镜画面。</p>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <div class="card-icon">B</div>
+                        <h3>数字人角色驱动</h3>
+                        <p style="font-size: 18px;">仅需一张模特的静态授权图，即可驱动该模特完成流利的“产品解说演示”连贯短视频。每日无限量产出，打造霸屏矩阵。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 10 -->
-      <section data-background-color="#1b5e20">
-        <div class="header-text">南瓜果实表征多样性 –果实形状多样性</div>
-        <div style="height: 80vh; display: flex; align-items: center; justify-content: center;">
-          <h1 class="highlight-yellow" style="text-shadow: 2px 2px #000;">
-            南瓜果实都是 
-            <span style="color: #ccff90; border: 4px solid #ccff90; padding: 5px 20px; transform: rotate(-10deg); display: inline-block; box-shadow: 4px 4px #000;">圆形</span> 
-            的吗？
-          </h1>
-        </div>
-        <div style="position: absolute; bottom: 20%; right: 20%; font-size: 4em;">🤔</div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 10</div>
-      </section>
+            <!-- Page 11: 营销基建：精准投流系统 -->
+            <section>
+                <h2>精准投流：数据大脑主动获客系统</h2>
+                <p>摒弃人工投手经验盲猜，将广告预算交由 AI 大脑进行实时自适应优化。</p>
+                
+                <div class="card" style="margin-top: 30px; padding: 35px;">
+                    <ul style="font-size: 19px; line-height: 1.8;">
+                        <li><strong>深度接口全面打通：</strong> 无缝接入 Google GA4 与 Meta Ads API。</li>
+                        <li><strong>意图实时捕捉：</strong> OpenClaw 大脑 24 小时实时分析高意向核心人群的交互数据与浏览轨迹。</li>
+                        <li><strong>动态定向触发（案例）：</strong> 若系统监测到特定产品词在某区域搜索量异常激增，Agent 将自动实时调高该词的竞价权重。</li>
+                        <li><strong>素材自动智能匹配：</strong> 系统自动调取对应卖点的 AI 生成视频，精准向该地区受众进行重定向推送，完成闭环收割。</li>
+                    </ul>
+                </div>
+            </section>
 
-      <!-- Page 11 -->
-      <section data-background-color="#333">
-        <div class="header-text">南瓜果实表征多样性 –果实形状多样性</div>
-        <h2 style="text-align: right; color: #ffeb3b; margin-top: 20px;">
-          不同 <span style="color: #ccff90; font-size: 1.5em; text-shadow: 2px 2px #000;">形状</span> 的南瓜
-        </h2>
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 20px;">
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[扁平形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">扁平形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[球形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">球形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[橡子形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">橡子形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[梨形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">梨形</span></div>
-          <div style="text-align:center; grid-row: span 2;"><div class="img-placeholder rect-placeholder" style="width:180px; height:280px;">[长柄形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">长柄形</span></div>
-          
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[磨盘形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">磨盘形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[香炉形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">香炉形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[翅果形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">翅果形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[曲颈形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">曲颈形</span></div>
-          
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[飞碟形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">飞碟形</span></div>
-          <div style="text-align:center;"><div class="img-placeholder rect-placeholder" style="width:140px; height:120px;">[佛手形]</div><span style="color:#fff; font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:5px;">佛手形</span></div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 11</div>
-      </section>
+            <!-- Page 12: 营销基建：权威知识库建立 - 修复溢出 -->
+            <section>
+                <h2>内容资产：建立品牌权威知识库 (E-E-A-T)</h2>
+                <p>用海量的高质量专业内容，抢占未来 AI 问答系统的“首选引用源 (Citation)”。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div>
+                        <ul style="font-size: 18px;">
+                            <li style="margin-bottom: 20px;"><strong style="color:#000;">蓝海长尾词挖掘：</strong> 接入顶级 SEO 工具，自动挖掘北美具有极高潜力的精准问题搜索词。</li>
+                            <li style="margin-bottom: 20px;"><strong style="color:#000;">自动化深度指南：</strong> 结合私有知识库，大语言模型自动生成带结构标签、参数对比表的万字权威长文。</li>
+                            <li><strong style="color:#000;">FAQ 自动更新闭环：</strong> AI 自动抓取电商平台高频痛点提问，并实时动态更新至独立站 FAQ 页面。</li>
+                        </ul>
+                    </div>
+                    <div class="card-color">
+                        <h3>抢占 AI 的“心智”</h3>
+                        <p>当 AI 替消费者做决策时，它依赖深度数据支撑。您网站中丰富的结构化知识库，将直接成为大模型的“行业标准参考”，从而将您的产品锁定为第一推荐位。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 12 -->
-      <section data-background-color="#4e342e">
-        <div class="header-text">南瓜果实表征多样性 –果实大小多样性</div>
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-top: 50px;">
-          <div style="width: 45%;">
-            <h1 style="color: red; text-shadow: 2px 2px #fff;">
-              小<span class="highlight-yellow">南瓜</span> vs 
-              <span class="highlight-orange" style="font-size: 1.5em;">大</span><span class="highlight-yellow">南瓜</span>
-            </h1>
-            <div style="position: relative; margin-top: 30px;">
-              <div class="img-placeholder rect-placeholder" style="width: 100%; height: 250px; background: #6d4c41; border: 4px solid #fff; box-shadow: -5px 5px 15px rgba(0,0,0,0.8);">[小南瓜摆在皮卡车上图片]</div>
-              <div style="position: absolute; top: -20px; right: -20px; border: 2px dashed #fff; padding: 10px; background: rgba(0,0,0,0.7); border-radius: 10px; transform: rotate(10deg);">
-                <h3 style="color: #fff; margin: 0; font-size: 0.8em;">迷你果实</h3>
-                <p style="color: #fff; font-size: 1.2em; margin: 0;">约 10-15g</p>
-              </div>
-            </div>
-          </div>
-          <div style="width: 50%;">
-            <div class="img-placeholder rect-placeholder" style="width: 100%; height: 250px; background: #8d6e63; border: 4px solid #fff; box-shadow: 5px 5px 15px rgba(0,0,0,0.8);">[巨型南瓜称重比赛图片]</div>
-            <div style="background: rgba(139, 195, 74, 0.9); padding: 15px; border-radius: 10px; margin-top: 20px; color: #fff; font-size: 0.7em; line-height: 1.5; border: 1px solid #fff;">
-              2023年，在北加州半月弯举行的第50届南瓜秤重世界锦标赛中，美国明尼苏达州一名园艺老师种出了重达1247公斤的南瓜，创下世界纪录。
-            </div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 12</div>
-      </section>
+            <!-- Page 13: 风险与安全体系 -->
+            <section>
+                <h2>构筑信任基石：合规风控与数据安全</h2>
+                <p>风控对象正从“人类”变为“机器”，基于 AI 系统的安全成为出海新护城河。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>KYA 代理身份验证</h3>
+                        <p style="font-size: 18px;">未来的网络欺诈将由恶意 AI 代理发起。我们的底层网关架构能精准识别合法 AI 助手与恶意爬虫，有效防范多代理协同攻击与虚假交易。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔒</div>
+                        <h3>数字主权与隐私保护</h3>
+                        <p style="font-size: 18px;">欧美市场高度重视数据合规。系统在处理海外买家订单意图及跨平台数据分发时，实现端到端的脱敏与强加密，完美符合 GDPR 等严苛的隐私法案。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 13 -->
-      <section data-background-color="#000">
-        <div class="header-text">南瓜物种遗传基因多样性</div>
-        <div style="text-align: center; margin-top: 15vh;">
-          <h2 style="color: #fff; font-weight: normal;">南瓜物种具有多样性</h2>
-          <h1 style="color: #fff; font-size: 6em; font-weight: bold; text-shadow: 0 0 10px #e91e63, 0 0 20px #e91e63, 0 0 30px #e91e63; margin: 20px 0;">WHY?</h1>
-          
-          <div style="background: rgba(27, 94, 32, 0.6); border: 2px dashed #8bc34a; border-radius: 30px; padding: 30px; margin-top: 50px; display: inline-block;">
-            <h3 class="highlight-yellow" style="margin-bottom: 10px;">具有复杂和有趣的<span style="color: #e040fb;">遗传变异规律</span></h3>
-            <h3 style="color: #fff;"><span class="highlight-yellow">多样的基因型</span>导致南瓜物种<span style="color: #e040fb;">绚丽多彩的变异</span></h3>
-            <p style="color: #ccc; font-size: 0.6em; margin-top: 20px;">已知南瓜遗传基因达到136个（CGC）</p>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 13</div>
-      </section>
+            <!-- Page 14: 实战标杆案例 (引出线下价值) -->
+            <section>
+                <h2>标杆案例剖析：大件家居的 O2O 突围战</h2>
+                <p>以我们在加拿大的落地项目为例：如何将 <span class="highlight">AI 线上获客</span> 与 <span class="highlight">实体线下履约</span> 完美结合？</p>
+                
+                <div class="grid-2" style="margin-top: 25px;">
+                    <div>
+                        <h3 style="font-size: 22px;">业务痛点与挑战</h3>
+                        <ul style="font-size: 18px;">
+                            <li><strong>产品特性：</strong> 窗帘、沙发等重型非标定制家居。</li>
+                            <li><strong>核心痛点：</strong> 纯线上购买导致消费者对材质缺乏信任；且大件物品跨国退换货成本极高，物流破损率高居不下。</li>
+                            <li><strong>战略目标：</strong> 摆脱低端价格战内卷，打造高信任度、高溢价的本土化 DTC 品牌。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 6px; object-fit: cover; height: 230px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 14 -->
-      <section data-background-color="#111">
-        <div class="header-text">南瓜物种遗传基因多样性</div>
-        <div style="display: flex; justify-content: space-between; align-items: center; height: 100%; padding-top: 40px;">
-          
-          <div style="width: 25%; border: 2px dashed yellow; border-radius: 20px; padding: 20px; text-align: center; background: rgba(0,0,0,0.5);">
-            <h3 style="color: #fff; margin: 0;">南瓜属包含</h3>
-            <h1 style="color: #ff3d00; font-size: 3em; margin: 10px 0; text-shadow: 2px 2px #fff;">5个栽培种</h1>
-            <h4 class="highlight-green" style="margin: 0;">和至少12个野生种</h4>
-          </div>
-          
-          <div style="width: 45%; position: relative;">
-            <div class="img-placeholder rect-placeholder" style="width: 100%; height: 450px; background: #e0f2f1; color: #000;">
-              [世界地图背景：标注中南美洲起源地]
-            </div>
-            <div style="position: absolute; top: -10px; left: 10%; background: #388e3c; color: #fff; padding: 8px; border-radius: 8px; font-size: 0.6em; border: 2px solid #fff; text-align: center;">
-              起源中心地带 -1<br>墨西哥和中南美洲
-            </div>
-            <div style="position: absolute; bottom: 10%; right: 10%; background: #388e3c; color: #fff; padding: 8px; border-radius: 8px; font-size: 0.6em; border: 2px solid #fff; text-align: center;">
-              起源中心地带 -2<br>南美洲
-            </div>
-          </div>
-          
-          <div style="width: 25%; display: flex; flex-direction: column; gap: 15px;">
-            <div style="display:flex; align-items:center;">
-              <div class="img-placeholder" style="width: 60px; height: 60px; margin-right: -20px; z-index: 1;">[西葫芦]</div>
-              <div style="background: #4caf50; color: #fff; text-align: center; padding: 10px 10px 10px 30px; border-radius: 20px; flex-grow: 1; font-size: 0.7em;">美洲南瓜<br>(西葫芦)</div>
-            </div>
-            <div style="display:flex; align-items:center;">
-              <div class="img-placeholder" style="width: 60px; height: 60px; margin-right: -20px; z-index: 1;">[灰籽南瓜]</div>
-              <div style="background: #607d8b; color: #fff; text-align: center; padding: 10px 10px 10px 30px; border-radius: 20px; flex-grow: 1; font-size: 0.7em;">墨西哥南瓜<br>(灰籽南瓜)</div>
-            </div>
-            <div style="display:flex; align-items:center;">
-              <div class="img-placeholder" style="width: 60px; height: 60px; margin-right: -20px; z-index: 1;">[黑籽南瓜]</div>
-              <div style="background: #1b5e20; color: #fff; text-align: center; padding: 15px 10px 15px 30px; border-radius: 20px; flex-grow: 1; font-size: 0.7em;">黑籽南瓜</div>
-            </div>
-            <div style="display:flex; align-items:center;">
-              <div class="img-placeholder" style="width: 60px; height: 60px; margin-right: -20px; z-index: 1;">[南瓜]</div>
-              <div style="background: #f57c00; color: #fff; text-align: center; padding: 10px 10px 10px 30px; border-radius: 20px; flex-grow: 1; font-size: 0.7em;">中国南瓜<br>(南瓜)</div>
-            </div>
-            <div style="display:flex; align-items:center;">
-              <div class="img-placeholder" style="width: 60px; height: 60px; margin-right: -20px; z-index: 1;">[笋瓜]</div>
-              <div style="background: #d32f2f; color: #fff; text-align: center; padding: 10px 10px 10px 30px; border-radius: 20px; flex-grow: 1; font-size: 0.7em;">印度南瓜<br>(笋瓜)</div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 14</div>
-      </section>
+            <!-- Page 15: 案例成效 (O2O闭环) -->
+            <section>
+                <h2>案例揭秘：坚不可摧的 O2O 商业闭环</h2>
+                <p>通过“AI系统+实体资产”双轮驱动，构建让竞品难以复制的降维打击壁垒。</p>
+                
+                <div class="grid-3" style="margin-top: 30px;">
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <h3 style="font-size: 20px;">1. 线上 AI 极速引流</h3>
+                        <p style="font-size: 16px;">利用内容工厂生成海量本地化短视频霸屏社媒。独立站 Agent 全天候承接流量，快速解答复杂参数并引导至线下体验。</p>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <h3 style="font-size: 20px;">2. 线下 Showroom 体验</h3>
+                        <p style="font-size: 16px;">高意向客户被引流至加拿大本地实体展厅“真实触摸面料”。支持线上下单线下自提，赋予品牌无可比拟的本土信任感。</p>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--accent-color);">
+                        <h3 style="font-size: 20px;">3. 极致售后履约网</h3>
+                        <p style="font-size: 16px;">依托本地仓储建立完善的退换货中心。彻底解决大件物流痛点，更为客户提供上门测量与安装的高附加值服务。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 15 -->
-      <section data-background-color="#212121">
-        <div class="header-text">南瓜栽培种连连看</div>
-        <h2 class="highlight-yellow" style="text-align: center; margin-top: 50px; text-shadow: 2px 2px #000;">这些南瓜属于哪个栽培种呢？</h2>
-        
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 40px;">
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[秘本南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">秘本南瓜</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[观赏南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">观赏南瓜</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[红栗南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">红栗南瓜</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[贝贝南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">贝贝南瓜</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[小磨盘南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">小磨盘南瓜</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[西葫芦]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">西葫芦</span></div>
-          <div style="position:relative;"><div class="img-placeholder" style="width:130px; height:130px;">[巨型南瓜]</div><span style="position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.6em;">巨型南瓜</span></div>
-        </div>
-        
-        <div style="display: flex; justify-content: center; gap: 50px; margin-top: 60px;">
-          <div style="width: 100px; height: 100px; border-radius: 50%; background: #455a64; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">美洲<br>南瓜</div>
-          <div style="width: 100px; height: 100px; border-radius: 50%; background: #8d6e63; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">中国<br>南瓜</div>
-          <div style="width: 100px; height: 100px; border-radius: 50%; background: #388e3c; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">印度<br>南瓜</div>
-        </div>
-        
-        <div style="position: absolute; bottom: 30%; left: 20%; font-size: 4em;">🤔</div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 15</div>
-      </section>
+            <!-- Page 16: 合作与服务模式 -->
+            <section>
+                <h2>灵活的赋能方式：为您量身定制</h2>
+                <p>从纯技术赋能到深度全案运营，根据您的企业基因按需匹配合作路径。</p>
+                
+                <div class="grid-2" style="margin-top: 30px;">
+                    <div class="card" style="border-top: 4px solid #888;">
+                        <h3 style="font-size: 24px; color: #444;">A. 系统私有化部署</h3>
+                        <p style="color: var(--accent-color); font-weight: bold; font-size: 18px;">核心技术搭建 + 企业能力移交</p>
+                        <ul style="font-size: 17px; padding-left: 0; margin-top: 15px;">
+                            <li>AI 独立站前端与 OpenClaw 中枢搭建交付。</li>
+                            <li>多跨境平台（Amazon等）API 对接打通。</li>
+                            <li>企业现有出海团队 AI 工具使用培训与陪跑。</li>
+                        </ul>
+                        <p style="font-size: 15px; margin-top: 20px; color: #888;">适用群体：拥有成熟外贸团队，急需降本增效的工厂。</p>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--primary-color);">
+                        <h3 style="font-size: 24px; color: var(--primary-color);">B. 品牌出海全案代运营</h3>
+                        <p style="color: var(--accent-color); font-weight: bold; font-size: 18px;">系统基建 + 营销拓客 + 销售转化</p>
+                        <ul style="font-size: 17px; padding-left: 0; margin-top: 15px;">
+                            <li>北美全渠道账号一站式托管运营。</li>
+                            <li>AI 视频内容矩阵日常高效产出与分发。</li>
+                            <li>GEO/SEO 优化与基于大数据的精准投放。</li>
+                        </ul>
+                        <p style="font-size: 15px; margin-top: 20px; color: #888;">适用群体：专注制造生产，希望“看效果”验证增量的工厂。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 16 -->
-      <section data-background-color="#111">
-        <div class="header-text">南瓜物种遗传基因多样性</div>
-        <div style="display: flex; justify-content: space-between; padding-top: 50px;">
-          <div style="width: 40%; border: 1px dashed #4caf50; border-radius: 15px; padding: 20px; background: rgba(0,0,0,0.6);">
-            <h1 style="color: #ff5722; text-shadow: 2px 2px #fff; font-size: 3em; border-bottom: 2px solid #ff5722; padding-bottom: 10px;">中国南瓜</h1>
-            <ul style="color: #fff; font-size: 0.7em; line-height: 1.8; margin-top: 20px;">
-              <li>果实多形似木瓜，一端大一端小</li>
-              <li>果柄坚硬，呈五棱形，与果实相接处膨大</li>
-              <li>果脐像个疤</li>
-              <li>种子较小，种皮光滑，周边突起明显</li>
-            </ul>
-            <ul style="color: #ccc; font-size: 0.7em; line-height: 1.8; margin-top: 10px; list-style-type: square;">
-              <li>以外形的长宽比划分：
-                <ul style="list-style-type: none; padding-left: 10px;">
-                  <li><span class="highlight-yellow">扁圆形</span>，为主，各地均有种植</li>
-                  <li><span class="highlight-yellow">长圆形</span>，主要分布在南方地区</li>
-                  <li><span class="highlight-yellow">长筒形</span>，以长江以北为主</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div style="width: 55%; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-content: flex-start;">
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[大磨盘南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">大磨盘南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[小磨盘南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">小磨盘南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[鳄鱼南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">鳄鱼南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[秘本南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">秘本南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[香芋南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">香芋南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[黄狼南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">黄狼南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[牛腿南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">牛腿南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:120px; height:120px;">[蛇南瓜]</div><span style="color:#fff;font-size:0.6em; background:rgba(0,0,0,0.5); padding:2px 5px;">蛇南瓜</span></div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 16</div>
-      </section>
+            <!-- Page 17: 为什么选择我们 -->
+            <section>
+                <h2>为什么选择我们的解决方案？</h2>
+                <p>我们不仅是技术架构师，更是深谙全球电商演变逻辑的商业实战派。</p>
+                
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div style="text-align: center;">
+                        <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">🧠</div>
+                        <h3 style="font-size: 20px; margin-top: 15px;">领先的认知代际</h3>
+                        <p style="font-size: 16px; text-align: center;">不盲目建站，深度理解 Agentic Commerce 趋势。为您提前布局符合未来 AI 机器抓取逻辑的核心数字资产。</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">⚙️</div>
+                        <h3 style="font-size: 20px; margin-top: 15px;">顶尖的模型开发栈</h3>
+                        <p style="font-size: 16px; text-align: center;">熟练掌握并深度融合 OpenClaw、大语言模型及视频生成引擎，把最前沿的 AI 生产力直接转化为您的财务利润表。</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">📈</div>
+                        <h3 style="font-size: 20px; margin-top: 15px;">结果驱动的实战经验</h3>
+                        <p style="font-size: 16px; text-align: center;">从 O2O 加拿大标杆案例到北美全网链路铺设，我们的商业方法论均经过真实交易场景和海量美金的严苛测试。</p>
+                    </div>
+                </div>
+            </section>
 
-      <!-- Page 17 -->
-      <section data-background-color="#111">
-        <div class="header-text">南瓜物种遗传基因多样性</div>
-        <div style="display: flex; justify-content: space-between; padding-top: 50px;">
-          <div style="width: 40%; border: 1px dashed #4caf50; border-radius: 15px; padding: 20px; background: rgba(0,0,0,0.6);">
-            <h1 class="highlight-green" style="text-shadow: 2px 2px #fff; font-size: 3em; border-bottom: 2px solid #8bc34a; padding-bottom: 10px;">印度南瓜</h1>
-            <ul style="color: #fff; font-size: 0.7em; line-height: 1.8; margin-top: 20px;">
-              <li><span class="highlight-yellow">又名“笋瓜”</span></li>
-              <li>果实表面光滑，叶片大</li>
-              <li>果柄软，呈圆筒状，与果实相接处不膨大</li>
-              <li>果脐是个小圆点或者环圈</li>
-              <li>圆形、扁圆形居多</li>
-              <li>种子较大，有的种皮粗糙<br>周边突起不明显</li>
-            </ul>
-          </div>
-          <div style="width: 55%; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            <div style="text-align:center;"><div class="img-placeholder" style="width:160px; height:160px;">[贝贝南瓜]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">贝贝南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:160px; height:160px;">[巨型南瓜]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">巨型南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:160px; height:160px;">[银栗南瓜]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">银栗南瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:160px; height:160px;">[红栗南瓜]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">红栗南瓜</span></div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 17</div>
-      </section>
-
-      <!-- Page 18 -->
-      <section data-background-color="#111">
-        <div class="header-text">南瓜物种遗传基因多样性</div>
-        <div style="display: flex; justify-content: space-between; padding-top: 50px;">
-          <div style="width: 40%; border: 1px dashed #4caf50; border-radius: 15px; padding: 20px; background: rgba(0,0,0,0.6);">
-            <h1 class="highlight-blue" style="text-shadow: 2px 2px #fff; font-size: 3em; border-bottom: 2px solid #29b6f6; padding-bottom: 10px;">美洲南瓜</h1>
-            <ul style="color: #fff; font-size: 0.7em; line-height: 1.8; margin-top: 20px;">
-              <li><span class="highlight-yellow">又名“西葫芦”“搅瓜”[jiǎo]</span></li>
-              <li>个头较小，类型丰富</li>
-              <li>果柄绿色，呈五棱形</li>
-              <li>果柄与果实相接处略膨大</li>
-            </ul>
-            <ul style="color: #ccc; font-size: 0.7em; line-height: 1.8; margin-top: 10px; list-style-type: square;">
-              <li>西葫芦（夏南瓜）<br>人类种植最早的南瓜种类</li>
-              <li>西葫芦与长得奇形怪状的观赏型小南瓜</li>
-            </ul>
-          </div>
-          <div style="width: 55%; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            <div style="text-align:center;"><div class="img-placeholder" style="width:180px; height:180px;">[西葫芦]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">西葫芦</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:180px; height:180px;">[金丝搅瓜]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">金丝搅瓜</span></div>
-            <div style="text-align:center;"><div class="img-placeholder" style="width:180px; height:180px;">[观赏型小南瓜群]</div><span style="color:#fff;font-size:0.7em; background:rgba(0,0,0,0.5); padding:2px 5px;">观赏型小南瓜</span></div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 18</div>
-      </section>
-
-      <!-- Page 19 -->
-      <section data-background-color="#212121">
-        <div class="header-text">南瓜栽培种连连看</div>
-        <h2 class="highlight-yellow" style="text-align: center; margin-top: 20px; text-shadow: 2px 2px #000;">这些南瓜属于哪个栽培种呢？</h2>
-        
-        <div style="position: relative; height: 500px; margin-top: 30px;">
-          <!-- 上方南瓜图片 -->
-          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; position: absolute; top: 0; width: 100%; z-index: 2;">
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[秘本南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">秘本南瓜</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[观赏南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">观赏南瓜</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[红栗南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">红栗南瓜</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[贝贝南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">贝贝南瓜</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[小磨盘南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">小磨盘南瓜</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[西葫芦]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">西葫芦</span></div>
-            <div style="position:relative;"><div class="img-placeholder" style="width:110px; height:110px;">[巨型南瓜]</div><span style="position:absolute; bottom:5px; left:0; right:0; text-align:center; color:#fff; background:rgba(0,0,0,0.6); font-size:0.5em;">巨型南瓜</span></div>
-          </div>
-          
-          <!-- 连线 SVG -->
-          <svg style="position: absolute; top: 110px; left: 0; width: 100%; height: 300px; z-index: 1;" viewBox="0 0 960 300">
-            <!-- 美洲南瓜 (左侧目标点 x~330) 连: 观赏南瓜(x~230), 西葫芦(x~710) -->
-            <path d="M 230 0 Q 280 150 330 250" fill="none" stroke="#29b6f6" stroke-width="4" stroke-dasharray="8,8"/>
-            <path d="M 710 0 Q 520 150 330 250" fill="none" stroke="#29b6f6" stroke-width="4" stroke-dasharray="8,8"/>
-            
-            <!-- 中国南瓜 (中间目标点 x~480) 连: 秘本南瓜(x~110), 小磨盘(x~590) -->
-            <path d="M 110 0 Q 300 150 480 250" fill="none" stroke="#ff9800" stroke-width="4" stroke-dasharray="8,8"/>
-            <path d="M 590 0 Q 530 150 480 250" fill="none" stroke="#ff9800" stroke-width="4" stroke-dasharray="8,8"/>
-            
-            <!-- 印度南瓜 (右侧目标点 x~630) 连: 红栗(x~350), 贝贝(x~470), 巨型(x~830) -->
-            <path d="M 350 0 Q 490 150 630 250" fill="none" stroke="#8bc34a" stroke-width="4" stroke-dasharray="8,8"/>
-            <path d="M 470 0 Q 550 150 630 250" fill="none" stroke="#8bc34a" stroke-width="4" stroke-dasharray="8,8"/>
-            <path d="M 830 0 Q 730 150 630 250" fill="none" stroke="#8bc34a" stroke-width="4" stroke-dasharray="8,8"/>
-          </svg>
-
-          <!-- 下方分类框 -->
-          <div style="display: flex; justify-content: center; gap: 50px; position: absolute; bottom: 0; width: 100%; z-index: 2;">
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: #455a64; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">美洲<br>南瓜</div>
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: #8d6e63; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">中国<br>南瓜</div>
-            <div style="width: 100px; height: 100px; border-radius: 50%; background: #388e3c; color: #fff; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; font-size: 1.2em; font-weight: bold;">印度<br>南瓜</div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 19</div>
-      </section>
-
-      <!-- Page 20 -->
-      <section data-background-color="#5d5a55">
-        <div class="header-text" style="color: #ffeb3b;">动手实践</div>
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-          <div style="text-align: left;">
-            <h1 style="color: #fff; font-size: 4em; font-weight: normal; margin: 0;">
-              一起 <span style="color: #ff5722; font-weight: bold; background: #fff; padding: 5px 15px; border-radius: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">做</span> 南瓜
-            </h1>
-            <p style="font-size: 3em; color: #ccc; font-family: monospace; letter-spacing: 15px; margin: 0;">.DIY.</p>
-          </div>
-          <div class="img-placeholder" style="width: 400px; height: 400px; margin-left: 50px; background: #fff; color: #333; border: 8px solid #fff;">
-            [南瓜藤手工艺品成品展示图]
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 20</div>
-      </section>
-
-      <!-- Page 21 -->
-      <section data-background-color="#3e2723">
-        <div class="header-text" style="color: #ffeb3b;">动手实践</div>
-        <h1 style="color: #ff5722; text-shadow: 2px 2px #fff; margin-top: 50px;">磨盘南瓜</h1>
-        <div style="display: flex; justify-content: space-between; margin-top: 30px;">
-          <div style="width: 45%; border: 2px dashed #4caf50; border-radius: 15px; padding: 25px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.8em; line-height: 2;">
-            <ul style="list-style-type: disc; padding-left: 20px;">
-              <li>中国南瓜栽培种</li>
-              <li>果实形状：扁圆形，有明显的棱沟</li>
-              <li>果皮表面：有光滑的也有粗糙的</li>
-              <li>果柄特征：坚硬、呈五棱形</li>
-              <li>果皮色泽：橙黄色、褐色、黄色、绿色等</li>
-            </ul>
-          </div>
-          <div style="width: 50%; position: relative;">
-            <div class="img-placeholder" style="width: 250px; height: 250px; position: absolute; top: 0; right: 0; z-index: 2; border: 4px solid #fff;">[磨盘南瓜实物图1]</div>
-            <div class="img-placeholder" style="width: 200px; height: 200px; position: absolute; bottom: -50px; left: 0; z-index: 1; border: 4px solid #fff;">[磨盘南瓜实物图2]</div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 21</div>
-      </section>
-
-      <!-- Page 22 -->
-      <section data-background-color="#212121">
-        <div class="header-text" style="color: #ffeb3b;">动手实践 材料与工具</div>
-        <div style="display: flex; height: 80vh; justify-content: space-around; align-items: center; margin-top: 50px;">
-          
-          <div style="position: relative; width: 40%;">
-            <div class="img-placeholder rect-placeholder" style="width: 150px; height: 180px; background: #fff; color: #000; position: absolute; top: 0; left: 0;">[橘色气球]</div>
-            <div class="img-placeholder rect-placeholder" style="width: 200px; height: 120px; background: #fff; color: #000; position: absolute; bottom: 0; left: 50px;">[马克笔套装]</div>
-            <div class="img-placeholder rect-placeholder" style="width: 200px; height: 150px; background: #fff; color: #000; position: absolute; top: 100px; right: 0;">[彩色笔/南瓜雕刻工具]</div>
-            
-            <div class="stamp" style="top: 30%; left: 20%; transform: rotate(-15deg);">拍照替换</div>
-          </div>
-          
-          <div style="width: 45%; display: flex; flex-direction: column; gap: 40px;">
-            <div style="border: 2px dashed #fff; padding: 25px; border-radius: 15px; background: rgba(0,0,0,0.5);">
-              <h2 class="highlight-yellow" style="margin: 0 0 10px 0;">a.南瓜套装</h2>
-              <p style="color: #fff; font-size: 0.8em; margin: 0; line-height: 1.5;">12寸气球、高弹棉花、细铁丝、弹力线、绿色胶带、瓜藤</p>
-            </div>
-            <div style="border: 2px dashed #fff; padding: 25px; border-radius: 15px; background: rgba(0,0,0,0.5);">
-              <h2 class="highlight-yellow" style="margin: 0 0 10px 0;">b.辅助工具</h2>
-              <p style="color: #fff; font-size: 0.8em; margin: 0; line-height: 1.5;">安全剪刀、双面胶、彩笔</p>
-            </div>
-          </div>
+            <!-- Page 18: 启动流程与联系方式 -->
+            <section>
+                <h2>准备好迎接出海的新纪元了吗？</h2>
+                <p>高效沟通，三步快速启动，用真实数据衡量出海成果。</p>
+                
+                <div style="margin-top: 40px; margin-left: 20px;">
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+                        <div style="font-size: 40px; color: #d0d5da; font-weight: bold; margin-right: 25px; line-height: 0.8;">1</div>
+                        <div>
+                            <h3 style="margin-bottom: 5px; font-size: 24px;">深度业务诊断</h3>
+                            <p style="margin: 0;">评估您的产品参数化程度、柔性产能优势及当前海外拓展痛点。</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
+                        <div style="font-size: 40px; color: #d0d5da; font-weight: bold; margin-right: 25px; line-height: 0.8;">2</div>
+                        <div>
+                            <h3 style="margin-bottom: 5px; font-size: 24px;">系统架构与路径规划</h3>
+                            <p style="margin: 0;">确认合作模式。设计专属于您的数据 Schema 结构与 AI 流量捕获战略。</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="font-size: 40px; color: var(--accent-color); font-weight: bold; margin-right: 25px; line-height: 0.8;">3</div>
+                        <div>
+                            <h3 style="margin-bottom: 5px; font-size: 24px;">极速上线与商业验证</h3>
+                            <p style="margin: 0;">部署并激活 AI 独立站引擎，开启内容自动化生产，用真实订单验证系统价值。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 22</div>
-      </section>
-
-      <!-- Page 23 -->
-      <section data-background-color="#212121">
-        <div class="header-text" style="color: #ffeb3b;">动手实践 基本操作步骤</div>
-        <div style="position: relative; width: 100%; height: 70vh; margin-top: 50px;">
-          
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 200px; position: absolute; top: 0; left: 0; border: 3px solid #fff;">
-            [步骤a: 画出轮廓]
-            <div style="position:absolute; top:10px; right:10px; width:40px; height:40px; background:#29b6f6; border-radius:50%; border:3px solid #fff; font-size:1.5em; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#fff;">a</div>
-          </div>
-          
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 200px; position: absolute; top: 0; left: 50%; transform: translateX(-50%); border: 3px solid #fff;">
-            [步骤b: 顶部切开]
-            <div style="position:absolute; top:10px; left:10px; width:40px; height:40px; background:#ff9800; border-radius:50%; border:3px solid #fff; font-size:1.5em; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#fff;">b</div>
-          </div>
-
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 200px; position: absolute; top: 0; right: 0; border: 3px solid #fff;">
-            [步骤c: 掏出瓜瓤]
-            <div style="position:absolute; top:10px; left:10px; width:40px; height:40px; background:#f44336; border-radius:50%; border:3px solid #fff; font-size:1.5em; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#fff;">c</div>
-          </div>
-
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 200px; position: absolute; bottom: 0; left: 15%; border: 3px solid #fff;">
-            [步骤d: 雕刻五官]
-            <div style="position:absolute; top:10px; left:10px; width:40px; height:40px; background:#9c27b0; border-radius:50%; border:3px solid #fff; font-size:1.5em; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#fff;">d</div>
-          </div>
-
-          <div class="img-placeholder rect-placeholder" style="width: 280px; height: 200px; position: absolute; bottom: 0; right: 15%; border: 3px solid #fff;">
-            [步骤e: 盖上盖子/点亮]
-            <div style="position:absolute; top:10px; left:10px; width:40px; height:40px; background:#4caf50; border-radius:50%; border:3px solid #fff; font-size:1.5em; font-weight:bold; display:flex; align-items:center; justify-content:center; color:#fff;">e</div>
-          </div>
-          
-          <div class="stamp" style="top: 40%; left: 40%; transform: rotate(15deg); font-size: 2.5em;">拍照替换</div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 23</div>
-      </section>
-
-      <!-- Page 24 -->
-      <section data-background-color="#2c1a11">
-        <div style="height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-          <h1 style="color: #ffca28; font-size: 4.5em; font-weight: bold; letter-spacing: 10px; text-shadow: 3px 3px #d32f2f, -3px -3px #d32f2f, 3px -3px #d32f2f, -3px 3px #d32f2f; margin-bottom: 60px;">小南瓜 大作为</h1>
-          <div style="display: flex; gap: 30px;">
-            <div class="img-placeholder rect-placeholder" style="width: 250px; height: 250px; border: 5px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.8);">[万圣节南瓜灯1 (惊讶)]</div>
-            <div class="img-placeholder rect-placeholder" style="width: 250px; height: 250px; border: 5px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.8); transform: translateY(-20px);">[万圣节南瓜灯2 (开心)]</div>
-            <div class="img-placeholder rect-placeholder" style="width: 250px; height: 250px; border: 5px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.8);">[万圣节南瓜灯3 (邪恶)]</div>
-          </div>
-        </div>
-        <div class="footer-text">Copyright © 2022 上海漫博教育科技有限公司 版权所有 page 24</div>
-      </section>
-
     </div>
-  </div>
 
-  <!-- Reveal.js 脚本 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
-  <script>
-    Reveal.initialize({
-      controls: true,
-      progress: true,
-      center: false, /* 设为 false 以允许自定义绝对定位和高度 */
-      hash: true,
-      transition: 'slide',
-      width: 1024,
-      height: 768,
-      margin: 0.04
-    });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            controls: false, 
+            progress: true,
+            slideNumber: 'c/t',
+            transition: 'none', 
+            center: true,       
+            width: 1280,        
+            height: 720, 
+            margin: 0.05,
+            pdfSeparateFragments: false 
+        });
+    </script>
 </body>
 </html>
-
-
-
