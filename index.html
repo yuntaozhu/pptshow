@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine 概念生长状态流水线</title>
+    <title>CG-Engine v4.5 核心动态架构图</title>
     
     <style>
         :root {
@@ -67,25 +67,23 @@
         .mermaid {
             width: 100%;
             text-align: center;
-            visibility: hidden; /* 防止未加载完成时白屏或闪烁 */
+            visibility: hidden;
         }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        // 强风控初始化，彻底不请求本地存储，隔离 Edge Tracking Prevention 拦截
         mermaid.initialize({
-            startOnLoad: false, /* 改为手动控制触发，规避 window.onload 被其他恶意脚本掐断 */
+            startOnLoad: false, 
             theme: 'base',
             securityLevel: 'loose', 
             flowchart: {
                 useMaxWidth: false,
-                htmlLabels: true, /* 服务器环境下重新启用 HTML 支持，恢复高级换行 */
-                curve: 'linear'
+                htmlLabels: true, /* 开启 HTML 标签支持 */
+                curve: 'linear'   /* 刚硬线条 */
             }
         });
 
-        // 确保在 DOM 树准备完毕后安全执行，且不受第三方 JSON.parse 崩溃的影响
         document.addEventListener("DOMContentLoaded", function() {
             try {
                 mermaid.run({
@@ -102,77 +100,61 @@
 
     <div class="container">
         <header>
-            <h1>CG-Engine 概念生长状态流水线</h1>
-            <p class="subtitle">标准工程状态机 | 基于断裂带捕获、时空画布矩阵、因果审计与版本自演化建仓的动态流转闭环</p>
+            <h1>CG-Engine v4.5 核心动态架构</h1>
+            <p class="subtitle">线性状态机：从输入层投放，历经断裂带编译、时空画布回测、动力链执行、到可证伪结算的公共思想工具流水线</p>
         </header>
 
         <div class="chart-wrapper">
             <div class="mermaid">
 graph LR
     %% 状态机视觉色彩系统定义
-    classDef ioNode fill:#ffffff,stroke:#adb5bd,stroke-width:2px,color:#495057;
-    classDef stateNode fill:#212529,stroke:#000000,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef inputLayer fill:#f1f3f5,stroke:#ced4da,stroke-width:2px,color:#495057;
+    classDef moduleNode fill:#212529,stroke:#000000,stroke-width:2px,color:#ffffff;
     classDef gateNode fill:#f03e3e,stroke:#c92a2a,stroke-width:2px,color:#ffffff,font-weight:bold;
-    classDef successNode fill:#2b8a3e,stroke:#2b8a3e,stroke-width:2px,color:#ffffff;
+    classDef outputLayer fill:#2b8a3e,stroke:#2b8a3e,stroke-width:2px,color:#ffffff;
 
-    %% === 状态 1：编译阶段 ===
-    In1["输入:<br/>捕获现实痛感与<br/>断裂带异常数据"] 
-    S1["加工状态: 跨域符号编译<br/>动作: LLM 斩断流畅废话<br/>强制异质概念跨界碰撞"] 
-    Out1["输出:<br/>初始猜想种子"]
+    %% === 输入层 ===
+    In1["【输入层】 原始思想意图投放<br/>(人类肉身痛感: 表面解释 A → 反常现象 B)"]
 
-    In1 --> S1 --> Out1
+    %% === 模块一 ===
+    S1["【模块一: 断裂带编译 (Compile)】 ──&gt; (Intent → Code)<br/>* 机制: 拒绝平庸流畅的自然语言滑动，直接将人类的'不适感意图'编译成高维特异性概念。<br/>* 原理: 卡住知识地形坐标，将模糊感受固化为具有强解释力的'深层结构 C (思想策略代码)'。"]
 
-    %% === 状态 2：拉伸阶段 ===
-    S2["加工状态: 时空画布矩阵拉伸<br/>动作: 推入横纵两轴坐标系<br/>迫使概念跨越纵向五时层演练"]
-    Out2["输出:<br/>多尺度高信息量理论空间"]
+    %% === 模块二 ===
+    S2["【模块二: 时空画布回测 (Backtest)】 ──&gt; (Code → Backtest)<br/>* 机制: 强制进行历史与场景的多尺度历史回测。<br/>* 原理: 将模块一生成的概念投入'手风琴时空矩阵'中。<br/>&nbsp;&nbsp;- 纵向回测: 在 100ms 生理惊耦、手头任务、长期事业、生命立命的'五时层历史数据'中跑自动化测试。<br/>&nbsp;&nbsp;- 横向回测: 在微观动作、学科断裂带、宏观社会文化地形的'多层场景'中进行极端回测。"]
 
-    Out1 --> S2 --> Out2
+    %% === 模块三 ===
+    S3["【模块三: 动力链执行器 (Execution)】 ──&gt; (Agent → Execution)<br/>* 机制: 启动长路径因果链 (Deep Think)，把抽象策略执行行为为具体的文字因果链仓位。<br/>* 原理: 用单一核心动力机制 (如差异驱动) 贯穿全文，将其从一个静态的'词语'转换为能在各个时层和地形中自动化运行的'动态因果机制'。"]
 
-    %% === 状态 3：对抗阶段 ===
-    S3["加工状态: 自动化漏洞红队挑衅<br/>动作: 杠精 Agent 扮演恶意黑客<br/>针对长因果链寻找死锁反例"]
-    Out3["输出:<br/>包含极端冲突日志的反例集"]
+    %% === 模块四 ===
+    S4["【模块四: 对抗审稿与可证伪结算 (PnL Auditor)】 ──&gt; (PnL → Iteration)<br/>* 机制: 无情计算逻辑支持度的衰减率，清算'伪精确'和'概念滑转'。<br/>* 原理: 强制输出带编号的【定义】、【结论】和【机制假说】。"]
 
-    Out2 --> S3 --> Out3
+    %% === 结算判定网关 ===
+    Gate{"【结算指标】<br/>是否强制生成<br/>【可证伪路径】?"}
 
-    %% === 状态 4：清洗收敛阶段 ===
-    S4["加工状态: 严苛因果全链审计<br/>动作: 算长链推理支持度衰减<br/>拦截为了圆场打的特设性补丁"]
-    Out4["输出:<br/>压实去水后的纯净因果链"]
+    %% === 输出层 ===
+    S5["【输出层】 诞生具备极高迭代效率、具备高主体间一致性、可随时应对市场环境变化的『公共思想工具』"]
 
-    Out3 --> S4 --> Out4
-
-    %% === 5. 风控结算与门控审计 ===
-    S5["加工状态: 思想 PnL 风控清算<br/>动作: 过滤五类体例失败<br/>锁死核心定义与标定概念爆仓止损线"]
-    Gate{"质量网关审计:<br/>概念是否通过压力测试?"}
+    %% 状态机核心流水线串联
+    In1 --> S1 --> S2 --> S3 --> S4 --> Gate
     
-    Out4 --> S5 --> Gate
-
-    %% === 状态 6：最终状态 ===
-    S6["最终状态: 版本自演化建仓<br/>动作: 回捞格斗日志入库<br/>重写底层 Embedding 拓扑空间<br/>正式发布有效新版本"]
-    
-    %% 流程分流与重构回流
-    Gate -->|YES 确证存活| S6
-    Gate -->|NO 爆仓破产| In1
+    %% 盈亏反馈闭环：爆仓彻底逼回模块一，通过 HTML 实体转义字符保障线缆不崩
+    Gate -->|YES: 确证存活| S5
+    Gate -->|NO: 策略彻底爆仓 (逼回重来)| In1
 
     %% 应用样式
-    class In1,Out1,Out2,Out3,Out4 ioNode;
-    class S1,S2,S3,S4,S5 stateNode;
+    class In1 inputLayer;
+    class S1,S2,S3,S4 moduleNode;
     class Gate gateNode;
-    class S6 successNode;
+    class S5 outputLayer;
 
     %% 连线美化定义
-    linkStyle 0 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 0 stroke:#495057,stroke-width:2px;
     linkStyle 1 stroke:#212529,stroke-width:2px;
-    linkStyle 2 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 2 stroke:#212529,stroke-width:2px;
     linkStyle 3 stroke:#212529,stroke-width:2px;
-    linkStyle 4 stroke:#adb5bd,stroke-width:2px;
-    linkStyle 5 stroke:#212529,stroke-width:2px;
-    linkStyle 6 stroke:#adb5bd,stroke-width:2px;
-    linkStyle 7 stroke:#212529,stroke-width:2px;
-    linkStyle 8 stroke:#adb5bd,stroke-width:2px;
-    linkStyle 9 stroke:#212529,stroke-width:2px;
-    linkStyle 10 stroke:#212529,stroke-width:2px;
-    linkStyle 11 stroke:#2b8a3e,stroke-width:3px;
-    linkStyle 12 stroke:#c92a2a,stroke-width:2px,stroke-dasharray: 5 5;
+    linkStyle 4 stroke:#212529,stroke-width:2px;
+    linkStyle 5 stroke:#2b8a3e,stroke-width:3px;
+    linkStyle 6 stroke:#c92a2a,stroke-width:2px,stroke-dasharray: 5 5;
             </div>
         </div>
     </div>
