@@ -101,7 +101,7 @@
     <div class="container">
         <header>
             <h1>CG-Engine v4.5 核心动态架构</h1>
-            <p class="subtitle">线性状态机：从输入层投放，历经断裂带编译、时空画布回测、动力链执行、到可证伪结算的公共思想工具流水线</p>
+            <p class="subtitle">标准工程状态机：从输入层投放，历经断裂带编译、时空画布回测、动力链执行、到可证伪结算的公共思想工具流水线</p>
         </header>
 
         <div class="chart-wrapper">
@@ -137,9 +137,9 @@ graph LR
     %% 状态机核心流水线串联
     In1 --> S1 --> S2 --> S3 --> S4 --> Gate
     
-    %% 盈亏反馈闭环：爆仓彻底逼回模块一，通过 HTML 实体转义字符保障线缆不崩
-    Gate -->|YES: 确证存活| S5
-    Gate -->|NO: 策略彻底爆仓 (逼回重来)| In1
+    %% 修正点：对连线文本进行严格的 \"\" 字符串隔离，彻底拔除冒号引起的词法死锁
+    Gate -->| "YES: 确证存活" | S5
+    Gate -->| "NO: 策略彻底爆仓 (逼回重来)" | In1
 
     %% 应用样式
     class In1 inputLayer;
