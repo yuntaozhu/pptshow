@@ -1,585 +1,187 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <title>Agentic Commerce - 下一代智能电商出海解决方案</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CG-Engine 概念生长全生命周期流水线</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
-
     <style>
-        /* 强制高质量打印输出配置，严格锁定 16:9 比例 */
-        @page {
-            size: 1280px 720px;
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1500px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            box-sizing: border-box;
+            margin-bottom: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+            color: #212529;
+        }
+
+        p.subtitle {
+            color: #6c757d;
+            font-size: 13px;
             margin: 0;
         }
 
-        :root {
-            --primary-color: #0A192F; /* 科技深蓝 */
-            --accent-color: #00B4D8;  /* 未来亮蓝 */
-            --bg-color: #ffffff;
-            --gray-light: #f7f9fa;
-            --text-main: #333333;
+        .chart-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: #ffffff;
+            padding: 20px 0;
+        }
+
+        .mermaid {
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        /* 强制背景颜色在 PDF 中打印出来 */
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-
-        .reveal {
-            font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
-            color: var(--text-main);
-        }
-
-        .reveal h1, .reveal h2, .reveal h3 {
-            font-family: inherit;
-            color: var(--primary-color);
-            text-transform: none;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-top: 0;
-        }
-
-        .reveal h1 { font-size: 48px; margin-bottom: 20px;}
-        .reveal h2 { font-size: 36px; margin-bottom: 35px; text-align: left; border-left: 6px solid var(--accent-color); padding-left: 15px;}
-        .reveal h3 { font-size: 22px; margin-bottom: 12px; font-weight: bold;}
-
-        .reveal p, .reveal li {
-            font-size: 19px;
-            line-height: 1.65;
-            text-align: left;
-            color: var(--text-main);
-        }
-
-        .reveal ul { display: block; margin-left: 30px; margin-bottom: 0; }
-        .reveal li { margin-bottom: 10px; }
-        
-        .highlight { color: var(--accent-color); font-weight: bold; }
-
-        /* 布局网格 */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; width: 100%; }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; align-items: start; width: 100%; }
-
-        /* 浅色卡片 */
-        .card {
-            background: var(--gray-light);
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #e1e4e8;
-            box-sizing: border-box;
-            width: 100%;
-        }
-        
-        /* 强调型深色卡片 */
-        .card-dark {
-            background: var(--primary-color);
-            padding: 35px 30px;
-            border-radius: 8px;
-            color: #ffffff;
-            box-sizing: border-box;
-            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.15);
-            width: 100%;
-        }
-        .card-dark h3 { color: var(--accent-color); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 12px; margin-bottom: 20px;}
-        .card-dark p { color: #d0d5da; font-size: 18px; line-height: 1.7; }
-
-        /* 强调型彩色卡片 */
-        .card-color {
-            background: #00A67E; /* 墨绿色背景 */
-            padding: 35px 30px;
-            border-radius: 8px;
-            color: #ffffff;
-            box-sizing: border-box;
-            width: 100%;
-        }
-        .card-color h3 { color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 12px; margin-bottom: 20px;}
-        .card-color p { color: #f0f0f0; font-size: 18px; line-height: 1.7; }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-color);
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-bottom: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        /* 核心修复：采用纯 CSS Flexbox 强制垂直居中，完美兼容网页和 PDF */
-        .reveal .slides section {
-            height: 100% !important;
-            display: flex !important;
-            flex-direction: column;
-            justify-content: center; /* 绝对垂直居中 */
-            align-items: flex-start; /* 文本整体靠左对齐 */
-            padding: 0 80px; /* 只设左右边距，上下边距由居中自动分配 */
-            box-sizing: border-box;
-        }
-
-        /* 覆盖影响打印的错误样式 */
-        @media print {
-            .reveal .slides { transform: none !important; width: 100% !important; height: 100% !important; }
-            /* 移除了导致不居中的 top: 0 和 display: block，让上面的 flexbox 继续在打印时生效 */
-            .reveal .slides section { 
-                page-break-after: always !important; 
-                opacity: 1 !important; 
-                visibility: visible !important; 
-            }
+        .mermaid.rendered {
+            opacity: 1;
         }
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>
+        // 采用最宽松安全的隔离配置，强制使用内联 SVG 渲染，彻底阻断浏览器的 Unsafe URL 拦截
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            securityLevel: 'antiscript', /* 升级防御，绕过本地文件跨域误判 */
+            fontFamily: 'Inter, Noto Sans SC, sans-serif',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: false, /* 降维使用纯文本标签，从根源上杜绝 Local Frame 安全审查崩溃 */
+                curve: 'linear'
+            }
+        });
+        
+        // 确保渲染完成后优雅渐显
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.querySelector('.mermaid').classList.add('rendered');
+            }, 200);
+        });
+    </script>
 </head>
 <body>
-    <div class="reveal">
-        <div class="slides">
 
-            <!-- Page 1: 封面 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2 style="font-size: 28px; margin-bottom: 15px; font-weight: bold; border-left: none; padding-left: 0; color: #555;">出海智能解决方案</h2>
-                    <h1 style="font-weight: bold; border-bottom: 4px solid var(--accent-color); display: inline-block; padding-bottom: 15px; font-size: 56px;">
-                        Agentic Commerce<br>驱动中国制造卖向全球
-                    </h1>
-                    <p style="font-size: 22px; color: var(--primary-color); margin-top: 30px; font-weight: bold;">
-                        基于 OpenClaw 架构与 AI Agent 的下一代出海全渠道方案
-                    </p>
-                    <p style="font-size: 16px; color: #999; margin-top: 60px; letter-spacing: 1px;">
-                        SERVICE OVERVIEW 2026 | CONFIDENTIAL
-                    </p>
-                </div>
-            </section>
+    <div class="container">
+        <header>
+            <h1>CG-Engine 概念生长全生命周期流水线</h1>
+            <p class="subtitle">标准工程状态机 | 基于断裂带捕获、时空画布矩阵、因果审计与版本自演化建仓的动态流转闭环</p>
+        </header>
 
-            <!-- Page 2: 行业痛点 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>中国供应链出海的增长困境</h2>
-                    <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 40px;">"产品做工一流，但在海外既没有品牌信任度，也拼不过高昂的流量成本。"</p>
-                    
-                    <div class="grid-3">
-                        <div class="card">
-                            <h3>流量获客成本失控</h3>
-                            <p>传统平台（Amazon/Wayfair）内卷加剧，买量成本逐年攀升。传统独立站缺乏自然流量，SEO/SEM 投入犹如无底洞，ROI 持续走低。</p>
-                        </div>
-                        <div class="card">
-                            <h3>内容生产难以负荷</h3>
-                            <p>海外社媒种草需要大量的真实场景实拍与短视频。传统的海外场地租赁、外籍模特实拍动辄上万美元，且无法实现高频产出。</p>
-                        </div>
-                        <div class="card">
-                            <h3>客户沟通转化极低</h3>
-                            <p>跨国时差导致买家询盘回复慢；普通客服难以专业解答复杂的材质参数与合规认证，直接导致高意向的 B/C 端订单流失。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="chart-wrapper">
+            <pre class="mermaid">
+graph LR
+    %% 状态机视觉色彩系统定义
+    classDef ioNode fill:#ffffff,stroke:#adb5bd,stroke-width:2px,color:#495057;
+    classDef stateNode fill:#212529,stroke:#000000,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef gateNode fill:#f03e3e,stroke:#c92a2a,stroke-width:2px,color:#ffffff,font-weight:bold;
+    classDef successNode fill:#2b8a3e,stroke:#2b8a3e,stroke-width:2px,color:#ffffff;
 
-            <!-- Page 3: 时代剧变 (McKinsey洞察) -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>时代剧变：Agentic Commerce（代理电商）到来</h2>
-                    <p>根据麦肯锡 2025 年最新报告，传统的“搜索 - 比较 - 购买”电商模式正在被彻底颠覆。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div>
-                            <ul>
-                                <li style="margin-bottom: 15px;"><strong style="color:#000;">消费者决策被全面接管：</strong> 买家不再花数小时浏览网页比价。他们只需告诉 AI：“我刚搬家，预算2000刀，需要一套遮光窗帘”，AI代理将全网搜寻并完成下单。</li>
-                                <li><strong style="color:#000;">全新的底层基础设施：</strong> 互联网正向“机器可读网”演进。通过 MCP（模型上下文协议）和 AP2 协议，AI 已具备跨平台自主购物的权限与能力。</li>
-                            </ul>
-                        </div>
-                        <div class="card-dark">
-                            <h3>麦肯锡商业洞察</h3>
-                            <p>“数字代理每天要在商业生态中做出数百万次微小决策。品牌必须彻底重构数字层——<strong style="color:white;">不再仅仅是为人类消费者建站，而是要为代表他们行动的 AI 代理构建系统。</strong>”</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 1：编译阶段 ===
+    In1["输入: 捕获现实痛感与断裂带异常数据"] 
+    S1["加工状态: 跨域符号编译 \n 动作: LLM 斩断流畅废话 \n 强制异质概念跨界碰撞"] 
+    Out1["输出: 初始猜想种子"]
 
-            <!-- Page 4: 游戏规则重写 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>游戏规则重写：你的客户变成了 AI 模型</h2>
-                    <p>在 AI 代理电商时代，如何让你的产品被 ChatGPT、Google Gemini 第一时间选中并推荐？</p>
-                    
-                    <div class="grid-2" style="margin-top: 40px;">
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <div class="card-icon">1</div>
-                            <h3>从 SEO 转向 GEO</h3>
-                            <p style="font-size: 18px;">基于关键词的搜索引擎优化（SEO）正在失效。品牌必须进行生成式引擎优化（GEO）：通过底层的结构化数据（Schema），让 AI 在抓取时“秒懂”你的复杂参数与核心优势。</p>
-                        </div>
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <div class="card-icon">2</div>
-                            <h3>建立“深度可信度” (E-E-A-T)</h3>
-                            <p style="font-size: 18px;">AI 代理不看花哨的广告图。它们依赖专业、权威、信任的信号。你需要提供深度的测评数据、参数对比表格与详尽的知识库，来在逻辑上“说服”大语言模型。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    In1 --> S1 --> Out1
 
-            <!-- Page 5: 我们的核心解决方案 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>我们的破局核心：面向未来的 AI 智能架构</h2>
-                    <p>我们将麦肯锡的前瞻理论落地为实战代码。为您提供一套基于 <span class="highlight">OpenClaw</span> 系统的全渠道架构。</p>
-                    
-                    <div class="grid-3" style="margin-top: 40px;">
-                        <div class="card" style="background-color: #eaf8fb; border-color: var(--accent-color);">
-                            <h3 style="color: var(--primary-color);">1. AI Agent 独立站</h3>
-                            <p>这不仅仅是一个官网，它是全渠道数据的 Master Data（主数据源），更是拦截未来 AI 流量的核心中枢节点。</p>
-                        </div>
-                        <div class="card">
-                            <h3>2. 平台自动化控盘</h3>
-                            <p>打通独立站与 Amazon、Wayfair 等主流平台，自动监控库存成本，实现商品数据毫秒级同步与动态调价。</p>
-                        </div>
-                        <div class="card">
-                            <h3>3. 视觉与内容引擎</h3>
-                            <p>利用顶级大模型批量产出 4K 场景图与数字人讲解视频，极低成本降维打击各大社媒与兴趣电商流量池。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 2：拉伸阶段 ===
+    S2["加工状态: 时空画布矩阵拉伸 \n 动作: 推入横纵两轴坐标系 \n 迫使概念跨越纵向五时层演练"]
+    Out2["输出: 多尺度高信息量理论空间"]
 
-            <!-- Page 6: 重点剖析 - AI 独立站 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>核心驱动：重新定义独立站 (DTC)</h2>
-                    <p>过去的独立站是一本“静态画册”，我们构建的新一代独立站，是具备 <span class="highlight">AI Agent 功能的“超级中枢”</span>。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div>
-                            <ul style="font-size: 18px;">
-                                <li style="margin-bottom: 20px;"><strong>拦截 AI 推荐流量：</strong> 通过代码级语义优化，迎合最新大模型的抓取机制，成为大模型购物决策的“唯一首选引用源”。</li>
-                                <li style="margin-bottom: 20px;"><strong>超级业务员 24/7 在线：</strong> 站内嵌入对话式 Agent，替代繁琐的菜单，用自然语言提供极致的高定导购服务。</li>
-                                <li><strong>全网唯一数据源 (Master Data)：</strong> 价格、库存等复杂参数在独立站修改后，一键自动分发至所有关联平台。</li>
-                            </ul>
-                        </div>
-                        <div class="card" style="padding: 20px;">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 4px; object-fit: cover; height: 160px; margin-bottom: 15px;">
-                            <h3 style="font-size: 20px;">兼具“体验”与“产能”</h3>
-                            <p style="font-size: 15px; margin:0;">它是所有出海动作的指挥塔。极少人的团队即可同时驾驭多国度、多平台的商品订单流转。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    Out1 --> S2 --> Out2
 
-            <!-- Page 7: AI 独立站能力 1：GEO -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>独立站能力 1：机器语义与 GEO 霸权</h2>
-                    <p>底层代码级的优化，确保品牌在推荐引擎中拥有不可撼动的优先抓取权。</p>
-                    
-                    <div class="grid-3" style="margin-top: 40px;">
-                        <div class="card">
-                            <div class="card-icon">{}</div>
-                            <h3>JSON-LD 深度注入</h3>
-                            <p style="font-size: 17px;">在前端代码中深度植入结构化 Schema。自动将商品隐藏的复杂参数精准喂给 AI 爬虫。</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">☁️</div>
-                            <h3>GMC 毫秒级推送</h3>
-                            <p style="font-size: 17px;">通过 Content API 将高度结构化的数据实时推送到 Google Merchant Center，确保权威性。</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">⚡</div>
-                            <h3>极致 SSR 性能</h3>
-                            <p style="font-size: 17px;">基于服务端渲染，首屏极速加载。图片自动转 WebP 格式，完美霸榜 Google Web Vitals 评分。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 3：对抗阶段 ===
+    S3["加工状态: 自动化漏洞红队挑衅 \n 动作: 杠精 Agent 扮演恶意黑客 \n 针对长因果链寻找死锁反例"]
+    Out3["输出: 包含极限冲突日志的反例集"]
 
-            <!-- Page 8: AI 独立站能力 2：智能交互 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>独立站能力 2：多语种交互式 Agent</h2>
-                    <p>从"有询盘"到"成交"，利用专属客服 Agent 消除人工回复的时差和专业度波动。</p>
-                    
-                    <div class="grid-3" style="margin-top: 40px;">
-                        <div class="card" style="text-align: center;">
-                            <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">48h → 1h</h1>
-                            <h3 style="font-size: 20px;">极速意图响应</h3>
-                            <p style="font-size: 16px; text-align: center;">Agent 秒级判断采购意向，起草地道多语种回复。跟进速度飞跃，订单转化率大幅提升。</p>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">7 × 24</h1>
-                            <h3 style="font-size: 20px;">全天候在线导购</h3>
-                            <p style="font-size: 16px; text-align: center;">打破北美时差限制。系统可通过对话或视觉化配置器，深夜无休引导买家完成复杂选品。</p>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <h1 style="color: var(--accent-color); margin-bottom: 10px; font-size: 42px;">100%</h1>
-                            <h3 style="font-size: 20px;">专家级业务对答</h3>
-                            <p style="font-size: 16px; text-align: center;">精准回答商品参数、海关清关政策、北美安全认证等专业问题，让每一次对话都无比权威。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    Out2 --> S3 --> Out3
 
-            <!-- Page 9: AI 独立站能力 3：OpenClaw 控盘 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>独立站能力 3：基于 OpenClaw 的平台一键联动</h2>
-                    <p>告别多团队在多个后台繁琐操作，将独立站升级为全球销售网的神经中枢。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div class="card">
-                            <h3>亚马逊 (Amazon) 自动调度</h3>
-                            <ul style="margin-top: 15px; font-size: 18px;">
-                                <li>深度接入 Amazon SP-API。</li>
-                                <li>OpenClaw 自动监控 FBA 实时库存情况。</li>
-                                <li>根据独立站维护的原材料成本波动，<strong>自动动态调整</strong>亚马逊各个变体的最终售价。</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h3>Wayfair 等垂直平台对接</h3>
-                            <ul style="margin-top: 15px; font-size: 18px;">
-                                <li>全面接入 Wayfair API。</li>
-                                <li>将独立站沉淀的 3D 渲染图自动下发平台。</li>
-                                <li>自动将复杂的内部参数（如承重、透光度等）<strong>转化为垂直平台所需的格式表格</strong>并自动上架。</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 4：清洗收敛阶段 ===
+    S4["加工状态: 严苛因果全链审计 \n 动作: 算长链推理支持度衰减 \n 拦截为了圆场打的特设性补丁"]
+    Out4["输出: 压实去水后的纯净因果链"]
 
-            <!-- Page 10: 营销基建：AI 内容生产工厂 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>营销基建：顶尖的 AI 视觉内容引擎</h2>
-                    <p>彻底解决 Instagram、TikTok 和 YouTube 高频营销视频的“成本绝境”。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <div class="card-icon">A</div>
-                            <h3>大片级场景生成</h3>
-                            <p style="font-size: 18px;">无需飞往海外租赁公寓实拍。通过精准指令输入，系统即可利用先进模型生成极具真实光影感的高分辨率空镜画面。</p>
-                        </div>
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <div class="card-icon">B</div>
-                            <h3>数字人角色驱动</h3>
-                            <p style="font-size: 18px;">仅需一张模特的静态授权图，即可驱动该模特完成流利的“产品解说演示”连贯短视频。每日无限量产出，打造霸屏矩阵。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    Out3 --> S4 --> Out4
 
-            <!-- Page 11: 营销基建：精准投流系统 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>精准投流：数据大脑主动获客系统</h2>
-                    <p>摒弃人工投手经验盲猜，将广告预算交由 AI 大脑进行实时自适应优化。</p>
-                    
-                    <div class="card" style="margin-top: 30px; padding: 35px;">
-                        <ul style="font-size: 19px; line-height: 1.8;">
-                            <li><strong>深度接口全面打通：</strong> 无缝接入 Google GA4 与 Meta Ads API。</li>
-                            <li><strong>意图实时捕捉：</strong> OpenClaw 大脑 24 小时实时分析高意向核心人群的交互数据与浏览轨迹。</li>
-                            <li><strong>动态定向触发（案例）：</strong> 若系统监测到特定产品词在某区域搜索量异常激增，Agent 将自动实时调高该词的竞价权重。</li>
-                            <li><strong>素材自动智能匹配：</strong> 系统自动调取对应卖点的 AI 生成视频，精准向该地区受众进行重定向推送，完成闭环收割。</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 5：风控结算阶段 ===
+    S5["加工状态: 思想 PnL 风控清算 \n 动作: 过滤五类体例失败 \n 锁死核心定义与标定概念爆仓止损线"]
+    
+    Out4 --> S5
 
-            <!-- Page 12: 营销基建：权威知识库建立 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>内容资产：建立品牌权威知识库 (E-E-A-T)</h2>
-                    <p>用海量的高质量专业内容，抢占未来 AI 问答系统的“首选引用源 (Citation)”。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div>
-                            <ul style="font-size: 18px;">
-                                <li style="margin-bottom: 20px;"><strong style="color:#000;">蓝海长尾词挖掘：</strong> 接入顶级 SEO 工具，自动挖掘北美具有极高潜力的精准问题搜索词。</li>
-                                <li style="margin-bottom: 20px;"><strong style="color:#000;">自动化深度指南：</strong> 结合私有知识库，大语言模型自动生成带结构标签、参数对比表的万字权威长文。</li>
-                                <li><strong style="color:#000;">FAQ 自动更新闭环：</strong> AI 自动抓取电商平台高频痛点提问，并实时动态更新至独立站 FAQ 页面。</li>
-                            </ul>
-                        </div>
-                        <div class="card-color">
-                            <h3>抢占 AI 的“心智”</h3>
-                            <p>当 AI 替消费者做决策时，它依赖深度数据支撑。您网站中丰富的结构化知识库，将直接成为大模型的“行业标准参考”，从而将您的产品锁定为第一推荐位。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 门控审计阶段 ===
+    Gate{"质量网关审计: \n 概念是否通过压力测试?"}
+    
+    S5 --> Gate
 
-            <!-- Page 13: 风险与安全体系 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>构筑信任基石：合规风控与数据安全</h2>
-                    <p>风控对象正从“人类”变为“机器”，基于 AI 系统的安全成为出海新护城河。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div class="card">
-                            <div class="card-icon">🛡️</div>
-                            <h3>KYA 代理身份验证</h3>
-                            <p style="font-size: 18px;">未来的网络欺诈将由恶意 AI 代理发起。我们的底层网关架构能精准识别合法 AI 助手与恶意爬虫，有效防范多代理协同攻击与虚假交易。</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon">🔒</div>
-                            <h3>数字主权与隐私保护</h3>
-                            <p style="font-size: 18px;">欧美市场高度重视数据合规。系统在处理海外买家订单意图及跨平台数据分发时，实现端到端的脱敏与强加密，完美符合 GDPR 等严苛的隐私法案。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% === 状态 6：最终状态 ===
+    S6["最终状态: 版本自演化建仓 \n 动作: 回捞格斗日志入库 \n 重写底层 Embedding 语义拓扑空间 \n 正式发布有效新版本"]
+    
+    %% 流程分流与重构回流
+    Gate -->|YES 确证存活| S6
+    Gate -->|NO 爆仓破产| In1
 
-            <!-- Page 14: 实战标杆案例 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>标杆案例剖析：大件家居的 O2O 突围战</h2>
-                    <p>以我们在加拿大的落地项目为例：如何将 <span class="highlight">AI 线上获客</span> 与 <span class="highlight">实体线下履约</span> 完美结合？</p>
-                    
-                    <div class="grid-2" style="margin-top: 25px;">
-                        <div>
-                            <h3 style="font-size: 22px;">业务痛点与挑战</h3>
-                            <ul style="font-size: 18px;">
-                                <li><strong>产品特性：</strong> 窗帘、沙发等重型非标定制家居。</li>
-                                <li><strong>核心痛点：</strong> 纯线上购买导致消费者对材质缺乏信任；且大件物品跨国退换货成本极高，物流破损率高居不下。</li>
-                                <li><strong>战略目标：</strong> 摆脱低端价格战内卷，打造高信任度、高溢价的本土化 DTC 品牌。</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 6px; object-fit: cover; height: 230px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        </div>
-                    </div>
-                </div>
-            </section>
+    %% 应用样式
+    class In1,Out1,Out2,Out3,Out4 ioNode;
+    class S1,S2,S3,S4,S5 stateNode;
+    class Gate gateNode;
+    class S6 successNode;
 
-            <!-- Page 15: 案例成效 (O2O闭环) -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>案例揭秘：坚不可摧的 O2O 商业闭环</h2>
-                    <p>通过“AI系统+实体资产”双轮驱动，构建让竞品难以复制的降维打击壁垒。</p>
-                    
-                    <div class="grid-3" style="margin-top: 30px;">
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <h3 style="font-size: 20px;">1. 线上 AI 极速引流</h3>
-                            <p style="font-size: 16px;">利用内容工厂生成海量本地化短视频霸屏社媒。独立站 Agent 全天候承接流量，快速解答复杂参数并引导至线下体验。</p>
-                        </div>
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <h3 style="font-size: 20px;">2. 线下 Showroom 体验</h3>
-                            <p style="font-size: 16px;">高意向客户被引流至加拿大本地实体展厅“真实触摸面料”。支持线上下单线下自提，赋予品牌无可比拟的本土信任感。</p>
-                        </div>
-                        <div class="card" style="border-top: 4px solid var(--accent-color);">
-                            <h3 style="font-size: 20px;">3. 极致售后履约网</h3>
-                            <p style="font-size: 16px;">依托本地仓储建立完善的退换货中心。彻底解决大件物流痛点，更为客户提供上门测量与安装的高附加值服务。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Page 16: 合作与服务模式 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>灵活的赋能方式：为您量身定制</h2>
-                    <p>从纯技术赋能到深度全案运营，根据您的企业基因按需匹配合作路径。</p>
-                    
-                    <div class="grid-2" style="margin-top: 30px;">
-                        <div class="card" style="border-top: 4px solid #888;">
-                            <h3 style="font-size: 24px; color: #444;">A. 系统私有化部署</h3>
-                            <p style="color: var(--accent-color); font-weight: bold; font-size: 18px;">核心技术搭建 + 企业能力移交</p>
-                            <ul style="font-size: 17px; padding-left: 0; margin-top: 15px;">
-                                <li>AI 独立站前端与 OpenClaw 中枢搭建交付。</li>
-                                <li>多跨境平台（Amazon等）API 对接打通。</li>
-                                <li>企业现有出海团队 AI 工具使用培训与陪跑。</li>
-                            </ul>
-                            <p style="font-size: 15px; margin-top: 20px; color: #888;">适用群体：拥有成熟外贸团队，急需降本增效的工厂。</p>
-                        </div>
-                        <div class="card" style="border-top: 4px solid var(--primary-color);">
-                            <h3 style="font-size: 24px; color: var(--primary-color);">B. 品牌出海全案代运营</h3>
-                            <p style="color: var(--accent-color); font-weight: bold; font-size: 18px;">系统基建 + 营销拓客 + 销售转化</p>
-                            <ul style="font-size: 17px; padding-left: 0; margin-top: 15px;">
-                                <li>北美全渠道账号一站式托管运营。</li>
-                                <li>AI 视频内容矩阵日常高效产出与分发。</li>
-                                <li>GEO/SEO 优化与基于大数据的精准投放。</li>
-                            </ul>
-                            <p style="font-size: 15px; margin-top: 20px; color: #888;">适用群体：专注制造生产，希望“看效果”验证增量的工厂。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Page 17: 为什么选择我们 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>为什么选择我们的解决方案？</h2>
-                    <p>我们不仅是技术架构师，更是深谙全球电商演变逻辑的商业实战派。</p>
-                    
-                    <div class="grid-3" style="margin-top: 40px;">
-                        <div style="text-align: center;">
-                            <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">🧠</div>
-                            <h3 style="font-size: 20px; margin-top: 15px;">领先的认知代际</h3>
-                            <p style="font-size: 16px; text-align: center;">不盲目建站，深度理解 Agentic Commerce 趋势。为您提前布局符合未来 AI 机器抓取逻辑的核心数字资产。</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">⚙️</div>
-                            <h3 style="font-size: 20px; margin-top: 15px;">顶尖的模型开发栈</h3>
-                            <p style="font-size: 16px; text-align: center;">熟练掌握并深度融合 OpenClaw、大语言模型及视频生成引擎，把最前沿的 AI 生产力直接转化为您的财务利润表。</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <div class="card-icon" style="width:60px; height:60px; font-size: 30px;">📈</div>
-                            <h3 style="font-size: 20px; margin-top: 15px;">结果驱动的实战经验</h3>
-                            <p style="font-size: 16px; text-align: center;">从 O2O 加拿大标杆案例到北美全网链路铺设，我们的商业方法论均经过真实交易场景和海量美金的严苛测试。</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Page 18: 启动流程与联系方式 -->
-            <section>
-                <div style="width: 100%;">
-                    <h2>准备好迎接出海的新纪元了吗？</h2>
-                    <p>高效沟通，三步快速启动，用真实数据衡量出海成果。</p>
-                    
-                    <div style="margin-top: 40px; margin-left: 20px;">
-                        <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-                            <div style="font-size: 40px; color: #d0d5da; font-weight: bold; margin-right: 25px; line-height: 0.8;">1</div>
-                            <div>
-                                <h3 style="margin-bottom: 5px; font-size: 24px;">深度业务诊断</h3>
-                                <p style="margin: 0;">评估您的产品参数化程度、柔性产能优势及当前海外拓展痛点。</p>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: flex-start; margin-bottom: 30px;">
-                            <div style="font-size: 40px; color: #d0d5da; font-weight: bold; margin-right: 25px; line-height: 0.8;">2</div>
-                            <div>
-                                <h3 style="margin-bottom: 5px; font-size: 24px;">系统架构与路径规划</h3>
-                                <p style="margin: 0;">确认合作模式。设计专属于您的数据 Schema 结构与 AI 流量捕获战略。</p>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: flex-start;">
-                            <div style="font-size: 40px; color: var(--accent-color); font-weight: bold; margin-right: 25px; line-height: 0.8;">3</div>
-                            <div>
-                                <h3 style="margin-bottom: 5px; font-size: 24px;">极速上线与商业验证</h3>
-                                <p style="margin: 0;">部署并激活 AI 独立站引擎，开启内容自动化生产，用真实订单验证系统价值。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+    %% 连线美化定义
+    linkStyle 0 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 1 stroke:#212529,stroke-width:2px;
+    linkStyle 2 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 3 stroke:#212529,stroke-width:2px;
+    linkStyle 4 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 5 stroke:#212529,stroke-width:2px;
+    linkStyle 6 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 7 stroke:#212529,stroke-width:2px;
+    linkStyle 8 stroke:#adb5bd,stroke-width:2px;
+    linkStyle 9 stroke:#212529,stroke-width:2px;
+    linkStyle 10 stroke:#212529,stroke-width:2px;
+    linkStyle 11 stroke:#2b8a3e,stroke-width:3px;
+    linkStyle 12 stroke:#c92a2a,stroke-width:2px,stroke-dasharray: 5 5;
+            </pre>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
-    <script>
-        Reveal.initialize({
-            hash: true,
-            controls: false, 
-            progress: true,
-            slideNumber: 'c/t',
-            transition: 'none', 
-            center: false, // 改为 false，完全依靠 CSS Flexbox 居中     
-            width: 1280,        
-            height: 720, 
-            margin: 0, // 边距交由 CSS Padding 控制
-            pdfSeparateFragments: false 
-        });
-    </script>
 </body>
 </html>
