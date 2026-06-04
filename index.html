@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine 概念生长全生命周期流水线</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <title>CG-Engine 概念生长状态流水线</title>
     
     <style>
         :root {
@@ -15,7 +14,7 @@
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -68,35 +67,34 @@
         .mermaid {
             width: 100%;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .mermaid.rendered {
-            opacity: 1;
+            visibility: hidden; /* 防止未加载完成时白屏或闪烁 */
         }
     </style>
 
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        // 采用最宽松安全的隔离配置，强制使用内联 SVG 渲染，彻底阻断浏览器的 Unsafe URL 拦截
+        // 强风控初始化，彻底不请求本地存储，隔离 Edge Tracking Prevention 拦截
         mermaid.initialize({
-            startOnLoad: true,
+            startOnLoad: false, /* 改为手动控制触发，规避 window.onload 被其他恶意脚本掐断 */
             theme: 'base',
-            securityLevel: 'antiscript', /* 升级防御，绕过本地文件跨域误判 */
-            fontFamily: 'Inter, Noto Sans SC, sans-serif',
+            securityLevel: 'loose', 
             flowchart: {
                 useMaxWidth: false,
-                htmlLabels: false, /* 降维使用纯文本标签，从根源上杜绝 Local Frame 安全审查崩溃 */
+                htmlLabels: true, /* 服务器环境下重新启用 HTML 支持，恢复高级换行 */
                 curve: 'linear'
             }
         });
-        
-        // 确保渲染完成后优雅渐显
+
+        // 确保在 DOM 树准备完毕后安全执行，且不受第三方 JSON.parse 崩溃的影响
         document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                document.querySelector('.mermaid').classList.add('rendered');
-            }, 200);
+            try {
+                mermaid.run({
+                    nodes: document.querySelectorAll('.mermaid')
+                });
+                document.querySelector('.mermaid').style.visibility = 'visible';
+            } catch (e) {
+                console.error("Mermaid 渲染沙箱捕获异常: ", e);
+            }
         });
     </script>
 </head>
@@ -104,12 +102,12 @@
 
     <div class="container">
         <header>
-            <h1>CG-Engine 概念生长全生命周期流水线</h1>
+            <h1>CG-Engine 概念生长状态流水线</h1>
             <p class="subtitle">标准工程状态机 | 基于断裂带捕获、时空画布矩阵、因果审计与版本自演化建仓的动态流转闭环</p>
         </header>
 
         <div class="chart-wrapper">
-            <pre class="mermaid">
+            <div class="mermaid">
 graph LR
     %% 状态机视觉色彩系统定义
     classDef ioNode fill:#ffffff,stroke:#adb5bd,stroke-width:2px,color:#495057;
@@ -118,42 +116,38 @@ graph LR
     classDef successNode fill:#2b8a3e,stroke:#2b8a3e,stroke-width:2px,color:#ffffff;
 
     %% === 状态 1：编译阶段 ===
-    In1["输入: 捕获现实痛感与断裂带异常数据"] 
-    S1["加工状态: 跨域符号编译 \n 动作: LLM 斩断流畅废话 \n 强制异质概念跨界碰撞"] 
-    Out1["输出: 初始猜想种子"]
+    In1["输入:<br/>捕获现实痛感与<br/>断裂带异常数据"] 
+    S1["加工状态: 跨域符号编译<br/>动作: LLM 斩断流畅废话<br/>强制异质概念跨界碰撞"] 
+    Out1["输出:<br/>初始猜想种子"]
 
     In1 --> S1 --> Out1
 
     %% === 状态 2：拉伸阶段 ===
-    S2["加工状态: 时空画布矩阵拉伸 \n 动作: 推入横纵两轴坐标系 \n 迫使概念跨越纵向五时层演练"]
-    Out2["输出: 多尺度高信息量理论空间"]
+    S2["加工状态: 时空画布矩阵拉伸<br/>动作: 推入横纵两轴坐标系<br/>迫使概念跨越纵向五时层演练"]
+    Out2["输出:<br/>多尺度高信息量理论空间"]
 
     Out1 --> S2 --> Out2
 
     %% === 状态 3：对抗阶段 ===
-    S3["加工状态: 自动化漏洞红队挑衅 \n 动作: 杠精 Agent 扮演恶意黑客 \n 针对长因果链寻找死锁反例"]
-    Out3["输出: 包含极限冲突日志的反例集"]
+    S3["加工状态: 自动化漏洞红队挑衅<br/>动作: 杠精 Agent 扮演恶意黑客<br/>针对长因果链寻找死锁反例"]
+    Out3["输出:<br/>包含极端冲突日志的反例集"]
 
     Out2 --> S3 --> Out3
 
     %% === 状态 4：清洗收敛阶段 ===
-    S4["加工状态: 严苛因果全链审计 \n 动作: 算长链推理支持度衰减 \n 拦截为了圆场打的特设性补丁"]
-    Out4["输出: 压实去水后的纯净因果链"]
+    S4["加工状态: 严苛因果全链审计<br/>动作: 算长链推理支持度衰减<br/>拦截为了圆场打的特设性补丁"]
+    Out4["输出:<br/>压实去水后的纯净因果链"]
 
     Out3 --> S4 --> Out4
 
-    %% === 状态 5：风控结算阶段 ===
-    S5["加工状态: 思想 PnL 风控清算 \n 动作: 过滤五类体例失败 \n 锁死核心定义与标定概念爆仓止损线"]
+    %% === 5. 风控结算与门控审计 ===
+    S5["加工状态: 思想 PnL 风控清算<br/>动作: 过滤五类体例失败<br/>锁死核心定义与标定概念爆仓止损线"]
+    Gate{"质量网关审计:<br/>概念是否通过压力测试?"}
     
-    Out4 --> S5
-
-    %% === 门控审计阶段 ===
-    Gate{"质量网关审计: \n 概念是否通过压力测试?"}
-    
-    S5 --> Gate
+    Out4 --> S5 --> Gate
 
     %% === 状态 6：最终状态 ===
-    S6["最终状态: 版本自演化建仓 \n 动作: 回捞格斗日志入库 \n 重写底层 Embedding 语义拓扑空间 \n 正式发布有效新版本"]
+    S6["最终状态: 版本自演化建仓<br/>动作: 回捞格斗日志入库<br/>重写底层 Embedding 拓扑空间<br/>正式发布有效新版本"]
     
     %% 流程分流与重构回流
     Gate -->|YES 确证存活| S6
@@ -179,7 +173,7 @@ graph LR
     linkStyle 10 stroke:#212529,stroke-width:2px;
     linkStyle 11 stroke:#2b8a3e,stroke-width:3px;
     linkStyle 12 stroke:#c92a2a,stroke-width:2px,stroke-dasharray: 5 5;
-            </pre>
+            </div>
         </div>
     </div>
 
