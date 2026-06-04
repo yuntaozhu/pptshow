@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine v4.5 核心动态架构图</title>
+    <title>CG-Engine v4.5 核心动态架构</title>
     
     <style>
         :root {
@@ -18,7 +18,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,27 +26,27 @@
 
         .container {
             width: 100%;
-            max-width: 1500px;
+            max-width: 1000px; /* 锁死主容器宽度，防止在大屏下过度拉伸 */
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             border: 1px solid var(--border-color);
-            padding: 30px;
+            padding: 25px;
             box-sizing: border-box;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 20px;
+            padding-bottom: 15px;
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             letter-spacing: -0.5px;
             color: #212529;
         }
@@ -55,19 +55,36 @@
             color: #6c757d;
             font-size: 13px;
             margin: 0;
+            line-height: 1.5;
         }
 
         .chart-wrapper {
             width: 100%;
-            overflow-x: auto;
+            display: flex;
+            justify-content: center;
+            overflow: hidden; /* 彻底封死溢出横向滚动条 */
             background: #ffffff;
-            padding: 20px 0;
+            padding: 10px 0;
         }
 
         .mermaid {
             width: 100%;
+            max-width: 100%;
             text-align: center;
             visibility: hidden;
+        }
+
+        /* 强行穿透重写 Mermaid 内部节点的 CSS 样式，确保节点文本不横向无限拉伸 */
+        .mermaid .node .label {
+            max-width: 650px !important; /* 限制卡片内部文本最大宽度 */
+            white-space: normal !important; /* 允许正常换行 */
+            word-wrap: break-word !important;
+            line-height: 1.6 !important;
+            font-size: 13px !important;
+        }
+        
+        .mermaid .node rect, .mermaid .node polygon {
+            stroke-width: 2px !important;
         }
     </style>
 
@@ -78,9 +95,11 @@
             theme: 'base',
             securityLevel: 'loose', 
             flowchart: {
-                useMaxWidth: false,
-                htmlLabels: true, /* 开启 HTML 标签支持 */
-                curve: 'linear'   /* 刚硬线条 */
+                useMaxWidth: true,     /* 开启最大宽度自适应，使其能够缩放 */
+                htmlLabels: true,      /* 开启 HTML 标签支持 */
+                curve: 'linear',       /* 刚硬线缆风格 */
+                nodeSpacing: 45,       /* 适当紧凑纵向间距 */
+                rankSpacing: 40
             }
         });
 
@@ -101,12 +120,12 @@
     <div class="container">
         <header>
             <h1>CG-Engine v4.5 核心动态架构</h1>
-            <p class="subtitle">线性状态机：从输入层投放，历经断裂带编译、时空画布回测、动力链执行、到可证伪结算的公共思想工具流水线</p>
+            <p class="subtitle">标准工程状态机：从输入层投放，历经断裂带编译、时空画布回测、动力链执行、到可证伪结算的闭环思想流水线</p>
         </header>
 
         <div class="chart-wrapper">
             <div class="mermaid">
-graph LR
+graph TD
     %% 状态机视觉色彩系统定义
     classDef inputLayer fill:#f1f3f5,stroke:#ced4da,stroke-width:2px,color:#495057;
     classDef moduleNode fill:#212529,stroke:#000000,stroke-width:2px,color:#ffffff;
@@ -117,16 +136,16 @@ graph LR
     In1["【输入层】 原始思想意图投放<br/>(人类肉身痛感: 表面解释 A → 反常现象 B)"]
 
     %% === 模块一 ===
-    S1["【模块一: 断裂带编译 (Compile)】 ──&gt; (Intent → Code)<br/>* 机制: 拒绝平庸流畅的自然语言滑动，直接将人类的'不适感意图'编译成高维特异性概念。<br/>* 原理: 卡住知识地形坐标，将模糊感受固化为具有强解释力的'深层结构 C (思想策略代码)'。"]
+    S1["<b>【模块一: 断裂带编译 (Compile)】 ──&gt; (Intent → Code)</b><br/>• <b>机制:</b> 拒绝平庸流畅的自然语言滑动，直接将人类的'不适感意图'编译成高维特异性概念。<br/>• <b>原理:</b> 卡住知识地形坐标，将模糊感受固化为具有强解释力的'深层结构 C (思想策略代码)'。"]
 
     %% === 模块二 ===
-    S2["【模块二: 时空画布回测 (Backtest)】 ──&gt; (Code → Backtest)<br/>* 机制: 强制进行历史与场景的多尺度历史回测。<br/>* 原理: 将模块一生成的概念投入'手风琴时空矩阵'中。<br/>&nbsp;&nbsp;- 纵向回测: 在 100ms 生理惊耦、手头任务、长期事业、生命立命的'五时层历史数据'中跑自动化测试。<br/>&nbsp;&nbsp;- 横向回测: 在微观动作、学科断裂带、宏观社会文化地形的'多层场景'中进行极端回测。"]
+    S2["<b>【模块二: 时空画布回测 (Backtest)】 ──&gt; (Code → Backtest)</b><br/>• <b>机制:</b> 强制进行历史与场景的多尺度历史回测。<br/>• <b>原理:</b> 将模块一生成的概念投入'手风琴时空矩阵'中。<br/>&nbsp;&nbsp;- <b>纵向回测:</b> 在 100ms 生理惊耦、手头任务、长期事业、生命立命的'五时层历史数据'中跑自动化测试。<br/>&nbsp;&nbsp;- <b>横向回测:</b> 在微观动作、学科断裂带、宏观社会文化地形的'多层场景'中进行极端回测。"]
 
     %% === 模块三 ===
-    S3["【模块三: 动力链执行器 (Execution)】 ──&gt; (Agent → Execution)<br/>* 机制: 启动长路径因果链 (Deep Think)，把抽象策略执行行为为具体的文字因果链仓位。<br/>* 原理: 用单一核心动力机制 (如差异驱动) 贯穿全文，将其从一个静态的'词语'转换为能在各个时层和地形中自动化运行的'动态因果机制'。"]
+    S3["<b>【模块三: 动力链执行器 (Execution)】 ──&gt; (Agent → Execution)</b><br/>• <b>机制:</b> 启动长路径因果链 (Deep Think)，把抽象策略执行行为为具体的文字因果链仓位。<br/>• <b>原理:</b> 用单一核心动力机制 (如差异驱动) 贯穿全文，将其从一个静态的'词语'转换为能在各个时层和地形中自动化运行的'动态因果机制'。"]
 
     %% === 模块四 ===
-    S4["【模块四: 对抗审稿与可证伪结算 (PnL Auditor)】 ──&gt; (PnL → Iteration)<br/>* 机制: 无情计算逻辑支持度的衰减率，清算'伪精确'和'概念滑转'。<br/>* 原理: 强制输出带编号的【定义】、【结论】和【机制假说】。"]
+    S4["<b>【模块四: 对抗审稿与可证伪结算 (PnL Auditor)】 ──&gt; (PnL → Iteration)</b><br/>• <b>机制:</b> 无情计算逻辑支持度的衰减率，清算'伪精确'和'概念滑转'。<br/>• <b>原理:</b> 强制输出带编号的【定义】、【结论】和【机制假说】。"]
 
     %% === 结算判定网关 ===
     Gate{"【结算指标】<br/>是否强制生成<br/>【可证伪路径】?"}
@@ -134,24 +153,24 @@ graph LR
     %% === 输出层 ===
     S5["【输出层】 诞生具备极高迭代效率、具备高主体间一致性、可随时应对市场环境变化的『公共思想工具』"]
 
-    %% === 拓扑流水线核心串联 (确保干净无串行尾部空格) ===
+    %% === 状态机纵向串联线缆 ===
     In1 --> S1
     S1 --> S2
     S2 --> S3
     S3 --> S4
     S4 --> Gate
     
-    %% === 严格解开双引号限制，彻底修复词法错误 ===
+    %% === 盈亏反馈分支 ===
     Gate -->|YES 确证存活| S5
     Gate -->|NO 策略彻底爆仓 逼回重来| In1
 
-    %% === 应用样式 ===
+    %% 应用视觉样式
     class In1 inputLayer;
     class S1,S2,S3,S4 moduleNode;
     class Gate gateNode;
     class S5 outputLayer;
 
-    %% === 连线美化定义 ===
+    %% 连线美化（针对垂直视图优化）
     linkStyle 0 stroke:#495057,stroke-width:2px;
     linkStyle 1 stroke:#212529,stroke-width:2px;
     linkStyle 2 stroke:#212529,stroke-width:2px;
