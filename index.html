@@ -16,7 +16,6 @@
             --accent-orange: #ea580c;
             --purple-deep: #7c3aed;
             --sky-blue: #0284c7;
-            --success-green: #16a34a;
             --danger-red: #dc2626;
         }
 
@@ -57,7 +56,7 @@
             margin: 0;
         }
 
-        /* 左右两栏极致比例切分 */
+        /* 左右工作区完美比例切分 */
         .workspace {
             display: flex;
             flex: 1;
@@ -65,12 +64,12 @@
             overflow: hidden;
         }
 
-        /* 左侧：让流线图节点完全膨胀，吞噬全部 24% 的空白空间 */
+        /* 左侧：深度饱和填充区，吞噬全部 24% 的纵向空白空间 */
         .left-panel {
             width: 24%;
             background: #fcfdfd;
             border-right: 1px solid var(--border-light);
-            padding: 12px 8px;
+            padding: 14px 10px;
             overflow-y: auto;
             box-sizing: border-box;
         }
@@ -80,7 +79,7 @@
             visibility: hidden;
         }
 
-        /* 右侧：超宽幅文本展现区（76%），完美展现您提炼的精简描述 */
+        /* 右侧：超宽幅文本展现区（76%），严格保持内容字号与长文本排版 */
         .right-panel {
             width: 76%;
             padding: 20px 32px;
@@ -195,8 +194,8 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 40, 
-                rankSpacing: 35
+                nodeSpacing: 45, /* 稍微增大间距，让节点垂直拉伸更饱满 */
+                rankSpacing: 40
             }
         });
 
@@ -205,7 +204,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.warn("Mermaid 渲染优化成功", e);
+                console.warn("Mermaid 渲染成功", e);
             }
         });
     </script>
@@ -230,29 +229,29 @@ graph TD
     classDef gateNode fill:#fef2f2,stroke:#b91c1c,stroke-width:2.5px,color:#991b1b,font-weight:bold;
     classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
 
-    In["<b>【输入源】原始痛感投放</b><br/>• 状态: S1 模糊零散直觉<br/>• 输入: 现实抓耳挠腮痛点<br/>• 特征: 带有强烈的个人情绪"]
+    In["<b>【输入源】原始痛感投放</b><br/>• 状态: S1 模糊零散直觉<br/>• 核心: 现实世界抓耳挠腮痛点<br/>• 属性: 带有强烈的个人情绪"]
     
-    M1["<b>【模块一】断裂带强编译</b><br/>• 动作: 剥离情绪, 跨界压榨<br/>• 状态: S2 思想代码种子生成<br/>• 产出: 亮晶晶/硬邦邦逻辑假说<br/>• 成果: 封装为核心『子弹』"]
+    M1["<b>【模块一】断裂带强编译</b><br/>• 动作: 剥离情绪 ✖ 跨界压榨<br/>• 状态: S2 思想代码种子生成<br/>• 产出: 亮晶晶/硬邦邦逻辑假说<br/>• <b>执行仓位权重: 20%</b>"]
     
-    M2["<b>【模块二】斯坦福小镇轰炸</b><br/>• 机制: 记忆流-反思-规划 闭环<br/>• 策略: 强迫Agent进行多地形博弈<br/>• 风控: 规避无效与无关废话Token<br/>• 产出: 标准化 Crash Logs 伤痕"]
+    M2["<b>【模块二】斯坦福小镇轰炸</b><br/>• 框架: Memory-Reflection-Planning<br/>• 运行: 多Agent特定地形生存博弈<br/>• 约束: 设定边界阻断无效废话 Token<br/>• 产出: 标准化 Crash Logs 伤痕"]
     
-    M3["<b>【模块三】马尔科夫因果连缀</b><br/>• 推理: Deep Think 漏洞缝合<br/>• 数学: 马尔科夫链 (X➔Y➔Z)<br/>• 状态: S3 100%确定性传导模型<br/>• 成果: 计算核心概念『执行仓位』"]
+    M3["<b>【模块三】马尔科夫因果连缀</b><br/>• 推理: Deep Think 漏洞重组缝合<br/>• 铁丝: 100% 刚性传导 (X➔Y➔Z)<br/>• 消除: 抹平一切『大概/可能』模糊<br/>• <b>执行仓位权重: 75% [重仓]</b>"]
     
-    M4["<b>【模块四】波普尔思想审计</b><br/>• 斩断: 拒绝人与LLM的过拟合护短<br/>• 清算: 彻底碾碎特设性狡辩借口<br/>• 状态: S4 划定『爆仓自毁死线』<br/>• 核心: 冰冷的哲学手术刀断头台"]
+    M4["<b>【模块四】波普尔思想审计</b><br/>• 风控: 对抗大脑与LLM过拟合护短<br/>• 结算: 斩断所有特设性狡辩理由<br/>• 刀刃: 强制划定『爆仓自毁死线』<br/>• <b>执行仓位权重: 5%</b>"]
     
-    Gate{"【交付网关】<br/>是否通过自毁死线清算?"}
+    Gate{"【LangGraph 交付大闸】<br/>自毁死线路由清算"}
     
-    Out["<b>【全局知识地图】正式交付</b><br/>• 成果: 颁发『交付证书』<br/>• 资产: 高韧性公共思想工具<br/>• 状态: 沉淀为抗打击资产网络"]
+    Out["<b>【全局知识地图】正式交付</b><br/>• 状态: 沉淀为抗打击资产网络<br/>• 证书: 颁发刚性思想交付证书<br/>• 成果: 获得高韧性公共思想工具"]
 
-    %% 紧密刚性链条咬合传导
-    In -->|投放说不清的原始直觉| M1
-    M1 -->|提供轰炸物料『子弹』| M2
-    M2 -->|投喂边缘失效日志弹药| M3
-    M3 -->|递交一穿到底的确定性因果链| M4
-    M4 -->|强制锁定生存边界送审| Gate
+    %% 密集高饱和度因果链传导与马尔科夫概率标注
+    In -->|1.投放原始直觉 P(S2|S1)=1.0| M1
+    M1 -->|2.输出封装『子弹』物料| M2
+    M2 -->|3.榨出失效日志弹药投喂| M3
+    M3 -->|4.连缀出一穿到底确定性链条| M4
+    M4 -->|5.锁定生存边界送审风控台| Gate
     
-    Gate -->|YES 通过清算| Out
-    Gate -.->|NO 判定和稀泥 ➔ 暴力打回重构| In
+    Gate -->|YES 通过审计线| Out
+    Gate -.->|NO 判定和稀泥 ➔ 强行打回原地重构| In
 
     class In inputNode;
     class M1 mod1Node;
