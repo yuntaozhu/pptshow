@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine v4.5 核心动态架构控制台</title>
+    <title>CG-Engine v4.5 概念生长引擎控制台</title>
     
     <style>
         :root {
-            --bg-color: #f6f8fa;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #4b5563;
-            --border-light: #e5e7eb;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-light: #e2e8f0;
             --primary-blue: #2563eb;
             --accent-orange: #ea580c;
-            --purple-deep: #8b5cf6;
-            --sky-blue: #0ea5e9;
+            --purple-deep: #7c3aed;
+            --sky-blue: #0284c7;
             --success-green: #16a34a;
             --danger-red: #dc2626;
         }
@@ -29,77 +29,75 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow: hidden; /* 锁死最外层，防止大页面断裂 */
         }
 
         /* 顶部导航栏 */
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-light);
-            padding: 12px 24px;
+            padding: 10px 24px;
             display: flex;
             align-items: baseline;
-            gap: 16px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            gap: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
             z-index: 10;
         }
 
         header h1 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             margin: 0;
-            color: #111827;
+            color: #0f172a;
         }
 
         header .subtitle {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             margin: 0;
         }
 
-        /* 左右分屏核心容器：极致拓宽右侧展现宽度 */
+        /* 左右工作区：激进调整比例，给予右侧大段文本史无前例的发挥空间 */
         .workspace {
             display: flex;
             flex: 1;
-            height: calc(100vh - 45px);
+            height: calc(100vh - 42px);
             overflow: hidden;
         }
 
-        /* 左侧：精细可视化流程图区 (缩紧至32%) */
+        /* 左侧：精细流程拓扑收窄至 24% */
         .left-panel {
-            width: 32%;
-            background: #fcfcfc;
+            width: 24%;
+            background: #fdfdfd;
             border-right: 1px solid var(--border-light);
-            padding: 16px;
+            padding: 14px;
             overflow-y: auto;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
         }
 
         .mermaid {
             width: 100%;
-            visibility: hidden;
+            visibility: hidden; /* 防止初始加载闪烁 */
         }
 
-        /* 右侧：超宽幅详细释义区 (扩充至68%，消灭长段纵向拉伸) */
+        /* 右侧：超宽幅文本展现区大幅扩展至 76% */
         .right-panel {
-            width: 68%;
-            padding: 20px 28px;
-            overflow-y: auto;
+            width: 76%;
+            padding: 20px 32px;
+            overflow-y: auto; /* 保证右侧在极宽状态下可独立顺滑滚动 */
             background: #ffffff;
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
 
-        /* 紧凑精致卡片设计 */
+        /* 横向拉宽后的紧凑卡片排版 */
         .info-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
             border-radius: 6px;
-            padding: 18px 22px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01);
             position: relative;
         }
 
@@ -113,7 +111,7 @@
             border-radius: 6px 0 0 6px;
         }
         
-        .info-card.input::before { background: #9ca3af; }
+        .info-card.input::before { background: #94a3b8; }
         .info-card.mod1::before { background: var(--accent-orange); }
         .info-card.mod2::before { background: var(--purple-deep); }
         .info-card.mod3::before { background: var(--sky-blue); }
@@ -123,54 +121,58 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #f3f4f6;
-            padding-bottom: 8px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 6px;
         }
 
         .step-badge {
             font-size: 10px;
             font-weight: 800;
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 3px;
             margin-right: 10px;
         }
 
         .card-title {
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
             margin: 0;
-            color: #111827;
+            color: #0f172a;
         }
 
-        /* I/O 参数盒子 */
+        /* I/O 参数多栏布局：横向空间变大后采用分栏，缩短纵向高度 */
         .io-block {
             background: #f8fafc;
             border: 1px dashed #cbd5e1;
             border-radius: 4px;
-            padding: 10px 14px;
-            margin-bottom: 12px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
             font-size: 12px;
             font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
             color: #334155;
-            line-height: 1.5;
+            display: flex;
+            gap: 30px;
+        }
+
+        .io-item {
+            flex: 1;
         }
 
         .io-label {
             font-weight: bold;
             color: #0f172a;
-            display: inline-block;
-            width: 55px;
         }
 
+        /* 绝对不修改原始文本大小，优化行高与间距实现单页高效通读 */
         .description {
             font-size: 13.5px;
             line-height: 1.6;
-            color: #374151;
+            color: #334155;
         }
 
         .description p {
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
         }
         .description p:last-child {
             margin-bottom: 0;
@@ -178,13 +180,13 @@
 
         .highlight {
             font-weight: 600;
-            color: #111827;
-            background: #fef3c7;
-            padding: 1px 4px;
+            color: #0f172a;
+            background: #fef08a;
+            padding: 1px 3px;
             border-radius: 2px;
         }
 
-        /* 滚动条整体美化 */
+        /* 滚动条 */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -192,11 +194,11 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: #e2e8f0;
+            background: #cbd5e1;
             border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #cbd5e1;
+            background: #94a3b8;
         }
 
     </style>
@@ -206,13 +208,14 @@
         mermaid.initialize({
             startOnLoad: false, 
             theme: 'base',
-            securityLevel: 'loose', 
+            securityLevel: 'loose',
+            logLevel: 'error',
             flowchart: {
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 40,
-                rankSpacing: 35
+                nodeSpacing: 35,
+                rankSpacing: 30
             }
         });
 
@@ -221,7 +224,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.error("Mermaid 渲染树中断拦截: ", e);
+                console.warn("Mermaid 拦截安全模式重置: ", e);
             }
         });
     </script>
@@ -238,36 +241,29 @@
         <div class="left-panel">
             <div class="mermaid">
 graph TD
-    classDef inputNode fill:#f3f4f6,stroke:#9ca3af,stroke-width:2px,color:#1f2937;
+    classDef inputNode fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px,color:#0f172a;
     classDef mod1Node fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#c2410c;
     classDef mod2Node fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px,color:#6d28d9;
-    classDef mod3Node fill:#ecfeff,stroke:#0ea5e9,stroke-width:2px,color:#0369a1;
+    classDef mod3Node fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px,color:#0369a1;
     classDef mod4Node fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#b91c1c;
     classDef gateNode fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#991b1b,font-weight:bold;
-    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
+    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
 
-    In["<b>【输入层】原始意图投放</b><br/>• 数据抓取与常识破壁<br/>• 提炼原生痛感与直觉表达"]
-    
-    M1["<b>【模块一】断裂带编译</b><br/>• 斩断修辞滑动 / 高度压缩提纯<br/>• 转化为策略种子 (Intent ➔ Code)"]
-    
-    M2["<b>【模块二】时空画布回测</b><br/>• 矩阵应力测试与压力仿真模拟<br/>• 策略验证与边界漏洞深度清算"]
-    
-    M3["<b>【模块三】动力链执行器</b><br/>• 长路径因果推理 (Deep Think)<br/>• 废墟碎片整合为自动化自运行因果"]
-    
-    M4["<b>【模块四】对抗审稿与结算</b><br/>• 反特设性修正与刚性风控审查<br/>• 锁定刚性定义并生成可证伪路径"]
-    
-    Gate{"质量清算<br/>判定网关"}
-    
-    Out["<b>【输出层】概念交付</b><br/>• 演化出高抗打击公共思想资产"]
+    In["<b>输入层: 意图投放</b><br/>原始直觉与痛感捕捉"]
+    M1["<b>模块一: 断裂带编译</b><br/>Intent ➔ Code"]
+    M2["<b>模块二: 画布回测</b><br/>时空矩阵极限应力盲测"]
+    M3["<b>模块三: 动力链执行</b><br/>长路径因果连缀闭环"]
+    M4["<b>模块四: 对抗结算</b><br/>波普尔式可证伪清算"]
+    Gate{"判定网关"}
+    Out["<b>输出层: 概念交付</b><br/>抗打击公共思想资产"]
 
-    %% === 连线逻辑定义 ===
-    In -->|冲突线: 表面解释A ➔ 反常现象B| M1
-    M1 -->|产出: 强解释力深层结构 C| M2
-    M2 -->|产出: 边界失效碰撞数据 Logs| M3
-    M3 -->|产出: 一穿到底的动态因果机制| M4
+    In --> M1
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
     M4 --> Gate
-    Gate -->|YES 通过生存死线| Out
-    Gate -.->|NO 发生爆仓 强制打回重构| In
+    Gate -->|YES 通过| Out
+    Gate -.->|NO 爆仓打回| In
 
     class In inputNode;
     class M1 mod1Node;
@@ -277,7 +273,7 @@ graph TD
     class Gate gateNode;
     class Out outputNode;
     
-    linkStyle 0 stroke:#9ca3af,stroke-width:2px;
+    linkStyle 0 stroke:#94a3b8,stroke-width:2px;
     linkStyle 1 stroke:#ea580c,stroke-width:2px;
     linkStyle 2 stroke:#8b5cf6,stroke-width:2px;
     linkStyle 3 stroke:#0ea5e9,stroke-width:2px;
@@ -291,7 +287,7 @@ graph TD
             
             <div class="info-card input">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#f3f4f6; color:#4b5563;">INPUT LAYER</span>
+                    <span class="step-badge" style="background:#e2e8f0; color:#334155;">INPUT LAYER</span>
                     <h2 class="card-title">【输入层】概念胚胎孵化 —— 捕捉痛感与打破常规</h2>
                 </div>
                 <div class="description">
@@ -306,8 +302,8 @@ graph TD
                     <h2 class="card-title">【模块一】断裂带编译 —— 费耶阿本德认知无政府主义多元编译</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 表面解释 A → 反常现象 B（输入层递交的原生冲突）</div>
-                    <div><span class="io-label">OUTPUT:</span> 深层结构 C（打破学科黑箱、高度自解耦的思想策略代码种子）</div>
+                    <div class="io-item"><span class="io-label">INPUT:</span> 表面解释 A → 反常现象 B（输入层递交的原生冲突）</div>
+                    <div class="io-item"><span class="io-label">OUTPUT:</span> 深层结构 C（打破学科黑箱、高度自解耦的思想策略代码种子）</div>
                 </div>
                 <div class="description">
                     <p><b>机制：</b>人在日常反思时极易陷入平庸流畅的自然语言滑动，用熟悉的陈词滥调抹平深层矛盾。模块一的核心任务就是强制剥离自然语言的温情修饰。它引入<span class="highlight">费耶阿本德认知无政府主义多元编译理论</span>，强制斩断传统流派的先验范式，允许异质层级的跨界概念混杂交配。</p>
@@ -317,12 +313,12 @@ graph TD
 
             <div class="info-card mod2">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#f3e8ff; color:#8b5cf6;">MODULE 02</span>
+                    <span class="step-badge" style="background:#f3e8ff; color:#7c3aed;">MODULE 02</span>
                     <h2 class="card-title">【模块二】时空画布回测 —— 风琴式时空矩阵极限对抗应力盲测</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 深层结构 C（模块一编译出的特异性对抗 Class）</div>
-                    <div><span class="io-label">OUTPUT:</span> 边缘失效碰撞数据（多维度逻辑卡死、漏洞暴露的 Crash Logs 废墟）</div>
+                    <div class="io-item"><span class="io-label">INPUT:</span> 深层结构 C（模块一编译出的特异性对抗 Class）</div>
+                    <div class="io-item"><span class="io-label">OUTPUT:</span> 边缘失效碰撞数据（多维度逻辑卡死、漏洞暴露的 Crash Logs 废墟）</div>
                 </div>
                 <div class="description">
                     <p><b>工程取舍重构：</b>这是概念在虚拟地形中的“残酷适者生存演练”。若采用传统的完备多智能体社会长时模拟（如斯坦福小镇模型），系统将面临推理链拉长、响应延迟高、算力成本爆炸等显著工程缺陷。系统在此做出了极为高效的架构平替 —— **轻量级多智能体矩阵盲测（Lightweight Agent Matrix Test）**。</p>
@@ -332,12 +328,12 @@ graph TD
 
             <div class="info-card mod3">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#e0f2fe; color:#0ea5e9;">MODULE 03</span>
+                    <span class="step-badge" style="background:#e0f2fe; color:#0284c7;">MODULE 03</span>
                     <h2 class="card-title">【模块三】动力链执行器 —— 长路径因果连缀与计算因果链仓位构建</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 仿真碰撞结果（模块二在应力盲测中压榨出来的逻辑漏洞数据）</div>
-                    <div><span class="io-label">OUTPUT:</span> 动态因果机制（具备高度异质自适应、可自运行的思想动力闭环）</div>
+                    <div class="io-item"><span class="io-label">INPUT:</span> 仿真碰撞结果（模块二在应力盲测中压榨出来的逻辑漏洞数据）</div>
+                    <div class="io-item"><span class="io-label">OUTPUT:</span> 动态因果机制（具备高度异质自适应、可自运行的思想动力闭环）</div>
                 </div>
                 <div class="description">
                     <p><b>机制：</b>在拿到模块二留下的、充满漏洞的碰撞废墟后，模块三启动 **Deep Think 长路径推理链**。它不负责修补表面创伤，其核心任务是通过差异驱动算法，在废墟碎片的底蕴中提炼出一条具备极高健壮性的因果传导路径。</p>
@@ -351,8 +347,8 @@ graph TD
                     <h2 class="card-title">【模块四】对抗审稿与可证伪结算 —— 波普尔式思想清算风控台</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 动态因果机制（模块三连缀完成的长逻辑传导机制）</div>
-                    <div><span class="io-label">OUTPUT:</span> 刚性结算报告 / 触发高吞吐量退回迭代流</div>
+                    <div class="io-item"><span class="io-label">INPUT:</span> 动态因果机制（模块三连缀完成的长逻辑传导机制）</div>
+                    <div class="io-item"><span class="io-label">OUTPUT:</span> 刚性结算报告 / 触发高吞吐量退回迭代流</div>
                 </div>
                 <div class="description">
                     <p><b>风控清算机制：</b>这是交付前的终极大闸。系统引入<span class="highlight">波普尔严厉的可证伪性准则</span>作为清算核心。它以极度冰冷的逻辑衰减率公式，无情碾碎一切人类在思考时出于自我防卫而编造的“临时修补理由”（Anti-Ad-hoc 特设性假说）。卡片不接受任何含糊其辞，强行锁定并要求机制输出带严密索引编号的【定义】、【结论】和【机制假说】。</p>
