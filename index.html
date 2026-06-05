@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine v4.5 概念生长引擎控制台</title>
+    <title>CG-Engine v4.5 核心动态架构控制台</title>
     
     <style>
         :root {
@@ -29,7 +29,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 锁死最外层，防止大页面断裂 */
+            overflow: hidden;
         }
 
         /* 顶部导航栏 */
@@ -57,7 +57,7 @@
             margin: 0;
         }
 
-        /* 左右工作区：激进调整比例，给予右侧大段文本史无前例的发挥空间 */
+        /* 左右工作区：完美比例切分 */
         .workspace {
             display: flex;
             flex: 1;
@@ -65,32 +65,32 @@
             overflow: hidden;
         }
 
-        /* 左侧：精细流程拓扑收窄至 24% */
+        /* 左侧：让流线图节点膨胀，填满这 24% 的所有空间 */
         .left-panel {
             width: 24%;
-            background: #fdfdfd;
+            background: #fcfdfd;
             border-right: 1px solid var(--border-light);
-            padding: 14px;
+            padding: 16px 10px;
             overflow-y: auto;
             box-sizing: border-box;
         }
 
         .mermaid {
             width: 100%;
-            visibility: hidden; /* 防止初始加载闪烁 */
+            visibility: hidden;
         }
 
-        /* 右侧：超宽幅文本展现区大幅扩展至 76% */
+        /* 右侧：超宽幅文本展现区（76%），内容字号与排版绝对不改变 */
         .right-panel {
             width: 76%;
             padding: 20px 32px;
-            overflow-y: auto; /* 保证右侧在极宽状态下可独立顺滑滚动 */
+            overflow-y: auto;
             background: #ffffff;
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
 
-        /* 横向拉宽后的紧凑卡片排版 */
+        /* 卡片排版 */
         .info-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
@@ -141,7 +141,6 @@
             color: #0f172a;
         }
 
-        /* I/O 参数多栏布局：横向空间变大后采用分栏，缩短纵向高度 */
         .io-block {
             background: #f8fafc;
             border: 1px dashed #cbd5e1;
@@ -164,7 +163,6 @@
             color: #0f172a;
         }
 
-        /* 绝对不修改原始文本大小，优化行高与间距实现单页高效通读 */
         .description {
             font-size: 13.5px;
             line-height: 1.6;
@@ -197,10 +195,6 @@
             background: #cbd5e1;
             border-radius: 3px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -214,8 +208,8 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 35,
-                rankSpacing: 30
+                nodeSpacing: 45, /* 稍微拉开间距，进一步吃满空间 */
+                rankSpacing: 40
             }
         });
 
@@ -224,7 +218,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.warn("Mermaid 拦截安全模式重置: ", e);
+                console.warn("Mermaid 优化复原", e);
             }
         });
     </script>
@@ -249,21 +243,29 @@ graph TD
     classDef gateNode fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#991b1b,font-weight:bold;
     classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
 
-    In["<b>输入层: 意图投放</b><br/>原始直觉与痛感捕捉"]
-    M1["<b>模块一: 断裂带编译</b><br/>Intent ➔ Code"]
-    M2["<b>模块二: 画布回测</b><br/>时空矩阵极限应力盲测"]
-    M3["<b>模块三: 动力链执行</b><br/>长路径因果连缀闭环"]
-    M4["<b>模块四: 对抗结算</b><br/>波普尔式可证伪清算"]
-    Gate{"判定网关"}
-    Out["<b>输出层: 概念交付</b><br/>抗打击公共思想资产"]
+    In["<b>【输入层】意图投放与孵化</b><br/>• 机制: 捕捉原生肉身痛感<br/>• 理论: <b>波普尔基础命题</b>破壁<br/>• 产出: 冲突主线 (A ➔ B)"]
+    
+    M1["<b>【模块一】断裂带强编译</b><br/>• 机制: 斩断自然语言温情滑动<br/>• 理论: <b>费耶阿本德多元编译</b><br/>• 产出: 特异性代码种子 (深层结构C)"]
+    
+    M2["<b>【模块二】时空画布极限回测</b><br/>• 机制: 轻量多智能体矩阵红队对抗<br/>• 演练: 纵向五时层 ✖ 横向异质地形<br/>• 产出: 边缘失效漏洞 Crash Logs"]
+    
+    M3["<b>【模块三】动力链执行器</b><br/>• 机制: Deep Think长路径因果连缀<br/>• 传导: 打造一穿到底刚性动力学模型<br/>• 产出: 确定性自驱动因果链闭环"]
+    
+    M4["<b>【模块四】对抗审稿与风控</b><br/>• 机制: 彻底清算精简特设性假说<br/>• 理论: <b>波普尔可证伪性死线</b><br/>• 产出: 锁定刚性定义与生存边界"]
+    
+    Gate{"【质量判定网关】<br/>可证伪生存清算"}
+    
+    Out["<b>【输出层】高韧性概念交付</b><br/>• 理论: <b>激进建构主义版本演化</b><br/>• 成果: 抗打击公共思想工具资产"]
 
-    In --> M1
-    M1 --> M2
-    M2 --> M3
-    M3 --> M4
-    M4 --> Gate
-    Gate -->|YES 通过| Out
-    Gate -.->|NO 爆仓打回| In
+    %% 密集连线驱动
+    In -->|递交原生逻辑冲突| M1
+    M1 -->|投喂特异性 Class 类| M2
+    M2 -->|死锁与碰撞失效日志| M3
+    M3 -->|一穿到底的自驱因果机制| M4
+    M4 -->|排除特设性修补进入大闸| Gate
+    
+    Gate -->|YES 通过生存死线| Out
+    Gate -.->|NO 爆仓触发秒级迭代全面重构| In
 
     class In inputNode;
     class M1 mod1Node;
@@ -329,7 +331,7 @@ graph TD
             <div class="info-card mod3">
                 <div class="card-header">
                     <span class="step-badge" style="background:#e0f2fe; color:#0284c7;">MODULE 03</span>
-                    <h2 class="card-title">【模块三】动力链执行器 —— 长路径因果连缀与计算因果链仓位构建</h2>
+                    <h2 class="card-title">【模块三】动力链执行器 ——长路径因果连缀与计算因果链仓位构建</h2>
                 </div>
                 <div class="io-block">
                     <div class="io-item"><span class="io-label">INPUT:</span> 仿真碰撞结果（模块二在应力盲测中压榨出来的逻辑漏洞数据）</div>
