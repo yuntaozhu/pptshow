@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CG-Engine v4.5 概念生长引擎控制台</title>
+    <title>CG-Engine v4.5 核心动态架构控制台</title>
     
     <style>
         :root {
-            --bg-color: #f1f3f5;
+            --bg-color: #f6f8fa;
             --card-bg: #ffffff;
-            --text-main: #212529;
-            --text-muted: #495057;
-            --border-light: #dee2e6;
-            --primary-blue: #1c7ed6;
-            --accent-orange: #d9480f;
-            --purple-deep: #7048e8;
-            --sky-blue: #1098ad;
-            --success-green: #2b8a3e;
-            --danger-red: #c92a2a;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --border-light: #e5e7eb;
+            --primary-blue: #2563eb;
+            --accent-orange: #ea580c;
+            --purple-deep: #8b5cf6;
+            --sky-blue: #0ea5e9;
+            --success-green: #16a34a;
+            --danger-red: #dc2626;
         }
 
         body {
@@ -29,18 +29,18 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 彻底锁定浏览器外层，防止大页面拉断 */
+            overflow: hidden;
         }
 
         /* 顶部导航栏 */
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-light);
-            padding: 14px 28px;
+            padding: 12px 24px;
             display: flex;
             align-items: baseline;
             gap: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
             z-index: 10;
         }
 
@@ -48,7 +48,7 @@
             font-size: 18px;
             font-weight: 800;
             margin: 0;
-            color: #1a1b1e;
+            color: #111827;
         }
 
         header .subtitle {
@@ -57,21 +57,21 @@
             margin: 0;
         }
 
-        /* 左右分屏核心容器 */
+        /* 左右分屏核心容器：极致拓宽右侧展现宽度 */
         .workspace {
             display: flex;
             flex: 1;
-            height: calc(100vh - 50px); /* 动态减去顶部栏高度，锁死容器 */
+            height: calc(100vh - 45px);
             overflow: hidden;
         }
 
-        /* 左侧：精细可视化流程图区 */
+        /* 左侧：精细可视化流程图区 (缩紧至32%) */
         .left-panel {
-            width: 40%;
-            background: #f8f9fa;
+            width: 32%;
+            background: #fcfcfc;
             border-right: 1px solid var(--border-light);
-            padding: 20px;
-            overflow-y: auto; /* 若图过大可独立滚动 */
+            padding: 16px;
+            overflow-y: auto;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -82,24 +82,24 @@
             visibility: hidden;
         }
 
-        /* 右侧：详细解释区（独立无断裂长滚轴） */
+        /* 右侧：超宽幅详细释义区 (扩充至68%，消灭长段纵向拉伸) */
         .right-panel {
-            width: 60%;
-            padding: 24px 32px;
-            overflow-y: auto; /* 核心：让右侧内容在这里完整铺开、无限滚动查看 */
+            width: 68%;
+            padding: 20px 28px;
+            overflow-y: auto;
             background: #ffffff;
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
 
-        /* 右侧深度解析卡片 */
+        /* 紧凑精致卡片设计 */
         .info-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border-radius: 6px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
             position: relative;
         }
 
@@ -109,11 +109,11 @@
             left: -1px;
             top: -1px;
             bottom: -1px;
-            width: 5px;
-            border-radius: 8px 0 0 8px;
+            width: 4px;
+            border-radius: 6px 0 0 6px;
         }
         
-        .info-card.input::before { background: #868e96; }
+        .info-card.input::before { background: #9ca3af; }
         .info-card.mod1::before { background: var(--accent-orange); }
         .info-card.mod2::before { background: var(--purple-deep); }
         .info-card.mod3::before { background: var(--sky-blue); }
@@ -123,54 +123,54 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #f1f3f5;
-            padding-bottom: 12px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 8px;
         }
 
         .step-badge {
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-right: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 10px;
         }
 
         .card-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             margin: 0;
-            color: #212529;
+            color: #111827;
         }
 
         /* I/O 参数盒子 */
         .io-block {
             background: #f8fafc;
             border: 1px dashed #cbd5e1;
-            border-radius: 6px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            border-radius: 4px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
             color: #334155;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .io-label {
             font-weight: bold;
             color: #0f172a;
             display: inline-block;
-            width: 50px;
+            width: 55px;
         }
 
         .description {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #495057;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #374151;
         }
 
         .description p {
-            margin: 0 0 12px 0;
+            margin: 0 0 8px 0;
         }
         .description p:last-child {
             margin-bottom: 0;
@@ -178,25 +178,25 @@
 
         .highlight {
             font-weight: 600;
-            color: #212529;
-            background: #fff3bf;
+            color: #111827;
+            background: #fef3c7;
             padding: 1px 4px;
-            border-radius: 3px;
+            border-radius: 2px;
         }
 
-        /* 自定义滚动条美化 */
+        /* 滚动条整体美化 */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+            background: #e2e8f0;
+            border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #cbd5e1;
         }
 
     </style>
@@ -211,8 +211,8 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 50,
-                rankSpacing: 40
+                nodeSpacing: 40,
+                rankSpacing: 35
             }
         });
 
@@ -221,7 +221,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.error("Mermaid 核心引擎故障捕获: ", e);
+                console.error("Mermaid 渲染树中断拦截: ", e);
             }
         });
     </script>
@@ -229,8 +229,8 @@
 <body>
 
     <header>
-        <h1>CG-Engine 概念生长控制台 v4.5</h1>
-        <p class="subtitle">融合五大工程模块与现代科学哲学认知动力模型</p>
+        <h1>CG-Engine v4.5 核心动态架构图</h1>
+        <p class="subtitle">融合五大工程模块与现代科学哲学（波普尔、费耶阿本德、冯·格拉泽斯菲尔德）三位一体认知动力模型</p>
     </header>
 
     <div class="workspace">
@@ -238,36 +238,36 @@
         <div class="left-panel">
             <div class="mermaid">
 graph TD
-    classDef inputNode fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#212529;
-    classDef mod1Node fill:#fff4e6,stroke:#e8590c,stroke-width:2px,color:#d9480f;
-    classDef mod2Node fill:#f3f0ff,stroke:#845ef7,stroke-width:2px,color:#7048e8;
-    classDef mod3Node fill:#e3fafc,stroke:#15aabf,stroke-width:2px,color:#1098ad;
-    classDef mod4Node fill:#fff5f5,stroke:#fa5252,stroke-width:2px,color:#c92a2a;
-    classDef gateNode fill:#ffe3e3,stroke:#e03131,stroke-width:2px,color:#c92a2a,font-weight:bold;
-    classDef outputNode fill:#ebfbee,stroke:#40c057,stroke-width:2px,color:#2b8a3e,font-weight:bold;
+    classDef inputNode fill:#f3f4f6,stroke:#9ca3af,stroke-width:2px,color:#1f2937;
+    classDef mod1Node fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#c2410c;
+    classDef mod2Node fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px,color:#6d28d9;
+    classDef mod3Node fill:#ecfeff,stroke:#0ea5e9,stroke-width:2px,color:#0369a1;
+    classDef mod4Node fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#b91c1c;
+    classDef gateNode fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#991b1b,font-weight:bold;
+    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d,font-weight:bold;
 
-    In["<b>【输入层】原始意图投放</b><br/>• 动作: 数据抓取与常识破壁<br/>• 输入: 用户原生表达与痛感说明"]
+    In["<b>【输入层】原始意图投放</b><br/>• 数据抓取与常识破壁<br/>• 提炼原生痛感与直觉表达"]
     
-    M1["<b>【模块一】断裂带编译 (Compile)</b><br/>• 动作: 斩断修辞滑动 / 高度压缩提纯<br/>• 机制: 意图转化为策略种子 (Intent ➔ Code)"]
+    M1["<b>【模块一】断裂带编译</b><br/>• 斩断修辞滑动 / 高度压缩提纯<br/>• 转化为策略种子 (Intent ➔ Code)"]
     
-    M2["<b>【模块二】时空画布回测 (Backtest)</b><br/>• 动作: 矩阵应力测试与盲测压力模拟<br/>• 机制: 策略验证与边缘漏洞清算"]
+    M2["<b>【模块二】时空画布回测</b><br/>• 矩阵应力测试与压力仿真模拟<br/>• 策略验证与边界漏洞深度清算"]
     
-    M3["<b>【模块三】动力链执行器 (Execution)</b><br/>• 动作: 长路径因果推理 (Deep Think)<br/>• 机制: 零散碰撞废墟整合为动态自运行因果"]
+    M3["<b>【模块三】动力链执行器</b><br/>• 长路径因果推理 (Deep Think)<br/>• 废墟碎片整合为自动化自运行因果"]
     
-    M4["<b>【模块四】对抗审稿与结算 (PnL)</b><br/>• 动作: 反特设性修正与刚性清算审查<br/>• 机制: 锁定定义 / 生成硬核可证伪路径"]
+    M4["<b>【模块四】对抗审稿与结算</b><br/>• 反特设性修正与刚性风控审查<br/>• 锁定刚性定义并生成可证伪路径"]
     
     Gate{"质量清算<br/>判定网关"}
     
-    Out["<b>【输出层】概念交付</b><br/>• 结果: 高抗打击力公共思想资产"]
+    Out["<b>【输出层】概念交付</b><br/>• 演化出高抗打击公共思想资产"]
 
-    %% === 明确标注转化边界的 7 条流线 ===
-    In -->|生成冲突线: 表面解释A ➔ 反常现象B| M1
+    %% === 连线逻辑定义 ===
+    In -->|冲突线: 表面解释A ➔ 反常现象B| M1
     M1 -->|产出: 强解释力深层结构 C| M2
-    M2 -->|产出: 模拟失效碰撞数据 / Crash Logs| M3
+    M2 -->|产出: 边界失效碰撞数据 Logs| M3
     M3 -->|产出: 一穿到底的动态因果机制| M4
     M4 --> Gate
     Gate -->|YES 通过生存死线| Out
-    Gate -.->|NO 策略理论破产 强制打回重新投放| In
+    Gate -.->|NO 发生爆仓 强制打回重构| In
 
     class In inputNode;
     class M1 mod1Node;
@@ -277,13 +277,13 @@ graph TD
     class Gate gateNode;
     class Out outputNode;
     
-    linkStyle 0 stroke:#868e96,stroke-width:2px;
-    linkStyle 1 stroke:#e8590c,stroke-width:2px;
-    linkStyle 2 stroke:#845ef7,stroke-width:2px;
-    linkStyle 3 stroke:#15aabf,stroke-width:2px;
-    linkStyle 4 stroke:#fa5252,stroke-width:2px;
-    linkStyle 5 stroke:#40c057,stroke-width:3px;
-    linkStyle 6 stroke:#e03131,stroke-width:2px,stroke-dasharray: 4 4;
+    linkStyle 0 stroke:#9ca3af,stroke-width:2px;
+    linkStyle 1 stroke:#ea580c,stroke-width:2px;
+    linkStyle 2 stroke:#8b5cf6,stroke-width:2px;
+    linkStyle 3 stroke:#0ea5e9,stroke-width:2px;
+    linkStyle 4 stroke:#dc2626,stroke-width:2px;
+    linkStyle 5 stroke:#16a34a,stroke-width:3px;
+    linkStyle 6 stroke:#dc2626,stroke-width:2px,stroke-dasharray: 4 4;
             </div>
         </div>
 
@@ -291,85 +291,83 @@ graph TD
             
             <div class="info-card input">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#e9ecef; color:#495057;">INPUT LAYER</span>
-                    <h2 class="card-title">【输入层】原始思想意图投放</h2>
+                    <span class="step-badge" style="background:#f3f4f6; color:#4b5563;">INPUT LAYER</span>
+                    <h2 class="card-title">【输入层】概念胚胎孵化 —— 捕捉痛感与打破常规</h2>
                 </div>
                 <div class="description">
-                    <p>用户在此处注入他们试图表达的、尚未经过精雕细琢的原始概念。在系统底层，会有数据总线并行触发两条事实检测线：一条通往 <b>Google Trends</b> 捕获宏观全球搜索热度与兴趣跃迁周期；另一条通往<b>学术期刊数据库</b>调取垂直领域的最新、最热研究方向（Hot Studies）。</p>
-                    <p>通过用客观趋势反向对齐平庸的主观经验，系统在两者的撞击中强行挤压出一条不协调的逻辑矛盾线：<span class="highlight">表面解释 A → 反常现象 B</span>。这种“无法自圆其说”的痛感是引擎运转的原动力。</p>
+                    <p><b>机制：</b>人类认知主体的体验往往捕获于原生“肉身痛感”。当观测到现有理论体系或常识无法解释的全新反常趋势时，即归入<span class="highlight">波普尔式基础命题</span>范畴。</p>
+                    <p>通过并行动态调用 <b>Google Trends</b> 全局搜索热度分布与<b>学术前沿热点数据（Hot Topics）</b>进行事实交织对齐，系统在主客观摩擦中强行挤压并固化出一条极具爆发力的逻辑冲突主线：<span class="highlight">表面解释 A → 反常现象 B</span>。这就是整个智能生长引擎启动的核心高压物料。</p>
                 </div>
             </div>
 
             <div class="info-card mod1">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#ffe8cc; color:#d9480f;">MODULE 01</span>
-                    <h2 class="card-title">【模块一】断裂带编译 (Compile)</h2>
+                    <span class="step-badge" style="background:#ffedd5; color:#ea580c;">MODULE 01</span>
+                    <h2 class="card-title">【模块一】断裂带编译 —— 费耶阿本德认知无政府主义多元编译</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 表面解释 A → 反常现象 B (输入层提炼的逻辑痛感)</div>
-                    <div><span class="io-label">OUTPUT:</span> 深层结构 C (高度压缩解耦的“思想策略代码”)</div>
+                    <div><span class="io-label">INPUT:</span> 表面解释 A → 反常现象 B（输入层递交的原生冲突）</div>
+                    <div><span class="io-label">OUTPUT:</span> 深层结构 C（打破学科黑箱、高度自解耦的思想策略代码种子）</div>
                 </div>
                 <div class="description">
-                    <p><b>通俗机制解析：</b>我们在日常写作或思考时，极容易依赖一些听起来四平八稳、逻辑十分流畅的自然语言去“滑动抹平”矛盾。模块一的编译过程就是强行斩断这种虚假的流畅。它像一个代码编译器一样，将庞大、松散的语言表述提纯、结晶。</p>
-                    <p><b>解构深层结构 C：</b>“深层结构 C”不是一句话，而是一个<span class="highlight">高维的概念核心 Class</span>。它剥离了所有的情感修饰，将问题收敛到极少数核心变量与特定知识地形的坐标交点上。它是静态的，但包含了核心对抗规则，就像设计精密的发动机图纸，用于输入给下一步进行高动态仿真测试。</p>
+                    <p><b>机制：</b>人在日常反思时极易陷入平庸流畅的自然语言滑动，用熟悉的陈词滥调抹平深层矛盾。模块一的核心任务就是强制剥离自然语言的温情修饰。它引入<span class="highlight">费耶阿本德认知无政府主义多元编译理论</span>，强制斩断传统流派的先验范式，允许异质层级的跨界概念混杂交配。</p>
+                    <p><b>工程本质：</b>它像一个逻辑压榨机，将繁杂的情绪直觉结晶化、代码化，盲打编译出具有极强特异性的“深层结构 C”。它不负责讨好常规认知，而是像一个写满对抗规则的底层 Class 类，牢牢卡住高价值的知识地形坐标，作为唯一的弹药投喂给后续的回测环境。</p>
                 </div>
             </div>
 
             <div class="info-card mod2">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#e5dbff; color:#7048e8;">MODULE 02</span>
-                    <h2 class="card-title">【模块二】时空画布回测 (Backtest)</h2>
+                    <span class="step-badge" style="background:#f3e8ff; color:#8b5cf6;">MODULE 02</span>
+                    <h2 class="card-title">【模块二】时空画布回测 —— 风琴式时空矩阵极限对抗应力盲测</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 深层结构 C (模块一产生的 Class 种子)</div>
-                    <div><span class="io-label">OUTPUT:</span> 仿真碰撞结果 (边缘场景失效数据 / Crash Logs)</div>
+                    <div><span class="io-label">INPUT:</span> 深层结构 C（模块一编译出的特异性对抗 Class）</div>
+                    <div><span class="io-label">OUTPUT:</span> 边缘失效碰撞数据（多维度逻辑卡死、漏洞暴露的 Crash Logs 废墟）</div>
                 </div>
                 <div class="description">
-                    <p><b>工程架构演进考量：</b>这是判定概念能否存活的关键滤网。最初的设计设想是完整构建一个类似于“斯坦福小镇（Generative Agents）”的多智能体仿真环境，让 25 个具有各异背景的 AI Agent 在其中带着这套概念演化生活 7 天。但这在实际软件工程中面临开发链路极长、推理成本高、高延迟的弊端。因此，我们在此采用了更高效的架构平替——<b>轻量级多智能体矩阵盲测（Lightweight Agent Matrix Test）</b>。</p>
-                    <p><b>回测机制展开：</b>我们把深层结构 C 抛入由专门扮演恶意攻击者、冷酷杠精的 Agent 红队控制台。强迫该概念在双轴矩阵中经受洗礼：<br>
-                    &nbsp;&nbsp;• <b>纵向五时层回测：</b>在 100ms 生理惊耦、手头具体任务、长期事业规划、生命终极立命等跨度中测试其稳定性。<br>
-                    &nbsp;&nbsp;• <b>横向多地形回测：</b>在微观肌肉动作、学科重叠断裂带、宏观社会文化等环境中发起漏洞对冲。最终系统不输出任何修辞，只输出概念在哪些边缘发生逻辑卡死的 Crash Logs 数据。</p>
+                    <p><b>工程取舍重构：</b>这是概念在虚拟地形中的“残酷适者生存演练”。若采用传统的完备多智能体社会长时模拟（如斯坦福小镇模型），系统将面临推理链拉长、响应延迟高、算力成本爆炸等显著工程缺陷。系统在此做出了极为高效的架构平替 —— **轻量级多智能体矩阵盲测（Lightweight Agent Matrix Test）**。</p>
+                    <p><b>机制执行：</b>系统将深层结构 C 直接抛入由冷酷、极端的“杠精 Agent 红队控制台”组成的多维手风琴时空矩阵。强迫概念种子在<b>纵向五时层</b>（100ms生理惊耦、瞬时任务切换、长期事业跃迁、生命终极立命等）与<b>横向异质地形</b>（肌肉微动作、学科边缘断裂带、宏观文化意识）中进行饱和轰炸。系统冷酷地过滤所有修辞，仅吐出概念在高强度碰撞中发生死锁或崩溃的硬核边缘失效日志（Crash Logs）。</p>
                 </div>
             </div>
 
             <div class="info-card mod3">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#c5f6fa; color:#1098ad;">MODULE 03</span>
-                    <h2 class="card-title">【模块三】动力链执行器 (Execution)</h2>
+                    <span class="step-badge" style="background:#e0f2fe; color:#0ea5e9;">MODULE 03</span>
+                    <h2 class="card-title">【模块三】动力链执行器 —— 长路径因果连缀与计算因果链仓位构建</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 仿真碰撞结果 (模块二导出的各场景逻辑漏洞日志)</div>
-                    <div><span class="io-label">OUTPUT:</span> 动态因果机制 (可以自动化运转的思想动力闭环)</div>
+                    <div><span class="io-label">INPUT:</span> 仿真碰撞结果（模块二在应力盲测中压榨出来的逻辑漏洞数据）</div>
+                    <div><span class="io-label">OUTPUT:</span> 动态因果机制（具备高度异质自适应、可自运行的思想动力闭环）</div>
                 </div>
                 <div class="description">
-                    <p><b>因果路径分析：</b>模块三就像是一个废墟整合器。面对模块二中被杠精 Agent 轰炸出来的各种死锁、失效场景，执行器会调用长路径因果推理系统（Deep Think 模式）。</p>
-                    <p>它的任务是找出一条能够贯穿所有失效断层的核心红线。它将静态的概念种子升级为一套<span class="highlight">可以在各个异质时层和地形中高度自适应运行的“动态因果机制”</span>（即刚性的“IF...THEN...”动力传导链），确保逻辑在复杂多变的现实背景下能够闭环自动化运转。</p>
+                    <p><b>机制：</b>在拿到模块二留下的、充满漏洞的碰撞废墟后，模块三启动 **Deep Think 长路径推理链**。它不负责修补表面创伤，其核心任务是通过差异驱动算法，在废墟碎片的底蕴中提炼出一条具备极高健壮性的因果传导路径。</p>
+                    <p>它将静态的、局部的词语定义硬化升级为一条贯穿全局的刚性动力链（一根铁丝穿到底的动力学传导模型）。这套机制能确保核心逻辑在面对现实多变地形的剧烈搅动时，内部变量依然能以高度确定的“IF...THEN...”自驱传导闭环平稳运转，消灭一切逻辑中途断裂的隐患。</p>
                 </div>
             </div>
 
             <div class="info-card mod4">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#ffe3e3; color:#c92a2a;">MODULE 04</span>
-                    <h2 class="card-title">【模块四】对抗审稿与可证伪结算 (PnL Auditor)</h2>
+                    <span class="step-badge" style="background:#fee2e2; color:#dc2626;">MODULE 04</span>
+                    <h2 class="card-title">【模块四】对抗审稿与可证伪结算 —— 波普尔式思想清算风控台</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">INPUT:</span> 动态因果机制 (模块三整合的长逻辑链条)</div>
-                    <div><span class="io-label">OUTPUT:</span> 带有明确亏损边界的可证伪生存报告</div>
+                    <div><span class="io-label">INPUT:</span> 动态因果机制（模块三连缀完成的长逻辑传导机制）</div>
+                    <div><span class="io-label">OUTPUT:</span> 刚性结算报告 / 触发高吞吐量退回迭代流</div>
                 </div>
                 <div class="description">
-                    <p><b>刚性收敛结算：</b>这是流水线交付前的最后风控台。它计算逻辑支持度的随时间衰减率，清算所有概念滑转和语言伪装。为了防止人类“为了圆场而临时编造新理由”的通病，模块四会彻底拦截所有“特设性假说”（Anti-Ad-hoc）。</p>
-                    <p>它会强制要求系统输出带有严密编号的【定义】、【结论】和【机制假说】，并划定属于该思想的<span class="highlight">爆仓止损线（可证伪路径）</span>——即白纸黑字写明：“一旦现实世界出现某种具体反例，本概念立刻破产宣告失效”。若能通过测试，则流入输出层；若不能交付可证伪路径，清算网关直接拉起NO分支，将策略强制打回输入层完全重来。</p>
+                    <p><b>风控清算机制：</b>这是交付前的终极大闸。系统引入<span class="highlight">波普尔严厉的可证伪性准则</span>作为清算核心。它以极度冰冷的逻辑衰减率公式，无情碾碎一切人类在思考时出于自我防卫而编造的“临时修补理由”（Anti-Ad-hoc 特设性假说）。卡片不接受任何含糊其辞，强行锁定并要求机制输出带严密索引编号的【定义】、【结论】和【机制假说】。</p>
+                    <p><b>可证伪生存边界线：</b>模块四会强制该概念划分并白纸黑字宣告其专属的“爆仓自毁死线” —— 即明确承诺“在何种具体的反例、何种边界数据出现时，本概念自愿宣告理论破产”。一旦无法划出清晰的可证伪路径，清算网关直接拉起NO信号，将此策略暴力打回输入层全面重构；若完美通过，则优雅流向输出端。</p>
                 </div>
             </div>
 
             <div class="info-card output">
                 <div class="card-header">
-                    <span class="step-badge" style="background:#d3f9d8; color:#2b8a3e;">OUTPUT LAYER</span>
-                    <h2 class="card-title">【输出层】概念演化与生长结果交付</h2>
+                    <span class="step-badge" style="background:#dcfce3; color:#16a34a;">OUTPUT LAYER</span>
+                    <h2 class="card-title">【输出层】知识重构与交付 —— 冯·格拉泽斯菲尔德激进建构主义版本演化</h2>
                 </div>
                 <div class="description">
-                    <p>至此，经历了断裂带提纯、多智能体压力回测、长路径因果连缀、波普尔式可证伪清算的概念，正式脱胎换骨。</p>
-                    <p>最终呈献给用户的，不再是那些脆弱、松散、一碰就碎的主观直觉，而是一个具备高主体间一致性、极低认知摩擦力、能在复杂现实地形中直接应用的<b>公共思想工具（坚硬的思想资产）</b>。</p>
+                    <p><b>交付：</b>经历过断裂编译、时空盲测、长链路整合与可证伪清算的概念，至此彻底完成生命周期的重塑。它符合<span class="highlight">冯·格拉泽斯菲尔德的激进建构主义哲学</span> —— 我们不奢求宣称触碰到了绝对客观的真理，但我们成功在充满荆棘的现实对抗边界上，建构出了一套极其稳固、具备超强解释力的认知生存底座。</p>
+                    <p>系统最终为用户渲染出具备极高抗打击韧性、极低群体间解释摩擦力的<b>“公共思想工具”</b>。它是一项坚硬的思想资产，能够帮助认知主体在错综复杂的异质博弈地形中，随时敏锐、稳定地反击并消纳外界环境的各种异动。</p>
                 </div>
             </div>
 
