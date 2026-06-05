@@ -16,7 +16,6 @@
             --accent-orange: #ea580c;
             --purple-deep: #7c3aed;
             --sky-blue: #0284c7;
-            --success-green: #16a34a;
             --danger-red: #dc2626;
         }
 
@@ -36,11 +35,11 @@
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-light);
-            padding: 10px 24px;
+            padding: 8px 20px;
             display: flex;
             align-items: baseline;
             gap: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.01);
             z-index: 10;
         }
 
@@ -57,47 +56,55 @@
             margin: 0;
         }
 
-        /* 左右工作区完美比例切分 */
+        /* 全景看板工作区 */
         .workspace {
             display: flex;
             flex: 1;
-            height: calc(100vh - 42px);
+            height: calc(100vh - 38px);
             overflow: hidden;
         }
 
-        /* 左侧：深度饱和填充区，吞噬全部 24% 的纵向空白空间 */
+        /* 左侧：横向大空间展开图（40%宽度），完美契合横向流向图 */
         .left-panel {
-            width: 24%;
+            width: 40%;
             background: #fcfdfd;
             border-right: 1px solid var(--border-light);
-            padding: 14px 10px;
-            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-sizing: border-box;
+            overflow: hidden; /* 强力约束，使其在单屏完全呈现 */
         }
 
         .mermaid {
             width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             visibility: hidden;
         }
 
-        /* 右侧：超宽幅文本展现区（76%），严格保持内容字号与长文本排版 */
+        /* 右侧：超宽幅、大字号文本区（60%宽度） */
         .right-panel {
-            width: 76%;
-            padding: 20px 32px;
+            width: 60%;
+            padding: 16px 24px;
             overflow-y: auto;
             background: #ffffff;
             box-sizing: border-box;
-            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        /* 工业级信息卡片排版 */
+        /* 优化排版：高辨识度工业卡片 */
         .info-card {
             background: #ffffff;
             border: 1px solid var(--border-light);
             border-radius: 6px;
-            padding: 18px 22px;
-            margin-bottom: 16px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01);
+            padding: 12px 18px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
             position: relative;
         }
 
@@ -120,21 +127,21 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 8px;
+            padding-bottom: 4px;
         }
 
         .step-badge {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 3px;
-            margin-right: 12px;
+            margin-right: 10px;
         }
 
         .card-title {
-            font-size: 15px;
+            font-size: 16px; /* 字号略微放大，提升可读性 */
             font-weight: 700;
             margin: 0;
             color: #0f172a;
@@ -144,12 +151,12 @@
         .core-summary {
             background: #f8fafc;
             border-left: 3px solid #cbd5e1;
-            padding: 10px 14px;
-            margin-bottom: 12px;
-            font-size: 13.5px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            font-size: 14.5px; /* 字号优化放大 */
             font-weight: 600;
             color: #1e293b;
-            line-height: 1.5;
+            line-height: 1.45;
         }
         
         .info-card.mod1 .core-summary { border-left-color: var(--accent-orange); background: #fff7ed; color: #9a3412; }
@@ -158,13 +165,13 @@
         .info-card.mod4 .core-summary { border-left-color: var(--danger-red); background: #fef2f2; color: #991b1b; }
 
         .description {
-            font-size: 13.5px;
-            line-height: 1.65;
+            font-size: 14px; /* 字号优化放大 */
+            line-height: 1.6;
             color: #334155;
         }
 
         .description p {
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
         }
         .description p:last-child {
             margin-bottom: 0;
@@ -195,8 +202,8 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 45, 
-                rankSpacing: 40
+                nodeSpacing: 15, /* 紧凑节点间距，防止溢出 */
+                rankSpacing: 35
             }
         });
 
@@ -205,7 +212,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.warn("Mermaid 渲染优化成功", e);
+                console.warn("Mermaid 看板渲染成功", e);
             }
         });
     </script>
@@ -221,7 +228,7 @@
         
         <div class="left-panel">
             <div class="mermaid">
-graph TD
+graph LR
     classDef inputNode fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px,color:#0f172a;
     classDef mod1Node fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#c2410c;
     classDef mod2Node fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px,color:#6d28d9;
@@ -230,29 +237,23 @@ graph TD
     classDef gateNode fill:#fef2f2,stroke:#b91c1c,stroke-width:2.5px,color:#991b1b,font-weight:bold;
     classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
 
-    In["<b>【输入源】原始痛感投放</b><br/>• 状态: S1 模糊零散直觉<br/>• 核心: 现实世界抓耳挠腮痛点<br/>• 属性: 带有强烈的个人情绪"]
-    
-    M1["<b>【模块一】断裂带强编译</b><br/>• 动作: 剥离情绪 ✖ 跨界压榨<br/>• 状态: S2 思想代码种子生成<br/>• 产出: 亮晶晶/硬邦邦逻辑假说<br/>• <b>执行仓位权重: 20%</b>"]
-    
-    M2["<b>【模块二】斯坦福小镇轰炸</b><br/>• 框架: Memory-Reflection-Planning<br/>• 运行: 多Agent特定地形生存博弈<br/>• 约束: 设定边界阻断无效废话 Token<br/>• 产出: 标准化 Crash Logs 伤痕"]
-    
-    M3["<b>【模块三】马尔科夫因果连缀</b><br/>• 推理: Deep Think 漏洞重组缝合<br/>• 铁丝: 100% 刚性传导 (X➔Y➔Z)<br/>• 消除: 抹平一切『大概/可能』模糊<br/>• <b>执行仓位权重: 75% [重仓]</b>"]
-    
-    M4["<b>【模块四】波普尔思想审计</b><br/>• 风控: 对抗大脑与LLM过拟合护短<br/>• 结算: 斩断所有特设性狡辩理由<br/>• 刀刃: 强制划定『爆仓自毁死线』<br/>• <b>执行仓位权重: 5%</b>"]
-    
-    Gate{"【LangGraph 交付大闸】<br/>自毁死线路由清算"}
-    
-    Out["<b>【全局知识地图】正式交付</b><br/>• 状态: 沉淀为抗打击资产网络<br/>• 证书: 颁发刚性思想交付证书<br/>• 成果: 获得高韧性公共思想工具"]
+    In["<b>【输入源】</b><br/>S1 原生痛感"]
+    M1["<b>【模块一】</b><br/>S2 思想代码种子<br/>(仓位: 20%)"]
+    M2["<b>【模块二】</b><br/>修罗场轰炸<br/>Crash Logs"]
+    M3["<b>【模块三】</b><br/>马尔科夫连缀<br/>(仓位: 75%)"]
+    M4["<b>【模块四】</b><br/>波普尔思想审计<br/>(仓位: 5%)"]
+    Gate{"【LangGraph 闸门】<br/>自毁死线清算"}
+    Out["<b>【全局地图】</b><br/>正式交付资产"]
 
-    %% 密集高饱和度因果链传导与马尔科夫概率标注（已修复转义漏洞）
-    In --> |"1.投放原始直觉 P(S2#124;S1)=1.0"| M1
-    M1 --> |"2.输出封装『子弹』物料"| M2
-    M2 --> |"3.榨出失效日志弹药投喂"| M3
-    M3 --> |"4.连缀出一穿到底确定性链条"| M4
-    M4 --> |"5.锁定生存边界送审风控台"| Gate
+    %% 横向紧密刚性齿轮传导
+    In --> |"投放直觉 P=1.0"| M1
+    M1 --> |"生成『子弹』"| M2
+    M2 --> |"失效日志"| M3
+    M3 --> |"确证因果链"| M4
+    M4 --> |"送审死线"| Gate
     
-    Gate --> |"YES 通过审计线"| Out
-    Gate -.-> |"NO 判定和稀泥 ➔ 强行打回原地重构"| In
+    Gate --> |"YES 通过"| Out
+    Gate -.-> |"NO 爆仓打回重构"| In
 
     class In inputNode;
     class M1 mod1Node;
@@ -268,7 +269,7 @@ graph TD
     linkStyle 3 stroke:#0ea5e9,stroke-width:2px;
     linkStyle 4 stroke:#dc2626,stroke-width:2px;
     linkStyle 5 stroke:#16a34a,stroke-width:3px;
-    linkStyle 6 stroke:#b91c1c,stroke-width:2px,stroke-dasharray: 4 4;
+    linkStyle 6 stroke:#b91c1c,stroke-width:2px,stroke-dasharray: 3 3;
             </div>
         </div>
 
@@ -287,14 +288,13 @@ graph TD
             <div class="info-card mod1">
                 <div class="card-header">
                     <span class="step-badge" style="background:#ffedd5; color:#ea580c;">MODULE 01</span>
-                    <h2 class="card-title">【模块一】扮演“翻译官”兼“逻辑硬化器”的角色</h2>
+                    <h2 class="card-title">【模块一】扮演“翻译官”兼“逻辑硬化器”</h2>
                 </div>
                 <div class="core-summary">
                     核心任务：把你脑子里模糊、零散、甚至带有个人情绪的“原始直觉”，转变成一段干净、高浓度、具备强解释力的“思想代码”。
                 </div>
                 <div class="description">
-                    <p>经过模块一剥离情绪、跨界编译的疯狂压榨后，吐出来的必须是一个亮晶晶、硬邦邦、具备独特解释视角的<b>深度逻辑假说（思想代码）</b>。</p>
-                    <p>人类认知主体只有拿到了这个坚实的<span class="highlight">“子弹”</span>，后面的模块二（时空矩阵回测）才能有物料去进行极限轰炸。</p>
+                    <p>经过模块一剥离情绪、跨界编译的疯狂压榨后，吐出来的必须是一个亮晶晶、硬邦邦、具备独特解释视角的<b>深度逻辑假说（思想代码）</b>。只有拿到了这个坚实的<span class="highlight">“子弹”</span>，后面的模块二才能有物料去进行极限轰炸。</p>
                 </div>
             </div>
 
@@ -304,11 +304,10 @@ graph TD
                     <h2 class="card-title">【模块二】基于斯坦福小镇的多 Agent 模拟博弈</h2>
                 </div>
                 <div class="core-summary">
-                    核心任务：对模块一形成的内容进行模拟。基于斯坦福小镇，构建多 Agent 完成不同角色构建，完成“带着你的思想种子（深层结构 C）在特定地形里博弈”的模拟。
+                    核心任务：基于斯坦福小镇完成模拟。“带着你的思想种子（深层结构 C）在特定地形里博弈”，系统强迫 Agent 带着深层结构 C 去做长期和短期的博弈行为规划。
                 </div>
                 <div class="description">
-                    <p>系统强迫 Agent 带着深层结构 C 去做长期和短期的博弈行为规划。斯坦福小镇提出了<b>“记忆流-反思-规划（Memory-Reflection-Planning）”</b>的主干设计，Agent 基于此完成深度自驱。</p>
-                    <p>在工程构建上，系统需要严密定义路径和边界，<span class="highlight">避免无效的与核心逻辑无关的废话 token 费用</span>。最终，这些反思的产物就是标准化的 <b>Crash Logs（边缘失效日志）</b>，直接作为弹药投喂给模块三。</p>
+                    <p>基于其<b>“记忆流-反思-规划（Memory-Reflection-Planning）”</b>的主干设计，Agent 展开深度自驱博弈。需要严密定义路径和边界，<span class="highlight">避免无效的与核心逻辑无关的废话 token 费用</span>。其反思产物即为 <b>Crash Logs（边缘失效日志）</b>，直接投喂给模块三。</p>
                 </div>
             </div>
 
@@ -318,11 +317,10 @@ graph TD
                     <h2 class="card-title">【模块三】马尔科夫链与 Deep Think 动力链连缀</h2>
                 </div>
                 <div class="core-summary">
-                    核心任务：利用 Deep Think 推理链，把模块二炸出来的碎屑和漏洞重新缝合，并且用一根刚性的“因果铁丝”从头穿到尾，打造一个能自己转动起来的动力闭环。
+                    核心任务：利用 Deep Think 推理链，把模块二炸出来的碎屑和漏洞重新缝合，用一根刚性的“因果铁丝”从头穿到尾，打造自运转动力闭环。
                 </div>
                 <div class="description">
-                    <p>通过构建一个<b>马尔科夫链</b>，确保输入变量 X 触发，必然 100% 带动变量 Y 发生，继而精准推动变量 Z。它在逻辑内部消除一切“大概”、“可能”、“差不多”的模糊地带，形成绝对确定的动力学传导模型。</p>
-                    <p>一旦因果链成型，系统会精准计算出为了维持这个逻辑运转，认知主体需要在哪些核心概念节点上进行<span class="highlight">“重仓布局”</span>（即分配主要的认知算力或践行精力）。</p>
+                    <p>通过构建一个<b>马尔科夫链</b>，确保输入变量 X 触发，必然 100% 带动变量 Y 发生，继而精准推动变量 Z。在逻辑内部消除一切“大概”、“可能”的模糊地带。一旦因果链成型，系统会精准计算出认知主体需要在哪些核心概念节点上进行<span class="highlight">“重仓布局”</span>（分配主要的认知算力或践行精力）。</p>
                 </div>
             </div>
 
@@ -335,8 +333,7 @@ graph TD
                     核心任务：像冰冷的断头台一样，强制为这条因果链划定“爆仓自毁死线”，剔除一切侥幸心理，通过的正式颁发“交付证书”，写进全局地图。
                 </div>
                 <div class="description">
-                    <p>人的大脑 and 当前的 LLM 有个致命缺陷：<span class="highlight">过拟合、极度护短</span>。当一个想法投入时间和精力去完善、甚至用数学链条（模块三）包装起来之后，我们就会不可教药地爱上这个想法。即使后续发现它有解释不通的地方，我们也会本能地编造各种“借口”和“特殊理由”去为它辩护，最终让你的知识地图被一堆伪科学、和稀泥的伪概念充斥。</p>
-                    <p>模块四的作用，就是用一柄<b>冰冷的哲学手术刀</b>，斩断所有的自我防卫，强行判定这个概念有没有资格正式交付，绝不姑息任何和稀泥的侥幸心理。</p>
+                    <p>人的大脑和当前的 LLM 有个致命缺陷：<span class="highlight">过拟合、极度护短</span>。我们会本能地编造各种“借口”去为错误辩护，让知识地图充满和稀泥的伪概念。模块四用一柄<b>冰冷的哲学手术刀</b>斩断所有自我防卫，通过者正式颁发证书并沉淀为抗打击资产，不通过者直接经由 LangGraph 路由全面打回输入层重构。</p>
                 </div>
             </div>
 
