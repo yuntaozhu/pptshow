@@ -16,6 +16,7 @@
             --accent-orange: #ea580c;
             --purple-deep: #7c3aed;
             --sky-blue: #0284c7;
+            --success-green: #16a34a;
             --danger-red: #dc2626;
         }
 
@@ -194,7 +195,7 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 45, /* 稍微增大间距，让节点垂直拉伸更饱满 */
+                nodeSpacing: 45, 
                 rankSpacing: 40
             }
         });
@@ -204,7 +205,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.warn("Mermaid 渲染成功", e);
+                console.warn("Mermaid 渲染优化成功", e);
             }
         });
     </script>
@@ -243,15 +244,15 @@ graph TD
     
     Out["<b>【全局知识地图】正式交付</b><br/>• 状态: 沉淀为抗打击资产网络<br/>• 证书: 颁发刚性思想交付证书<br/>• 成果: 获得高韧性公共思想工具"]
 
-    %% 密集高饱和度因果链传导与马尔科夫概率标注
-    In -->|1.投放原始直觉 P(S2|S1)=1.0| M1
-    M1 -->|2.输出封装『子弹』物料| M2
-    M2 -->|3.榨出失效日志弹药投喂| M3
-    M3 -->|4.连缀出一穿到底确定性链条| M4
-    M4 -->|5.锁定生存边界送审风控台| Gate
+    %% 密集高饱和度因果链传导与马尔科夫概率标注（已修复转义漏洞）
+    In --> |"1.投放原始直觉 P(S2#124;S1)=1.0"| M1
+    M1 --> |"2.输出封装『子弹』物料"| M2
+    M2 --> |"3.榨出失效日志弹药投喂"| M3
+    M3 --> |"4.连缀出一穿到底确定性链条"| M4
+    M4 --> |"5.锁定生存边界送审风控台"| Gate
     
-    Gate -->|YES 通过审计线| Out
-    Gate -.->|NO 判定和稀泥 ➔ 强行打回原地重构| In
+    Gate --> |"YES 通过审计线"| Out
+    Gate -.-> |"NO 判定和稀泥 ➔ 强行打回原地重构"| In
 
     class In inputNode;
     class M1 mod1Node;
@@ -334,7 +335,7 @@ graph TD
                     核心任务：像冰冷的断头台一样，强制为这条因果链划定“爆仓自毁死线”，剔除一切侥幸心理，通过的正式颁发“交付证书”，写进全局地图。
                 </div>
                 <div class="description">
-                    <p>人的大脑和当前的 LLM 有个致命缺陷：<span class="highlight">过拟合、极度护短</span>。当一个想法投入时间和精力去完善、甚至用数学链条（模块三）包装起来之后，我们就会不可救药地爱上这个想法。即使后续发现它有解释不通的地方，我们也会本能地编造各种“借口”和“特殊理由”去为它辩护，最终让你的知识地图被一堆伪科学、和稀泥的伪概念充斥。</p>
+                    <p>人的大脑 and 当前的 LLM 有个致命缺陷：<span class="highlight">过拟合、极度护短</span>。当一个想法投入时间和精力去完善、甚至用数学链条（模块三）包装起来之后，我们就会不可教药地爱上这个想法。即使后续发现它有解释不通的地方，我们也会本能地编造各种“借口”和“特殊理由”去为它辩护，最终让你的知识地图被一堆伪科学、和稀泥的伪概念充斥。</p>
                     <p>模块四的作用，就是用一柄<b>冰冷的哲学手术刀</b>，斩断所有的自我防卫，强行判定这个概念有没有资格正式交付，绝不姑息任何和稀泥的侥幸心理。</p>
                 </div>
             </div>
