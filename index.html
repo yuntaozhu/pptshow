@@ -2,94 +2,69 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>CG-Engine 核心认知生长控制台</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <title>CG-Engine v4.5 全景架构控制台</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
-        :root { --main-bg: #f4f7f9; --text-color: #2d3436; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--main-bg); color: var(--text-color); margin: 0; padding: 20px; }
-        
-        /* 布局：横向扩展流程图，使其占据更大空间 */
-        .dashboard { display: grid; grid-template-columns: 40% 58%; gap: 2%; height: 95vh; }
-        
-        .flow-container { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: auto; }
-        .text-container { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-y: auto; }
-        
-        /* 文字放大与排版优化 */
-        h2 { font-size: 1.4em; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .module-block { margin-bottom: 25px; line-height: 1.6; }
-        .module-title { font-size: 1.2em; font-weight: bold; color: #2980b9; margin-bottom: 5px; }
-        .module-content { font-size: 1.1em; color: #34495e; }
-        
-        /* 强制 Mermaid 节点居中 */
-        .mermaid { display: flex; justify-content: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; height: 100vh; }
+        .header { text-align: center; margin-bottom: 10px; }
+        .container { display: flex; flex: 1; gap: 20px; overflow: hidden; }
+        /* 左侧流程图：增加宽度 */
+        .left-panel { flex: 0 0 40%; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: auto; }
+        /* 右侧说明：增大字号 */
+        .right-panel { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow-y: auto; font-size: 16px; line-height: 1.6; }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; }
+        .module { margin-bottom: 25px; }
     </style>
 </head>
 <body>
 
-<div class="dashboard">
-    <div class="flow-container">
+<div class="header">
+    <h1>CG-Engine v4.5 全景架构控制台</h1>
+</div>
+
+<div class="container">
+    <div class="left-panel">
         <div class="mermaid">
             graph TD
-            %% 布局方向设置，增加横向间距
-            subgraph Engine [CG-Engine v4.5 核心逻辑]
-            direction TB
-            Input[<b>【输入层】</b><br/>原始直觉与痛感投放]
-            M1[<b>【模块一】</b><br/>断裂带强编译<br/>Intent -> Code]
-            M2[<b>【模块二】</b><br/>斯坦福小镇轰炸<br/>Backtest]
-            M3[<b>【模块三】</b><br/>动力链执行器<br/>Execution]
-            M4[<b>【模块四】</b><br/>对抗性清算风控<br/>PnL Auditor]
-            Gate{判定网关}
-            Output[<b>【交付层】</b><br/>抗打击思想资产]
+            In[输入层: 原始痛感与直觉] --> M1[模块一: 断裂带强编译]
+            M1 -->|输出深层结构 C| M2[模块二: 时空画布回测]
+            M2 -->|输出 Crash Logs| M3[模块三: 动力链执行器]
+            M3 -->|输出动态因果机制| M4[模块四: 对抗审计与清算]
+            M4 --> Check{判定制胜点}
+            Check -->|NO| In
+            Check -->|YES| Out[输出层: 交付概念资产]
             
-            Input --> M1
-            M1 --> M2
-            M2 -->|Crash Logs| M3
-            M3 --> M4
-            M4 --> Gate
-            Gate -- YES --> Output
-            Gate -.->|NO 打回重构| Input
-            end
-            
-            %% 样式定义
-            classDef default fill:#fff,stroke:#333,stroke-width:2px;
-            classDef node fill:#ecf0f1,stroke:#3498db,stroke-width:3px;
-            class Input,M1,M2,M3,M4,Output node;
-            class Gate fill:#f1c40f,stroke:#f39c12,stroke-width:3px;
+            style In fill:#f9f,stroke:#333
+            style M1 fill:#ff9,stroke:#333
+            style M2 fill:#bbf,stroke:#333
+            style M3 fill:#bfb,stroke:#333
+            style M4 fill:#fbb,stroke:#333
+            style Out fill:#9f9,stroke:#333
         </div>
     </div>
 
-    <div class="text-container">
-        <h2>系统模块详解</h2>
-        
-        <div class="module-block">
-            <div class="module-title">【输入层】原始直觉与痛感投放</div>
-            <div class="module-content">捕捉用户在现实世界中产生的抓耳挠腮、说不清道不明的原始痛感，将其转化为可处理的数据流。</div>
+    <div class="right-panel">
+        <div class="module">
+            <h2>[模块一] 断裂带强编译</h2>
+            <p><strong>作用：</strong>将散乱的 Markdown 片段编译为具备强解释力的思想种子。</p>
         </div>
-
-        <div class="module-block">
-            <div class="module-title">【模块一】断裂带强编译 (Intent -> Code)</div>
-            <div class="module-content">扮演“翻译官”兼“逻辑硬化器”，剥离所有个人情绪与修辞，将模糊的意图编译为具备强解释力的深度逻辑假说（思想代码种子）。</div>
+        <div class="module">
+            <h2>[模块二] 时空画布回测</h2>
+            <p><strong>作用：</strong>通过模拟环境，通过多智能体博弈寻找逻辑边界。</p>
         </div>
-
-        <div class="module-block">
-            <div class="module-title">【模块二】时空画布回测 (Backtest)</div>
-            <div class="module-content">基于斯坦福小镇框架，构建多 Agent 模拟环境。通过在特定地形中的博弈规划，强迫种子经历极限压力测试，输出标准化的 Crash Logs（边缘失效日志）。</div>
+        <div class="module">
+            <h2>[模块三] 动力链执行器</h2>
+            <p><strong>作用：</strong>利用马尔科夫链与思维链，缝合漏洞，建立刚性因果链。</p>
         </div>
-
-        <div class="module-block">
-            <div class="module-title">【模块三】动力链执行器 (Execution)</div>
-            <div class="module-content">利用 Deep Think 与马尔科夫链，将模块二的漏洞碎屑缝合。通过确定性传导模型，消除模糊性，计算出概念核心节点的“执行仓位”，形成闭环动力。</div>
-        </div>
-
-        <div class="module-block">
-            <div class="module-title">【模块四】对抗性清算风控 (PnL Auditor)</div>
-            <div class="module-content">哲学手术刀般的风控官。斩断一切“特设性狡辩”，强制划定可证伪的“爆仓自毁死线”，剔除侥幸心理，确保仅交付高韧性思想资产。</div>
+        <div class="module">
+            <h2>[模块四] 对抗审计与清算</h2>
+            <p><strong>作用：</strong>作为判定网关，通过波普尔式生存死线进行最终结算。</p>
         </div>
     </div>
 </div>
 
 <script>
-    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    mermaid.initialize({ startOnLoad: true });
 </script>
 </body>
 </html>
