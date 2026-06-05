@@ -14,6 +14,8 @@
             --border-light: #e5e7eb;
             --primary-blue: #2563eb;
             --accent-orange: #ea580c;
+            --purple-deep: #8b5cf6;
+            --sky-blue: #0ea5e9;
             --success-green: #16a34a;
             --danger-red: #dc2626;
         }
@@ -27,7 +29,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* 锁定外层滚动 */
+            overflow: hidden;
         }
 
         /* 顶部导航栏 */
@@ -65,7 +67,7 @@
 
         /* 左侧：可视化流程图区 */
         .left-panel {
-            width: 45%;
+            width: 42%;
             background: #fafaf9;
             border-right: 1px solid var(--border-light);
             padding: 24px;
@@ -77,12 +79,12 @@
 
         .mermaid {
             width: 100%;
-            visibility: hidden; /* 渲染前隐藏防闪烁 */
+            visibility: hidden;
         }
 
         /* 右侧：详细解释区 */
         .right-panel {
-            width: 55%;
+            width: 58%;
             padding: 32px 40px;
             overflow-y: auto;
             background: var(--bg-color);
@@ -113,8 +115,8 @@
         
         .info-card.input::before { background: var(--text-muted); }
         .info-card.mod1::before { background: var(--accent-orange); }
-        .info-card.mod2::before { background: #8b5cf6; }
-        .info-card.mod3::before { background: #0ea5e9; }
+        .info-card.mod2::before { background: var(--purple-deep); }
+        .info-card.mod3::before { background: var(--sky-blue); }
         .info-card.mod4::before { background: var(--danger-red); }
         .info-card.output::before { background: var(--success-green); }
 
@@ -127,7 +129,7 @@
         }
 
         .step-badge {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             padding: 4px 8px;
             border-radius: 4px;
@@ -151,6 +153,7 @@
             font-size: 13px;
             font-family: monospace;
             color: #334155;
+            line-height: 1.5;
         }
 
         .io-label {
@@ -167,6 +170,13 @@
             margin: 0;
         }
 
+        .description p {
+            margin: 0 0 12px 0;
+        }
+        .description p:last-child {
+            margin-bottom: 0;
+        }
+
         .highlight {
             font-weight: 600;
             color: var(--text-main);
@@ -177,7 +187,7 @@
 
     </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         mermaid.initialize({
             startOnLoad: false, 
@@ -187,8 +197,8 @@
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'linear',
-                nodeSpacing: 40,
-                rankSpacing: 35
+                nodeSpacing: 45,
+                rankSpacing: 40
             }
         });
 
@@ -197,7 +207,7 @@
                 mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 document.querySelector('.mermaid').style.visibility = 'visible';
             } catch (e) {
-                console.error("渲染异常: ", e);
+                console.error("Mermaid 渲染沙箱捕获异常: ", e);
             }
         });
     </script>
@@ -220,19 +230,14 @@ graph TD
     classDef outputNode fill:#dcfce3,stroke:#16a34a,stroke-width:2px,color:#166534,font-weight:bold;
 
     In["<b>【输入层】</b><br/>原始意图与宏观趋势"]
-    
     M1["<b>【模块一: 断裂带编译】</b><br/>Intent ➔ Code"]
-    
     M2["<b>【模块二: 时空画布回测】</b><br/>Code ➔ Backtest"]
-    
     M3["<b>【模块三: 动力链执行器】</b><br/>Agent ➔ Execution"]
-    
     M4["<b>【模块四: 结算与可证伪】</b><br/>PnL ➔ Iteration"]
-    
     Gate{"质量判定"}
-    
     Out["<b>【输出层】</b><br/>演化完成的概念资产"]
 
+    %% === 连线流转定义（共计 7 条线：索引 0 到 6） ===
     In -->|表面解释A ➔ 反常现象B| M1
     M1 -->|输出: 深层结构 C| M2
     M2 -->|输出: 模拟碰撞结果| M3
@@ -246,9 +251,14 @@ graph TD
     class Gate gateNode;
     class Out outputNode;
     
-    linkStyle default stroke:#64748b,stroke-width:2px;
-    linkStyle 6 stroke:#16a34a,stroke-width:2px;
-    linkStyle 7 stroke:#dc2626,stroke-width:2px,stroke-dasharray: 4 4;
+    %% === 修正后的边样式定义，绝无越界 ===
+    linkStyle 0 stroke:#64748b,stroke-width:2px;
+    linkStyle 1 stroke:#2563eb,stroke-width:2px;
+    linkStyle 2 stroke:#8b5cf6,stroke-width:2px;
+    linkStyle 3 stroke:#0ea5e9,stroke-width:2px;
+    linkStyle 4 stroke:#475569,stroke-width:2px;
+    linkStyle 5 stroke:#16a34a,stroke-width:3px;
+    linkStyle 6 stroke:#dc2626,stroke-width:2px,stroke-dasharray: 4 4;
             </div>
         </div>
 
@@ -256,83 +266,83 @@ graph TD
             
             <div class="info-card input">
                 <div class="card-header">
-                    <span class="step-badge">INPUT</span>
+                    <span class="step-badge" style="background:#f3f4f6; color:#374151;">INPUT</span>
                     <h2 class="card-title">【输入层】原始思想意图投放</h2>
                 </div>
                 <div class="description">
-                    <p>用户在此输入自己想要表达的核心概念。系统后台会并行抓取 Google Trends 的搜索趋势以及学术期刊的热门研究内容。</p>
-                    <p>通过对比常识与趋势，系统强行提取出一条逻辑冲突线：<span class="highlight">表面解释 A → 反常现象 B</span>。这就是整个概念演化引擎赖以启动的原材料。</p>
+                    <p>用户在此输入自己想要表达的核心概念。为了给概念提供客观现实锚点，系统后台会并行抓取 <b>Google Trends</b> 的全局搜索趋势以及<b>学术期刊</b>的最热研究内容（Hot Topics）。</p>
+                    <p>通过对比平庸常识与异常趋势，系统将模糊的直觉强行硬化，提取出一条逻辑冲突线：<span class="highlight">表面解释 A → 反常现象 B</span>。这就是整个概念演化引擎赖以启动的原材料，直接递交给模块一。</p>
                 </div>
             </div>
 
             <div class="info-card mod1">
                 <div class="card-header">
-                    <span class="step-badge">MOD 1</span>
+                    <span class="step-badge" style="background:#ffedd5; color:#ea580c;">MOD 1</span>
                     <h2 class="card-title">【模块一】断裂带编译 (Compile)</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">输入:</span> 表面解释 A → 反常现象 B</div>
-                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 深层结构 C (思想策略代码)</div>
+                    <div><span class="io-label">输入:</span> 表面解释 A → 反常现象 B (输入层原始物料)</div>
+                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 深层结构 C (思想策略代码 / 算法种子)</div>
                 </div>
                 <div class="description">
-                    <p><b>通俗机制：</b>在这个模块里，AI 不允许你写出“听起来很顺溜但全是废话”的鸡汤散文。它像一个严苛的编译器，把你的原始困惑强行压缩、提纯。</p>
-                    <p><b>什么是深层结构 C？</b>它不是一段文本段落，而是一个<span class="highlight">高度压缩的算法种子</span>。它剥离了情绪，只保留了核心的变量（例如：如果增加某个维度的投入，会在哪个特定的断裂带引发断裂）。这个“结构C”就像是写代码时定义好的一个 Class 类，等待后续去被实例化测试。</p>
+                    <p><b>通俗机制：</b>在这个模块里，系统会斩断那些听起来很流畅但没有信息增量的自然语言滑动（拒绝平庸修辞）。它像一个硬核编译器，把人类的不适感、矛盾感和意图编译成一个高维的特异性概念。</p>
+                    <p><b>什么是深层结构 C？</b>它不是一篇散文段落，而是一个<span class="highlight">高度压缩、可以被执行的逻辑种子</span>。它卡住了特定的知识地形坐标，明确声明了核心变量之间的非对称关系。它就像面向对象编程中定义好的一个 Class 类，剥离了情绪，专为高强度对抗测试准备。</p>
                 </div>
             </div>
 
             <div class="info-card mod2">
                 <div class="card-header">
-                    <span class="step-badge">MOD 2</span>
+                    <span class="step-badge" style="background:#ede9fe; color:#8b5cf6;">MOD 2</span>
                     <h2 class="card-title">【模块二】时空画布回测 (Backtest)</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">输入:</span> 深层结构 C</div>
-                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 模拟仿真结果 (Crash Logs)</div>
+                    <div><span class="io-label">输入:</span> 深层结构 C (模块一生成的 Class 种子)</div>
+                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 模拟仿真结果 (边缘失效碰撞数据 / Crash Logs)</div>
                 </div>
                 <div class="description">
-                    <p><b>工程实现考量：</b>这是全系统最关键的压力测试。理想状态下，我们可以接入一个“斯坦福小镇（Generative Agents）”程序，让25个 AI 带着这个概念在虚拟小镇里生活七天来看是否会崩溃。但由于开发过于复杂且高延迟，工程上我们采用<span class="highlight">轻量级多智能体矩阵盲测</span>。</p>
-                    <p><b>机制执行：</b>我们将“深层结构 C”扔进 100ms瞬间、手头任务、生命立命等“五时层坐标”中，由专门的杠精 Agent 发起逻辑攻击。它最终吐出的不是文章，而是一堆“在哪个场景下概念失效了”的模拟碰撞结果数据。</p>
+                    <p><b>工程实现取舍：</b>这是全系统最核心的生存应力测试。理想状态下，我们可以构建一个类似“斯坦福小镇（Generative Agents）”的多智能体长时仿真程序，让 25 个带有不同社会背景的 AI 代理带着深层结构 C 生活 7 天来看概念是否会变形破产。但考虑到开发周期极长、系统延迟高且成本高昂，我们在此做出了高效的工程平替：采用<b>轻量级多智能体矩阵盲测（Lightweight Agent Matrix Test）</b>。</p>
+                    <p><b>机制执行：</b>模块二直接将深层结构 C 投放到由杠精 Agent 和恶意挑刺 Agent 组成的红队黑客矩阵中，在 100ms 瞬间、手头任务、长期事业、生命立命等“五时层坐标”中发起极限应力轰炸。最终，系统直接输出概念在哪些边界场景下发生了死锁失效的 Crash Logs 碰撞数据。</p>
                 </div>
             </div>
 
             <div class="info-card mod3">
                 <div class="card-header">
-                    <span class="step-badge">MOD 3</span>
+                    <span class="step-badge" style="background:#e0f2fe; color:#0ea5e9;">MOD 3</span>
                     <h2 class="card-title">【模块三】动力链执行器 (Execution)</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">输入:</span> 模拟仿真结果</div>
-                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 动态因果机制</div>
+                    <div><span class="io-label">输入:</span> 模拟仿真结果 (模块二导出的场景碰撞废墟)</div>
+                    <div style="margin-top:4px;"><span class="io-label">输出:</span> 动态因果机制 (能在异质地形中自运行的动力学闭环)</div>
                 </div>
                 <div class="description">
-                    <p><b>因果分析：</b>拿到模块二那些散乱的、充满冲突的模拟数据后，模块三启动 Deep Think 长路径推理。</p>
-                    <p>它负责在这些碰撞废墟中找到一根“红线”。它把静态的文本词汇，转化成一套<span class="highlight">可以在各个时层和地形中自动化运行的“动态因果机制”</span>（即 IF...THEN... 的动力学传导链），确保逻辑一穿到底，没有缝隙。</p>
+                    <p><b>因果分析：</b>在拿到模块二那堆零散的、充满边缘冲突的模拟失效数据后，模块三启动 Deep Think 长路径推理链。</p>
+                    <p>它负责在这些碰撞废墟里找到唯一的确定性因果红线。它将原本静态的词汇或 Class 种子，转换为一套<span class="highlight">可以在各个时层和地形中自动化运行的“动态因果机制”</span>（即一根铁丝穿到底的动力传导链），确保概念的逻辑链条在任何异质环境中不会出现中途断裂或自相矛盾。</p>
                 </div>
             </div>
 
             <div class="info-card mod4">
                 <div class="card-header">
-                    <span class="step-badge">MOD 4</span>
+                    <span class="step-badge" style="background:#fee2e2; color:#dc2626;">MOD 4</span>
                     <h2 class="card-title">【模块四】对抗审稿与可证伪结算 (PnL Auditor)</h2>
                 </div>
                 <div class="io-block">
-                    <div><span class="io-label">输入:</span> 动态因果机制</div>
-                    <div style="margin-top:4px;"><span class="io-label">输出:</span> PnL 判定线 / 爆仓打回信号</div>
+                    <div><span class="io-label">输入:</span> 动态因果机制 (模块三生成的长因果链)</div>
+                    <div style="margin-top:4px;"><span class="io-label">输出:</span> PnL 判定线 / 可证伪生长结果</div>
                 </div>
                 <div class="description">
-                    <p><b>刚性风控：</b>这是一个无情的结算台。它对模块三形成的因果链进行反特设性审查（不允许你为了圆场而打免责补丁）。</p>
-                    <p>最后，强制要求该机制写下自己的<span class="highlight">可证伪结算线</span>——明确宣告“如果现实世界发生哪种具体的反例，本概念彻底破产”。只有敢于划出止损线的概念，才能获准进入输出层。</p>
+                    <p><b>风控收敛结算：</b>这是整个流水线的刚性风险控制台。它会对形成的动态因果机制进行逻辑支持度衰减率的无情计算，强行拦截所有为了圆场而临时修补的“特设性假说”（Anti-Ad-hoc）。</p>
+                    <p>它要求机制必须吐出带编号的【定义】、【结论】和【机制假说】，并强制该概念划定属于它自己的<span class="highlight">爆仓止损止盈线（可证伪路径）</span>——即明确宣告“在何种具体的反例下本概念彻底破产”。一旦判定通过，演化和生长的结果将优雅、坚硬地交付给终端用户；若判定失败，直接触发信号将整个策略彻底逼回输入层重来。</p>
                 </div>
             </div>
 
             <div class="info-card output">
                 <div class="card-header">
-                    <span class="step-badge">OUTPUT</span>
-                    <h2 class="card-title">【输出层】概念演化与生长结果</h2>
+                    <span class="step-badge" style="background:#dcfce3; color:#16a34a;">OUTPUT</span>
+                    <h2 class="card-title">【输出层】概念演化与生长结果交付</h2>
                 </div>
                 <div class="description">
-                    <p>经历过上述所有粉碎、拉伸与重塑的流程后，原本模糊、脆弱的初始意图，在此刻凝结成了坚硬的思想资产。</p>
-                    <p>交付给用户的，将是一个具备高度抗打击能力、逻辑自洽的<b>公共思想工具</b>，可以直接用于架构设计、文章发表或业务重构。</p>
+                    <p>经历过符号编译、仿真矩阵盲测、长因果链整合与可证伪清算后，原本脆弱、模糊的初始想法已经完成了向高阶思想资产的彻底重塑。</p>
+                    <p>系统最终为用户渲染出具备极高抗打击能力、极低认知损耗、高主体间一致性的<b>公共思想工具</b>，帮助用户在复杂的实战地形中随时应对环境的变化。</p>
                 </div>
             </div>
 
