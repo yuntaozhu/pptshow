@@ -2,69 +2,424 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>CG-Engine v4.5 全景架构控制台</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>万能工匠教学实操及能力发展 AI 评估报告</title>
+    <!-- 引入 Tailwind CSS 快速排版框架 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Apache ECharts 数据可视化库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 10px; display: flex; flex-direction: column; height: 100vh; }
-        .header { text-align: center; margin-bottom: 10px; }
-        .container { display: flex; flex: 1; gap: 20px; overflow: hidden; }
-        /* 左侧流程图：增加宽度 */
-        .left-panel { flex: 0 0 40%; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: auto; }
-        /* 右侧说明：增大字号 */
-        .right-panel { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow-y: auto; font-size: 16px; line-height: 1.6; }
-        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; }
-        .module { margin-bottom: 25px; }
+        .chart-container {
+            min-height: 320px;
+        }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans leading-normal tracking-normal">
 
-<div class="header">
-    <h1>CG-Engine v4.5 全景架构控制台</h1>
-</div>
+    <!-- 顶部导航栏 -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-bold tracking-wider">AI-Edu Analytics</span>
+                <span class="bg-blue-500 text-xs px-2 py-1 rounded font-semibold uppercase">PRO v2.0</span>
+            </div>
+            <div class="text-sm opacity-90">评估性质：万能工匠实操教学培训诊断</div>
+        </div>
+    </header>
 
-<div class="container">
-    <div class="left-panel">
-        <div class="mermaid">
-            graph TD
-            In[输入层: 原始痛感与直觉] --> M1[模块一: 断裂带强编译]
-            M1 -->|输出深层结构 C| M2[模块二: 时空画布回测]
-            M2 -->|输出 Crash Logs| M3[模块三: 动力链执行器]
-            M3 -->|输出动态因果机制| M4[模块四: 对抗审计与清算]
-            M4 --> Check{判定制胜点}
-            Check -->|NO| In
-            Check -->|YES| Out[输出层: 交付概念资产]
+    <!-- 主容器 -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- 基础信息面板 -->
+        <section class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-slate-100 flex flex-wrap justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900 mb-1">万能工匠教学实操及能力发展综合评估</h1>
+                <p class="text-slate-500 text-sm">通过降噪语音声学分析与行为逻辑，客观评估教学互动质量及实践学员的动作发展水平。</p>
+            </div>
+            <div class="flex space-x-6 text-sm text-slate-600">
+                <div><strong>评估总时长:</strong> <span class="text-blue-600 font-semibold">57分51秒</span></div>
+                <div><strong>交互总计:</strong> <span class="text-blue-600 font-semibold">158次</span></div>
+                <div><strong>报告生成时间:</strong> <span class="text-slate-500">2026-06-11</span></div>
+            </div>
+        </section>
+
+        <!-- 板块一：教学质量AI评估报告 -->
+        <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+            <span class="w-1.5 h-6 bg-blue-600 rounded-full mr-2"></span> 板块一：教学质量 AI 评估报告
+        </h2>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+            <!-- 教学行为与语言互动指标 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2">
+                <h3 class="text-md font-semibold text-slate-700 mb-4">主讲教师语言行为频次统计</h3>
+                <div id="behaviorChart" class="chart-container"></div>
+            </div>
+
+            <!-- 师生时长统计 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h3 class="text-md font-semibold text-slate-700 mb-4">讲师-学员发言时长分配</h3>
+                <div id="durationChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- 课堂节奏与教案符合度分析 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h3 class="text-md font-semibold text-slate-700 mb-3">各教学环节耗时与计划符合度</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-4 py-2 text-left font-medium text-slate-500">教学环节</th>
+                                <th class="px-4 py-2 text-center font-medium text-slate-500">理论比例</th>
+                                <th class="px-4 py-2 text-center font-medium text-slate-500">实际耗时</th>
+                                <th class="px-4 py-2 text-right font-medium text-slate-500">达成度</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-4 py-3 font-medium">环节一：实操组装与基础部件</td>
+                                <td class="px-4 py-3 text-center">20%</td>
+                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">10分10秒</td>
+                                <td class="px-4 py-3 text-right text-emerald-600">100%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">环节二：体能示范与技能测评</td>
+                                <td class="px-4 py-3 text-center">15%</td>
+                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">8分30秒</td>
+                                <td class="px-4 py-3 text-right text-emerald-600">100%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">环节三：高阶力学与双面拼搭</td>
+                                <td class="px-4 py-3 text-center">25%</td>
+                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">14分30秒</td>
+                                <td class="px-4 py-3 text-right text-emerald-600">95%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">环节四：户外体能循环设计原则</td>
+                                <td class="px-4 py-3 text-center">20%</td>
+                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">12分00秒</td>
+                                <td class="px-4 py-3 text-right text-emerald-600">90%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">环节五：总结评估、安全与教案</td>
+                                <td class="px-4 py-3 text-center">20%</td>
+                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">12分41秒</td>
+                                <td class="px-4 py-3 text-right text-amber-500">85%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 p-3 bg-slate-50 rounded-lg text-xs text-slate-500">
+                    <strong>节奏评估结论:</strong> 整体节奏偏慢但科学性高。安全讲解部分在实操隐患被揭示后有主动拉长，契合现场实操培训的灵活应变特征 [1]。
+                </div>
+            </div>
+
+            <!-- 基于声学FFT的情感与思维特征 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h3 class="text-md font-semibold text-slate-700 mb-3">现场声学特征 FFT 模拟分析</h3>
+                <div id="fftChart" class="chart-container"></div>
+                <div class="mt-4 text-xs text-slate-500">
+                    <strong>FFT频谱简析:</strong> 教师发音主要聚焦在1kHz-2.5kHz的清晰吐字区。学员高强度协同研议阶段在200Hz附近呈现共振，整体音频展示出了极高强度的思维交互与实践能动性。
+                </div>
+            </div>
+        </div>
+
+        <!-- 课堂教学改进建议 -->
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
+            <h3 class="text-md font-semibold text-slate-700 mb-4">教学改进建议 (基于AI综合研判)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
+                    <h4 class="font-bold text-blue-900 mb-1">1. 实操安全双人互检机制</h4>
+                    <p class="text-blue-700 text-xs">针对后期发现的“锁扣螺丝未拧紧”隐患，增加“30秒实操交叉互检”环节，从体制上闭环实操风险。</p>
+                </div>
+                <div class="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-600">
+                    <h4 class="font-bold text-indigo-900 mb-1">2. 增设“力学物理测重体验”</h4>
+                    <p class="text-indigo-700 text-xs">利用载重块现场演示，直观展示“三角形稳定性”与“双面建构”在阻抗变形时的物理区别，将说教具象化。</p>
+                </div>
+                <div class="p-4 bg-amber-50 rounded-lg border-l-4 border-amber-600">
+                    <h4 class="font-bold text-amber-900 mb-1">3. 提供教案转化规范化框架</h4>
+                    <p class="text-amber-700 text-xs">实物化展示一份“万能工匠教案编制指南模版”，降低学员将建构物转化为标准游戏教学教案的难度。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块二：幼儿(学员)能力AI评估报告 -->
+        <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告
+        </h2>
+
+        <!-- 多人能力综合雷达对比 -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-2">多学员能力发展雷达图</h3>
+                    <p class="text-slate-500 text-xs mb-4">通过对现场不同实操任务的表现，量化评估各实践学员的空间、运动及协作水平。</p>
+                </div>
+                <div id="radarChart" class="chart-container"></div>
+            </div>
+
+            <!-- 三位典型代表详细量化评估卡片 -->
+            <div class="xl:col-span-2 space-y-6">
+                <!-- 14号实践学员 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">14号学员</span>
+                            <span class="text-sm text-slate-500">模拟：体能与车体变高任务</span>
+                        </div>
+                        <div class="text-lg font-bold text-blue-600">综合评分：88分</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong class="text-emerald-700">表现优势项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>动作生物力学突出:</strong> 跨跳、蹬地动作平稳，摆臂幅度和落地阻抗缓冲控制较好。</li>
+                                <li><strong>高级建构逻辑清晰:</strong> 完美掌握三角形稳定性，车体高度调整能通过基础轴进行物理加固。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-amber-700">待提升项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>锁扣锁紧度自检偏弱:</strong> 在高速体能循环下，缺乏对微小连接锁扣的后期二次拉力自检。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
+                        <strong>AI 文字评语:</strong> 动作协调、平衡感优。空间和生物力学的应用表现令人满意。建议在后续自主应用中强化锁合安全自检，做到在体能教学时“稳上加稳”。
+                    </div>
+                </div>
+
+                <!-- 8号实践学员 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded">8号学员</span>
+                            <span class="text-sm text-slate-500">模拟：造价计算与部件规则</span>
+                        </div>
+                        <div class="text-lg font-bold text-indigo-600">综合评分：86分</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong class="text-emerald-700">表现优势项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>数理逻辑精准:</strong> 在夹角微计算（45度孔距）和组装规则数理限制中有优异执行表现。</li>
+                                <li><strong>微小拼搭稳固度高:</strong> 锁合精细度处于前列，无螺丝未锁紧的低端疏漏。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-amber-700">待提升项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>大肌肉运动能动性偏保守:</strong> 在体能跃进等测试中身体控制稍显保守，蹬地发力高度一般。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
+                        <strong>AI 文字评语:</strong> 精细组装与数量统筹方面表现突出，力学细节极高，但在大肌肉跃动模拟中不够自信。建议结合其优势，多尝试富有动能性质的拼搭器械跨越。
+                    </div>
+                </div>
+
+                <!-- 王老师 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-teal-600 text-white text-xs font-bold px-2 py-1 rounded">王老师</span>
+                            <span class="text-sm text-slate-500">模拟：高空斜坡调节与平衡</span>
+                        </div>
+                        <div class="text-lg font-bold text-teal-600">综合评分：85分</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong class="text-emerald-700">表现优势项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>重心与平衡控制平稳:</strong> 模拟运动斜坡体验时展示了优秀的核心稳定性，动态平衡突出。</li>
+                                <li><strong>出色的问题变通力:</strong> 斜坡出现侧晃时，可快速采用增设基础支撑和调整坡底角度来进行解决。</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong class="text-amber-700">待提升项:</strong>
+                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
+                                <li><strong>物理重力坡度规划偏差:</strong> 早期设计时斜坡角度过于垂直偏陡，导致物体下滑重力势能计算稍有局限。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
+                        <strong>AI 文字评语:</strong> 平衡表现出众，展现出较强的问题解决毅力，但前期物理规划和测重计算的严密性仍有待提升。建议在体能教学时注意坡度承重的预见性。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-xs mt-12 border-t border-slate-800">
+        <p>© 2026 AI-Edu Analytics. 保留所有评估分析权。报告数据由降噪语音及生物学仿真评估引擎客观呈现。</p>
+    </footer>
+
+    <!-- 图表渲染逻辑 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             
-            style In fill:#f9f,stroke:#333
-            style M1 fill:#ff9,stroke:#333
-            style M2 fill:#bbf,stroke:#333
-            style M3 fill:#bfb,stroke:#333
-            style M4 fill:#fbb,stroke:#333
-            style Out fill:#9f9,stroke:#333
-        </div>
-    </div>
+            // 1. 教师行为频次柱状图
+            const behaviorDom = document.getElementById('behaviorChart');
+            const behaviorChart = echarts.init(behaviorDom);
+            const behaviorOption = {
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01],
+                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['纠正反馈次数', '指定次数', '积极反馈次数', '讲解次数', '提问次数'],
+                    axisLabel: { fontWeight: 'bold' }
+                },
+                series: [
+                    {
+                        name: '发生频次(次)',
+                        type: 'bar',
+                        data: [11, 15, 26, 45, 58],
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                                { offset: 0, color: '#3b82f6' },
+                                { offset: 1, color: '#6366f1' }
+                            ]),
+                            borderRadius: [0, 4, 4, 0]
+                        }
+                    }
+                ]
+            };
+            behaviorChart.setOption(behaviorOption);
 
-    <div class="right-panel">
-        <div class="module">
-            <h2>[模块一] 断裂带强编译</h2>
-            <p><strong>作用：</strong>将散乱的 Markdown 片段编译为具备强解释力的思想种子。</p>
-        </div>
-        <div class="module">
-            <h2>[模块二] 时空画布回测</h2>
-            <p><strong>作用：</strong>通过模拟环境，通过多智能体博弈寻找逻辑边界。</p>
-        </div>
-        <div class="module">
-            <h2>[模块三] 动力链执行器</h2>
-            <p><strong>作用：</strong>利用马尔科夫链与思维链，缝合漏洞，建立刚性因果链。</p>
-        </div>
-        <div class="module">
-            <h2>[模块四] 对抗审计与清算</h2>
-            <p><strong>作用：</strong>作为判定网关，通过波普尔式生存死线进行最终结算。</p>
-        </div>
-    </div>
-</div>
+            // 2. 发言时长饼图
+            const durationDom = document.getElementById('durationChart');
+            const durationChart = echarts.init(durationDom);
+            const durationOption = {
+                tooltip: { trigger: 'item', formatter: '{b}: {c}分钟 ({d}%)' },
+                legend: { bottom: '5%', left: 'center' },
+                series: [
+                    {
+                        name: '发言/实操耗时',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
+                        label: { show: false, position: 'center' },
+                        emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
+                        labelLine: { show: false },
+                        data: [
+                            { value: 41.25, name: '教师发言时长', itemStyle: { color: '#6366f1' } },
+                            { value: 16.6, name: '学员回答/实操', itemStyle: { color: '#0d9488' } }
+                        ]
+                    }
+                ]
+            };
+            durationChart.setOption(durationOption);
 
-<script>
-    mermaid.initialize({ startOnLoad: true });
-</script>
+            // 3. FFT 模拟分析折线图
+            const fftDom = document.getElementById('fftChart');
+            const fftChart = echarts.init(fftDom);
+            const fftOption = {
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['主讲教师', '实践学员'], right: 10 },
+                xAxis: {
+                    type: 'category',
+                    name: '频率(Hz)',
+                    boundaryGap: false,
+                    data: ['100', '200', '400', '800', '1200', '1600', '2000', '2400', '3000', '4000']
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '模拟振幅(dB)',
+                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                },
+                series: [
+                    {
+                        name: '主讲教师',
+                        type: 'line',
+                        smooth: true,
+                        data: [15, 20, 30, 48, 82, 85, 76, 40, 25, 12],
+                        lineStyle: { width: 3, color: '#6366f1' },
+                        showSymbol: false
+                    },
+                    {
+                        name: '实践学员',
+                        type: 'line',
+                        smooth: true,
+                        data: [20, 72, 75, 42, 22, 16, 14, 10, 5, 4],
+                        lineStyle: { width: 3, color: '#0d9488' },
+                        showSymbol: false
+                    }
+                ]
+            };
+            fftChart.setOption(fftOption);
+
+            // 4. 三人能力多维雷达图
+            const radarDom = document.getElementById('radarChart');
+            const radarChart = echarts.init(radarDom);
+            const radarOption = {
+                legend: {
+                    data: ['14号学员', '8号学员', '王老师'],
+                    bottom: '0%'
+                },
+                radar: {
+                    indicator: [
+                        { name: '空间建构', max: 5.0 },
+                        { name: '大肌肉协调', max: 5.0 },
+                        { name: '问题解决与应变', max: 5.0 },
+                        { name: '数理逻辑', max: 5.0 },
+                        { name: '细节防范', max: 5.0 }
+                    ],
+                    radius: '65%',
+                    axisName: {
+                        color: '#475569',
+                        fontWeight: 'bold',
+                        fontSize: 10
+                    }
+                },
+                series: [
+                    {
+                        name: '能力多维分析',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [4.6, 4.4, 4.3, 4.0, 3.8],
+                                name: '14号学员',
+                                lineStyle: { color: '#3b82f6', width: 2 },
+                                itemStyle: { color: '#3b82f6' },
+                                areaStyle: { color: 'rgba(59, 130, 246, 0.2)' }
+                            },
+                            {
+                                value: [4.4, 3.9, 4.1, 4.7, 4.8],
+                                name: '8号学员',
+                                lineStyle: { color: '#6366f1', width: 2 },
+                                itemStyle: { color: '#6366f1' },
+                                areaStyle: { color: 'rgba(99, 102, 241, 0.2)' }
+                            },
+                            {
+                                value: [4.1, 4.6, 4.5, 4.0, 4.2],
+                                name: '王老师',
+                                lineStyle: { color: '#0d9488', width: 2 },
+                                itemStyle: { color: '#0d9488' },
+                                areaStyle: { color: 'rgba(13, 148, 136, 0.2)' }
+                            }
+                        ]
+                    }
+                ]
+            };
+            radarChart.setOption(radarOption);
+
+            // 监听窗口尺寸变化，动态更新图表渲染
+            window.addEventListener('resize', function() {
+                behaviorChart.resize();
+                durationChart.resize();
+                fftChart.resize();
+                radarChart.resize();
+            });
+
+        });
+    </script>
 </body>
 </html>
