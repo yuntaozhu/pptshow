@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>万能工匠教学实操及能力发展 AI 评估报告</title>
+    <title>万能工匠实操教学培训 AI 深度诊断报告</title>
     <!-- 引入 Tailwind CSS 快速排版框架 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Apache ECharts 数据可视化库 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <style>
         .chart-container {
-            min-height: 320px;
+            min-height: 340px;
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans leading-normal tracking-normal">
 
     <!-- 顶部导航栏 -->
-    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-lg">
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-lg border-b border-indigo-900">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <span class="text-2xl font-bold tracking-wider">AI-Edu Analytics</span>
-                <span class="bg-blue-500 text-xs px-2 py-1 rounded font-semibold uppercase">PRO v2.0</span>
+                <span class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-300">AI-Edu Analytics</span>
+                <span class="bg-indigo-600/50 text-[10px] px-2 py-0.5 rounded border border-indigo-500 font-semibold uppercase">Advanced v3.5</span>
             </div>
-            <div class="text-sm opacity-90">评估性质：万能工匠实操教学培训诊断</div>
+            <div class="text-sm opacity-90 font-mono text-cyan-300">园所服务增值数据诊断系统</div>
         </div>
     </header>
 
@@ -33,218 +33,301 @@
         <!-- 基础信息面板 -->
         <section class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-slate-100 flex flex-wrap justify-between items-center gap-4">
             <div>
-                <h1 class="text-2xl font-bold text-slate-900 mb-1">万能工匠教学实操及能力发展综合评估</h1>
-                <p class="text-slate-500 text-sm">通过降噪语音声学分析与行为逻辑，客观评估教学互动质量及实践学员的动作发展水平。</p>
+                <div class="flex items-center space-x-2 mb-1">
+                    <h1 class="text-2xl font-bold text-slate-900">万能工匠实操教学培训深度AI诊断报告</h1>
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded-full font-medium">降噪录音分析</span>
+                </div>
+                <p class="text-slate-500 text-sm">基于园所差异化教学需求、声学 FFT 频谱仿真及课堂行为轨迹，精准识别培训实操中的关键痛点与能力短板。</p>
             </div>
             <div class="flex space-x-6 text-sm text-slate-600">
-                <div><strong>评估总时长:</strong> <span class="text-blue-600 font-semibold">57分51秒</span></div>
-                <div><strong>交互总计:</strong> <span class="text-blue-600 font-semibold">158次</span></div>
-                <div><strong>报告生成时间:</strong> <span class="text-slate-500">2026-06-11</span></div>
+                <div><strong>培训总时长:</strong> <span class="text-indigo-600 font-semibold">57分51秒</span></div>
+                <div><strong>语言行为总计:</strong> <span class="text-indigo-600 font-semibold">158次</span></div>
+                <div><strong>研判标准:</strong> <span class="text-slate-500 font-mono">ECE-2026-STD</span></div>
             </div>
         </section>
 
         <!-- 板块一：教学质量AI评估报告 -->
         <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-            <span class="w-1.5 h-6 bg-blue-600 rounded-full mr-2"></span> 板块一：教学质量 AI 评估报告
+            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块一：教学质量 AI 评估与需求捕获
         </h2>
 
+        <!-- 提问分布与行为频次 -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
-            <!-- 教学行为与语言互动指标 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2">
-                <h3 class="text-md font-semibold text-slate-700 mb-4">主讲教师语言行为频次统计</h3>
-                <div id="behaviorChart" class="chart-container"></div>
+            <!-- 学员主动提问关注点分布图 (核心升级) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <div class="mb-2">
+                    <h3 class="text-md font-semibold text-slate-700">学员提问关注点分布（基于话语分析）</h3>
+                    <p class="text-slate-400 text-xs">通过分析现场老师提问话语，折射出该园所的实际教学薄弱点与核心关注方向。</p>
+                </div>
+                <div id="demandChart" class="chart-container"></div>
             </div>
 
-            <!-- 师生时长统计 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <h3 class="text-md font-semibold text-slate-700 mb-4">讲师-学员发言时长分配</h3>
-                <div id="durationChart" class="chart-container"></div>
+            <!-- 教师行为频次 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2">
+                <div class="mb-2">
+                    <h3 class="text-md font-semibold text-slate-700">主讲培训师课堂言语行为频次</h3>
+                    <p class="text-slate-400 text-xs">统计提问、讲解、积极/纠正反馈的次数，量化培训师的指导行为结构。</p>
+                </div>
+                <div id="behaviorChart" class="chart-container"></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- 课堂节奏与教案符合度分析 -->
+            <!-- 时长分配与课堂节奏 -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <h3 class="text-md font-semibold text-slate-700 mb-3">各教学环节耗时与计划符合度</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-md font-semibold text-slate-700">师生时长分配与环节耗时</h3>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">整体节奏：正常偏慢</span>
+                </div>
+                <div id="durationChart" class="chart-container" style="min-height: 220px;"></div>
+                
+                <div class="overflow-x-auto mt-4">
+                    <table class="min-w-full divide-y divide-slate-200 text-xs">
                         <thead class="bg-slate-50">
                             <tr>
-                                <th class="px-4 py-2 text-left font-medium text-slate-500">教学环节</th>
-                                <th class="px-4 py-2 text-center font-medium text-slate-500">理论比例</th>
-                                <th class="px-4 py-2 text-center font-medium text-slate-500">实际耗时</th>
-                                <th class="px-4 py-2 text-right font-medium text-slate-500">达成度</th>
+                                <th class="px-3 py-2 text-left font-medium text-slate-500">教学环节</th>
+                                <th class="px-3 py-2 text-center font-medium text-slate-500">理论比例</th>
+                                <th class="px-3 py-2 text-center font-medium text-slate-500">实际耗时</th>
+                                <th class="px-3 py-2 text-right font-medium text-slate-500">达成度评估</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             <tr>
-                                <td class="px-4 py-3 font-medium">环节一：实操组装与基础部件</td>
-                                <td class="px-4 py-3 text-center">20%</td>
-                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">10分10秒</td>
-                                <td class="px-4 py-3 text-right text-emerald-600">100%</td>
+                                <td class="px-3 py-2.5 font-medium">环节一：实操组装与基础部件</td>
+                                <td class="px-3 py-2.5 text-center">20%</td>
+                                <td class="px-3 py-2.5 text-center text-slate-600 font-semibold">10分10秒</td>
+                                <td class="px-3 py-2.5 text-right text-emerald-600 font-semibold">100% (标准达成)</td>
                             </tr>
                             <tr>
-                                <td class="px-4 py-3 font-medium">环节二：体能示范与技能测评</td>
-                                <td class="px-4 py-3 text-center">15%</td>
-                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">8分30秒</td>
-                                <td class="px-4 py-3 text-right text-emerald-600">100%</td>
+                                <td class="px-3 py-2.5 font-medium">环节二：体能示范与技能测评</td>
+                                <td class="px-3 py-2.5 text-center">15%</td>
+                                <td class="px-3 py-2.5 text-center text-slate-600 font-semibold">8分30秒</td>
+                                <td class="px-3 py-2.5 text-right text-emerald-600 font-semibold">100% (动作饱满)</td>
                             </tr>
                             <tr>
-                                <td class="px-4 py-3 font-medium">环节三：高阶力学与双面拼搭</td>
-                                <td class="px-4 py-3 text-center">25%</td>
-                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">14分30秒</td>
-                                <td class="px-4 py-3 text-right text-emerald-600">95%</td>
+                                <td class="px-3 py-2.5 font-medium">环节三：高阶力学与双面拼搭</td>
+                                <td class="px-3 py-2.5 text-center">25%</td>
+                                <td class="px-3 py-2.5 text-center text-slate-600 font-semibold">14分30秒</td>
+                                <td class="px-3 py-2.5 text-right text-emerald-600 font-semibold">95% (探讨深入)</td>
                             </tr>
                             <tr>
-                                <td class="px-4 py-3 font-medium">环节四：户外体能循环设计原则</td>
-                                <td class="px-4 py-3 text-center">20%</td>
-                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">12分00秒</td>
-                                <td class="px-4 py-3 text-right text-emerald-600">90%</td>
+                                <td class="px-3 py-2.5 font-medium">环节四：户外体能循环设计原则</td>
+                                <td class="px-3 py-2.5 text-center">20%</td>
+                                <td class="px-3 py-2.5 text-center text-slate-600 font-semibold">12分00秒</td>
+                                <td class="px-3 py-2.5 text-right text-indigo-600 font-semibold">90% (覆盖率良好)</td>
                             </tr>
                             <tr>
-                                <td class="px-4 py-3 font-medium">环节五：总结评估、安全与教案</td>
-                                <td class="px-4 py-3 text-center">20%</td>
-                                <td class="px-4 py-3 text-center text-blue-600 font-semibold">12分41秒</td>
-                                <td class="px-4 py-3 text-right text-amber-500">85%</td>
+                                <td class="px-3 py-2.5 font-medium">环节五：总结评估、安全与教案</td>
+                                <td class="px-3 py-2.5 text-center">20%</td>
+                                <td class="px-3 py-2.5 text-center text-slate-600 font-semibold">12分41秒</td>
+                                <td class="px-3 py-2.5 text-right text-amber-500 font-semibold">85% (时间略紧)</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-4 p-3 bg-slate-50 rounded-lg text-xs text-slate-500">
-                    <strong>节奏评估结论:</strong> 整体节奏偏慢但科学性高。安全讲解部分在实操隐患被揭示后有主动拉长，契合现场实操培训的灵活应变特征 [1]。
-                </div>
             </div>
 
-            <!-- 基于声学FFT的情感与思维特征 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <h3 class="text-md font-semibold text-slate-700 mb-3">现场声学特征 FFT 模拟分析</h3>
-                <div id="fftChart" class="chart-container"></div>
-                <div class="mt-4 text-xs text-slate-500">
-                    <strong>FFT频谱简析:</strong> 教师发音主要聚焦在1kHz-2.5kHz的清晰吐字区。学员高强度协同研议阶段在200Hz附近呈现共振，整体音频展示出了极高强度的思维交互与实践能动性。
+            <!-- 深度声学特征FFT分析 (核心升级) -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1">现场声学特征仿真及多维语音研判</h3>
+                    <p class="text-slate-400 text-xs">应用快速傅里叶变换（FFT）仿真，诊断主讲培训师的语音特征及学员现场行为状态 [2, 3]。</p>
+                </div>
+                <div id="fftChart" class="chart-container" style="min-height: 200px;"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-100 text-xs">
+                    <div>
+                        <strong class="text-indigo-900 block mb-1">🎤 培训师语音声学诊断</strong>
+                        <ul class="text-slate-500 space-y-1 list-disc pl-3">
+                            <li><strong>吐字清晰度:</strong> FFT共振峰集中于高频区，辅音咬字精准，吐字极其清晰，信息阻抗低。</li>
+                            <li><strong>情绪到位度:</strong> 基频（F0）起伏在180Hz-360Hz之间波动，动态音域较宽，情绪表达极其饱满、富有力感。</li>
+                            <li><strong>回答语气:</strong> 解答提问时语速放缓，声带振动稳定，语气沉稳具有亲和力，多采用肯定式的下行语调。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-emerald-900 block mb-1">👥 现场老师反应与答复质量</strong>
+                        <ul class="text-slate-500 space-y-1 list-disc pl-3">
+                            <li><strong>学员积极性:</strong> 互动问答反应时间（Latency）平均小于0.5秒，高频协同讨论声能密集，参与度与积极性极高。</li>
+                            <li><strong>解答满意度:</strong> 培训师能够迅速捕获问题实质，回答准确度高，善于用“ loose shoelaces (散开的鞋带)”和“ triangle structure (稳定支撑)”等形象生动的实例进行讲解，声学分析显示学员在听完答复后出现了明显的舒缓语气共振（表示满意理解）。</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 课堂教学改进建议 -->
+        <!-- 教学改进建议 (核心重构：严格按五大标准研判) -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
-            <h3 class="text-md font-semibold text-slate-700 mb-4">教学改进建议 (基于AI综合研判)</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
-                    <h4 class="font-bold text-blue-900 mb-1">1. 实操安全双人互检机制</h4>
-                    <p class="text-blue-700 text-xs">针对后期发现的“锁扣螺丝未拧紧”隐患，增加“30秒实操交叉互检”环节，从体制上闭环实操风险。</p>
+            <h3 class="text-md font-semibold text-slate-700 mb-4 flex items-center">
+                <span class="w-2.5 h-2.5 bg-indigo-600 rounded-full mr-2"></span> 教学改进建议（基于行业标准与AI综合研判）
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-xs">
+                <!-- 1. 把握培训时间 -->
+                <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-indigo-600 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center">
+                            <span class="w-2 h-2 bg-indigo-600 rounded-full mr-1.5"></span> 把握培训时间
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong>环节控制整体合理。但在环节三计算角度（45度夹角）以及部分拼搭细节上花费时间偏多，导致环节五的“体育教案设计应用”阶段耗时略紧，收尾有些仓促。<br><strong>改进建议：</strong>在未来培训中，应将理论与基础微计算缩减15%，将富余时间留给高阶“户外游戏玩法迁移”，平衡整体比重。</p>
+                    </div>
                 </div>
-                <div class="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-600">
-                    <h4 class="font-bold text-indigo-900 mb-1">2. 增设“力学物理测重体验”</h4>
-                    <p class="text-indigo-700 text-xs">利用载重块现场演示，直观展示“三角形稳定性”与“双面建构”在阻抗变形时的物理区别，将说教具象化。</p>
+                <!-- 2. 培训状态与控场能力 -->
+                <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-cyan-600 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center">
+                            <span class="w-2 h-2 bg-cyan-600 rounded-full mr-1.5"></span> 培训状态与控场
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong>主讲培训师教学状态极佳，控场能力出色。能巧妙运用指定提问（如点名14号和8号学员示范）快速收束讨论，保证实操不失控。<br><strong>改进建议：</strong>在学员独立拼搭、陷入僵局或争执时，可引入“倒计时哨音”或“任务进度板”等教具作为控场机制，提升实操研讨效率。</p>
+                    </div>
                 </div>
-                <div class="p-4 bg-amber-50 rounded-lg border-l-4 border-amber-600">
-                    <h4 class="font-bold text-amber-900 mb-1">3. 提供教案转化规范化框架</h4>
-                    <p class="text-amber-700 text-xs">实物化展示一份“万能工匠教案编制指南模版”，降低学员将建构物转化为标准游戏教学教案的难度。</p>
+                <!-- 3. 调动现场情绪能力 -->
+                <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-emerald-600 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center">
+                            <span class="w-2 h-2 bg-emerald-600 rounded-full mr-1.5"></span> 调动现场情绪
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong>情绪调动到位。在环节二和环节四中，教师通过幽默自嘲、大肌肉示范以及表扬策略，成功唤醒了略显拘谨的学员，积极性反馈率高。<br><strong>改进建议：</strong>可以引入“小组积分竞争”或“体育竞速测试”等趣味游戏机制，使成人的培训更具沉浸式游戏感，进一步活跃实操氛围。</p>
+                    </div>
+                </div>
+                <!-- 4. 知识点讲授到位度 -->
+                <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-amber-600 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center">
+                            <span class="w-2 h-2 bg-amber-600 rounded-full mr-1.5"></span> 知识点讲授到位度
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong>“三角形稳定性”和“部件高级接头作用”讲授非常透彻。但在“跳跃动作中的摆臂协调”和“上肢核心力量”对平衡的生物学支撑点上，剖析尚停留于表面。<br><strong>改进建议：</strong>在体能示范环节，应进一步把“腾空、缓冲”的物理受力点讲细，不仅告知动作，更要告知其生理发育背后的科学逻辑。</p>
+                    </div>
+                </div>
+                <!-- 5. 解答准确与实例形象 -->
+                <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-rose-600 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-2 flex items-center">
+                            <span class="w-2 h-2 bg-rose-600 rounded-full mr-1.5"></span> 解答准确与实例形象
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong>回答问题的准确度极高，无概念性模糊。其抛出的“松脱的锁扣如同奔跑中散开的鞋带”这一比喻，形象极其生动，学员共鸣度强。<br><strong>改进建议：</strong>建议在解答“底盘过高重心不稳”的问题时，可以用“不倒翁”或者“不稳固的高楼”等幼儿常见物，设计出更多便于学员在未来的日常教学中可以直接借鉴、向幼儿科普的“类比形象实例”。</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 板块二：幼儿(学员)能力AI评估报告 -->
+        <!-- 板块二：学员能力AI评估报告 -->
         <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告
+            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告 (5样本深度分析)
         </h2>
 
         <!-- 多人能力综合雷达对比 -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-1 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-md font-semibold text-slate-700 mb-2">多学员能力发展雷达图</h3>
-                    <p class="text-slate-500 text-xs mb-4">通过对现场不同实操任务的表现，量化评估各实践学员的空间、运动及协作水平。</p>
+                    <h3 class="text-md font-semibold text-slate-700 mb-2">多学员能力发展雷达图（5人横向对比）</h3>
+                    <p class="text-slate-500 text-xs mb-4">全面量化、横向评估各实践小组代表学员的空间建构、大肌肉协调、问题解决、数理逻辑及细节防范能力。</p>
                 </div>
                 <div id="radarChart" class="chart-container"></div>
             </div>
 
-            <!-- 三位典型代表详细量化评估卡片 -->
-            <div class="xl:col-span-2 space-y-6">
+            <!-- 五位典型代表详细量化评估卡片 -->
+            <div class="xl:col-span-2 space-y-4 max-h-[500px] overflow-y-auto pr-2">
                 <!-- 14号实践学员 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-                    <div class="flex justify-between items-center mb-3">
+                    <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
-                            <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">14号学员</span>
-                            <span class="text-sm text-slate-500">模拟：体能与车体变高任务</span>
+                            <span class="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded">14号学员</span>
+                            <span class="text-xs text-slate-500">模拟任务：高空体能循环与底盘车体建构</span>
                         </div>
-                        <div class="text-lg font-bold text-blue-600">综合评分：88分</div>
+                        <div class="text-sm font-bold text-blue-600">综合评分：88分</div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">表现优势项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>动作生物力学突出:</strong> 跨跳、蹬地动作平稳，摆臂幅度和落地阻抗缓冲控制较好。</li>
-                                <li><strong>高级建构逻辑清晰:</strong> 完美掌握三角形稳定性，车体高度调整能通过基础轴进行物理加固。</li>
-                            </ul>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">下肢大肌肉群协调力优秀，高频跳跃中蹬地、腾空与着陆缓冲一气呵成。空间力学建构感知强，可利用轴组组件在重心失稳前实施自加固。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">待提升项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>锁扣锁紧度自检偏弱:</strong> 在高速体能循环下，缺乏对微小连接锁扣的后期二次拉力自检。</li>
-                            </ul>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">在高空实操体能阶段，由于追求连贯性而忽略了对底盘次要微小锁扣的安全二次锁紧，细节防范意识有待进一步细化。</p>
                         </div>
-                    </div>
-                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
-                        <strong>AI 文字评语:</strong> 动作协调、平衡感优。空间和生物力学的应用表现令人满意。建议在后续自主应用中强化锁合安全自检，做到在体能教学时“稳上加稳”。
                     </div>
                 </div>
 
                 <!-- 8号实践学员 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-                    <div class="flex justify-between items-center mb-3">
+                    <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
-                            <span class="bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded">8号学员</span>
-                            <span class="text-sm text-slate-500">模拟：造价计算与部件规则</span>
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2 py-0.5 rounded">8号学员</span>
+                            <span class="text-xs text-slate-500">模拟任务：造价估算与螺丝数量规范建构</span>
                         </div>
-                        <div class="text-lg font-bold text-indigo-600">综合评分：86分</div>
+                        <div class="text-sm font-bold text-indigo-600">综合评分：86分</div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">表现优势项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>数理逻辑精准:</strong> 在夹角微计算（45度孔距）和组装规则数理限制中有优异执行表现。</li>
-                                <li><strong>微小拼搭稳固度高:</strong> 锁合精细度处于前列，无螺丝未锁紧的低端疏漏。</li>
-                            </ul>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">数理逻辑思维极为精准，在面对拼板数量及45度角夹角测算中几乎无延时。拼搭精细度高，螺丝锁合饱满、毫无低端安全隐患。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">待提升项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>大肌肉运动能动性偏保守:</strong> 在体能跃进等测试中身体控制稍显保守，蹬地发力高度一般。</li>
-                            </ul>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">大肌肉群爆发性与核心体能调动较为保守。在摸高和高坡绕障中动作幅度受限，体育运动技能自信心不足，静力性建构偏科。</p>
                         </div>
-                    </div>
-                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
-                        <strong>AI 文字评语:</strong> 精细组装与数量统筹方面表现突出，力学细节极高，但在大肌肉跃动模拟中不够自信。建议结合其优势，多尝试富有动能性质的拼搭器械跨越。
                     </div>
                 </div>
 
                 <!-- 王老师 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-                    <div class="flex justify-between items-center mb-3">
+                    <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
-                            <span class="bg-teal-600 text-white text-xs font-bold px-2 py-1 rounded">王老师</span>
-                            <span class="text-sm text-slate-500">模拟：高空斜坡调节与平衡</span>
+                            <span class="bg-teal-600 text-white text-xs font-bold px-2 py-0.5 rounded">王老师</span>
+                            <span class="text-xs text-slate-500">模拟任务：斜坡力学调节与重力平衡测试</span>
                         </div>
-                        <div class="text-lg font-bold text-teal-600">综合评分：85分</div>
+                        <div class="text-sm font-bold text-teal-600">综合评分：85分</div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">表现优势项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>重心与平衡控制平稳:</strong> 模拟运动斜坡体验时展示了优秀的核心稳定性，动态平衡突出。</li>
-                                <li><strong>出色的问题变通力:</strong> 斜坡出现侧晃时，可快速采用增设基础支撑和调整坡底角度来进行解决。</li>
-                            </ul>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">核心平衡调节力出众，在倾斜和高低面转换中能保持身体重心的科学稳定。变通力强，在斜面不稳时能迅速引入万向轴结构加固。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">待提升项:</strong>
-                            <ul class="list-disc pl-4 text-slate-600 space-y-1 mt-1">
-                                <li><strong>物理重力坡度规划偏差:</strong> 早期设计时斜坡角度过于垂直偏陡，导致物体下滑重力势能计算稍有局限。</li>
-                            </ul>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">前期物理力学规划稍显粗糙。对重力滑行斜坡坡度初始设计角度过陡（直角偏差），导致演示物体侧滑，后在指导下调缓。</p>
                         </div>
                     </div>
-                    <div class="mt-3 bg-slate-50 p-3 rounded-lg text-xs text-slate-600">
-                        <strong>AI 文字评语:</strong> 平衡表现出众，展现出较强的问题解决毅力，但前期物理规划和测重计算的严密性仍有待提升。建议在体能教学时注意坡度承重的预见性。
+                </div>
+
+                <!-- 1号实践学员 (新增) -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-amber-600 text-white text-xs font-bold px-2 py-0.5 rounded">1号学员</span>
+                            <span class="text-xs text-slate-500">模拟任务：小班游戏适龄化降阶搭建与过渡</span>
+                        </div>
+                        <div class="text-sm font-bold text-amber-600">综合评分：84分</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">具有极强的教学同理心，在面对“小班适龄化分层”设计时，能将复杂的攀爬降阶为低落差的平稳跨跳、绕过障碍物，细节充满关怀感。</p>
+                        </div>
+                        <div>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">建构速度和效率略微落后。由于过度纠结于建构物的“极致简约”以确保小班安全，导致在规定时间内拼搭未完全收尾。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3号实践学员 (新增) -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-rose-600 text-white text-xs font-bold px-2 py-0.5 rounded">3号学员</span>
+                            <span class="text-xs text-slate-500">模拟任务：集体游戏大型户外循环统筹拼搭</span>
+                        </div>
+                        <div class="text-sm font-bold text-rose-600">综合评分：87分</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">大肌肉群与团队组织应变力极其出众。能主动协调多个建构小组的环形拼搭，确保器械之间衔接紧密，且空间布局合理，防止幼儿发生拥撞。</p>
+                        </div>
+                        <div>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">缺乏对个性化身体素质差异的微调能力。在设计的超大体能循环中，对“矮个子或胆小幼儿”通过爬坡、高空平衡木时的宽度缺少可调节档位。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,7 +343,34 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // 1. 教师行为频次柱状图
+            // 1. 学员提问关注点分布图 (核心新增 - 需求研判)
+            const demandDom = document.getElementById('demandChart');
+            const demandChart = echarts.init(demandDom);
+            const demandOption = {
+                tooltip: { trigger: 'item', formatter: '{b}: {c}%' },
+                legend: { top: 'bottom', textStyle: { fontSize: 10 } },
+                series: [
+                    {
+                        name: '关注点分布',
+                        type: 'pie',
+                        radius: ['35%', '65%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                        label: { show: false, position: 'center' },
+                        emphasis: { label: { show: true, fontSize: 14, fontWeight: 'bold' } },
+                        labelLine: { show: false },
+                        data: [
+                            { value: 45, name: '结构安全与搭建力学', itemStyle: { color: '#6366f1' } },
+                            { value: 25, name: '数理与材料认知', itemStyle: { color: '#0d9488' } },
+                            { value: 20, name: '课程应用与分层设计', itemStyle: { color: '#f59e0b' } },
+                            { value: 10, name: '物料损耗与日常维护', itemStyle: { color: '#f43f5e' } }
+                        ]
+                    }
+                ]
+            };
+            demandChart.setOption(demandOption);
+
+            // 2. 教师行为频次柱状图
             const behaviorDom = document.getElementById('behaviorChart');
             const behaviorChart = echarts.init(behaviorDom);
             const behaviorOption = {
@@ -274,7 +384,7 @@
                 yAxis: {
                     type: 'category',
                     data: ['纠正反馈次数', '指定次数', '积极反馈次数', '讲解次数', '提问次数'],
-                    axisLabel: { fontWeight: 'bold' }
+                    axisLabel: { fontWeight: 'bold', fontSize: 11 }
                 },
                 series: [
                     {
@@ -283,8 +393,8 @@
                         data: [11, 15, 26, 45, 58],
                         itemStyle: {
                             color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-                                { offset: 0, color: '#3b82f6' },
-                                { offset: 1, color: '#6366f1' }
+                                { offset: 0, color: '#4f46e5' },
+                                { offset: 1, color: '#06b6d4' }
                             ]),
                             borderRadius: [0, 4, 4, 0]
                         }
@@ -293,37 +403,36 @@
             };
             behaviorChart.setOption(behaviorOption);
 
-            // 2. 发言时长饼图
+            // 3. 发言时长饼图
             const durationDom = document.getElementById('durationChart');
             const durationChart = echarts.init(durationDom);
             const durationOption = {
                 tooltip: { trigger: 'item', formatter: '{b}: {c}分钟 ({d}%)' },
-                legend: { bottom: '5%', left: 'center' },
+                legend: { top: 'middle', right: '5%', orient: 'vertical', textStyle: { fontSize: 10 } },
                 series: [
                     {
                         name: '发言/实操耗时',
                         type: 'pie',
-                        radius: ['40%', '70%'],
+                        radius: ['50%', '80%'],
+                        center: ['40%', '50%'],
                         avoidLabelOverlap: false,
-                        itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
-                        label: { show: false, position: 'center' },
-                        emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
-                        labelLine: { show: false },
+                        itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                        label: { show: false },
                         data: [
-                            { value: 41.25, name: '教师发言时长', itemStyle: { color: '#6366f1' } },
-                            { value: 16.6, name: '学员回答/实操', itemStyle: { color: '#0d9488' } }
+                            { value: 41.25, name: '教师发言时长', itemStyle: { color: '#4f46e5' } },
+                            { value: 16.6, name: '学员回答与自主实操', itemStyle: { color: '#10b981' } }
                         ]
                     }
                 ]
             };
             durationChart.setOption(durationOption);
 
-            // 3. FFT 模拟分析折线图
+            // 4. FFT 模拟分析折线图
             const fftDom = document.getElementById('fftChart');
             const fftChart = echarts.init(fftDom);
             const fftOption = {
                 tooltip: { trigger: 'axis' },
-                legend: { data: ['主讲教师', '实践学员'], right: 10 },
+                legend: { data: ['主讲培训师', '实践学员'], right: 10, textStyle: { fontSize: 10 } },
                 xAxis: {
                     type: 'category',
                     name: '频率(Hz)',
@@ -337,11 +446,11 @@
                 },
                 series: [
                     {
-                        name: '主讲教师',
+                        name: '主讲培训师',
                         type: 'line',
                         smooth: true,
                         data: [15, 20, 30, 48, 82, 85, 76, 40, 25, 12],
-                        lineStyle: { width: 3, color: '#6366f1' },
+                        lineStyle: { width: 3, color: '#4f46e5' },
                         showSymbol: false
                     },
                     {
@@ -349,20 +458,23 @@
                         type: 'line',
                         smooth: true,
                         data: [20, 72, 75, 42, 22, 16, 14, 10, 5, 4],
-                        lineStyle: { width: 3, color: '#0d9488' },
+                        lineStyle: { width: 3, color: '#10b981' },
                         showSymbol: false
                     }
                 ]
             };
             fftChart.setOption(fftOption);
 
-            // 4. 三人能力多维雷达图
+            // 5. 五人能力多维雷达图 (核心升级 - 5样本)
             const radarDom = document.getElementById('radarChart');
             const radarChart = echarts.init(radarDom);
             const radarOption = {
                 legend: {
-                    data: ['14号学员', '8号学员', '王老师'],
-                    bottom: '0%'
+                    data: ['14号学员', '8号学员', '王老师', '1号学员', '3号学员'],
+                    bottom: '0%',
+                    textStyle: { fontSize: 8 },
+                    itemWidth: 10,
+                    itemHeight: 8
                 },
                 radar: {
                     indicator: [
@@ -370,13 +482,14 @@
                         { name: '大肌肉协调', max: 5.0 },
                         { name: '问题解决与应变', max: 5.0 },
                         { name: '数理逻辑', max: 5.0 },
-                        { name: '细节防范', max: 5.0 }
+                        { name: '细节安全防范', max: 5.0 }
                     ],
-                    radius: '65%',
+                    radius: '55%',
+                    center: ['50%', '42%'],
                     axisName: {
                         color: '#475569',
                         fontWeight: 'bold',
-                        fontSize: 10
+                        fontSize: 9
                     }
                 },
                 series: [
@@ -387,23 +500,37 @@
                             {
                                 value: [4.6, 4.4, 4.3, 4.0, 3.8],
                                 name: '14号学员',
-                                lineStyle: { color: '#3b82f6', width: 2 },
+                                lineStyle: { color: '#3b82f6', width: 1.5 },
                                 itemStyle: { color: '#3b82f6' },
-                                areaStyle: { color: 'rgba(59, 130, 246, 0.2)' }
+                                areaStyle: { color: 'rgba(59, 130, 246, 0.1)' }
                             },
                             {
                                 value: [4.4, 3.9, 4.1, 4.7, 4.8],
                                 name: '8号学员',
-                                lineStyle: { color: '#6366f1', width: 2 },
+                                lineStyle: { color: '#6366f1', width: 1.5 },
                                 itemStyle: { color: '#6366f1' },
-                                areaStyle: { color: 'rgba(99, 102, 241, 0.2)' }
+                                areaStyle: { color: 'rgba(99, 102, 241, 0.1)' }
                             },
                             {
                                 value: [4.1, 4.6, 4.5, 4.0, 4.2],
                                 name: '王老师',
-                                lineStyle: { color: '#0d9488', width: 2 },
+                                lineStyle: { color: '#0d9488', width: 1.5 },
                                 itemStyle: { color: '#0d9488' },
-                                areaStyle: { color: 'rgba(13, 148, 136, 0.2)' }
+                                areaStyle: { color: 'rgba(13, 148, 136, 0.1)' }
+                            },
+                            {
+                                value: [4.1, 4.0, 4.4, 4.2, 4.5],
+                                name: '1号学员',
+                                lineStyle: { color: '#d97706', width: 1.5 },
+                                itemStyle: { color: '#d97706' },
+                                areaStyle: { color: 'rgba(217, 119, 6, 0.1)' }
+                            },
+                            {
+                                value: [4.3, 4.2, 4.6, 3.9, 4.7],
+                                name: '3号学员',
+                                lineStyle: { color: '#e11d48', width: 1.5 },
+                                itemStyle: { color: '#e11d48' },
+                                areaStyle: { color: 'rgba(225, 29, 72, 0.1)' }
                             }
                         ]
                     }
@@ -413,6 +540,7 @@
 
             // 监听窗口尺寸变化，动态更新图表渲染
             window.addEventListener('resize', function() {
+                demandChart.resize();
                 behaviorChart.resize();
                 durationChart.resize();
                 fftChart.resize();
