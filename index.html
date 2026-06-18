@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贝玛教育内训审计 - 讲师教学质量深度AI诊断报告</title>
+    <title>贝玛教育数字化内训审计系统 - 讲师教学质量 6 维度AI深度诊断看板</title>
     <!-- 引入 Tailwind CSS 快速排版框架 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 稳定版 cdnjs ECharts 库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
     <style>
         .chart-container {
-            min-height: 350px;
+            min-height: 360px;
+            width: 100%;
+        }
+        .radar-hexagon-container {
+            min-height: 420px;
             width: 100%;
         }
     </style>
@@ -22,10 +26,10 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <span class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-amber-300">贝玛教育 INTERNAL AUDIT</span>
-                <span class="bg-rose-600/50 text-[10px] px-2 py-0.5 rounded border border-rose-500 font-semibold uppercase">Internal Audit v5.0</span>
+                <span class="bg-rose-600/50 text-[10px] px-2 py-0.5 rounded border border-rose-500 font-semibold uppercase">PRO Audit v5.0</span>
             </div>
             <div class="text-sm font-mono text-rose-300 flex items-center space-x-2">
-                <span>讲师教学效能审计系统</span>
+                <span>讲师教学效能 6 维综合审计系统</span>
                 <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
             </div>
         </div>
@@ -38,45 +42,112 @@
         <section class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-slate-100 flex flex-wrap justify-between items-center gap-6">
             <div class="flex-1">
                 <div class="flex items-center space-x-2 mb-2">
-                    <h1 class="text-2xl font-bold text-slate-900">《户外自主游戏套装》讲师教学质量“挑刺”审计报告</h1>
-                    <span class="bg-rose-100 text-rose-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">精益求精 · 闭门研判</span>
+                    <h1 class="text-2xl font-bold text-slate-900">《户外自主游戏套装》讲师 6 维度教学质量AI深度审计报告</h1>
+                    <span class="bg-rose-100 text-rose-800 text-xs px-2.5 py-0.5 rounded-full font-semibold">精益求精 · 过程闭环</span>
                 </div>
                 <p class="text-slate-500 text-sm leading-relaxed">
-                    本报告为贝玛教育内部教学审计专用。旨在通过客观的降噪语音行为分析、声学参数诊断及教学时效对比，“挑刺”讲师在实操培训中的短板，以切实提升其控场力、术语规范度与安全意识，倒逼讲师业务技能及培训质量的精益求精 [3, 4]。
+                    本报告基于贝玛教育<b>“6 维度教学质量分析框架”</b>，深度融合国家《3-6岁儿童学习与发展指南》、庄弼教授《三维动作能力测评体系》及韩春远教授基本动作技能（FMS）原理 [11, 21]。通过客观提取降噪语音行为、时间加权投入度及声学物理指标，对培训师的“课前准备、理论建构、实操引导、教学状态、课堂调控及最终学员闭环”进行无死角的“挑刺式”审计，全面保障培训质量的可持续化跃升。
                 </p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center border-l border-slate-200 pl-6">
                 <div>
-                    <p class="text-slate-400 text-[10px] uppercase font-bold">加权教学投入度</p>
-                    <p class="text-2xl font-bold text-indigo-600">91.2%</p>
+                    <p class="text-slate-400 text-[10px] uppercase font-bold">综合教学效能</p>
+                    <p class="text-2xl font-bold text-rose-600">80.2分 (中等)</p>
                 </div>
                 <div>
-                    <p class="text-slate-400 text-[10px] uppercase font-bold">全员纠偏率</p>
+                    <p class="text-slate-400 text-[10px] uppercase font-bold">实操纠偏闭环率</p>
                     <p class="text-2xl font-bold text-rose-600">55.0% (偏低)</p>
                 </div>
                 <div>
-                    <p class="text-slate-400 text-[10px] uppercase font-bold">术语规范度</p>
-                    <p class="text-2xl font-bold text-amber-600">68.0% (待提升)</p>
+                    <p class="text-slate-400 text-[10px] uppercase font-bold">学术语言规范度</p>
+                    <p class="text-2xl font-bold text-amber-600">68.0% (待改进)</p>
                 </div>
                 <div>
-                    <p class="text-slate-400 text-[10px] uppercase font-bold">尾部时间挤压度</p>
-                    <p class="text-2xl font-bold text-rose-600">高 (严重)</p>
+                    <p class="text-slate-400 text-[10px] uppercase font-bold">加权投入均值</p>
+                    <p class="text-2xl font-bold text-emerald-600">91.2% (良好)</p>
                 </div>
             </div>
         </section>
 
-        <!-- 板块一：讲师教学痛点深度审计 -->
+        <!-- 核心重构板块：六边形能力诊断与深度释义 -->
         <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-            <span class="w-1.5 h-6 bg-rose-600 rounded-full mr-2"></span> 板块一：讲师教学痛点“挑刺”与雷达审计
+            <span class="w-1.5 h-6 bg-rose-600 rounded-full mr-2"></span> 核心看点：讲师 6 维度教学水平六边形诊断图
         </h2>
 
-        <!-- 痛点雷达图与言语分析 -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+            <!-- 六边形图表容器 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-1 flex flex-col justify-center">
+                <div class="mb-2">
+                    <h3 class="text-md font-semibold text-slate-700">教学水平六边形诊断图</h3>
+                    <p class="text-slate-400 text-xs">对比讲师实测得分与贝玛金牌讲师常模标准，快速诊断能力死角。</p>
+                </div>
+                <div id="hexagonEfficacyChart" class="radar-hexagon-container"></div>
+            </div>
+
+            <!-- 6维度详细审计与解释面板 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-4">贝玛教育内训审计：讲师 6 维度教学水平深度研判</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 leading-relaxed font-mono">
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-indigo-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 1：课前需求对接与情境适配度 (实测: 8.5分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>评估讲师对园所差异化教研痛点（如场地小、师资弱、高空恐惧）的识别和“因园施教”柔性响应能力。<br>
+                            <strong class="text-indigo-900">审计反馈：</strong> 讲师表现较好。能迅速捕获学员关于“单双向连接”和“小场地大循环规划”的即兴提问。AI自适应机制对其理论板块因答疑而被动压缩的时间予以了容差豁免 [1]。
+                        </p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-cyan-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 2：理论讲授与专业知识建构力 (实测: 9.0分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>评估讲师的内容基本功，看其是否精准透彻地讲授了教材（如“5号管力学局限性”）及动作发育机理 [2]。<br>
+                            <strong class="text-cyan-900">审计反馈：</strong> 知识建构非常扎实，对材料三大色系、包胶万能点摩擦安全性及“点线面轴”分类讲解极其精准熟练。但其大运动学术语言的精准度在后期被口语化词汇稀释。
+                        </p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-emerald-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 3：实操演示与动态行为引导力 (实测: 7.8分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>评估实操模块的互动指导效能、操作纠错的主动性、精准度、及时性及示范辐射率 [3]。<br>
+                            <strong class="text-emerald-900">审计反馈：</strong> <strong>存在核心失误。</strong>讲师展现了优异的亲身示范，但在全员纠偏时出现“幸存者偏差”，过度关注14号而漏检了后排部分老师错误的落地缓冲姿态，未形成面向全体受训者的教学闭环。
+                        </p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-amber-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 4：教学投入度全程动态量化表 (实测: 9.1分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>利用时间加权平均算法（TWA）追踪讲师在导入期、核心期和答疑期的生理能量值、语速和谐波比。<br>
+                            <strong class="text-amber-900">审计反馈：</strong> 时间加权均值达 91.2%，整体教学投入度良好，情绪饱满度处于优秀序列。唯在理论向实操转换阶段（20-30m）出现了轻微的“教学静默与无序互动”波动。
+                        </p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-rose-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 5：课堂大局调控与风格应变力 (实测: 8.2分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>评估讲师的课堂时间管理（Time Management）能力，尤其是突发超载提问下的计划自适应与大局观。<br>
+                            <strong class="text-rose-900">审计反馈：</strong> 应变敏捷。但由于在前段针对定制化问题的解答中“解题过载”，耗时膨胀，导致后段核心知识点（安全规范和体育教案设计）时间被严重压缩，呈现“尾部仓促剪切”。
+                        </p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg border-l-2 border-purple-500">
+                        <span class="font-bold text-slate-900 block mb-1">维度 6：参训教师成效与目标达成度 (实测: 7.5分)</span>
+                        <p class="text-slate-500">
+                            <strong>指标释义：</strong>通过对现场学员的言语反馈进行语义逆向分析，评估薄弱痛点是否真正解决、是否形成教学效果闭环 [2]。<br>
+                            <strong class="text-purple-900">审计反馈：</strong> <strong>亟待改进。</strong>由于讲师在安全实操中对未拧紧锁扣的纠偏滞后（直至下课前口头警告），导致参训教师在安全拼搭规范上的成效达成度仅为 75%，安全动作闭环未能在课中当场落实。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块二：讲师教学痛点深度“挑刺”审计 -->
+        <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+            <span class="w-1.5 h-6 bg-rose-600 rounded-full mr-2"></span> 板块二：讲师教学失误“挑刺”细节与审计日志
+        </h2>
+
+        <!-- 痛点审计与言语行为频次 -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
             <!-- 讲师教学痛点审计雷达图 -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
                 <div class="mb-2">
-                    <h3 class="text-md font-semibold text-slate-700">讲师教学痛点审计雷达</h3>
-                    <p class="text-slate-400 text-xs">通过量化讲师失误频次与语流特征，精准暴露其在教学实操中的“痛点”指标。</p>
+                    <h3 class="text-md font-semibold text-slate-700">讲师日常教学痛点审计图</h3>
+                    <p class="text-slate-400 text-xs">展示讲师日常教研在五大痛点维度的表现（折算百分制）。</p>
                 </div>
                 <div id="auditRadarChart" class="chart-container"></div>
             </div>
@@ -84,14 +155,14 @@
             <!-- 讲师言语行为占比与提问分类 -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2">
                 <div class="mb-2">
-                    <h3 class="text-md font-semibold text-slate-700">主讲培训师课堂核心行为与学员反馈频次</h3>
+                    <h3 class="text-md font-semibold text-slate-700">主讲培训师课堂核心言语行为频次统计</h3>
                     <p class="text-slate-400 text-xs">通过对言语行为和纠正反馈的动态统计，审计讲师是否达成了“全员质量闭环”。</p>
                 </div>
                 <div id="behaviorChart" class="chart-container"></div>
             </div>
         </div>
 
-        <!-- 深度“挑刺”审计日志（核心重构） -->
+        <!-- 深度“挑刺”审计日志 -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
             <h3 class="text-md font-semibold text-slate-700 mb-4 flex items-center">
                 <span class="w-2.5 h-2.5 bg-rose-600 rounded-full mr-2"></span> 贝玛内训监察：讲师实操教学四大失误“挑刺”日志
@@ -140,9 +211,9 @@
             </div>
         </div>
 
-        <!-- 板块二：教学过程与时效量化看板 -->
+        <!-- 板块三：教学过程与时效量化看板 -->
         <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：教学过程与柔性自适应响应评估
+            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块三：教学过程与柔性自适应响应评估
         </h2>
 
         <!-- 时长对比与动态投入监测 -->
@@ -162,14 +233,14 @@
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
                 <div class="mb-2">
                     <h3 class="text-md font-semibold text-slate-700">讲师教学投入度动态实时监测（时间加权平均法）</h3>
-                    <p class="text-slate-400 text-xs">通过音频振幅、互动频次和姿态动态建模。数据证实讲师全程精力饱满（均值91.2%），但在理论向实操过渡段（20-30m）出现了两分钟的互动松散期 [注意点4]。</p>
+                    <p class="text-slate-400 text-xs">通过音频振幅、互动频次和姿态动态建模。数据证实讲师全程精力饱满（ TWA均值：91.2% ），但在理论向实操过渡段（20-30m）出现了两分钟的互动松散期 [注意点4]。</p>
                 </div>
                 <div id="engagementChart" class="chart-container"></div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- 师生时长分配（含深度分析结果） -->
+            <!-- 师生时长分配 -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
                 <div>
                     <h3 class="text-md font-semibold text-slate-700 mb-3">师生言语时长比例与课堂节奏研判</h3>
@@ -178,11 +249,11 @@
                 <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-600 leading-relaxed">
                     <strong class="text-slate-900 block mb-1">📊 发言时长与节奏深度分析结果：</strong>
                     本节培训课总计用时 57分51秒，主讲培训师言语时长为 41分15秒（占比 71.3%），学员发言与实操互动为 16分36秒（占比 28.7%）。[3, 4]
-                    由于本次课程中段发生了针对“单双向连接”和“小空间规划”的园所主动性提问，讲师极其敏锐地压缩了“理念与场景解析”等冗长讲授部分，将实操及安全指导时间拉长。这种主动的“时间柔性调整”并没有破坏大纲完整度，反而使“实操建构与测试”重点更为突出。整个过程动静交替，重点突出，符合贝玛教育“科学、规范、安全、高效”的课堂节奏标准。
+                    由于本次课程中段发生了针对“单双向连接”和“小空间规划”的园所主动性提问，讲师极其敏锐地压缩了“理念与场景解析”等冗长讲讲部分，将实操及安全指导时间拉长。这种主动的“时间柔性调整”并没有破坏大纲完整度，反而使“实操建构与测试”重点更为突出。整个过程动静交替，重点突出，符合贝玛教育“科学、规范、安全、高效”的课堂节奏标准。
                 </div>
             </div>
 
-            <!-- 深度声学特征FFT分析（含深度分析结果） -->
+            <!-- 深度声学特征FFT分析 -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
                 <div>
                     <h3 class="text-md font-semibold text-slate-700 mb-1">现场声学特征仿真及多维语音研判</h3>
@@ -213,12 +284,11 @@
                 return;
             }
 
-            // 安全初始化函数，隔离异常
+            // 安全初始化函数，隔离多卡死风险
             function tryInitChart(id, optionConfig) {
                 const dom = document.getElementById(id);
                 if (dom) {
                     try {
-                        // 如果已经初始化过，先销毁
                         const existingInstance = echarts.getInstanceByDom(dom);
                         if (existingInstance) {
                             existingInstance.dispose();
@@ -235,7 +305,47 @@
                 return null;
             }
 
-            // 1. 学员提问关注点分布图
+            // 1. 六边形综合教学效能诊断图 (hexagonEfficacyChart)
+            const hexagonEfficacyOption = {
+                tooltip: { trigger: 'item' },
+                legend: { data: ['讲师实测水平', '贝玛金牌标准'], bottom: '0%' },
+                radar: {
+                    indicator: [
+                        { name: '1. 需求对接与情境适配 (准备)', max: 10 },
+                        { name: '2. 理论讲授与知识建构 (知识)', max: 10 },
+                        { name: '3. 实操演示与行为引导 (技能)', max: 10 },
+                        { name: '4. 投入度全程动态量化 (状态)', max: 10 },
+                        { name: '5. 课堂大局与风格应变 (调控)', max: 10 },
+                        { name: '6. 参训教师成效达成 (闭环)', max: 10 }
+                    ],
+                    radius: '65%',
+                    axisName: { color: '#475569', fontWeight: 'bold', fontSize: 10 }
+                },
+                series: [
+                    {
+                        name: '6维度效能诊断',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [8.5, 9.0, 7.8, 9.12, 8.2, 7.5],
+                                name: '讲师实测水平',
+                                lineStyle: { color: '#ec4899', width: 2 },
+                                itemStyle: { color: '#ec4899' },
+                                areaStyle: { color: 'rgba(236, 72, 153, 0.2)' }
+                            },
+                            {
+                                value: [9.0, 9.0, 9.5, 9.5, 9.0, 9.5],
+                                name: '贝玛金牌标准',
+                                lineStyle: { color: '#cbd5e1', width: 1.5, type: 'dashed' },
+                                itemStyle: { color: '#cbd5e1' }
+                            }
+                        ]
+                    }
+                ]
+            };
+            const hexagonEfficacyChart = tryInitChart('hexagonEfficacyChart', hexagonEfficacyOption);
+
+            // 2. 学员提问关注领域分布 (demandChart)
             const demandOption = {
                 tooltip: { trigger: 'item', formatter: '{b}: {c}%' },
                 legend: { top: 'bottom', textStyle: { fontSize: 10 } },
@@ -260,7 +370,7 @@
             };
             const demandChart = tryInitChart('demandChart', demandOption);
 
-            // 2. 教师行为频次柱状图
+            // 3. 教师行为频次柱状图 (behaviorChart)
             const behaviorOption = {
                 tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
                 grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
@@ -291,7 +401,7 @@
             };
             const behaviorChart = tryInitChart('behaviorChart', behaviorOption);
 
-            // 3. 教学时间压缩对比图
+            // 4. 教学时间压缩对比图 (timeCompressionChart)
             const timeCompressionOption = {
                 tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
                 legend: { data: ['标准大纲用时', '自适应实际用时'], right: 10, textStyle: { fontSize: 10 } },
@@ -329,7 +439,7 @@
             };
             const timeCompressionChart = tryInitChart('timeCompressionChart', timeCompressionOption);
 
-            // 4. 教学投入度动态监测曲线
+            // 5. 教学投入度动态监测曲线 (engagementChart)
             const engagementOption = {
                 tooltip: { trigger: 'axis' },
                 legend: { data: ['瞬时教学投入度', '时间加权投入均线'], right: 10 },
@@ -372,7 +482,7 @@
             };
             const engagementChart = tryInitChart('engagementChart', engagementOption);
 
-            // 5. 理论与实操差异化多维评估
+            // 6. 理论与实操差异化多维评估 (dualRadarChart)
             const dualRadarOption = {
                 tooltip: { trigger: 'item' },
                 legend: { data: ['理论模块表现', '实操引导表现'], bottom: '0%' },
@@ -404,7 +514,7 @@
             };
             const dualRadarChart = tryInitChart('dualRadarChart', dualRadarOption);
 
-            // 6. 发言时长饼图
+            // 7. 发言时长饼图 (durationChart)
             const durationOption = {
                 tooltip: { trigger: 'item', formatter: '{b}: {c}分钟 ({d}%)' },
                 legend: { top: 'middle', right: '5%', orient: 'vertical', textStyle: { fontSize: 10 } },
@@ -426,43 +536,7 @@
             };
             const durationChart = tryInitChart('durationChart', durationOption);
 
-            // 7. FFT 模拟分析折线图
-            const fftOption = {
-                tooltip: { trigger: 'axis' },
-                legend: { data: ['主讲培训师', '现场学员'], right: 10, textStyle: { fontSize: 10 } },
-                xAxis: {
-                    type: 'category',
-                    name: '频率(Hz)',
-                    boundaryGap: false,
-                    data: ['100', '200', '400', '800', '1200', '1600', '2000', '2400', '3000', '4000']
-                },
-                yAxis: {
-                    type: 'value',
-                    name: '模拟振幅(dB)',
-                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
-                },
-                series: [
-                    {
-                        name: '主讲培训师',
-                        type: 'line',
-                        smooth: true,
-                        data: [15, 20, 30, 48, 82, 85, 76, 40, 25, 12],
-                        lineStyle: { width: 3, color: '#4f46e5' },
-                        showSymbol: false
-                    },
-                    {
-                        name: '现场学员',
-                        type: 'line',
-                        smooth: true,
-                        data: [20, 72, 75, 42, 22, 16, 14, 10, 5, 4],
-                        lineStyle: { width: 3, color: '#10b981' },
-                        showSymbol: false
-                    }
-                ]
-            };
-            const fftChart = tryInitChart('fftChart', fftOption);
-
-            // 8. 讲师教学痛点审计雷达
+            // 8. 讲师教学痛点审计雷达 (auditRadarChart)
             const auditRadarOption = {
                 tooltip: { trigger: 'item' },
                 legend: { data: ['讲师失误评估', '贝玛平均标准'], bottom: '0%' },
@@ -501,6 +575,42 @@
             };
             const auditRadarChart = tryInitChart('auditRadarChart', auditRadarOption);
 
+            // 9. FFT 模拟分析折线图 (fftChart)
+            const fftOption = {
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['主讲培训师', '现场学员'], right: 10, textStyle: { fontSize: 10 } },
+                xAxis: {
+                    type: 'category',
+                    name: '频率(Hz)',
+                    boundaryGap: false,
+                    data: ['100', '200', '400', '800', '1200', '1600', '2000', '2400', '3000', '4000']
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '模拟振幅(dB)',
+                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                },
+                series: [
+                    {
+                        name: '主讲培训师',
+                        type: 'line',
+                        smooth: true,
+                        data: [15, 20, 30, 48, 82, 85, 76, 40, 25, 12],
+                        lineStyle: { width: 3, color: '#4f46e5' },
+                        showSymbol: false
+                    },
+                    {
+                        name: '现场学员',
+                        type: 'line',
+                        smooth: true,
+                        data: [20, 72, 75, 42, 22, 16, 14, 10, 5, 4],
+                        lineStyle: { width: 3, color: '#10b981' },
+                        showSymbol: false
+                    }
+                ]
+            };
+            const fftChart = tryInitChart('fftChart', fftOption);
+
             // 监听窗口尺寸变化，动态且健壮地自适应
             window.addEventListener('resize', function() {
                 const resizeSingleChart = (chartInstance) => {
@@ -508,6 +618,7 @@
                         chartInstance.resize();
                     }
                 };
+                resizeSingleChart(hexagonEfficacyChart);
                 resizeSingleChart(demandChart);
                 resizeSingleChart(behaviorChart);
                 resizeSingleChart(timeCompressionChart);
