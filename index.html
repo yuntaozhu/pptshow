@@ -11,6 +11,7 @@
     <style>
         .chart-container {
             min-height: 350px;
+            width: 100%;
         }
     </style>
 </head>
@@ -130,7 +131,46 @@
             </div>
         </div>
 
-        <!-- 教学改进建议 (严格按五大标准研判) -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+            <!-- 提问关注点分布 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <div class="mb-2">
+                    <h3 class="text-md font-semibold text-slate-700">学员提问关注点分布（基于话语分析）</h3>
+                    <p class="text-slate-400 text-xs">通过分析现场老师提问话语，折射出该园所的实际教学薄弱点与核心关注方向。</p>
+                </div>
+                <div id="demandChart" class="chart-container"></div>
+            </div>
+
+            <!-- 教师行为频次 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-2">
+                <div class="mb-2">
+                    <h3 class="text-md font-semibold text-slate-700">主讲培训师课堂核心言语行为频次统计</h3>
+                    <p class="text-slate-400 text-xs">统计提问、讲解、积极/纠正反馈的次数，量化培训师的指导行为结构。</p>
+                </div>
+                <div id="behaviorChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- 师生时长分配 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-md font-semibold text-slate-700">师生时长分配与课堂节奏</h3>
+                </div>
+                <div id="durationChart" class="chart-container" style="min-height: 220px;"></div>
+            </div>
+
+            <!-- 深度声学特征FFT分析 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1">现场声学特征仿真及多维语音研判</h3>
+                    <p class="text-slate-400 text-xs">应用快速傅里叶变换（FFT）仿真，诊断主讲培训师的语音特征及现场行为状态。</p>
+                </div>
+                <div id="fftChart" class="chart-container" style="min-height: 200px;"></div>
+            </div>
+        </div>
+
+        <!-- 教学改进建议 -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8">
             <h3 class="text-md font-semibold text-slate-700 mb-4 flex items-center">
                 <span class="w-2.5 h-2.5 bg-indigo-600 rounded-full mr-2"></span> 教学改进建议（基于行业标准与AI综合研判）
@@ -142,25 +182,25 @@
                         <h4 class="font-bold text-slate-900 mb-2 flex items-center">
                             <span class="w-2 h-2 bg-indigo-600 rounded-full mr-1.5"></span> 把握培训时间
                         </h4>
-                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 整体流程推进平稳。然而，在环节三的圆盘角度测算（45度角）细节上互动略长，导致在第五环节“教案设计与适龄化课程设计落地”部分时间略紧，收尾教案转换指导稍显局限。<br><strong>改进建议：</strong> 建议在未来的培训中，将理论与图形计算的时间压缩15%，为后续“自主体育游戏玩法和幼师体育教案实操编写”部分留出至少15分钟，使“拼搭向教学”的转化过渡更加舒缓饱满。</p>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 环节控制整体合理。但在环节三计算角度（45度夹角）以及部分拼搭细节上花费时间偏多，导致环节五的“体育教案设计应用”阶段耗时略紧，收尾有些仓促。<br><strong>改进建议：</strong> 在未来培训中，应将理论与基础微计算缩减15%，将富余时间留给高阶“户外游戏玩法迁移”，平衡整体比重。</p>
                     </div>
                 </div>
                 <!-- 2. 培训状态与控场能力 -->
                 <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-cyan-600 flex flex-col justify-between">
                     <div>
                         <h4 class="font-bold text-slate-900 mb-2 flex items-center">
-                            <span class="w-2 h-2 bg-cyan-600 rounded-full mr-1.5"></span> 培训状态与控场力
+                            <span class="w-2 h-2 bg-cyan-600 rounded-full mr-1.5"></span> 培训状态与控场
                         </h4>
-                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 培训师精神状态饱满，专业度较高。控场能力极其优秀，在学员分组拼搭可能面临松散或偏离主题时，能用指定提问、哨声指令、点名特定老师（14号、8号等）快速拉回正轨。<br><strong>改进建议：</strong> 实操中部分小组因争抢器材或对稳定结构意见分歧出现轻微无序，可设计“建构项目经理制”或“限定2分钟构思时间”等辅助机制，使协作控场更具机制保障。</p>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 主讲培训师教学状态极佳，控场能力出色。能巧妙运用指定提问（如点名14号和8号学员示范）快速收束讨论，保证实操不失控。<br><strong>改进建议：</strong> 在学员独立拼搭、陷入僵局或争执时，可引入“倒计时哨音”或“任务进度板”等教具作为控场机制，提升实操研讨效率。</p>
                     </div>
                 </div>
                 <!-- 3. 调动现场情绪能力 -->
                 <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-emerald-600 flex flex-col justify-between">
                     <div>
                         <h4 class="font-bold text-slate-900 mb-2 flex items-center">
-                            <span class="w-2 h-2 bg-emerald-600 rounded-full mr-1.5"></span> 调动现场情绪能力
+                            <span class="w-2 h-2 bg-emerald-600 rounded-full mr-1.5"></span> 调动现场情绪
                         </h4>
-                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 展现了优秀的共情与激励技巧。通过大动作示范（如跳跃摆臂）、幽默解答，打破了成人受训者较拘谨的形态。学员高声附和、笑声与惊叹声共鸣度高，情绪反馈正面。<br><strong>改进建议：</strong> 在纯手工建构的静力性环节（如螺丝锁定和框架调整），由于技术重复性高，课堂情绪易走低，可引入“体育接力赛背景音乐”或“沙标限时挑战”，增强操作的动能趣味性。</p>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 情绪调动到位。在环节二和环节四中，教师通过幽默自嘲、大肌肉示范以及表扬策略，成功唤醒了略显拘谨的学员，积极性反馈率高。<br><strong>改进建议：</strong> 可以引入“小组积分竞争”或“体育竞速测试”等游戏机制，提升实操氛围。</p>
                     </div>
                 </div>
                 <!-- 4. 知识点讲授到位度 -->
@@ -169,32 +209,32 @@
                         <h4 class="font-bold text-slate-900 mb-2 flex items-center">
                             <span class="w-2 h-2 bg-amber-600 rounded-full mr-1.5"></span> 知识点讲授到位度
                         </h4>
-                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 力学要点（如三角形稳定性、双面拼搭原理）讲授极其到位。但在“跳跃动作的大肌肉协调”和“上肢核心区平衡感”对解剖发育背后的重要承重支撑点上，剖析尚处于感性层面。<br><strong>改进建议：</strong> 建议在解释运动原则时，引用基本动作技能（FMS）原理或“三维动作”发展敏感期特点，把“动作质量”如何转化为“骨密度和肌肉力量”的后台科学机理讲透，提高培训的学术深度。</p>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> “三角形稳定性”和“部件高级接头作用”讲授非常透彻。但在“跳跃动作的大肌肉协调”和“上肢核心力量”对平衡的生物学支撑点上，剖析尚停留于表面。<br><strong>改进建议：</strong> 在体能示范环节，应进一步把“腾空、缓冲”的物理受力点讲细，科学化输出。</p>
                     </div>
                 </div>
-                <!-- 5. 解答准确度与实例形象度 -->
+                <!-- 5. 解答准确与实例形象 -->
                 <div class="p-4 bg-slate-50 rounded-lg border-t-4 border-rose-600 flex flex-col justify-between">
                     <div>
                         <h4 class="font-bold text-slate-900 mb-2 flex items-center">
-                            <span class="w-2 h-2 bg-rose-600 rounded-full mr-1.5"></span> 回答准确与实例形象
+                            <span class="w-2 h-2 bg-rose-600 rounded-full mr-1.5"></span> 解答准确与实例形象
                         </h4>
-                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 回答极为精准，科学性无可挑剔。其使用的“不拧紧的锁扣犹如幼儿跑步时散开的鞋带”类比，形象鲜明。然而，在解答“底盘过高重心不稳”问题时，物理推导略微学术化。<br><strong>改进建议：</strong> 建议对底盘高度与重心问题，多采用“不倒翁原理”或“高低双层巴士”等幼儿熟悉的卡通形象来解释，协助幼师们积累一套可直接拷贝到未来课堂的、充满重力的科学科普语言体系。</p>
+                        <p class="text-slate-500 leading-relaxed"><strong>评估结论：</strong> 回答问题的准确度极高，无概念性模糊。其抛出的“松脱的锁扣犹如幼儿跑步时散开的鞋带”这一比喻，形象极其生动，学员共鸣度强。<br><strong>改进建议：</strong> 建议在解答“底盘过高重心不稳”的问题时，可以用“不倒翁”等幼儿常见物建立类比。</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告 (5样本深度分析) -->
+        <!-- 板块二：学员能力AI评估报告 -->
         <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告 (5样本学术建模)
+            <span class="w-1.5 h-6 bg-indigo-600 rounded-full mr-2"></span> 板块二：实践学员(模拟幼儿角色) 能力 AI 评估报告 (5样本深度分析)
         </h2>
 
         <!-- 多人能力综合雷达对比 -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 xl:col-span-1 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-md font-semibold text-slate-700 mb-2">多学员能力发展雷达图（5人横向学术对比）</h3>
-                    <p class="text-slate-500 text-xs mb-4">本雷达轴精准对接**CNPFM-Pre（国民体能测试指标）**及**FMS（基本动作技能分类）**标准，展示实践学员在平衡稳定性、移动敏捷度、操控力量、空间认知力与细节安全习惯维度的多态分布 [2, 3]。</p>
+                    <h3 class="text-md font-semibold text-slate-700 mb-2">多学员能力发展雷达图（5人评估）</h3>
+                    <p class="text-slate-500 text-xs mb-4">横向评估实践小组代表学员的空间建构、大肌肉协调、问题解决、数理逻辑及细节防范能力。</p>
                 </div>
                 <div id="radarChart" class="chart-container"></div>
             </div>
@@ -206,18 +246,18 @@
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
                             <span class="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded">14号学员</span>
-                            <span class="text-xs text-slate-500">模拟任务：下肢爆发力（立定跳远）与移动技能（折返跑）循环测试</span>
+                            <span class="text-xs text-slate-500">模拟任务：高空体能循环与底盘车体建构</span>
                         </div>
                         <div class="text-sm font-bold text-blue-600">综合评分：88分</div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">★ 表现优势项 (CNPFM-Pre 爆发力指标):</strong>
-                            <p class="text-slate-600 mt-1">动作生物力学极佳。双脚蹬地发力坚决，摆臂协调，身体腾空高度理想，落地屈膝缓冲平稳，下肢大肌肉爆发力强。折返跑身体姿态控制自然、绕障灵敏度突出。</p>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">下肢大肌肉群协调力优秀，高频跳跃中着陆缓冲控制较好。空间力学建构感知强，可利用轴组组件在重心失稳前实施自加固。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">▲ 待提升项 (细节与力学加固):</strong>
-                            <p class="text-slate-600 mt-1">在体能高速运转阶段，由于追求连贯性而忽略了对底盘次要微小锁扣的安全二次锁紧，对细节防范意识有待进一步细化。</p>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">在高空实操体能阶段，由于追求连贯性而忽略了对底盘次要微小锁扣的安全二次锁紧，细节防范意识有待进一步细化。</p>
                         </div>
                     </div>
                 </div>
@@ -227,18 +267,18 @@
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
                             <span class="bg-indigo-600 text-white text-xs font-bold px-2 py-0.5 rounded">8号学员</span>
-                            <span class="text-xs text-slate-500">模拟任务：上肢力量（沙包掷远）与精细动作手眼配合</span>
+                            <span class="text-xs text-slate-500">模拟任务：造价估算与螺丝数量规范建构</span>
                         </div>
                         <div class="text-sm font-bold text-indigo-600">综合评分：86分</div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">★ 表现优势项 (操作与精细技能):</strong>
-                            <p class="text-slate-600 mt-1">数理逻辑思维极为精准，在面对拼板数量及45度角夹角测算中无延时。拼搭精细度高，螺丝锁定、螺栓锁合牢固、饱满，无低端安全隐患。</p>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">数理逻辑思维极为精准，在面对拼板数量及45度角夹角测算中几乎无延时。拼搭精细度高，螺丝锁合饱满、毫无低端安全隐患。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">▲ 待提升项 (下肢大肌肉暴发性):</strong>
-                            <p class="text-slate-600 mt-1">体能爆发性偏保守。在摸高和高坡绕障中动作幅度受限，体育运动自信心不足，静力性建构极佳，但下肢力量释放与移动技巧需要提升。</p>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">大肌肉群爆发性与核心体能调动较为保守。在摸高和高坡绕障中动作幅度受限，体育运动技能自信心不足，静力性建构偏科。</p>
                         </div>
                     </div>
                 </div>
@@ -248,60 +288,60 @@
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
                             <span class="bg-teal-600 text-white text-xs font-bold px-2 py-0.5 rounded">王老师</span>
-                            <span class="text-xs text-slate-500">模拟任务：斜坡平衡力学（走平衡木）与静态平衡（单脚站立）测试</span>
+                            <span class="text-xs text-slate-500">模拟任务：斜坡力学调节与重力平衡测试</span>
                         </div>
                         <div class="text-sm font-bold text-teal-600">综合评分：85分</div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">★ 表现优势项 (动态与静态平衡性):</strong>
-                            <p class="text-slate-600 mt-1">平衡力出众。在走斜坡、倾斜和高低面转换中能保持身体重心稳定。当器械重心失衡时，能敏锐地利用万向轴和高低管塞调节支点，迅速重构平衡状态。</p>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">核心平衡调节力出众，重心控制平稳。变通力强，在斜面不稳时能迅速引入万向轴结构加固。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">▲ 待提升项 (前期力学科学规划):</strong>
-                            <p class="text-slate-600 mt-1">力学参数前置计算不够严密。初始斜坡坡度设计过陡，未充分考虑重力下滑摩擦力对稳定性的破坏。后经调整方消除倾覆隐患。</p>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">前期物理力学规划稍显粗糙。对重力滑行斜坡坡度初始设计角度过陡，导致演示物体侧滑，后在指导下调缓。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 1号实践学员 (新增) -->
+                <!-- 1号实践学员 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
                             <span class="bg-amber-600 text-white text-xs font-bold px-2 py-0.5 rounded">1号学员</span>
-                            <span class="text-xs text-slate-500">模拟任务：小班适龄化分层搭建、手膝爬行与技能退阶过渡设计</span>
+                            <span class="text-xs text-slate-500">模拟任务：小班游戏适龄化分层搭建与过渡</span>
                         </div>
                         <div class="text-sm font-bold text-amber-600">综合评分：84分</div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">★ 表现优势项 (适龄化教学同理心):</strong>
-                            <p class="text-slate-600 mt-1">贯彻“以儿童为本，顺应成长天性”理念极佳 [2]。在面对小班阶段时，能将大型高落差拼搭科学退阶，转化为低重心的手膝着地爬行（CNPFM-Pre灵敏爬行指标）与低跨跳，安全性考量十分周全。</p>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">具有极强的教学同理心，在面对“小班适龄化分层”设计时，能将复杂的攀爬降阶为低落差的平稳跨跳，细节充满关怀感。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">▲ 待提升项 (拼搭搭建效率):</strong>
-                            <p class="text-slate-600 mt-1">建构速度和效率略微落后。由于过度纠结于建构物的“极致简约”以确保小班安全，导致在规定时间内拼搭未完全收尾。</p>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">建构速度和效率略微落后。由于过度纠结于建构物的“极致简约”以确保小班安全，导致在规定时间内拼搭未完全收尾。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3号实践学员 (新增) -->
+                <!-- 3号实践学员 -->
                 <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
                     <div class="flex justify-between items-center mb-2">
                         <div class="flex items-center space-x-2">
                             <span class="bg-rose-600 text-white text-xs font-bold px-2 py-0.5 rounded">3号学员</span>
-                            <span class="text-xs text-slate-500">模拟任务：集体游戏大型户外循环统筹规划与多人协作</span>
+                            <span class="text-xs text-slate-500">模拟任务：集体游戏大型户外循环统筹拼搭</span>
                         </div>
                         <div class="text-sm font-bold text-rose-600">综合评分：87分</div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div>
-                            <strong class="text-emerald-700">★ 表现优势项 (社会性与群性发展):</strong>
-                            <p class="text-slate-600 mt-1">表现出高超的团队协作与群性沟通能力 [2]。能主动统筹第一、第二、建构组之间的模块对接，确保在环形体能循环路线中各个拼搭器械之间无安全碰撞隐患，空间利用效率最大化。</p>
+                            <strong class="text-emerald-700">★ 表现优势项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">大肌肉群与团队组织应变力极其出众。能主动协调多个建构小组的环形拼搭，确保器械之间衔接紧密，空间布局合理，防止幼儿发生拥撞。</p>
                         </div>
                         <div>
-                            <strong class="text-amber-700">▲ 待提升项 (个性化体能容差考虑):</strong>
-                            <p class="text-slate-600 mt-1">设计的循环动线挑战难度均一化。对“低肌肉力量、平衡感较弱的个别幼儿”缺乏可调节的物理降阶通道设计，容差机制有待提升。</p>
+                            <strong class="text-amber-700">▲ 待提升项:</strong>
+                            <p class="text-slate-600 leading-relaxed mt-1">缺乏对个性化身体素质差异的微调能力。对“低肌肉力量、平衡感较弱的个别幼儿”缺少可调节的物理降阶通道设计。</p>
                         </div>
                     </div>
                 </div>
@@ -318,264 +358,348 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // 1. 提问与自适应调整分布图
+            // 1. 提问与自适应调整分布图 (demandChart)
             const demandDom = document.getElementById('demandChart');
-            const demandChart = echarts.init(demandDom);
-            const demandOption = {
-                tooltip: { trigger: 'item', formatter: '{b}: {c}%' },
-                legend: { top: 'bottom', textStyle: { fontSize: 10 } },
-                series: [
-                    {
-                        name: '定制化需求分布',
-                        type: 'pie',
-                        radius: ['35%', '65%'],
-                        avoidLabelOverlap: false,
-                        itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
-                        label: { show: false, position: 'center' },
-                        emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold' } },
-                        labelLine: { show: false },
-                        data: [
-                            { value: 45, name: '建构原件及拼搭技巧（空间物理建构）', itemStyle: { color: '#6366f1' } },
-                            { value: 25, name: '连接原件与大循环（空间力学与安全）', itemStyle: { color: '#0d9488' } },
-                            { value: 20, name: '体能循环适龄分层（FMS功能应用）', itemStyle: { color: '#f59e0b' } },
-                            { value: 10, name: '材料整理收纳及教辅（日常习惯与自理）', itemStyle: { color: '#f43f5e' } }
-                        ]
-                    }
-                ]
-            };
-            demandChart.setOption(demandOption);
+            if (demandDom) {
+                const demandChart = echarts.init(demandDom);
+                const demandOption = {
+                    tooltip: { trigger: 'item', formatter: '{b}: {c}%' },
+                    legend: { top: 'bottom', textStyle: { fontSize: 10 } },
+                    series: [
+                        {
+                            name: '定制化需求分布',
+                            type: 'pie',
+                            radius: ['35%', '65%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                            label: { show: false, position: 'center' },
+                            emphasis: { label: { show: true, fontSize: 13, fontWeight: 'bold' } },
+                            labelLine: { show: false },
+                            data: [
+                                { value: 45, name: '建构原件及拼搭技巧（空间物理建构）', itemStyle: { color: '#6366f1' } },
+                                { value: 25, name: '连接原件与大循环（空间力学与安全）', itemStyle: { color: '#0d9488' } },
+                                { value: 20, name: '体能循环适龄分层（FMS功能应用）', itemStyle: { color: '#f59e0b' } },
+                                { value: 10, name: '材料整理收纳及教辅（日常习惯与自理）', itemStyle: { color: '#f43f5e' } }
+                            ]
+                        }
+                    ]
+                };
+                demandChart.setOption(demandOption);
+            }
 
-            // 2. 教师行为频次柱状图
+            // 2. 教师行为频次柱状图 (behaviorChart)
             const behaviorDom = document.getElementById('behaviorChart');
-            const behaviorChart = echarts.init(behaviorDom);
-            const behaviorOption = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-                xAxis: {
-                    type: 'value',
-                    boundaryGap: [0, 0.01],
-                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
-                },
-                yAxis: {
-                    type: 'category',
-                    data: ['纠正反馈次数', '指定次数', '积极反馈次数', '讲解次数', '提问次数'],
-                    axisLabel: { fontWeight: 'bold', fontSize: 11 }
-                },
-                series: [
-                    {
-                        name: '发生频次(次)',
-                        type: 'bar',
-                        data: [11, 15, 26, 45, 58],
-                        itemStyle: {
-                            color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-                                { offset: 0, color: '#4f46e5' },
-                                { offset: 1, color: '#06b6d4' }
-                            ]),
-                            borderRadius: [0, 4, 4, 0]
+            if (behaviorDom) {
+                const behaviorChart = echarts.init(behaviorDom);
+                const behaviorOption = {
+                    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: ['纠正反馈次数', '指定次数', '积极反馈次数', '讲解次数', '提问次数'],
+                        axisLabel: { fontWeight: 'bold', fontSize: 11 }
+                    },
+                    series: [
+                        {
+                            name: '发生频次(次)',
+                            type: 'bar',
+                            data: [11, 15, 26, 45, 58],
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                                    { offset: 0, color: '#4f46e5' },
+                                    { offset: 1, color: '#06b6d4' }
+                                ]),
+                                borderRadius: [0, 4, 4, 0]
+                            }
                         }
-                    }
-                ]
-            };
-            behaviorChart.setOption(behaviorOption);
+                    ]
+                };
+                behaviorChart.setOption(behaviorOption);
+            }
 
-            // 3. 教学时间压缩对比图 (核心升级：展示定制化响应导致的时间压缩)
+            // 3. 教学时间压缩对比图 (timeCompressionChart)
             const timeCompressionDom = document.getElementById('timeCompressionChart');
-            const timeCompressionChart = echarts.init(timeCompressionDom);
-            const timeCompressionOption = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                legend: { data: ['标准大纲用时', '自适应实际用时'], right: 10, textStyle: { fontSize: 10 } },
-                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-                xAxis: {
-                    type: 'category',
-                    data: ['理念与价值', '材料认知', '应用场景', '设计实施', '实操建构与测试'],
-                    axisLabel: { fontSize: 10 }
-                },
-                yAxis: {
-                    type: 'value',
-                    name: '时间 (分钟)',
-                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
-                },
-                series: [
-                    {
-                        name: '标准课标用时',
-                        type: 'bar',
-                        data: [5, 15, 10, 10, 60],
-                        itemStyle: { color: '#cbd5e1', borderRadius: [4, 4, 0, 0] }
+            if (timeCompressionDom) {
+                const timeCompressionChart = echarts.init(timeCompressionDom);
+                const timeCompressionOption = {
+                    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                    legend: { data: ['标准大纲用时', '自适应实际用时'], right: 10, textStyle: { fontSize: 10 } },
+                    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['理念与价值', '材料认知', '应用场景', '设计实施', '实操建构与测试'],
+                        axisLabel: { fontSize: 10 }
                     },
-                    {
-                        name: '实际自适应用时',
-                        type: 'bar',
-                        data: [3, 9, 7, 7, 74],
-                        itemStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-                                { offset: 0, color: '#4f46e5' },
-                                { offset: 1, color: '#06b6d4' }
-                            ]),
-                            borderRadius: [4, 4, 0, 0]
-                        }
-                    }
-                ]
-            };
-            timeCompressionChart.setOption(timeCompressionOption);
-
-            // 4. 教学投入度动态监测曲线（时间加权平均法）
-            const engagementDom = document.getElementById('engagementChart');
-            const engagementChart = echarts.init(fftDom); // 重用原本FFT的位置或整合
-            const engagementOption = {
-                tooltip: { trigger: 'axis' },
-                legend: { data: ['瞬时教学投入度', '时间加权投入均线'], right: 10 },
-                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['0-10m', '10-20m', '20-30m', '30-40m', '40-50m', '50-58m']
-                },
-                yAxis: {
-                    type: 'value',
-                    name: '投入度比例 (%)',
-                    min: 60,
-                    max: 100,
-                    splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
-                },
-                series: [
-                    {
-                        name: '瞬时教学投入度',
-                        type: 'line',
-                        smooth: true,
-                        data: [85, 92, 88, 90, 95, 93],
-                        lineStyle: { width: 3, color: '#4f46e5' },
-                        areaStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
-                                { offset: 1, color: 'rgba(79, 70, 229, 0.0)' }
-                            ])
+                    yAxis: {
+                        type: 'value',
+                        name: '时间 (分钟)',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                    },
+                    series: [
+                        {
+                            name: '标准大纲用时',
+                            type: 'bar',
+                            data: [5, 15, 10, 10, 60],
+                            itemStyle: { color: '#cbd5e1', borderRadius: [4, 4, 0, 0] }
                         },
-                        showSymbol: true
+                        {
+                            name: '自适应实际用时',
+                            type: 'bar',
+                            data: [3, 9, 7, 7, 74],
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    { offset: 0, color: '#4f46e5' },
+                                    { offset: 1, color: '#06b6d4' }
+                                ]),
+                                borderRadius: [4, 4, 0, 0]
+                            }
+                        }
+                    ]
+                };
+                timeCompressionChart.setOption(timeCompressionOption);
+            }
+
+            // 4. 教学投入度动态监测曲线 (engagementChart)
+            const engagementDom = document.getElementById('engagementChart');
+            if (engagementDom) {
+                const engagementChart = echarts.init(engagementDom);
+                const engagementOption = {
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['瞬时教学投入度', '时间加权投入均线'], right: 10 },
+                    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['0-10m', '10-20m', '20-30m', '30-40m', '40-50m', '50-58m']
                     },
-                    {
-                        name: '时间加权投入均线',
-                        type: 'line',
-                        step: 'middle',
-                        data: [85, 88.5, 88.3, 88.9, 90.1, 91.2],
-                        lineStyle: { width: 2, type: 'dashed', color: '#10b981' }
-                    }
-                ]
-            };
-            // 绑定到对应区域
-            const fftChartInit = echarts.init(document.getElementById('fftChart'));
-            fftChartInit.setOption(engagementOption);
+                    yAxis: {
+                        type: 'value',
+                        name: '投入度比例 (%)',
+                        min: 60,
+                        max: 100,
+                        splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                    },
+                    series: [
+                        {
+                            name: '瞬时教学投入度',
+                            type: 'line',
+                            smooth: true,
+                            data: [85, 92, 88, 90, 95, 93],
+                            lineStyle: { width: 3, color: '#4f46e5' },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: 'rgba(79, 70, 229, 0.3)' },
+                                    { offset: 1, color: 'rgba(79, 70, 229, 0.0)' }
+                                ])
+                            },
+                            showSymbol: true
+                        },
+                        {
+                            name: '时间加权投入均线',
+                            type: 'line',
+                            step: 'middle',
+                            data: [85, 88.5, 88.3, 88.9, 90.1, 91.2],
+                            lineStyle: { width: 2, type: 'dashed', color: '#10b981' }
+                        }
+                    ]
+                };
+                engagementChart.setOption(engagementOption);
+            }
 
-            // 5. 理论与实操差异化多维评估
+            // 5. 理论与实操差异化多维评估 (dualRadarChart)
             const dualRadarDom = document.getElementById('dualRadarChart');
-            const dualRadarChart = echarts.init(dualRadarDom);
-            const dualRadarOption = {
-                tooltip: { trigger: 'item' },
-                legend: { data: ['理论模块表现', '实操引导表现'], bottom: '0%' },
-                radar: {
-                    indicator: [
-                        { name: '内容呈现 / 行为引导', max: 100 },
-                        { name: '知识建构 / 过程支持', max: 100 },
-                        { name: '情境适配 / 响应速度', max: 100 },
-                        { name: '核心覆盖 / 纠偏反馈', max: 100 }
-                    ],
-                    radius: '65%',
-                    axisName: { color: '#475569', fontWeight: 'bold' }
-                },
-                series: [
-                    {
-                        name: '教学行为双轨分析',
-                        type: 'radar',
-                        data: [
-                            {
-                                value: [88, 90, 85, 92, 80],
-                                name: '主讲培训师评定得分',
-                                lineStyle: { color: '#6366f1', width: 2 },
-                                itemStyle: { color: '#6366f1' },
-                                areaStyle: { color: 'rgba(99, 102, 241, 0.2)' }
-                            }
-                        ]
-                    }
-                ]
-            };
-            dualRadarChart.setOption(dualRadarOption);
+            if (dualRadarDom) {
+                const dualRadarChart = echarts.init(dualRadarDom);
+                const dualRadarOption = {
+                    tooltip: { trigger: 'item' },
+                    legend: { data: ['理论模块表现', '实操引导表现'], bottom: '0%' },
+                    radar: {
+                        indicator: [
+                            { name: '内容呈现 / 行为引导', max: 100 },
+                            { name: '知识建构 / 过程支持', max: 100 },
+                            { name: '情境适配 / 响应速度', max: 100 },
+                            { name: '核心覆盖 / 纠偏反馈', max: 100 }
+                        ],
+                        radius: '65%',
+                        axisName: { color: '#475569', fontWeight: 'bold' }
+                    },
+                    series: [
+                        {
+                            name: '教学行为双轨分析',
+                            type: 'radar',
+                            data: [
+                                {
+                                    value: [88, 90, 85, 92],
+                                    name: '理论与实操多维数据',
+                                    lineStyle: { color: '#6366f1', width: 2 },
+                                    itemStyle: { color: '#6366f1' },
+                                    areaStyle: { color: 'rgba(99, 102, 241, 0.2)' }
+                                }
+                            ]
+                        }
+                    ]
+                };
+                dualRadarChart.setOption(dualRadarOption);
+            }
 
-            // 6. 五人能力多维雷达图
+            // 6. 发言时长饼图 (durationChart)
+            const durationDom = document.getElementById('durationChart');
+            if (durationDom) {
+                const durationChart = echarts.init(durationDom);
+                const durationOption = {
+                    tooltip: { trigger: 'item', formatter: '{b}: {c}分钟 ({d}%)' },
+                    legend: { top: 'middle', right: '5%', orient: 'vertical', textStyle: { fontSize: 10 } },
+                    series: [
+                        {
+                            name: '发言/实操耗时',
+                            type: 'pie',
+                            radius: ['50%', '80%'],
+                            center: ['40%', '50%'],
+                            avoidLabelOverlap: false,
+                            itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+                            label: { show: false },
+                            data: [
+                                { value: 41.25, name: '教师发言时长', itemStyle: { color: '#4f46e5' } },
+                                { value: 16.6, name: '学员回答与自主实操', itemStyle: { color: '#10b981' } }
+                            ]
+                        }
+                    ]
+                };
+                durationChart.setOption(durationOption);
+            }
+
+            // 7. FFT 模拟分析折线图 (fftChart)
+            const fftDom = document.getElementById('fftChart');
+            if (fftDom) {
+                const fftChart = echarts.init(fftDom);
+                const fftOption = {
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['主讲培训师', '现场学员'], right: 10, textStyle: { fontSize: 10 } },
+                    xAxis: {
+                        type: 'category',
+                        name: '频率(Hz)',
+                        boundaryGap: false,
+                        data: ['100', '200', '400', '800', '1200', '1600', '2000', '2400', '3000', '4000']
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '模拟振幅(dB)',
+                        splitLine: { lineStyle: { type: 'dashed', color: '#f1f5f9' } }
+                    },
+                    series: [
+                        {
+                            name: '主讲培训师',
+                            type: 'line',
+                            smooth: true,
+                            data: [15, 20, 30, 48, 82, 85, 76, 40, 25, 12],
+                            lineStyle: { width: 3, color: '#4f46e5' },
+                            showSymbol: false
+                        },
+                        {
+                            name: '现场学员',
+                            type: 'line',
+                            smooth: true,
+                            data: [20, 72, 75, 42, 22, 16, 14, 10, 5, 4],
+                            lineStyle: { width: 3, color: '#10b981' },
+                            showSymbol: false
+                        }
+                    ]
+                };
+                fftChart.setOption(fftOption);
+            }
+
+            // 8. 五人能力多维雷达图 (radarChart)
             const radarDom = document.getElementById('radarChart');
-            const radarChart = echarts.init(radarDom);
-            const radarOption = {
-                legend: {
-                    data: ['14号学员', '8号学员', '王老师', '1号学员', '3号学员'],
-                    bottom: '0%',
-                    textStyle: { fontSize: 8 },
-                    itemWidth: 10,
-                    itemHeight: 8
-                },
-                radar: {
-                    indicator: [
-                        { name: '平衡稳定性', max: 5.0 },
-                        { name: '移动敏捷度', max: 5.0 },
-                        { name: '操控力量', max: 5.0 },
-                        { name: '空间认知力', max: 5.0 },
-                        { name: '细节安全习惯', max: 5.0 }
-                    ],
-                    radius: '55%',
-                    center: ['50%', '42%'],
-                    axisName: { color: '#475569', fontWeight: 'bold', fontSize: 9 }
-                },
-                series: [
-                    {
-                        name: '能力多维分析',
-                        type: 'radar',
-                        data: [
-                            {
-                                value: [4.6, 4.4, 4.3, 4.0, 3.8],
-                                name: '14号学员',
-                                lineStyle: { color: '#3b82f6', width: 1.5 },
-                                itemStyle: { color: '#3b82f6' },
-                                areaStyle: { color: 'rgba(59, 130, 246, 0.1)' }
-                            },
-                            {
-                                value: [4.4, 3.9, 4.1, 4.7, 4.8],
-                                name: '8号学员',
-                                lineStyle: { color: '#6366f1', width: 1.5 },
-                                itemStyle: { color: '#6366f1' },
-                                areaStyle: { color: 'rgba(99, 102, 241, 0.1)' }
-                            },
-                            {
-                                value: [4.1, 4.6, 4.5, 4.0, 4.2],
-                                name: '王老师',
-                                lineStyle: { color: '#0d9488', width: 1.5 },
-                                itemStyle: { color: '#0d9488' },
-                                areaStyle: { color: 'rgba(13, 148, 136, 0.1)' }
-                            },
-                            {
-                                value: [4.1, 4.0, 4.4, 4.2, 4.5],
-                                name: '1号学员',
-                                lineStyle: { color: '#d97706', width: 1.5 },
-                                itemStyle: { color: '#d97706' },
-                                areaStyle: { color: 'rgba(217, 119, 6, 0.1)' }
-                            },
-                            {
-                                value: [4.3, 4.2, 4.6, 3.9, 4.7],
-                                name: '3号学员',
-                                lineStyle: { color: '#e11d48', width: 1.5 },
-                                itemStyle: { color: '#e11d48' },
-                                areaStyle: { color: 'rgba(225, 29, 72, 0.1)' }
-                            }
-                        ]
-                    }
-                ]
-            };
-            radarChart.setOption(radarOption);
+            if (radarDom) {
+                const radarChart = echarts.init(radarDom);
+                const radarOption = {
+                    legend: {
+                        data: ['14号学员', '8号学员', '王老师', '1号学员', '3号学员'],
+                        bottom: '0%',
+                        textStyle: { fontSize: 8 },
+                        itemWidth: 10,
+                        itemHeight: 8
+                    },
+                    radar: {
+                        indicator: [
+                            { name: '空间建构', max: 5.0 },
+                            { name: '大肌肉协调', max: 5.0 },
+                            { name: '问题解决与应变', max: 5.0 },
+                            { name: '数理逻辑', max: 5.0 },
+                            { name: '细节安全防范', max: 5.0 }
+                        ],
+                        radius: '55%',
+                        center: ['50%', '42%'],
+                        axisName: { color: '#475569', fontWeight: 'bold', fontSize: 9 }
+                    },
+                    series: [
+                        {
+                            name: '能力多维分析',
+                            type: 'radar',
+                            data: [
+                                {
+                                    value: [4.6, 4.4, 4.3, 4.0, 3.8],
+                                    name: '14号学员',
+                                    lineStyle: { color: '#3b82f6', width: 1.5 },
+                                    itemStyle: { color: '#3b82f6' },
+                                    areaStyle: { color: 'rgba(59, 130, 246, 0.1)' }
+                                },
+                                {
+                                    value: [4.4, 3.9, 4.1, 4.7, 4.8],
+                                    name: '8号学员',
+                                    lineStyle: { color: '#6366f1', width: 1.5 },
+                                    itemStyle: { color: '#6366f1' },
+                                    areaStyle: { color: 'rgba(99, 102, 241, 0.1)' }
+                                },
+                                {
+                                    value: [4.1, 4.6, 4.5, 4.0, 4.2],
+                                    name: '王老师',
+                                    lineStyle: { color: '#0d9488', width: 1.5 },
+                                    itemStyle: { color: '#0d9488' },
+                                    areaStyle: { color: 'rgba(13, 148, 136, 0.1)' }
+                                },
+                                {
+                                    value: [4.1, 4.0, 4.4, 4.2, 4.5],
+                                    name: '1号学员',
+                                    lineStyle: { color: '#d97706', width: 1.5 },
+                                    itemStyle: { color: '#d97706' },
+                                    areaStyle: { color: 'rgba(217, 119, 6, 0.1)' }
+                                },
+                                {
+                                    value: [4.3, 4.2, 4.6, 3.9, 4.7],
+                                    name: '3号学员',
+                                    lineStyle: { color: '#e11d48', width: 1.5 },
+                                    itemStyle: { color: '#e11d48' },
+                                    areaStyle: { color: 'rgba(225, 29, 72, 0.1)' }
+                                }
+                            ]
+                        }
+                    ]
+                };
+                radarChart.setOption(radarOption);
+            }
 
             // 监听窗口尺寸变化，动态更新图表渲染
             window.addEventListener('resize', function() {
-                demandChart.resize();
-                behaviorChart.resize();
-                timeCompressionChart.resize();
-                fftChartInit.resize();
-                dualRadarChart.resize();
-                radarChart.resize();
+                const resizeChart = (id) => {
+                    const instance = echarts.getInstanceByDom(document.getElementById(id));
+                    if (instance) {
+                        instance.resize();
+                    }
+                };
+                resizeChart('demandChart');
+                resizeChart('behaviorChart');
+                resizeChart('timeCompressionChart');
+                resizeChart('engagementChart');
+                resizeChart('dualRadarChart');
+                resizeChart('durationChart');
+                resizeChart('fftChart');
+                resizeChart('radarChart');
             });
 
         });
